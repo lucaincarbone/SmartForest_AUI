@@ -1,19 +1,58 @@
 <template>
   <div>
-    <div class="container">
+    <div class="forest-container">
       <img src="../assets/CLOUDS.png" alt="" class="clouds floating-clouds" />
       <img class="ground" src="../assets/GROUND.png" alt="" />
       <img class="base floating-base" src="../assets/LINES_BASE.png" alt="" />
+      <div class="experience-bar">
+        <div id="current" class="current-bar">
+          <p id="currentnum" class="experience-text">75/100</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      percentage: 0,
+    };
+  },
+  methods: {
+    loadBar: function () {
+      var div = document.getElementById("current");
+      if(this.percentage == 200) {
+        this.percentage = 0;
+      }
+      else {
+        this.percentage+=10;
+      }
+
+      if(this.percentage <= 75){
+        div.style.backgroundColor = "red";
+      }
+      else if(this.percentage <= 150 && this.percentage > 75){
+        div.style.backgroundColor = "yellow";
+      }
+      else if(this.percentage <= 200 && this.percentage > 150){
+        div.style.backgroundColor = "rgb(0, 183, 0)";
+      }
+      div.style.width = this.percentage + "px";
+      document.getElementById("currentnum").textContent = this.percentage/2 + "/100";
+    },
+  },
+  mounted() {
+    setInterval(() => {
+      this.loadBar();
+    }, 500);
+  },
+};
 </script>
 
 <style>
-.container {
+.forest-container {
   position: relative;
   height: 1000px;
   width: 1080px;
@@ -36,20 +75,29 @@ export default {};
   position: absolute;
   width: 1080px;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 .base {
   position: relative;
   justify-content: center;
   display: flex;
   width: 1000px;
+  left: 0;
+  right: 0;
   margin: 0 auto;
   bottom: 7em;
 }
 .clouds {
   position: absolute;
   z-index: 100;
-  width: 1080px;
-  margin-bottom: 17em;
+  width: 800px;
+  height: auto;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 25em;
 }
 
 .floating-base {
@@ -76,8 +124,6 @@ export default {};
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
-  /* margin-left: 30px; */
-  margin-top: 5px;
 }
 
 @keyframes floating-clouds {
@@ -90,5 +136,42 @@ export default {};
   100% {
     transform: translate(0, 0);
   }
+}
+.experience-bar {
+  position: absolute;
+  background-color: white;
+  width: 200px;
+  height: 30px;
+  border-radius: 1em;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 80px;
+}
+
+.current-bar {
+  position: absolute;
+  /* background-color: rgb(0, 183, 0); */
+  /* width: 187px; */
+  max-width: 200px;
+  height: 30px;
+  border-radius: 1em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.experience-text {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: auto 0;
+  line-height: 30px;
+  font-weight: 3em;
+  color: black;
+  z-index: 102;
 }
 </style>

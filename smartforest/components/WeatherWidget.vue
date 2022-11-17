@@ -16,7 +16,7 @@ export default {
     return {
       // TODO: How to live update?
       //time: new Date().toLocaleString("it", {hour: '2-digit', minute: '2-digit'}),
-      time: "",
+      time: "00:00",
       date:
         new Date().getDate() +
         "/" +
@@ -46,27 +46,33 @@ export default {
   width: 1080px;
   position: absolute;
   z-index: 101;
-  margin-bottom: 62em;
+  margin-bottom: 890px;
+  /* bottom: 910px; */
 }
 .weather-box {
   background: white;
-  border-top-right-radius: 300px;
-  border-bottom-right-radius: 300px;
-  width: 300px;
-  /* height: 100px; */
+  border-top-right-radius: 3em;
+  border-bottom-right-radius: 3em;
+  width: 250px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.296);
-  align-items: center;
 }
 .time-weather {
   color: black;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 2.5em;
   grid-area: time;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 .date-weather {
   color: black;
   font-size: 1.5em;
   grid-area: date;
+
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 .date-box {
   position: relative;
@@ -74,18 +80,17 @@ export default {
 .sun {
   grid-area: sun;
   height: 80px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   margin: auto;
-}
-
-p {
-  padding: 0;
-  margin: 0;
 }
 
 .grid-container {
   display: grid;
   grid-template-areas:
-    "sun time"
-    "sun date";
+    "time sun"
+    "date sun";
 }
 </style>

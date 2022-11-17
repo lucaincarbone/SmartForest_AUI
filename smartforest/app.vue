@@ -1,7 +1,7 @@
 <script setup>
 
 import Forest from "./components/Forest.vue";
-import WidgetWeather from "./components/WidgetWeather.vue";
+import WeatherWidget from "./components/WeatherWidget.vue";
 import VoiceDetectionWidget from "./components/VoiceDetectionWidget.vue";
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -12,7 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 <template>
   <div class="bg">
     <VoiceDetectionWidget/>
-    <WidgetWeather/>
+    <WeatherWidget/>
     <Forest />
   </div>
 </template>
