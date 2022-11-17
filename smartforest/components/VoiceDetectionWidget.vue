@@ -1,7 +1,7 @@
 <template>
   <div class="vd-container">
     <div class="vd-box">
-      <img src="src/assets/sirigif.gif" alt="" class="vd-icon" />
+      <img src="../assets/sirigif.gif" alt="" class="vd-icon" />
       <p class="vd-text">Hey, Forest!</p>
     </div>
   </div>

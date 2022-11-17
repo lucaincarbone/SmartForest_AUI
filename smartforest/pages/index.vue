@@ -2,16 +2,19 @@
   <div class="bg">
     <VoiceDetectionWidget/>
     <WidgetWeather/>
-    <Forest />
+    <Forest/>
   </div>
 </template>
 
 <script>
-import Forest from "./components/Forest.vue";
-import WidgetWeather from "./components/WidgetWeather.vue";
-import VoiceDetectionWidget from "./components/VoiceDetectionWidget.vue";
+import Forest from '../components/Forest.vue';
+import VoiceDetectionWidget from '../components/VoiceDetectionWidget.vue';
+import WidgetWeather from '../components/WidgetWeather.vue';
+
+
 
 export default {
+  components: { Forest, VoiceDetectionWidget, WidgetWeather },
   name: 'IndexPage'
 }
 </script>

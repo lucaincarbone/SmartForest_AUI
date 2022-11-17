@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="container">
-      <img src="/src/assets/CLOUDS.png" alt="" class="clouds floating-clouds" />
-      <img class="ground" src="/src/assets/GROUND.png" alt="" />
-      <img class="base floating-base" src="/src/assets/LINES_BASE.png" alt="" />
+      <img src="../assets/CLOUDS.png" alt="" class="clouds floating-clouds" />
+      <img class="ground" src="../assets/GROUND.png" alt="" />
+      <img class="base floating-base" src="../assets/LINES_BASE.png" alt="" />
     </div>
   </div>
 </template>

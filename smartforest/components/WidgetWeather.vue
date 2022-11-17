@@ -2,7 +2,7 @@
   <div class="weather-container">
     <div class="weather-box">
       <div class="date-box grid-container">
-        <img class="sun" src="src/assets/sun.png" alt="">
+        <img class="sun" src="../assets/sun.png" alt="">
         <p class="time-weather">{{ time }}</p>
         <p class="date-weather">{{ date }}</p>
       </div>
