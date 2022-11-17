@@ -53,7 +53,7 @@ export default {
   border-top-right-radius: 300px;
   border-bottom-right-radius: 300px;
   width: 300px;
-  height: 100px;
+  /* height: 100px; */
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.296);
   align-items: center;
 }

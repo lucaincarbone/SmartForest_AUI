@@ -3,6 +3,10 @@
 import Forest from "./components/Forest.vue";
 import WidgetWeather from "./components/WidgetWeather.vue";
 import VoiceDetectionWidget from "./components/VoiceDetectionWidget.vue";
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 </script>
 
 <template>
