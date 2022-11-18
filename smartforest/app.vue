@@ -3,6 +3,7 @@
 import Forest from "./components/Forest.vue";
 import WeatherWidget from "./components/WeatherWidget.vue";
 import VoiceDetectionWidget from "./components/VoiceDetectionWidget.vue";
+import Trees from "./components/Trees.vue";
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -11,6 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 <template>
   <div class="bg">
+    <Trees/>
     <VoiceDetectionWidget/>
     <WeatherWidget/>
     <Forest />
