@@ -13,7 +13,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .vd-container {
   position: absolute;
   z-index: 101;

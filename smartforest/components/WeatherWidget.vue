@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .weather-container {
   width: 1080px;
   position: absolute;

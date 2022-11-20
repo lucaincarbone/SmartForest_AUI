@@ -12,8 +12,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 <template>
   <div class="bg">
-    <Trees/>
     <VoiceDetectionWidget/>
+    <Trees/>
     <WeatherWidget/>
     <Forest />
   </div>
