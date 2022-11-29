@@ -26,7 +26,7 @@ export default {
 
  //TODO remove this test api interaction
   async setup() {
-    const { data: testData } = await useFetch('/api/test')
+    const { data: testData } = await useFetch('/api/state')
     console.log(testData.value.title);
   },
 

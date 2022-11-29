@@ -1,13 +1,17 @@
+import { ToasterOperations } from "./ToasterOperations"
+import{ IdleState,ToasterState }  from"./ToasterState"
+
 export namespace Appliances
 {
     /**
      * Toaster class
+     * It when a method is called on this class a submethod is called from the class on its state to provide dynamic handling
      */
     export class Toaster implements ToasterOperations {
-        private _state: ToasterState = new IdleState()
+        private _state: ToasterState
 
         constructor() {
-            this.logCurrentState()
+            this._state = new IdleState()
         }
 
         public insertBread(): void {
@@ -28,68 +32,12 @@ export namespace Appliances
             this.logCurrentState()
         }
 
-        private logCurrentState(): void {
-            console.log(this._state)
+        public advanceState(): void {
+            this._state = this._state.advanceState()
         }
-    }
-    /**
-     * Interface defining which actions the toaster will be hable to handle in every state 
-     */
-    export interface ToasterOperations {
-        insertBread(): void
-        pullLever(): void
-        ejectBread(): void
-        removeBread(): void
-    }
 
-    /**
-     * Define the default response to actions not redefined by the current state 
-     * Ex: toaster.ejectBread() when state is idle and not toasting
-     */
-    abstract class ToasterState implements ToasterOperations {
-        public insertBread(): ToasterState {
-            throw new Error("Invalid operation")
-        }
-        public pullLever(): ToasterState {
-            throw new Error("Invalid operation")
-        }
-        public ejectBread(): ToasterState {
-            throw new Error("Invalid operation")
-        }
-        public removeBread(): ToasterState {
-            throw new Error("Invalid operation")
-        }
-    }
-    /**
-     * Idle state 
-     */
-    class IdleState extends ToasterState {
-        public insertBread(): ToasterState {
-            return new BreadInsertedState()
-        }
-    }
-    /**
-     * State when bread is inserted
-     */
-    class BreadInsertedState extends ToasterState {
-        public pullLever(): ToasterState {
-            return new ToastingState()
-        }
-    }
-    /**
-     * State when bread is being toasted 
-     */
-    class ToastingState extends ToasterState {
-        public ejectBread(): ToasterState {
-            return new BreadEjectedState()
-        }
-    }
-    /**
-     * state when bread has been ejected
-     */
-    class BreadEjectedState extends ToasterState {
-        public removeBread(): ToasterState {
-            return new IdleState()
+        private logCurrentState(): void {
+            //console.log(this._state)
         }
     }
 }
