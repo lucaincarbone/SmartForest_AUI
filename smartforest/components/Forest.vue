@@ -20,6 +20,19 @@ export default {
       percentage: 0,
     };
   },
+
+
+
+
+ //TODO remove this test api interaction
+  async setup() {
+    const { data: testData } = await useFetch('/api/test')
+    console.log(testData.value.title);
+  },
+
+
+
+
   methods: {
     loadBar: function () {
       var div = document.getElementById("current");
