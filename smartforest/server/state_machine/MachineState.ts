@@ -19,7 +19,3 @@ export abstract class MachineState implements StateOperations{
         throw new Error("Method not implemented.");
     }
 }
-
-export class IdleState extends MachineState{
-
-}

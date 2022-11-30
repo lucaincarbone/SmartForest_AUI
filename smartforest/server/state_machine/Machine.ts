@@ -1,4 +1,6 @@
-import { IdleState, MachineState } from "./MachineState";
+import {MachineState } from "./MachineState";
+import { IdleState } from "./states/IdleState";
+
 
 /**
  * Main machine body
@@ -10,7 +12,6 @@ export class Machine{
     private _state: MachineState
     constructor() {
         this._state=new IdleState()
-        //this._state = new StartingState()
     }
 
     /**
@@ -19,8 +20,9 @@ export class Machine{
      * It also changes its current state 
      */
     public prepareResponse(){
-        this._state.prepareResponse()
-        this._state=this._state.changeState()
+        this._state.prepareResponse()//Ideally response to be sent back = this function returned json
+        this._state=this._state.changeState()//change machine state to appropriate next one 
+        //return JSON_RESPONSE_FOR_CLIENT
     }
 
 }
