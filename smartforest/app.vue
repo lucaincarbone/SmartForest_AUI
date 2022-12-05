@@ -12,13 +12,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 <template>
   <div class="bg">
-    <iframe
-        allow="microphone"
-        width="1080"
-        height="800"
-        src="https://console.dialogflow.com/api-client/demo/embedded/9a54017d-1247-4058-86e8-6a41e8212c8f">
-    </iframe>
-    <VoiceDetectionWidget/>
+    <div><iframe
+    allow="microphone;"
+    width="1080"
+    height="300"
+    z-index="110"
+    src="https://console.dialogflow.com/api-client/demo/embedded/9a54017d-1247-4058-86e8-6a41e8212c8f">
+</iframe></div>
+    <!-- <VoiceDetectionWidget/> -->
     <Trees/>
     <WeatherWidget/>
     <Forest />
@@ -33,5 +34,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+}
+iframe {
+  position: absolute;
+  top: 0;
 }
 </style>

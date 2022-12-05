@@ -297,7 +297,7 @@ export default {
 <style scoped>
 .tree-container {
   width: 1080px;
-  height: 1920px;
+  height: 960px;
   position: absolute;
 }
 .tree {
