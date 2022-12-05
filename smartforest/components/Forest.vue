@@ -104,7 +104,7 @@ export default {
 }
 .clouds {
   position: absolute;
-  z-index: 105;
+  z-index: 100;
   width: 800px;
   height: auto;
   left: 0;

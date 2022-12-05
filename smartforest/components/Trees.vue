@@ -1,220 +1,254 @@
 <template>
   <div id="window" class="tree-container">
-    <img
-      id="pos11"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_1_1"
+    src="../assets/dynamics/lev2.png"
+    alt=""
+    class="tree floating-base pos_1_1"
+    @click="showAlert('pos11')"
     />
     <img
-      id="pos12"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_1_2"
+        id="pos12"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_1_2"
+        @click="showAlert('pos12')"
     />
     <img
-      id="pos13"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_1_3"
+        id="pos13"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_1_3"
+        @click="showAlert('pos13')"
     />
     <img
-      id="pos14"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_1_4"
+        id="pos14"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_1_4"
+        @click="showAlert('pos14')"
     />
     <img
-      id="pos15"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_1_5"
+        id="pos15"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_1_5"
+        @click="showAlert('pos15')"
     />
     <img
-      id="pos16"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_1_6"
+        id="pos16"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_1_6"
+        @click="showAlert('pos16')"
     />
     <img
-      id="pos21"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_2_1"
+        id="pos21"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_2_1"
+        @click="showAlert('pos21')"
     />
     <img
-      id="pos22"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_2_2"
+        id="pos22"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_2_2"
+        @click="showAlert('pos22')"
     />
     <img
-      id="pos23"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_2_3"
+        id="pos23"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_2_3"
+        @click="showAlert('pos23')"
     />
     <img
-      id="pos24"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_2_4"
+        id="pos24"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_2_4"
+        @click="showAlert('pos24')"
     />
     <img
-      id="pos25"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_2_5"
+        id="pos25"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_2_5"
+        @click="showAlert('pos25')"
     />
     <img
-      id="pos26"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_2_6"
+        id="pos26"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_2_6"
+        @click="showAlert('pos26')"
     />
     <img
-      id="pos31"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_3_1"
+        id="pos31"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_3_1"
+        @click="showAlert('pos31')"
     />
     <img
-      id="pos32"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_3_2"
+        id="pos32"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_3_2"
+        @click="showAlert('pos32')"
     />
     <img
-      id="pos33"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_3_3"
+        id="pos33"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_3_3"
+        @click="showAlert('pos33')"
     />
     <img
-      id="pos34"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_3_4"
+        id="pos34"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_3_4"
+        @click="showAlert('pos34')"
     />
     <img
-      id="pos35"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_3_5"
+        id="pos35"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_3_5"
+        @click="showAlert('pos35')"
     />
     <img
-      id="pos36"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_3_6"
+        id="pos36"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_3_6"
+        @click="showAlert('pos36')"
     />
     <img
-      id="pos41"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_4_1"
+        id="pos41"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_4_1"
+        @click="showAlert('pos41')"
     />
     <img
-      id="pos42"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_4_2"
+        id="pos42"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_4_2"
+        @click="showAlert('pos42')"
     />
     <img
-      id="pos43"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_4_3"
+        id="pos43"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_4_3"
+        @click="showAlert('pos43')"
     />
     <img
-      id="pos44"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_4_4"
+        id="pos44"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_4_4"
+        @click="showAlert('pos44')"
     />
     <img
-      id="pos45"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_4_5"
+        id="pos45"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_4_5"
+        @click="showAlert('pos45')"
     />
     <img
-      id="pos46"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_4_6"
+        id="pos46"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_4_6"
+        @click="showAlert('pos46')"
     />
     <img
-      id="pos51"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_5_1"
+        id="pos51"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_5_1"
+        @click="showAlert('pos51')"
     />
     <img
-      id="pos52"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_5_2"
+        id="pos52"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_5_2"
+        @click="showAlert('pos52')"
     />
     <img
-      id="pos53"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_5_3"
+        id="pos53"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_5_3"
+        @click="showAlert('pos53')"
     />
     <img
-      id="pos54"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_5_4"
+        id="pos54"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_5_4"
+        @click="showAlert('pos54')"
     />
     <img
-      id="pos55"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_5_5"
+        id="pos55"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_5_5"
+        @click="showAlert('pos55')"
     />
     <img
-      id="pos56"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_5_6"
+        id="pos56"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_5_6"
+        @click="showAlert('pos56')"
     />
     <img
-      id="pos61"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_6_1"
+        id="pos61"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_6_1"
+        @click="showAlert('pos61')"
     />
     <img
-      id="pos62"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_6_2"
+        id="pos62"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_6_2"
+        @click="showAlert('pos62')"
     />
     <img
-      id="pos63"
-      src="../assets/dynamics/lev1.png"
-      alt=""
-      class="tree floating-base pos_6_3"
+        id="pos63"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_6_3"
+        @click="showAlert('pos63')"
     />
     <img
-      id="pos64"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_6_4"
+        id="pos64"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_6_4"
+        @click="showAlert('pos64')"
     />
     <img
-      id="pos65"
-      src="../assets/dynamics/lev3.png"
-      alt=""
-      class="tree floating-base pos_6_5"
+        id="pos65"
+        src="../assets/dynamics/lev3.png"
+        alt=""
+        class="tree floating-base pos_6_5"
+        @click="showAlert('pos65')"
     />
     <img
-      id="pos66"
-      src="../assets/dynamics/lev2.png"
-      alt=""
-      class="tree floating-base pos_6_6"
+        id="pos66"
+        src="../assets/dynamics/lev2.png"
+        alt=""
+        class="tree floating-base pos_6_6"
+        @click="showAlert('pos66')"
     />
   </div>
 </template>
@@ -225,6 +259,12 @@ export default {
     return {};
   },
   methods: {
+
+    showAlert: (id) => {
+      console.log('Image_id: ' + id)
+      alert('Image_id: ' + id)
+    },
+
     spawnTreeInARandomPos: function () {
       document.getElementById(this.randomPos()).src =
         "/_nuxt/assets/dynamics/lev" + this.randomLevel() + ".png";
