@@ -20,7 +20,7 @@ export default {
       date:
         new Date().getDate() +
         "/" +
-        new Date().getMonth() +
+        new Date().getMonth()+1 +
         "/" +
         new Date().getFullYear(),
     };
