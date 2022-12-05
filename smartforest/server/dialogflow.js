@@ -2,12 +2,12 @@
 /**
  * TODO(developer): UPDATE these variables before running the sample.
  */
-const projectId = 'green-home-cico';
-const sessionId = '123456';
-const queries = [
-  'I want to plan a tree'  // Rooms are defined on the Dialogflow agent, default options are A, B, or C
+export const projectId = 'green-home-cico';
+export const sessionId = '123456';
+export const queries = [
+  ''  // Rooms are defined on the Dialogflow agent, default options are A, B, or C
 ]
-const languageCode = 'en';
+export const languageCode = 'en';
 
 // Imports the Dialogflow library
 const dialogflow = require('@google-cloud/dialogflow');
@@ -49,7 +49,7 @@ async function detectIntent(
   return responses[0];
 }
 
-async function executeQueries(projectId, sessionId, queries, languageCode) {
+export async function executeQueries(projectId, sessionId, queries, languageCode) {
   // Keeping the context across queries let's us simulate an ongoing conversation with the bot
   let context;
   let intentResponse;
@@ -75,3 +75,5 @@ async function executeQueries(projectId, sessionId, queries, languageCode) {
   }
 }
 executeQueries(projectId, sessionId, queries, languageCode);
+
+// GOOGLE_APPLICATION_CREDENTIALS="/Users/lucaincarbone/.config/gcloud/application_default_credentials.json" node dialogflow.js

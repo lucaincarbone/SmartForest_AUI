@@ -1,8 +1,8 @@
 <template>
-  <div class="vd-container">
+  <div class="vd-container" @click="askMeSomething()">
     <div class="vd-flex">
       <div class="vd-grid-container">
-        <img src="../assets/sirigif.gif" alt="" class="vd-icon" />
+        <img src="../assets/sirigif.gif" alt="" class="vd-icon"/>
         <p class="vd-text">Hey, Forest!</p>
       </div>
     </div>
@@ -10,7 +10,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  async askMeSomething() {
+    const {data: testData} = await useFetch('/api/state')
+    console.log('button clicked')
+  }
+  
+};
 </script>
 
 <style scoped>

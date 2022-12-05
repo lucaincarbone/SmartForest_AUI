@@ -1,16 +1,12 @@
 <template>
-  <div id="window" class="tree-container">
-    src="../assets/dynamics/lev2.png"
-    alt=""
-    class="tree floating-base pos_1_1"
-    @click="showAlert('pos11')"
+  <div id="window" class="tree-container" >
+    <img
+        id="pos11"
+        src="../assets/dynamics/lev1.png"
+        alt=""
+        class="tree floating-base pos_1_1"
+        @click="showAlert('pos11')"
     />
-    <iframe
-        allow="microphone;"
-        width="350"
-        height="430"
-        src="https://console.dialogflow.com/api-client/demo/embedded/9a54017d-1247-4058-86e8-6a41e8212c8f">
-    </iframe>
     <img
         id="pos12"
         src="../assets/dynamics/lev1.png"

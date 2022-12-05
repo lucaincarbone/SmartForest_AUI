@@ -12,6 +12,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 <template>
   <div class="bg">
+    <iframe
+        allow="microphone"
+        width="1080"
+        height="800"
+        src="https://console.dialogflow.com/api-client/demo/embedded/9a54017d-1247-4058-86e8-6a41e8212c8f">
+    </iframe>
     <VoiceDetectionWidget/>
     <Trees/>
     <WeatherWidget/>

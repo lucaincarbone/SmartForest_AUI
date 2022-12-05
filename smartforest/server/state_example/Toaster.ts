@@ -1,5 +1,8 @@
+import { executeQueries, languageCode, projectId, sessionId } from "../dialogflow"
 import { ToasterOperations } from "./ToasterOperations"
 import{ IdleState,ToasterState }  from"./ToasterState"
+
+
 
 export namespace Appliances
 {
@@ -38,6 +41,7 @@ export namespace Appliances
 
         private logCurrentState(): void {
             //console.log(this._state)
+            //executeQueries(projectId, sessionId, ["Hey, Forest!"], languageCode);
         }
     }
 }
