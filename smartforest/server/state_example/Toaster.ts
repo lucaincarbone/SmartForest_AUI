@@ -1,3 +1,4 @@
+import { DialogHandler } from "../dialogClass"
 import { ToasterOperations } from "./ToasterOperations"
 import{ IdleState,ToasterState }  from"./ToasterState"
 
@@ -11,9 +12,11 @@ export namespace Appliances
      */
     export class Toaster implements ToasterOperations {
         private _state: ToasterState
+        private dialogHandler: DialogHandler
 
         constructor() {
             this._state = new IdleState()
+            this.dialogHandler = new DialogHandler()
         }
 
         public insertBread(): void {
@@ -36,10 +39,13 @@ export namespace Appliances
 
         public advanceState(): void {
             this._state = this._state.advanceState()
+            this.logCurrentState()
         }
 
         private logCurrentState(): void {
-            // Dialogflow.executeQuery("Hi, forest!")
+           var response;
+           response= this.dialogHandler.executeQueries(["hi,forest"])
+           //console.log(response)
         }
     }
 }
