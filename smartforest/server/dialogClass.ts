@@ -12,7 +12,6 @@ export class DialogHandler {
     }
 
     private async detectIntent(query: string,contexts:any): Promise<any> {
-        console.log(`Sending Query: ${query}`);
         // The path to identify the agent that owns the created intent.
         const sessionPath = this.sessionClient.projectAgentSessionPath(
             this.projectId,
