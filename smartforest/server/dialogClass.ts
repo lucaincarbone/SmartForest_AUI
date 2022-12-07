@@ -48,12 +48,8 @@ export class DialogHandler {
               query,
               context,
             );
-            console.log('Detected intent');
-            console.log(
-              // `Fulfillment Text: ${intentResponse.queryResult.fulfillmentText}
-              (JSON.parse(intentResponse.queryResult))["displayName"]
-              // JSON.stringify(intentResponse.queryResult)
-            );
+            console.log('Detected intent: ');
+            console.log((intentResponse.queryResult.intent.displayName).toString());
             // Use the context from this response for next queries
             context = intentResponse.queryResult.outputContexts;
           } catch (error) {
