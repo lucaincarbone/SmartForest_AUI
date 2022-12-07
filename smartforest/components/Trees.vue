@@ -263,9 +263,9 @@ export default {
   },
   methods: {
 
-    showAlert: (id) => {
-      console.log('Image_id: ' + id)
-      alert('Image_id: ' + id)
+    showAlert: async (id) => {
+      await $fetch('/api/state')
+      //alert('Image_id: ' + id)
     },
 
     spawnTreeInARandomPos: function () {
