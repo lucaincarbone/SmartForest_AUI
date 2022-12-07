@@ -1,5 +1,5 @@
 import {MachineState } from "./MachineState";
-import { IdleState } from "./states/IdleState";
+import { UserPromptState } from "./states/UserPromptState";
 
 
 /**
@@ -11,7 +11,7 @@ import { IdleState } from "./states/IdleState";
 export class Machine{
     private _state: MachineState
     constructor() {
-        this._state=new IdleState()
+        this._state=new UserPromptState()
     }
 
     /**

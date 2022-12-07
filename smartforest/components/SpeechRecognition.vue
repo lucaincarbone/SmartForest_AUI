@@ -37,6 +37,7 @@ export default {
       recognition.addEventListener("end", () => {
         if(this.runtimeTranscription_.toString().includes("hello")){
             this.transcription_.push(this.runtimeTranscription_);
+            $fetch('/api/submit', { method: 'post', body: { phrase: this.runtimeTranscription_.toString() } })
 
         }
         this.runtimeTranscription_ = "";

@@ -7,5 +7,5 @@
     pullLever(): void
     ejectBread(): void
     removeBread(): void
-    advanceState(): void
+    advanceState(phrase:string): void
 }

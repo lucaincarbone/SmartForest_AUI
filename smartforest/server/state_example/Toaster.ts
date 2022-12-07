@@ -4,7 +4,6 @@ import{ IdleState,ToasterState }  from"./ToasterState"
 
 
 
-
 export namespace Appliances
 {
     /**
@@ -38,15 +37,17 @@ export namespace Appliances
             this.logCurrentState()
         }
 
-        public advanceState(): void {
+        public advanceState(phrase:string): void {
             this._state = this._state.advanceState()
-            this.logCurrentState()
+            this.askDialog(phrase)
+        }
+        private askDialog(phrase:string) {
+            var response;
+            response= this.dialogHandler.executeQueries([phrase])
+            //console.log(response)
         }
 
         private logCurrentState(): void {
-           var response;
-           response= this.dialogHandler.executeQueries(["hi,forest"])
-           //console.log(response)
         }
     }
 }

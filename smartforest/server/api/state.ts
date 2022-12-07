@@ -8,7 +8,7 @@ export default defineEventHandler(() => {
 
 
 function GenerateRandomJson(toaster: Toaster) {
-  toaster.advanceState()
+  toaster.advanceState("hi,forest")
   //return json as example
     return {
         title: 'Mount Everest',
