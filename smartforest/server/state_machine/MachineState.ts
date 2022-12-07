@@ -7,23 +7,32 @@ import { StateOperations } from "./stateOperations";
  * Each state will redefine how they handle all the stateOperations 
  * They will also handle which is the correct next state for the machine
  */
-export abstract class MachineState implements StateOperations{
-    private dialogHandler: DialogHandler
+export abstract class MachineState implements StateOperations {
+    private static dialogHandler: DialogHandler= new DialogHandler()
+    private nextState: MachineState
 
     constructor() {
-        this.dialogHandler = new DialogHandler()
+        //TODO dialog handler MUST be singleton or else i create a new connection every state change
+        this.nextState = this
     }
 
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
-    prepareResponse(phrase:string): Promise<string>  {
-        return this.dialogHandler.executeQueries([phrase])
+    prepareResponse(phrase: string): Promise<string> {
+        return MachineState.dialogHandler.executeQueries([phrase])
     }
     /**
-     * Changes its state based on the response he sent 
+     * Return the next state for the machine after the current one 
      */
     changeState(): MachineState {
-        return this
+        return this.nextState
     }
+    /**
+     * Set the next state following this one 
+     */
+    setNextState(nextState: MachineState): void {
+        this.nextState = nextState
+    }
+
 }

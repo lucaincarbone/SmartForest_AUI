@@ -7,7 +7,9 @@ export class DialogHandler {
     // Instantiates a session client
     private sessionClient;
 
+    //TODO make this class singleton and remove from abstract state constructor
     constructor() {
+      console.log("creating dialogHandler")
         this.sessionClient = new SessionsClient();
     }
 
