@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="forest-container">
+      <VoiceDetectionWidget/>
       <img src="../assets/CLOUDS.png" alt="" class="clouds floating-clouds" />
       <img class="ground" src="../assets/GROUND.png" alt="" />
       <img class="base floating-base" src="../assets/LINES_BASE.png" alt="" />
