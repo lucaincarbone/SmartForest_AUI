@@ -16,13 +16,16 @@ export class Machine{
 
     /**
      * This function is called every time a voice command is received 
+     * It takes as parameter the string command
      * It returns a json to send as answer to the client 
      * It also changes its current state 
      */
-    public prepareResponse(){
-        this._state.prepareResponse()//Ideally response to be sent back = this function returned json
-        this._state=this._state.changeState()//change machine state to appropriate next one 
-        //return JSON_RESPONSE_FOR_CLIENT
+    public async prepareResponse(phrase:string): Promise<string> {
+        var response: string 
+        response = await this._state.prepareResponse(phrase) //Ideally response to be sent back = this function returned json
+        console.log(response) // for now it is the intent but state should redefine prepareResponse and return the Json
+        this._state=this._state.changeState() //change machine state to appropriate next one 
+        return response //return JSON_RESPONSE_FOR_CLIENT
     }
 
 }

@@ -37,10 +37,11 @@ export class DialogHandler {
         return responses[0];
     }
 
-    public async executeQueries(queries:[string]) {
+    public async executeQueries(queries:[string]):Promise<string> {
         // Keeping the context across queries let's us simulate an ongoing conversation with the bot
         let context;
         let intentResponse;
+        let answer:string=""
         for (const query of queries) {
           try {
             console.log(`Sending Query: ${query}`);
@@ -49,13 +50,15 @@ export class DialogHandler {
               context,
             );
             console.log('Detected intent: ');
-            console.log((intentResponse.queryResult.intent.displayName).toString());
+            answer=(intentResponse.queryResult.intent.displayName).toString()
+            //console.log(answer);
             // Use the context from this response for next queries
             context = intentResponse.queryResult.outputContexts;
           } catch (error) {
             console.log(error);
           }
         }
+        return answer
       }
 
 

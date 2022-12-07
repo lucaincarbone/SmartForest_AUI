@@ -265,7 +265,7 @@ export default {
 
     showAlert: async (id) => {
       await $fetch('/api/state')
-      //alert('Image_id: ' + id)
+      $fetch('/api/submit', { method: 'post', body: { phrase: "hello,forest!" } })
     },
 
     spawnTreeInARandomPos: function () {
