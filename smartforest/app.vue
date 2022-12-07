@@ -1,5 +1,4 @@
-<script setup>
-
+<script>
 import Forest from "./components/Forest.vue";
 import WeatherWidget from "./components/WeatherWidget.vue";
 import VoiceDetectionWidget from "./components/VoiceDetectionWidget.vue";
@@ -7,11 +6,13 @@ import Trees from "./components/Trees.vue";
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 </script>
 
 <template>
+  
   <div class="bg">
+    <SpeechRecognition/>
+    
     <div><iframe
     allow="microphone;"
     width="1080"

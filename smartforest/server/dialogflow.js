@@ -1,4 +1,3 @@
-
 /**
  * TODO(developer): UPDATE these variables before running the sample.
  */

@@ -115,7 +115,7 @@ export default {
 
 .floating-base {
   animation-name: floating-base;
-  animation-duration: 3s;
+  animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   margin-top: 5px;
@@ -134,7 +134,7 @@ export default {
 }
 .floating-clouds {
   animation-name: floating-clouds;
-  animation-duration: 5s;
+  animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }

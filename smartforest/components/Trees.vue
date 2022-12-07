@@ -290,7 +290,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.spawnTreeInARandomPos();
-    }, 500);
+    }, 1000);
   },
 };
 </script>
@@ -461,7 +461,7 @@ export default {
 
 .floating-base {
   animation-name: floating-base;
-  animation-duration: 3s;
+  animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   margin-top: 5px;
