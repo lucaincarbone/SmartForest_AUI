@@ -11,11 +11,21 @@ export class AdviceSelectionState extends MachineState{
      */
   async prepareResponse(phrase:string): Promise<string>  {
     //Parent class method returns the intent 
-    let intent: string = await super.prepareResponse(phrase)
-    // if(intent==Intents.advices_general){
-    //     super.setNextState(new Actionselectionstate())
-    // }
-    return super.prepareResponse(phrase)
+    let promisedIntent: Promise<string> = super.prepareResponse(phrase)
+    let intent: string = await promisedIntent
+    if (intent == Intents.advices_applinces_consumption) {
+      //specific tree part
+    }
+    else if (intent == Intents.advices_energy_status) {
+      //specific tree part
+    }
+    else if (intent == Intents.advices_start_specific_appliance) {
+      //specific tree part
+    }
+    else {
+      console.log("AdviceSelectionState could not detect intent:" + intent)
+    }
+    return promisedIntent
    
 }
 }
