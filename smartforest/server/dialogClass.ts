@@ -1,19 +1,26 @@
-import { SessionsClient } from '@google-cloud/dialogflow';
+import {SessionsClient} from '@google-cloud/dialogflow';
+
 export class DialogHandler {
+
+    private static _instance: DialogHandler;
     private projectId: string = 'green-home-cico';
     private sessionId = '123456';
     private languageCode: string = 'en';
-    //private dialogflow = require('@google-cloud/dialogflow');
+    // private dialogflow = require('@google-cloud/dialogflow');
     // Instantiates a session client
     private sessionClient;
 
     //TODO make this class singleton and remove from abstract state constructor
-    constructor() {
-      console.log("creating dialogHandler")
+    private constructor() {
+        console.log("Creating a new DialogHandler...")
         this.sessionClient = new SessionsClient();
     }
 
-    private async detectIntent(query: string,contexts:any): Promise<any> {
+    public static get Instance() {
+        return this._instance || (this._instance = new this());
+    }
+
+    private async detectIntent(query: string, contexts: any): Promise<any> {
         // The path to identify the agent that owns the created intent.
         const sessionPath = this.sessionClient.projectAgentSessionPath(
             this.projectId,
@@ -28,7 +35,7 @@ export class DialogHandler {
                     languageCode: this.languageCode,
                 },
             },
-            queryParams:{}
+            queryParams: {}
         };
         if (contexts && contexts.length > 0) {
             request.queryParams = {
@@ -39,48 +46,28 @@ export class DialogHandler {
         return responses[0];
     }
 
-    public async executeQueries(queries:[string]):Promise<string> {
-        // Keeping the context across queries let's us simulate an ongoing conversation with the bot
+    public async executeQueries(queries: [string]): Promise<string> {
+        // Keeping the context across queries lets us simulate an ongoing conversation with the bot
         let context;
         let intentResponse;
-        let answer:string=""
+        let answer: string = ""
         for (const query of queries) {
-          try {
-            console.log(`Sending Query: ${query}`);
-            intentResponse = await this.detectIntent(
-              query,
-              context,
-            );
-            console.log('Detected intent: ');
-            answer=(intentResponse.queryResult.intent.displayName).toString()
-            //console.log(answer);
-            // Use the context from this response for next queries
-            context = intentResponse.queryResult.outputContexts;
-          } catch (error) {
-            console.log(error);
-          }
+            try {
+                console.log(`Sending Query: ${query}`);
+                intentResponse = await this.detectIntent(
+                    query,
+                    context,
+                );
+                answer = (intentResponse.queryResult.intent.displayName).toString()
+                console.log('Detected intent: ' + answer);
+                // Use the context from this response for next queries
+                context = intentResponse.queryResult.outputContexts;
+            } catch (error) {
+                console.log(error);
+            }
         }
         return answer
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }
