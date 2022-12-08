@@ -3,7 +3,7 @@
     <div class="vd-flex">
       <div class="vd-grid-container">
         <img src="../assets/sirigif.gif" @click="askMeSomething()" alt="" class="vd-icon"/>
-        <p class="vd-text">{{runtimeTranscription_}}</p>
+        <p class="vd-text">{{ runtimeTranscription_ }}</p>
       </div>
     </div>
   </div>
@@ -34,18 +34,18 @@ export default {
       // Sentence-Matching Event Triggered
       recognition.addEventListener("result", (event) => {
         var text = Array.from(event.results)
-          .map((result) => result[0])
-          .map((result) => result.transcript)
-          .join("");
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
         this.runtimeTranscription_ = text;
       });
       // End of Sentence Event Triggered
       recognition.addEventListener("end", () => {
         console.log(this.runtimeTranscription_.toString());
-        if(this.runtimeTranscription_.toString().includes("flora")){
-            this.transcription_.push(this.runtimeTranscription_);
-            $fetch('/api/submit', { method: 'post', body: { phrase: this.runtimeTranscription_.toString() } })
-
+        // Flora must be upper case
+        if (this.runtimeTranscription_.toString().includes("Flora")) {
+          this.transcription_.push(this.runtimeTranscription_);
+          $fetch('/api/submit', {method: 'post', body: {phrase: this.runtimeTranscription_.toString()}})
         }
         // this.runtimeTranscription_ = "Hello, Flora!";
         // CLICK AND LISTEN, THEN STOP
@@ -79,6 +79,7 @@ export default {
   bottom: 0;
   grid-area: sentence;
 }
+
 .vd-icon {
   height: 40px;
   margin: auto;
@@ -91,10 +92,11 @@ export default {
 .vd-runtime {
   grid-area: response;
 }
+
 .vd-grid-container {
   position: relative;
   display: inline-grid;
-  grid-template-areas: 
+  grid-template-areas:
   "mic sentence";
   column-gap: 1em;
   align-items: center;
@@ -108,6 +110,7 @@ export default {
   right: 0;
   margin: 0 auto;
 }
+
 .vd-flex {
   display: flex;
 }
