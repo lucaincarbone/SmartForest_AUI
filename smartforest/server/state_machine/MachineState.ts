@@ -12,7 +12,7 @@ export abstract class MachineState implements StateOperations {
     private nextState: MachineState
 
     constructor() {
-        //TODO dialog handler MUST be singleton or else I create a new connection every state change
+        // TODO dialog handler MUST be singleton or else I create a new connection every state change, done?
         this.nextState = this
     }
 

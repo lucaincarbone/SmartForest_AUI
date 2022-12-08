@@ -1,6 +1,9 @@
 import {Intents} from "../intents";
 import {MachineState} from "../MachineState";
 import {UserRequestState} from "./UserRequestState";
+import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionselectionState";
+import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
+import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
 
 /**
  * Concrete state class that will redefine prepare response and change state methods
@@ -20,7 +23,7 @@ export class UserPromptState extends MachineState {
                 break;
             }
             case Intents.forest_management_general: {
-                console.log(Intents.forest_management_general)
+                super.setNextState(new ActionSelectionState())
                 break;
             }
             case Intents.forest_management_buy: {
@@ -32,7 +35,7 @@ export class UserPromptState extends MachineState {
                 break;
             }
             case Intents.forest_status_general: {
-                console.log(Intents.forest_status_general)
+                super.setNextState(new StateRequestState())
                 break;
             }
             case Intents.forest_status_overall: {
@@ -76,6 +79,22 @@ export class UserPromptState extends MachineState {
                 break;
             }
             case Intents.guide_plant: {
+                console.log(Intents.guide_plant)
+                break;
+            }
+            case Intents.advices_general: {
+                super.setNextState(new AdviceSelectionState())
+                break;
+            }
+            case Intents.advices_applinces_consumption: {
+                console.log(Intents.guide_plant)
+                break;
+            }
+            case Intents.advices_energy_status: {
+                console.log(Intents.guide_plant)
+                break;
+            }
+            case Intents.advices_start_specific_appliance: {
                 console.log(Intents.guide_plant)
                 break;
             }
