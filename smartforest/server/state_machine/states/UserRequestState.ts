@@ -12,20 +12,33 @@ export class UserRequestState extends MachineState {
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
     async prepareResponse(phrase: string): Promise<string> {
-        //Parent class method returns the intent
+        // Parent class method returns the intent
         let promisedIntent: Promise<string> = super.prepareResponse(phrase)
         let intent: string = await promisedIntent
-        if (intent == Intents.forest_management_general) {
-            super.setNextState(new ActionSelectionState())
-        } else if (intent == Intents.forest_status_general) {
-            super.setNextState(new StateRequestState())
-        } else if (intent == Intents.advices_general) {
-            super.setNextState(new AdviceSelectionState())
-        } else if (intent == Intents.guide_general) {
-            //guide part of the tree
-        } else {
-            console.log("From UserRequestState: could not detect intent:" + intent)
+
+        switch (intent) {
+            case Intents.forest_management_general: {
+                super.setNextState(new ActionSelectionState())
+                break;
+            }
+            case Intents.forest_status_general: {
+                super.setNextState(new StateRequestState())
+                break;
+            }
+            case Intents.advices_general: {
+                super.setNextState(new AdviceSelectionState())
+                break;
+            }
+            case Intents.guide_general: {
+                console.log(Intents.guide_general)
+                break;
+            }
+            default: {
+                console.log("From UserPromptState could not detect intent:" + intent)
+                break;
+            }
         }
+
         return promisedIntent
     }
 }

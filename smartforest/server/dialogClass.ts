@@ -53,6 +53,7 @@ export class DialogHandler {
         let answer: string = ""
         for (const query of queries) {
             try {
+                console.log('From DialogHandler:')
                 console.log(`Sending Query: ${query}`);
                 intentResponse = await this.detectIntent(
                     query,
@@ -63,7 +64,7 @@ export class DialogHandler {
                 // Use the context from this response for next queries
                 context = intentResponse.queryResult.outputContexts;
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         }
         return answer

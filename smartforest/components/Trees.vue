@@ -5,252 +5,252 @@
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_1_1"
-        @click="showAlert('pos11')"
+        @click="doAction('pos11')"
     />
     <img
         id="pos12"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_1_2"
-        @click="showAlert('pos12')"
+        @click="doAction('pos12')"
     />
     <img
         id="pos13"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_1_3"
-        @click="showAlert('pos13')"
+        @click="doAction('pos13')"
     />
     <img
         id="pos14"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_1_4"
-        @click="showAlert('pos14')"
+        @click="doAction('pos14')"
     />
     <img
         id="pos15"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_1_5"
-        @click="showAlert('pos15')"
+        @click="doAction('pos15')"
     />
     <img
         id="pos16"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_1_6"
-        @click="showAlert('pos16')"
+        @click="doAction('pos16')"
     />
     <img
         id="pos21"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_2_1"
-        @click="showAlert('pos21')"
+        @click="doAction('pos21')"
     />
     <img
         id="pos22"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_2_2"
-        @click="showAlert('pos22')"
+        @click="doAction('pos22')"
     />
     <img
         id="pos23"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_2_3"
-        @click="showAlert('pos23')"
+        @click="doAction('pos23')"
     />
     <img
         id="pos24"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_2_4"
-        @click="showAlert('pos24')"
+        @click="doAction('pos24')"
     />
     <img
         id="pos25"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_2_5"
-        @click="showAlert('pos25')"
+        @click="doAction('pos25')"
     />
     <img
         id="pos26"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_2_6"
-        @click="showAlert('pos26')"
+        @click="doAction('pos26')"
     />
     <img
         id="pos31"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_3_1"
-        @click="showAlert('pos31')"
+        @click="doAction('pos31')"
     />
     <img
         id="pos32"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_3_2"
-        @click="showAlert('pos32')"
+        @click="doAction('pos32')"
     />
     <img
         id="pos33"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_3_3"
-        @click="showAlert('pos33')"
+        @click="doAction('pos33')"
     />
     <img
         id="pos34"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_3_4"
-        @click="showAlert('pos34')"
+        @click="doAction('pos34')"
     />
     <img
         id="pos35"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_3_5"
-        @click="showAlert('pos35')"
+        @click="doAction('pos35')"
     />
     <img
         id="pos36"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_3_6"
-        @click="showAlert('pos36')"
+        @click="doAction('pos36')"
     />
     <img
         id="pos41"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_4_1"
-        @click="showAlert('pos41')"
+        @click="doAction('pos41')"
     />
     <img
         id="pos42"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_4_2"
-        @click="showAlert('pos42')"
+        @click="doAction('pos42')"
     />
     <img
         id="pos43"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_4_3"
-        @click="showAlert('pos43')"
+        @click="doAction('pos43')"
     />
     <img
         id="pos44"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_4_4"
-        @click="showAlert('pos44')"
+        @click="doAction('pos44')"
     />
     <img
         id="pos45"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_4_5"
-        @click="showAlert('pos45')"
+        @click="doAction('pos45')"
     />
     <img
         id="pos46"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_4_6"
-        @click="showAlert('pos46')"
+        @click="doAction('pos46')"
     />
     <img
         id="pos51"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_5_1"
-        @click="showAlert('pos51')"
+        @click="doAction('pos51')"
     />
     <img
         id="pos52"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_5_2"
-        @click="showAlert('pos52')"
+        @click="doAction('pos52')"
     />
     <img
         id="pos53"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_5_3"
-        @click="showAlert('pos53')"
+        @click="doAction('pos53')"
     />
     <img
         id="pos54"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_5_4"
-        @click="showAlert('pos54')"
+        @click="doAction('pos54')"
     />
     <img
         id="pos55"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_5_5"
-        @click="showAlert('pos55')"
+        @click="doAction('pos55')"
     />
     <img
         id="pos56"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_5_6"
-        @click="showAlert('pos56')"
+        @click="doAction('pos56')"
     />
     <img
         id="pos61"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_6_1"
-        @click="showAlert('pos61')"
+        @click="doAction('pos61')"
     />
     <img
         id="pos62"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_6_2"
-        @click="showAlert('pos62')"
+        @click="doAction('pos62')"
     />
     <img
         id="pos63"
         src="../assets/dynamics/lev1.png"
         alt=""
         class="tree floating-base pos_6_3"
-        @click="showAlert('pos63')"
+        @click="doAction('pos63')"
     />
     <img
         id="pos64"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_6_4"
-        @click="showAlert('pos64')"
+        @click="doAction('pos64')"
     />
     <img
         id="pos65"
         src="../assets/dynamics/lev3.png"
         alt=""
         class="tree floating-base pos_6_5"
-        @click="showAlert('pos65')"
+        @click="doAction('pos65')"
     />
     <img
         id="pos66"
         src="../assets/dynamics/lev2.png"
         alt=""
         class="tree floating-base pos_6_6"
-        @click="showAlert('pos66')"
+        @click="doAction('pos66')"
     />
   </div>
 </template>
@@ -263,7 +263,7 @@ export default {
   },
   methods: {
 
-    showAlert: async (id) => {
+    doAction: async (id) => {
       await $fetch('/api/state')
       $fetch('/api/submit', { method: 'post', body: { phrase: "hello,forest!" } })
     },

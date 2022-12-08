@@ -42,11 +42,11 @@ export default {
       // End of Sentence Event Triggered
       recognition.addEventListener("end", () => {
         console.log(this.runtimeTranscription_.toString());
-        // Flora must be upper case
-        if (this.runtimeTranscription_.toString().includes("Flora")) {
-          this.transcription_.push(this.runtimeTranscription_);
-          $fetch('/api/submit', {method: 'post', body: {phrase: this.runtimeTranscription_.toString()}})
-        }
+        // FIXME: Uncomment below if you want to capture audio when the user says Flora
+        //if (this.runtimeTranscription_.toString().includes("Flora")) {
+        this.transcription_.push(this.runtimeTranscription_);
+        $fetch('/api/submit', {method: 'post', body: {phrase: this.runtimeTranscription_.toString()}})
+        //}
         // this.runtimeTranscription_ = "Hello, Flora!";
         // CLICK AND LISTEN, THEN STOP
         recognition.stop();
