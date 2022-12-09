@@ -11,10 +11,11 @@ export class UserRequestState extends MachineState {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
-    async prepareResponse(phrase: string): Promise<string> {
+    async prepareResponse(phrase: string): Promise<Map<string, string>> {
         // Parent class method returns the intent
-        let promisedIntent: Promise<string> = super.prepareResponse(phrase)
-        let intent: string = await promisedIntent
+        let fromDialogFlow: Map<string, string> = await super.prepareResponse(phrase)
+        let intent: string = fromDialogFlow.get('intent')!
+        let answer: string = fromDialogFlow.get('answer')!
 
         switch (intent) {
             case Intents.forest_management_general: {
@@ -34,11 +35,11 @@ export class UserRequestState extends MachineState {
                 break;
             }
             default: {
-                console.log("From UserPromptState could not detect intent:" + intent)
+                console.log("From UserPromptState could not detect intent: " + intent)
                 break;
             }
         }
 
-        return promisedIntent
+        return fromDialogFlow
     }
 }

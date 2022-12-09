@@ -12,18 +12,21 @@ export class UserPromptState extends MachineState {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
-    async prepareResponse(phrase: string): Promise<string> {
+    async prepareResponse(phrase: string): Promise<Map<string, string>> {
         // Parent class method returns the intent
-        let promisedIntent: Promise<string> = super.prepareResponse(phrase)
-        let intent: string = await promisedIntent
+        let fromDialogFlow: Map<string, string> = await super.prepareResponse(phrase)
+        let intent: string = fromDialogFlow.get('intent')!
+        let answer: string = fromDialogFlow.get('answer')!
 
         switch (intent) {
             case Intents.Welcome_Flora: {
-                super.setNextState(new UserRequestState())
+                console.log(Intents.Welcome_Flora)
+                //super.setNextState(new UserRequestState())
                 break;
             }
             case Intents.forest_management_general: {
-                super.setNextState(new ActionSelectionState())
+                console.log(Intents.forest_management_general)
+                //super.setNextState(new ActionSelectionState())
                 break;
             }
             case Intents.forest_management_buy: {
@@ -35,7 +38,8 @@ export class UserPromptState extends MachineState {
                 break;
             }
             case Intents.forest_status_general: {
-                super.setNextState(new StateRequestState())
+                console.log(Intents.forest_status_general)
+                //super.setNextState(new StateRequestState())
                 break;
             }
             case Intents.forest_status_overall: {
@@ -83,7 +87,8 @@ export class UserPromptState extends MachineState {
                 break;
             }
             case Intents.advices_general: {
-                super.setNextState(new AdviceSelectionState())
+                console.log(Intents.advices_general)
+                //super.setNextState(new AdviceSelectionState())
                 break;
             }
             case Intents.advices_applinces_consumption: {
@@ -99,12 +104,12 @@ export class UserPromptState extends MachineState {
                 break;
             }
             default: {
-                console.log("From UserPromptState could not detect intent:" + intent)
+                console.log("From UserPromptState could not detect intent: " + intent)
                 break;
             }
         }
 
-        return promisedIntent
+        return fromDialogFlow
     }
 
 }

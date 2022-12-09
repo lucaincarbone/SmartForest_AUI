@@ -10,7 +10,6 @@ export class DialogHandler {
     // Instantiates a session client
     private sessionClient;
 
-    // TODO make this class singleton and remove from abstract state constructor, done?
     private constructor() {
         console.log("Creating a new DialogHandler...")
         this.sessionClient = new SessionsClient();
@@ -46,29 +45,34 @@ export class DialogHandler {
         return responses[0];
     }
 
-    public async executeQueries(queries: [string]): Promise<string> {
+    public async executeQueries(queries: [string]): Promise<Map<string, string>> {
         // Keeping the context across queries lets us simulate an ongoing conversation with the bot
         let context;
         let intentResponse;
-        let answer: string = ""
+        let detectedIntent: string = ""
+        let caAnswer: string = ""
+        let mapToReturn: Map<string, string> = new Map<string, string>()
+
         for (const query of queries) {
             try {
-                console.log('From DialogHandler:')
-                console.log(`Sending Query: ${query}`);
+                //console.log('From DialogHandler:')
+                //console.log(`Sending Query: ${query}`);
                 intentResponse = await this.detectIntent(
                     query,
                     context,
                 );
-                answer = (intentResponse.queryResult.intent.displayName).toString()
-                console.log('Detected intent: ' + answer);
+                detectedIntent = (intentResponse.queryResult.intent.displayName).toString()
+                caAnswer = intentResponse.queryResult.fulfillmentText
+                //console.log('Detected intent: ' + detectedIntent);
+                //console.log('CA answer: ' + caAnswer);
                 // Use the context from this response for next queries
                 context = intentResponse.queryResult.outputContexts;
+                mapToReturn.set("intent",detectedIntent)
+                mapToReturn.set("answer",caAnswer)
             } catch (error) {
                 console.error(error);
             }
         }
-        return answer
+        return mapToReturn
     }
-
-
 }

@@ -265,7 +265,7 @@ export default {
 
     doAction: async (id) => {
       await $fetch('/api/state')
-      $fetch('/api/submit', { method: 'post', body: { phrase: "hello,forest!" } })
+      await $fetch('/api/submit', {method: 'post', body: {phrase: "hello,forest!"}})
     },
 
     spawnTreeInARandomPos: function () {

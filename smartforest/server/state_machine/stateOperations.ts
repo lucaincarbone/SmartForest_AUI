@@ -5,6 +5,6 @@ import { MachineState } from "./MachineState"
      * each state will define how they handle each function in a different way
      */
   export interface StateOperations {
-    prepareResponse(phrase:string): Promise<string> 
+     prepareResponse(phrase: string): Promise<Map<string, string>>
     changeState(): MachineState
 }

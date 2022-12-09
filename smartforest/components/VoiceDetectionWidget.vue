@@ -1,5 +1,10 @@
 <template>
   <div class="vd-container floating">
+    <div class="vd-grid-container">
+      <p class="vd-text">{{ answerFromCA_ }}</p>
+    </div>
+  </div>
+  <div class="vd-container floating">
     <div class="vd-flex">
       <div class="vd-grid-container">
         <img src="../assets/sirigif.gif" @click="askMeSomething()" alt="" class="vd-icon"/>
@@ -17,6 +22,7 @@ export default {
       runtimeTranscription_: "",
       transcription_: [],
       lang_: "en-US",
+      answerFromCA_: ""
     };
   },
   mounted() {
@@ -33,19 +39,21 @@ export default {
 
       // Sentence-Matching Event Triggered
       recognition.addEventListener("result", (event) => {
-        var text = Array.from(event.results)
+        this.runtimeTranscription_ = Array.from(event.results)
             .map((result) => result[0])
             .map((result) => result.transcript)
             .join("");
-        this.runtimeTranscription_ = text;
       });
       // End of Sentence Event Triggered
-      recognition.addEventListener("end", () => {
+      recognition.addEventListener("end", async () => {
         console.log(this.runtimeTranscription_.toString());
         // FIXME: Uncomment below if you want to capture audio when the user says Flora
         //if (this.runtimeTranscription_.toString().includes("Flora")) {
         this.transcription_.push(this.runtimeTranscription_);
-        $fetch('/api/submit', {method: 'post', body: {phrase: this.runtimeTranscription_.toString()}})
+        this.answerFromCA_ = await $fetch('/api/submit', {
+          method: 'post',
+          body: {phrase: this.runtimeTranscription_.toString()}
+        })
         //}
         // this.runtimeTranscription_ = "Hello, Flora!";
         // CLICK AND LISTEN, THEN STOP

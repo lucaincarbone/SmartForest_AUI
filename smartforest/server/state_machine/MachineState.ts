@@ -12,14 +12,13 @@ export abstract class MachineState implements StateOperations {
     private nextState: MachineState
 
     constructor() {
-        // TODO dialog handler MUST be singleton or else I create a new connection every state change, done?
         this.nextState = this
     }
 
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
-    prepareResponse(phrase: string): Promise<string> {
+    prepareResponse(phrase: string): Promise<Map<string, string>> {
         return MachineState.dialogHandler.executeQueries([phrase])
     }
 

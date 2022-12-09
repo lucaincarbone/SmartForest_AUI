@@ -15,5 +15,5 @@ export default defineEventHandler(async (event) => {
     // make this method return the json to send back to the client
     answer = await machine.prepareResponse(phrase)
     // console.log(answer)
-    return {body}
+    return answer
 })
