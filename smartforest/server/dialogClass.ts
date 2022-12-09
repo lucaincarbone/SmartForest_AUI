@@ -67,8 +67,8 @@ export class DialogHandler {
                 //console.log('CA answer: ' + caAnswer);
                 // Use the context from this response for next queries
                 context = intentResponse.queryResult.outputContexts;
-                mapToReturn.set("intent",detectedIntent)
-                mapToReturn.set("answer",caAnswer)
+                mapToReturn.set("intent", detectedIntent)
+                mapToReturn.set("answer", caAnswer)
             } catch (error) {
                 console.error(error);
             }

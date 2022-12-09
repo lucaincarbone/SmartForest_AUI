@@ -2,9 +2,9 @@
   <div>
     <div class="forest-container">
       <VoiceDetectionWidget/>
-      <img src="../assets/CLOUDS.png" alt="" class="clouds floating-clouds" />
-      <img class="ground" src="../assets/GROUND.png" alt="" />
-      <img class="base floating-base" src="../assets/LINES_BASE.png" alt="" />
+      <img src="../assets/CLOUDS.png" alt="" class="clouds floating-clouds"/>
+      <img class="ground" src="../assets/GROUND.png" alt=""/>
+      <img class="base floating-base" src="../assets/LINES_BASE.png" alt=""/>
       <div class="experience-bar">
         <div id="current" class="current-bar">
           <p id="currentnum" class="experience-text">75/100</p>
@@ -23,38 +23,31 @@ export default {
   },
 
 
-
-
- //TODO remove this test api interaction
+  //TODO remove this test api interaction
   async setup() {
     // const { data: testData } = await useFetch('/api/state')
     // console.log(testData.value.title);
   },
 
 
-
-
   methods: {
     loadBar: function () {
       var div = document.getElementById("current");
-      if(this.percentage == 200) {
+      if (this.percentage == 200) {
         this.percentage = 0;
-      }
-      else {
-        this.percentage+=10;
+      } else {
+        this.percentage += 10;
       }
 
-      if(this.percentage <= 75){
+      if (this.percentage <= 75) {
         div.style.backgroundColor = "red";
-      }
-      else if(this.percentage <= 150 && this.percentage > 75){
+      } else if (this.percentage <= 150 && this.percentage > 75) {
         div.style.backgroundColor = "yellow";
-      }
-      else if(this.percentage <= 200 && this.percentage > 150){
+      } else if (this.percentage <= 200 && this.percentage > 150) {
         div.style.backgroundColor = "rgb(0, 183, 0)";
       }
       div.style.width = this.percentage + "px";
-      document.getElementById("currentnum").textContent = this.percentage/2 + "/100";
+      document.getElementById("currentnum").textContent = this.percentage / 2 + "/100";
     },
   },
   mounted() {
@@ -76,15 +69,16 @@ export default {
 
   background: rgb(0, 170, 255);
   background: linear-gradient(
-    180deg,
-    rgba(0, 170, 255, 1) 0%,
-    rgba(0, 192, 255, 1) 23%,
-    rgba(159, 241, 255, 1) 49%,
-    rgba(255, 255, 255, 1) 100%
+      180deg,
+      rgba(0, 170, 255, 1) 0%,
+      rgba(0, 192, 255, 1) 23%,
+      rgba(159, 241, 255, 1) 49%,
+      rgba(255, 255, 255, 1) 100%
   );
   border-top-left-radius: 200px;
   border-top-right-radius: 200px;
 }
+
 .ground {
   position: absolute;
   width: 1080px;
@@ -93,6 +87,7 @@ export default {
   right: 0;
   margin: 0 auto;
 }
+
 .base {
   position: relative;
   justify-content: center;
@@ -103,6 +98,7 @@ export default {
   margin: 0 auto;
   bottom: 7em;
 }
+
 .clouds {
   position: absolute;
   z-index: 100;
@@ -133,6 +129,7 @@ export default {
     transform: translate(0, -0px);
   }
 }
+
 .floating-clouds {
   animation-name: floating-clouds;
   animation-duration: 10s;
@@ -151,6 +148,7 @@ export default {
     transform: translate(0, 0);
   }
 }
+
 .experience-bar {
   position: absolute;
   background-color: white;

@@ -15,7 +15,7 @@ export class AdviceSelectionState extends MachineState {
         let intent: string = fromDialogFlow.get('intent')!
         let answer: string = fromDialogFlow.get('answer')!
 
-        if (intent == Intents.advices_applinces_consumption) {
+        if (intent == Intents.advices_appliances_consumption) {
             //specific tree part
         } else if (intent == Intents.advices_energy_status) {
             //specific tree part

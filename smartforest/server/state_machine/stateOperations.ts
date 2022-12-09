@@ -1,10 +1,11 @@
-import { MachineState } from "./MachineState"
+import {MachineState} from "./MachineState"
 
- /**
-     * Interface defining which functions the machine states will be hable to handle
-     * each state will define how they handle each function in a different way
-     */
-  export interface StateOperations {
-     prepareResponse(phrase: string): Promise<Map<string, string>>
+/**
+ * Interface defining which functions the machine states will be hable to handle
+ * each state will define how they handle each function in a different way
+ */
+export interface StateOperations {
+    prepareResponse(phrase: string): Promise<Map<string, string>>
+
     changeState(): MachineState
 }

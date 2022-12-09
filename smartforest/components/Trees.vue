@@ -1,5 +1,5 @@
 <template>
-  <div id="window" class="tree-container" >
+  <div id="window" class="tree-container">
     <img
         id="pos11"
         src="../assets/dynamics/lev1.png"
@@ -270,7 +270,7 @@ export default {
 
     spawnTreeInARandomPos: function () {
       document.getElementById(this.randomPos()).src =
-        "/_nuxt/assets/dynamics/lev" + this.randomLevel() + ".png";
+          "/_nuxt/assets/dynamics/lev" + this.randomLevel() + ".png";
     },
     randomLevel: function () {
       return Math.floor(Math.random() * 3 + 1).toString();
@@ -301,6 +301,7 @@ export default {
   height: 960px;
   position: absolute;
 }
+
 .tree {
   position: absolute;
   height: 100px;
@@ -314,22 +315,27 @@ export default {
   bottom: 500px;
   left: 100px;
 }
+
 .pos_1_2 {
   bottom: 545px;
   left: 180px;
 }
+
 .pos_1_3 {
   bottom: 590px;
   left: 260px;
 }
+
 .pos_1_4 {
   bottom: 635px;
   left: 340px;
 }
+
 .pos_1_5 {
   bottom: 680px;
   left: 420px;
 }
+
 .pos_1_6 {
   bottom: 725px;
   left: 490px;
@@ -339,22 +345,27 @@ export default {
   bottom: 450px;
   left: 180px;
 }
+
 .pos_2_2 {
   bottom: 500px;
   left: 260px;
 }
+
 .pos_2_3 {
   bottom: 545px;
   left: 340px;
 }
+
 .pos_2_4 {
   bottom: 590px;
   left: 420px;
 }
+
 .pos_2_5 {
   bottom: 635px;
   left: 490px;
 }
+
 .pos_2_6 {
   bottom: 680px;
   left: 570px;
@@ -364,22 +375,27 @@ export default {
   bottom: 400px;
   left: 260px;
 }
+
 .pos_3_2 {
   bottom: 450px;
   left: 340px;
 }
+
 .pos_3_3 {
   bottom: 500px;
   left: 420px;
 }
+
 .pos_3_4 {
   bottom: 545px;
   left: 490px;
 }
+
 .pos_3_5 {
   bottom: 590px;
   left: 570px;
 }
+
 .pos_3_6 {
   bottom: 635px;
   left: 650px;
@@ -389,22 +405,27 @@ export default {
   bottom: 355px;
   left: 340px;
 }
+
 .pos_4_2 {
   bottom: 400px;
   left: 420px;
 }
+
 .pos_4_3 {
   bottom: 450px;
   left: 490px;
 }
+
 .pos_4_4 {
   bottom: 500px;
   left: 570px;
 }
+
 .pos_4_5 {
   bottom: 545px;
   left: 650px;
 }
+
 .pos_4_6 {
   bottom: 590px;
   left: 730px;
@@ -414,46 +435,57 @@ export default {
   bottom: 310px;
   left: 420px;
 }
+
 .pos_5_2 {
   bottom: 355px;
   left: 490px;
 }
+
 .pos_5_3 {
   bottom: 400px;
   left: 570px;
 }
+
 .pos_5_4 {
   bottom: 445px;
   left: 650px;
 }
+
 .pos_5_5 {
   bottom: 490px;
   left: 730px;
 }
+
 .pos_5_6 {
   bottom: 545px;
   left: 810px;
 }
+
 .pos_6_1 {
   bottom: 265px; /*-235px*/
   left: 490px; /*+390px */
 }
+
 .pos_6_2 {
   bottom: 310px;
   left: 570px;
 }
+
 .pos_6_3 {
   bottom: 355px;
   left: 650px;
 }
+
 .pos_6_4 {
   bottom: 400px;
   left: 730px;
 }
+
 .pos_6_5 {
   bottom: 445px;
   left: 810px;
 }
+
 .pos_6_6 {
   bottom: 490px;
   left: 890px;

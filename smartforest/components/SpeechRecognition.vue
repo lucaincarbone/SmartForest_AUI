@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     startSpeechToTxt() {
-        console.log("STARTING...");
+      console.log("STARTING...");
       // initialisation of voicereco
 
       window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -28,16 +28,16 @@ export default {
       // event current voice reco word
       recognition.addEventListener("result", (event) => {
         var text = Array.from(event.results)
-          .map((result) => result[0])
-          .map((result) => result.transcript)
-          .join("");
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
         this.runtimeTranscription_ = text;
       });
       // end of transcription
       recognition.addEventListener("end", () => {
-        if(this.runtimeTranscription_.toString().includes("hello")){
-            this.transcription_.push(this.runtimeTranscription_);
-            $fetch('/api/submit', { method: 'post', body: { phrase: this.runtimeTranscription_.toString() } })
+        if (this.runtimeTranscription_.toString().includes("hello")) {
+          this.transcription_.push(this.runtimeTranscription_);
+          $fetch('/api/submit', {method: 'post', body: {phrase: this.runtimeTranscription_.toString()}})
 
         }
         this.runtimeTranscription_ = "";
@@ -53,12 +53,13 @@ export default {
 </script>
 
 <style scoped>
- .voice {
-    background: white;
-    padding: 1em;
+.voice {
+  background: white;
+  padding: 1em;
 }
+
 .speech-to-txt {
-    background: green;
+  background: green;
 }
 
 </style>

@@ -91,7 +91,7 @@ export class UserPromptState extends MachineState {
                 //super.setNextState(new AdviceSelectionState())
                 break;
             }
-            case Intents.advices_applinces_consumption: {
+            case Intents.advices_appliances_consumption: {
                 console.log(Intents.guide_plant)
                 break;
             }
