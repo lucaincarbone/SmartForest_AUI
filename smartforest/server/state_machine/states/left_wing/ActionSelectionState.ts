@@ -1,4 +1,4 @@
-import {Intents} from "../../intents"
+import {Intents} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
 
@@ -22,7 +22,7 @@ export class ActionSelectionState extends MachineState {
         } else if (intent == Intents.forest_management_group) {
             //TODO this diramation within state machine need to be clarified
         } else {
-            console.log("ActionSelectionState could not detect intent:" + intent)
+            console.log("From ActionSelectionState could not detect intent:" + intent)
         }
         return fromDialogFlow
 

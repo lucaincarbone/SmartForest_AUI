@@ -1,6 +1,6 @@
-import {Intents} from "../intents";
+import {Intents, NameStates, statesMap} from "../Utils";
 import {MachineState} from "../MachineState";
-import {ActionSelectionState} from "./left_wing/ActionselectionState";
+import {ActionSelectionState} from "./left_wing/ActionSelectionState";
 import {StateRequestState} from "./middle_wing/StateRequestState";
 import {AdviceSelectionState} from "./right_wing/AdviceSelectionState";
 
@@ -19,15 +19,15 @@ export class UserRequestState extends MachineState {
 
         switch (intent) {
             case Intents.forest_management_general: {
-                super.setNextState(new ActionSelectionState())
+                super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
                 break;
             }
             case Intents.forest_status_general: {
-                super.setNextState(new StateRequestState())
+                super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
             case Intents.advices_general: {
-                super.setNextState(new AdviceSelectionState())
+                super.setNextState(statesMap.get(NameStates.AdviceSelectionState)!)
                 break;
             }
             case Intents.guide_general: {

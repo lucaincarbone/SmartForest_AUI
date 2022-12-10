@@ -1,5 +1,17 @@
-import {DialogHandler} from "../dialogClass";
-import {StateOperations} from "./stateOperations";
+import {DialogHandler} from "../DialogClass";
+import {StateOperations} from "./StateOperations";
+import {NameStates} from "~/server/state_machine/Utils";
+import {UserPromptState} from "~/server/state_machine/states/UserPromptState";
+import {UserRequestState} from "~/server/state_machine/states/UserRequestState";
+import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
+import {HowToSpendRequestState} from "~/server/state_machine/states/middle_wing/HowToSpendRequestState";
+import {SpecificStateRequestState} from "~/server/state_machine/states/middle_wing/SpecificStateRequestState";
+import {StateRequestBottomState} from "~/server/state_machine/states/middle_wing/StateRequestBottomState";
+import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
+import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionSelectionState";
+import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
+import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
+import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
 
 
 /**
@@ -35,5 +47,4 @@ export abstract class MachineState implements StateOperations {
     setNextState(nextState: MachineState): void {
         this.nextState = nextState
     }
-
 }

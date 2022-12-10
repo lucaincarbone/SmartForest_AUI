@@ -1,7 +1,7 @@
-import {Intents} from "../intents";
+import {Intents, NameStates, statesMap} from "../Utils";
 import {MachineState} from "../MachineState";
 import {UserRequestState} from "./UserRequestState";
-import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionselectionState";
+import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionSelectionState";
 import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
 import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
 
@@ -21,12 +21,12 @@ export class UserPromptState extends MachineState {
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
-                //super.setNextState(new UserRequestState())
+                super.setNextState(statesMap.get(NameStates.UserRequestState)!)
                 break;
             }
             case Intents.forest_management_general: {
                 console.log(Intents.forest_management_general)
-                //super.setNextState(new ActionSelectionState())
+                // super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
                 break;
             }
             case Intents.forest_management_buy: {
@@ -39,7 +39,7 @@ export class UserPromptState extends MachineState {
             }
             case Intents.forest_status_general: {
                 console.log(Intents.forest_status_general)
-                //super.setNextState(new StateRequestState())
+                // super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
             case Intents.forest_status_overall: {
@@ -88,7 +88,7 @@ export class UserPromptState extends MachineState {
             }
             case Intents.advices_general: {
                 console.log(Intents.advices_general)
-                //super.setNextState(new AdviceSelectionState())
+                // super.setNextState(statesMap.get(NameStates.AdviceSelectionState)!)
                 break;
             }
             case Intents.advices_appliances_consumption: {

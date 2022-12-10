@@ -1,4 +1,4 @@
-import {Intents} from "../../intents"
+import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
 import {HowToSpendRequestState} from "./HowToSpendRequestState"
 import {StateRequestBottomState} from "./StateRequestBottomState"
@@ -24,7 +24,7 @@ export class SpecificStateRequestState extends MachineState {
         } else if (intent == Intents.forest_status_overall_notifications) {
             //not a status waiting for interaction
         } else if (intent == Intents.forest_status_overall_levelExperience) {
-            super.setNextState(new StateRequestBottomState())
+            super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
         } else {
             console.log("SpecificStateRequestState could not detect intent:" + intent)
         }

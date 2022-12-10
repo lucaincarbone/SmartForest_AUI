@@ -1,4 +1,4 @@
-import {Intents} from "../../intents"
+import {Intents} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
 

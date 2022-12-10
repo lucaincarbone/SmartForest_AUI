@@ -1,4 +1,4 @@
-import {Intents} from "../../intents"
+import {Intents} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
 
@@ -15,8 +15,8 @@ export class PositionSelectionState extends MachineState {
         let intent: string = fromDialogFlow.get('intent')!
         let answer: string = fromDialogFlow.get('answer')!
 
-        // if (intent == Intents.forest_management_buy_position) {
-        //     super.setNextState(new ActionSelectionState())
+        // if (intent == Utils.forest_management_buy_position) {
+        //     super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
         // }
         // else{
         //     console.log("ActionSelectionState could not detect intent:"+intent)
