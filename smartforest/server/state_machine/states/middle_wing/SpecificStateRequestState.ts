@@ -1,7 +1,5 @@
 import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
-import {HowToSpendRequestState} from "./HowToSpendRequestState"
-import {StateRequestBottomState} from "./StateRequestBottomState"
 
 
 /**
@@ -18,7 +16,7 @@ export class SpecificStateRequestState extends MachineState {
         let answer: string = fromDialogFlow.get('answer')!
 
         if (intent == Intents.forest_status_overall_leaves) {
-            super.setNextState(new HowToSpendRequestState())
+            super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
         } else if (intent == Intents.forest_status_overall_numberTrees) {
             //not a status waiting for interaction
         } else if (intent == Intents.forest_status_overall_notifications) {

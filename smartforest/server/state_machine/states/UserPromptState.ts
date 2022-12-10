@@ -1,9 +1,6 @@
 import {Intents, NameStates, statesMap} from "../Utils";
 import {MachineState} from "../MachineState";
-import {UserRequestState} from "./UserRequestState";
-import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionSelectionState";
-import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
-import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
+
 
 /**
  * Concrete state class that will redefine prepare response and change state methods
@@ -21,7 +18,7 @@ export class UserPromptState extends MachineState {
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
-                super.setNextState(statesMap.get(NameStates.UserRequestState)!)
+                // super.setNextState(statesMap.get(NameStates.UserRequestState)!)
                 break;
             }
             case Intents.forest_management_general: {

@@ -1,8 +1,5 @@
 import {Intents, NameStates, statesMap} from "../Utils";
 import {MachineState} from "../MachineState";
-import {ActionSelectionState} from "./left_wing/ActionSelectionState";
-import {StateRequestState} from "./middle_wing/StateRequestState";
-import {AdviceSelectionState} from "./right_wing/AdviceSelectionState";
 
 /**
  * Concrete state class that will redefine prepare response and change state methods
