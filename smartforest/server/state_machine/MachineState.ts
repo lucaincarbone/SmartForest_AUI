@@ -20,7 +20,6 @@ import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/T
  * They will also handle which is the correct next state for the machine
  */
 export abstract class MachineState implements StateOperations {
-    private static dialogHandler: DialogHandler = DialogHandler.Instance
     private nextState: MachineState
 
     constructor() {
@@ -31,7 +30,7 @@ export abstract class MachineState implements StateOperations {
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
     prepareResponse(phrase: string): Promise<Map<string, string>> {
-        return MachineState.dialogHandler.executeQueries([phrase])
+        return DialogHandler.Instance.executeQueries([phrase])
     }
 
     /**

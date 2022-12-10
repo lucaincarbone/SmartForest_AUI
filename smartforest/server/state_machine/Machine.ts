@@ -11,6 +11,7 @@ import {PositionSelectionState} from "~/server/state_machine/states/left_wing/Po
 import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
 import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
 import {NameStates, statesMap} from "~/server/state_machine/Utils";
+import {Model} from "~/server/Model";
 
 
 /**
@@ -41,5 +42,4 @@ export class Machine {
         this._state = this._state.changeState() //change machine state to appropriate next one
         return response.get('answer')!; //return JSON_RESPONSE_FOR_CLIENT
     }
-
 }
