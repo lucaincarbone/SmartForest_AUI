@@ -1,4 +1,3 @@
-import gameState from './gameState.json';
 import fs from 'fs';
 import {Tree} from "~/server/Tree";
 
@@ -13,6 +12,7 @@ export class Model {
     private _trees: Tree[];
     private _leaves: number;
     private _globalExperience: number;
+    private pathToJsonFile: string = "./server/gameState.json";
 
     private constructor() {
         console.log("Creating a new Model...")
@@ -25,9 +25,13 @@ export class Model {
         return this._instance || (this._instance = new this());
     }
 
+    get trees(): Tree[] {
+        return this._trees;
+    }
+
     public addTree(position_x: number, position_y: number, level: number, experience: number) {
         this._trees.push(new Tree(position_x, position_y, level, experience))
-        //this.updateJsonFile(); // TODO: to fix
+        // TODO: add to Json file
     }
 
     public removeTree(id: string) {
@@ -41,24 +45,24 @@ export class Model {
         });
 
         this._trees.length = j;
-        //this.updateJsonFile(); // TODO: to fix
+        // TODO: remove from Json file
     }
 
-    // TODO: to fix
-    // public updateExperience(experience: number) {
-    //     this._globalExperience = experience;
-    //     gameState.globalExperience = gameState.globalExperience + experience;
-    //     this.updateJsonFile()
-    // }
+    // TODO: make the reading a function to not duplicate code
+    public updateGlobalExperience(experience: number) {
 
-    get trees(): Tree[] {
-        return this._trees;
-    }
+        fs.readFile(this.pathToJsonFile, (error, data) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
 
-    // TODO: to fix?
-    public updateJsonFile() {
-        fs.writeFile("server/gameState.json", JSON.stringify(gameState), err => {
-            if (err) console.log("Error writing file:", err);
+            const parsedData = JSON.parse(data.toString());
+            this._globalExperience = experience;
+            parsedData.globalExperience = experience;
+
+            fs.writeFileSync(this.pathToJsonFile,
+                JSON.stringify(parsedData, null, 2));
         });
     }
 }
