@@ -59,6 +59,10 @@ export class Model {
         })
     }
 
+    public groupTrees(OldPositions: [number, number, number], newPosition_x: number, newPosition_y: number) {
+
+    }
+
     public updateGlobalExperience(experience: number) {
         this._globalExperience = experience
 
