@@ -6,8 +6,8 @@
       <img class="ground" src="../assets/GROUND.png" alt=""/>
       <img class="base floating-base" src="../assets/LINES_BASE.png" alt=""/>
       <div class="experience-bar">
+        <p id="currentnum" class="experience-text"></p>
         <div id="current" class="current-bar">
-          <p id="currentnum" class="experience-text">75/100</p>
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@ export default {
 
 .floating-base {
   animation-name: floating-base;
-  animation-duration: 10s;
+  animation-duration: 20s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   margin-top: 5px;
@@ -132,7 +132,7 @@ export default {
 
 .floating-clouds {
   animation-name: floating-clouds;
-  animation-duration: 10s;
+  animation-duration: 20s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
@@ -185,5 +185,6 @@ export default {
   font-weight: 3em;
   color: black;
   z-index: 102;
+  font-weight: 600;
 }
 </style>

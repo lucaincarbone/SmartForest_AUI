@@ -1,14 +1,13 @@
 <template>
   <div class="vd-container floating">
-    <div class="vd-grid-container">
-      <p class="vd-text">{{ answerFromCA_ }}</p>
-    </div>
-  </div>
-  <div class="vd-container floating">
     <div class="vd-flex">
-      <div class="vd-grid-container">
-        <img src="../assets/sirigif.gif" @click="askMeSomething()" alt="" class="vd-icon"/>
-        <p class="vd-text">{{ runtimeTranscription_ }}</p>
+      <div class="vd-grid-container" @click="askMeSomething()">
+        <img
+          src="../assets/sirigif.gif"
+          alt=""
+          class="vd-icon"
+        />
+        <p id="flora-txt" class="vd-text">{{ runtimeTranscription_ }}</p>
       </div>
     </div>
   </div>
@@ -22,17 +21,17 @@ export default {
       runtimeTranscription_: "",
       transcription_: [],
       lang_: "en-US",
-      answerFromCA_: ""
+      answerFromCA_: "",
     };
   },
   mounted() {
-    this.runtimeTranscription_ = "Tap to ask Flora"
+    this.runtimeTranscription_ = "Tap to ask Flora";
   },
   methods: {
     askMeSomething() {
-
       // Init Voice Recognition
-      window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang_;
       recognition.interimResults = true;
@@ -40,9 +39,9 @@ export default {
       // Sentence-Matching Event Triggered
       recognition.addEventListener("result", (event) => {
         this.runtimeTranscription_ = Array.from(event.results)
-            .map((result) => result[0])
-            .map((result) => result.transcript)
-            .join("");
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
       });
       // End of Sentence Event Triggered
       recognition.addEventListener("end", async () => {
@@ -50,22 +49,33 @@ export default {
         // FIXME: Uncomment below if you want to capture audio when the user says Flora
         //if (this.runtimeTranscription_.toString().includes("Flora")) {
         this.transcription_.push(this.runtimeTranscription_);
-        this.answerFromCA_ = await $fetch('/api/submit', {
-          method: 'post',
-          body: {phrase: this.runtimeTranscription_.toString()}
-        })
+        this.answerFromCA_ = await $fetch("/api/submit", {
+          method: "post",
+          body: { phrase: this.runtimeTranscription_.toString() },
+        });
         //}
         // this.runtimeTranscription_ = "Hello, Flora!";
         // CLICK AND LISTEN, THEN STOP
         recognition.stop();
         // ALWAYS LISTENING
         // recognition.start();
+        this.changeAnswerTextBox();
       });
       recognition.start();
     },
+    changeAnswerTextBox() {
+      document.getElementById("answer-txt").textContent = this.answerFromCA_;
+      document.getElementById("answer-container").style.visibility = "visible";
+      document.getElementById("answer-container").style.transition = "opacity";
+      document
+        .getElementById("answer-container")
+        .animate([{ opacity: "0%" }, { opacity: "100%" }], {
+          duration: 1000,
+          fill: "forwards",
+        });
+    },
   },
 };
-
 </script>
 
 <style scoped>
@@ -104,8 +114,7 @@ export default {
 .vd-grid-container {
   position: relative;
   display: inline-grid;
-  grid-template-areas:
-  "mic sentence";
+  grid-template-areas: "mic sentence";
   column-gap: 1em;
   align-items: center;
   justify-content: center;
@@ -141,5 +150,11 @@ export default {
   100% {
     transform: translate(0, -0px);
   }
+}
+
+.answer-container {
+  z-index: 999;
+  position: absolute;
+  top: 0;
 }
 </style>

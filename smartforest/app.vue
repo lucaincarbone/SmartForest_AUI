@@ -11,6 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 <template>
   
   <div class="bg">
+    <AnswerBox/>
     <!-- <VoiceDetectionWidget/> -->
     <Trees/>
     <!-- <WeatherWidget/> -->
