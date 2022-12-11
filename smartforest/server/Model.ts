@@ -30,39 +30,61 @@ export class Model {
     }
 
     public addTree(position_x: number, position_y: number, level: number, experience: number) {
-        this._trees.push(new Tree(position_x, position_y, level, experience))
-        // TODO: add to Json file
+        let treeToAdd = new Tree(position_x, position_y, level, experience)
+
+        this._trees.push(treeToAdd)
+
+        this.updateJsonFile({position_x: position_x, position_y: position_y, level: level, experience: experience},
+            (parsedData, tree) => {
+                parsedData.trees.push(tree);
+            })
     }
 
-    public removeTree(id: string) {
+    public removeTree(position_x: number, position_y: number) {
         let j = 0;
+        let indexOfTreeToRemove = 0;
 
         this._trees.forEach((tree, i) => {
-            if (tree.id != id) {
+            if (tree.position_x != position_x && tree.position_y != position_y) {
                 if (i !== j) this._trees[j] = tree;
                 j++;
+            } else if (tree.position_x == position_x && tree.position_y == position_y){
+                indexOfTreeToRemove = i;
             }
         });
-
         this._trees.length = j;
-        // TODO: remove from Json file
+
+        this.updateJsonFile([position_x, position_y], (parsedData, not_used) => {
+            parsedData.trees.splice(indexOfTreeToRemove, 1);
+        })
     }
 
-    // TODO: make the reading a function to not duplicate code
     public updateGlobalExperience(experience: number) {
+        this._globalExperience = experience
 
-        fs.readFile(this.pathToJsonFile, (error, data) => {
-            if (error) {
-                console.log(error);
-                return;
-            }
-
-            const parsedData = JSON.parse(data.toString());
-            this._globalExperience = experience;
+        this.updateJsonFile(experience, (parsedData, experience) => {
             parsedData.globalExperience = experience;
+        })
+    }
 
-            fs.writeFileSync(this.pathToJsonFile,
-                JSON.stringify(parsedData, null, 2));
-        });
+    public updateLeaves(leaves: number) {
+        this._leaves = leaves
+
+        this.updateJsonFile(leaves, (parsedData, leaves) => {
+            parsedData.leaves = leaves;
+        })
+    }
+
+    private updateJsonFile(dataToUpdate: any, func: (parsedData: any, data: any) => void) {
+
+        let data = fs.readFileSync(this.pathToJsonFile);
+        const parsedData = JSON.parse(data.toString());
+
+        func(parsedData, dataToUpdate)
+
+        fs.writeFileSync(this.pathToJsonFile,
+            JSON.stringify(parsedData, null, 2));
     }
 }
+
+
