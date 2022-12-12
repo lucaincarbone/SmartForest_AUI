@@ -1,6 +1,7 @@
 import fs from 'fs';
-import {Tree} from "~/server/Tree";
+import { Tree } from "~/server/Tree";
 import { Position } from './Position';
+import { PlantPlaces } from './state_machine/Utils';
 
 /**
  * Singleton class that represents the model of the game.
@@ -14,6 +15,7 @@ export class Model {
     private _leaves: number;
     private _globalExperience: number;
     private pathToJsonFile: string = "./server/gameState.json";
+    private _leavesCost = 10;
 
     private constructor() {
         console.log("Creating a new Model...")
@@ -30,12 +32,110 @@ export class Model {
         return this._trees;
     }
 
+
+    public buyTree(positionGeneral: PlantPlaces): boolean {
+        if (this.canIBuyATree()) {
+            try {
+                let position: Position = this.getAPosition(positionGeneral)
+                this.addTree(position, 1, 50)
+                return true
+            }
+            //There is no free space on the whole board
+            catch (e) {
+                console.log(e);
+                return false
+            }
+        }
+        return false
+    }
+
+    /**
+     * Check if enough leaves are available to buy
+     * @returns true if the user has enough leaves 
+     */
+    private canIBuyATree() {
+        return this._leaves >= this._leavesCost;
+    }
+
+    /**
+     * Return a free position where a tree can be planted 
+     * if no space is available in the selected place return a random free space 
+     * if no space is available in general return an error
+     * @param positionGeneral macro position chosen by the user
+     * @returns A free position or an error if everything is full
+     */
+    private getAPosition(positionGeneral: PlantPlaces) {
+        let possiblePositions: Position[] = []
+        let x_start, x_end, y_start, y_end
+        switch (positionGeneral) {
+            case PlantPlaces.right: {
+                x_start = 4
+                x_end = 6
+                y_start = 4
+                y_end = 6
+                break;
+            }
+            case PlantPlaces.left: {
+                x_start = 1
+                x_end = 3
+                y_start = 1
+                y_end = 3
+                break;
+            }
+            case PlantPlaces.top: {
+                x_start = 1
+                x_end = 3
+                y_start = 4
+                y_end = 6
+                break;
+            }
+            case PlantPlaces.bottom: {
+                x_start = 4
+                x_end = 6
+                y_start = 1
+                y_end = 3
+                break;
+            }
+        }
+        for (let x = x_start; x <= x_end; x++) {
+            for (let y = y_start; y <= y_end; y++) {
+                if (this.checkFreePosition(x, y)) {
+                    return new Position(x, y);
+                }
+            }
+        }
+        //no free position in selectect place 
+        for (let x = 1; x <= 6; x++) {
+            for (let y = 1; y <= 6; y++) {
+                if (this.checkFreePosition(x, y)) {
+                    return new Position(x, y);
+                }
+            }
+        }
+        //no free position in general
+        throw new Error('There is no space to plant a new tree');
+    }
+
+    /**
+     * Check if a position is free
+     * @param x desired x
+     * @param y desired y
+     * @returns true if free/ false if not
+     */
+    private checkFreePosition(x: number, y: number) {
+        this.trees.forEach(tree => {
+            if ((tree.position_x == x) && (tree.position_y == y)) {
+                return false
+            }
+        });
+        return true;
+    }
     public addTree(position: Position, level: number, experience: number) {
         let treeToAdd = new Tree(position, level, experience)
 
         this._trees.push(treeToAdd)
 
-        this.updateJsonFile({position: position, level: level, experience: experience},
+        this.updateJsonFile({ position: position, level: level, experience: experience },
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
@@ -49,7 +149,7 @@ export class Model {
             if (tree.position_x != position.x && tree.position_y != position.y) {
                 if (i !== j) this._trees[j] = tree;
                 j++;
-            } else if (tree.position_x == position.x && tree.position_y == position.y){
+            } else if (tree.position_x == position.x && tree.position_y == position.y) {
                 indexOfTreeToRemove = i;
             }
         });
