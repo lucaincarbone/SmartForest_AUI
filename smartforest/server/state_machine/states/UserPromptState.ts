@@ -1,5 +1,6 @@
 import {Intents, NameStates, statesMap} from "../Utils";
 import {MachineState} from "../MachineState";
+import { Model } from "~~/server/Model";
 
 
 /**
@@ -18,16 +19,22 @@ export class UserPromptState extends MachineState {
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
-                // super.setNextState(statesMap.get(NameStates.UserRequestState)!)
+                super.setNextState(statesMap.get(NameStates.UserRequestState)!)
                 break;
             }
             case Intents.forest_management_general: {
                 console.log(Intents.forest_management_general)
-                // super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
+                super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
                 break;
             }
             case Intents.forest_management_buy: {
                 console.log(Intents.forest_management_buy)
+                if(Model.Instance.canIBuyATree()){
+                    super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
+                }
+                else{
+                    super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
+                }
                 break;
             }
             case Intents.forest_management_group: {
@@ -36,7 +43,7 @@ export class UserPromptState extends MachineState {
             }
             case Intents.forest_status_general: {
                 console.log(Intents.forest_status_general)
-                // super.setNextState(statesMap.get(NameStates.StateRequestState)!)
+                super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
             case Intents.forest_status_overall: {

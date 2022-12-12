@@ -15,12 +15,9 @@ export class PositionSelectionState extends MachineState {
         let intent: string = fromDialogFlow.get('intent')!
         let answer: string = fromDialogFlow.get('answer')!
 
-        // if (intent == Utils.forest_management_buy_position) {
-        //     super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
-        // }
-        // else{
-        //     console.log("ActionSelectionState could not detect intent:"+intent)
-        // }
+        console.log("answerCA")
+        let test:JSON = JSON.parse(answer)
+        console.log(test)
         return fromDialogFlow
 
     }

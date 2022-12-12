@@ -17,10 +17,11 @@ export class Model {
     private pathToJsonFile: string = "./server/gameState.json";
     private _leavesCost = 10;
 
+    //TODO make initial numbers correct (leaves)
     private constructor() {
         console.log("Creating a new Model...")
         this._trees = []
-        this._leaves = 0
+        this._leaves = 50
         this._globalExperience = 0
     }
 
@@ -53,7 +54,7 @@ export class Model {
      * Check if enough leaves are available to buy
      * @returns true if the user has enough leaves 
      */
-    private canIBuyATree() {
+    public canIBuyATree() {
         return this._leaves >= this._leavesCost;
     }
 

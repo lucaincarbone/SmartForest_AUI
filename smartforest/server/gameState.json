@@ -1,5 +1,150 @@
 {
   "leaves": 69,
   "globalExperience": 69,
-  "trees": []
+  "trees": [
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 12,
+        "_y": 15
+      },
+      "level": 12,
+      "experience": 12
+    },
+    {
+      "position": {
+        "_x": 10,
+        "_y": 10
+      },
+      "level": 12,
+      "experience": 12
+    }
+  ]
 }

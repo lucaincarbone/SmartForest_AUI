@@ -1,5 +1,6 @@
-import {Intents} from "../../Utils"
+import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
+import { Model } from "~~/server/Model"
 
 
 /**
@@ -19,6 +20,12 @@ export class ActionSelectionState extends MachineState {
             //TODO check if possible to buy
             //if yes    ->PositionSelectionState
             //if not    ->TipRequestNoLeavesState
+            if(Model.Instance.canIBuyATree()){
+                super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
+            }
+            else{
+                super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
+            }
         } else if (intent == Intents.forest_management_group) {
             //TODO this diramation within state machine need to be clarified
         } else {
