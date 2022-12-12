@@ -10,10 +10,10 @@ import {ActionSelectionState} from "~/server/state_machine/states/left_wing/Acti
 import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
 import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
 import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
-import {NameStates, statesMap} from "~/server/state_machine/Utils";
 import {Model} from "~/server/Model";
 import {HomeEnergyAPI} from "~/server/HomeEnergyAPI";
 import { Position } from "../Position";
+import {NameStates, PlantPlaces, statesMap} from "~/server/state_machine/Utils";
 
 
 /**

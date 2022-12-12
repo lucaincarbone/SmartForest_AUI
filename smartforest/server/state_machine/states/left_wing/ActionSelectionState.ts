@@ -24,6 +24,7 @@ export class ActionSelectionState extends MachineState {
                 super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
             }
             else{
+                //TODO not show the result
                 super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
             }
         } else if (intent == Intents.forest_management_group) {

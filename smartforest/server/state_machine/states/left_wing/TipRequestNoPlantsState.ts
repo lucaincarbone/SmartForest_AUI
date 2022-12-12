@@ -1,7 +1,7 @@
 import {Intents} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
-
+// TODO: to remove??????!!!
 /**
  * Concrete state class that will redefine prepare response and change state methods
  */

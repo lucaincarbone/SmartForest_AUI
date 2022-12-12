@@ -1,15 +1,15 @@
-import { MachineState } from "~/server/state_machine/MachineState";
-import { UserPromptState } from "~/server/state_machine/states/UserPromptState";
-import { UserRequestState } from "~/server/state_machine/states/UserRequestState";
-import { AdviceSelectionState } from "~/server/state_machine/states/right_wing/AdviceSelectionState";
-import { HowToSpendRequestState } from "~/server/state_machine/states/middle_wing/HowToSpendRequestState";
-import { SpecificStateRequestState } from "~/server/state_machine/states/middle_wing/SpecificStateRequestState";
-import { StateRequestBottomState } from "~/server/state_machine/states/middle_wing/StateRequestBottomState";
-import { StateRequestState } from "~/server/state_machine/states/middle_wing/StateRequestState";
-import { ActionSelectionState } from "~/server/state_machine/states/left_wing/ActionSelectionState";
-import { PositionSelectionState } from "~/server/state_machine/states/left_wing/PositionSelectionState";
-import { TipRequestNoLeavesState } from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
-import { TipRequestNoPlantsState } from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
+import {MachineState} from "~/server/state_machine/MachineState";
+import {UserPromptState} from "~/server/state_machine/states/UserPromptState";
+import {UserRequestState} from "~/server/state_machine/states/UserRequestState";
+import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
+import {HowToSpendRequestState} from "~/server/state_machine/states/middle_wing/HowToSpendRequestState";
+import {SpecificStateRequestState} from "~/server/state_machine/states/middle_wing/SpecificStateRequestState";
+import {StateRequestBottomState} from "~/server/state_machine/states/middle_wing/StateRequestBottomState";
+import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
+import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionSelectionState";
+import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
+import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
+import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
 
 export class Intents {
     public static advices_appliances_consumption: string = "advices_applinces_consumption";
@@ -50,12 +50,14 @@ export enum NameStates {
     TipRequestNoLeavesState = "TipRequestNoLeavesState",
     TipRequestNoPlantsState = "TipRequestNoPlantsState",
 }
+
 export enum PlantPlaces {
-    top = "Top",
-    bottom = "Bottom",
-    right = "Right",
-    left = "Left"
+    TOP = "TOP",
+    BOTTOM = "BOTTOM",
+    RIGHT = "RIGHT",
+    LEFT = "LEFT"
 }
+
 
 export const statesMap: Map<string, MachineState> = new Map<string, MachineState>([
     [NameStates.UserPromptState, new UserPromptState()],
