@@ -11,6 +11,10 @@ export class Tree {
         this._experience = experience;
     }
 
+    get position(): Position {
+        return this._position;
+    }
+
     get position_x(): number {
         return this._position.x;
     }
