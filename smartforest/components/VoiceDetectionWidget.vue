@@ -60,13 +60,13 @@ export default {
         // ALWAYS LISTENING
         // recognition.start();
         this.changeAnswerTextBox();
-        console.log(this.answerFromCA_.outputAudio);
+        await this.play();
       });
       recognition.start();
     },
     changeAnswerTextBox() {
       document.getElementById("answer-txt").textContent =
-        this.answerFromCA_.queryResult.fulfillmentText;
+        this.answerFromCA_.queryResult.fulfillmentText.toString();
       document.getElementById("answer-container").style.visibility = "visible";
       document.getElementById("answer-container").style.transition = "opacity";
       document
@@ -75,6 +75,16 @@ export default {
           duration: 500,
           fill: "forwards",
         });
+    },
+    async play() {
+      window.speechSynthesis.cancel();
+      var voices = window.speechSynthesis.getVoices();
+      var utterThis = new SpeechSynthesisUtterance();
+      utterThis.text = this.answerFromCA_.queryResult.fulfillmentText.toString();
+      utterThis.voice = voices[146];
+      utterThis.pitch = 1;
+      utterThis.lang = 'en';
+      window.speechSynthesis.speak(utterThis);
     },
   },
 };
