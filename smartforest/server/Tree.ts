@@ -1,22 +1,22 @@
+import { Position } from "./Position";
+
 export class Tree {
-    private _position_x: number
-    private _position_y: number
+    private _position: Position
     private _level: number
     private _experience: number
 
-    constructor(position_x: number, position_y: number, level: number, experience: number) {
-        this._position_x = position_x;
-        this._position_y = position_y;
+    constructor(position:Position, level: number, experience: number) {
+        this._position = position
         this._level = level;
         this._experience = experience;
     }
 
     get position_x(): number {
-        return this._position_x;
+        return this._position.x;
     }
 
     get position_y(): number {
-        return this._position_y;
+        return this._position.y;
     }
 
     get level(): number {

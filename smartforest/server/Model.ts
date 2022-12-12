@@ -1,5 +1,6 @@
 import fs from 'fs';
 import {Tree} from "~/server/Tree";
+import { Position } from './Position';
 
 /**
  * Singleton class that represents the model of the game.
@@ -29,37 +30,37 @@ export class Model {
         return this._trees;
     }
 
-    public addTree(position_x: number, position_y: number, level: number, experience: number) {
-        let treeToAdd = new Tree(position_x, position_y, level, experience)
+    public addTree(position: Position, level: number, experience: number) {
+        let treeToAdd = new Tree(position, level, experience)
 
         this._trees.push(treeToAdd)
 
-        this.updateJsonFile({position_x: position_x, position_y: position_y, level: level, experience: experience},
+        this.updateJsonFile({position: position, level: level, experience: experience},
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
     }
 
-    public removeTree(position_x: number, position_y: number) {
+    public removeTree(position: Position) {
         let j = 0;
         let indexOfTreeToRemove = 0;
 
         this._trees.forEach((tree, i) => {
-            if (tree.position_x != position_x && tree.position_y != position_y) {
+            if (tree.position_x != position.x && tree.position_y != position.y) {
                 if (i !== j) this._trees[j] = tree;
                 j++;
-            } else if (tree.position_x == position_x && tree.position_y == position_y){
+            } else if (tree.position_x == position.x && tree.position_y == position.y){
                 indexOfTreeToRemove = i;
             }
         });
         this._trees.length = j;
-
-        this.updateJsonFile([position_x, position_y], (parsedData, not_used) => {
+        console.log(indexOfTreeToRemove)
+        this.updateJsonFile([position.x, position.y], (parsedData, not_used) => {
             parsedData.trees.splice(indexOfTreeToRemove, 1);
         })
     }
 
-    public groupTrees(OldPositions: [number, number, number], newPosition_x: number, newPosition_y: number) {
+    public groupTrees(OldPositions: [Position, Position, Position], newPosition: Position) {
 
     }
 

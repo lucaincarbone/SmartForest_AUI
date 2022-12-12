@@ -1,7 +1,7 @@
 export class Position{
     private _x: number;
     private _y: number;
-    private constructor(x: number,y: number){
+    constructor(x: number,y: number){
         this._x = x;
         this._y = y;
     }

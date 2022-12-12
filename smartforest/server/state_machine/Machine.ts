@@ -13,6 +13,7 @@ import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/T
 import {NameStates, statesMap} from "~/server/state_machine/Utils";
 import {Model} from "~/server/Model";
 import {HomeEnergyAPI} from "~/server/HomeEnergyAPI";
+import { Position } from "../Position";
 
 
 /**
@@ -36,6 +37,9 @@ export class Machine {
      */
     public async prepareResponse(phrase: string): Promise<string> {
         let response: Map<string, string>;
+        Model.Instance.addTree(new Position(12,15),12,12)
+        Model.Instance.addTree(new Position(10,10),12,12)
+        Model.Instance.removeTree(new Position(12,15))
 
         response = await this._state.prepareResponse(phrase) //Ideally response to be sent back = this function returned json
         // console.log(response) // for now it is the intent but state should redefine prepareResponse and return the Json
