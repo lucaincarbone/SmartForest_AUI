@@ -36,15 +36,12 @@ export class Machine {
      * It also changes its current state
      */
     public async prepareResponse(phrase: string): Promise<string> {
-        let response: Map<string, string>;
-        Model.Instance.addTree(new Position(12,15),12,12)
-        Model.Instance.addTree(new Position(10,10),12,12)
-        Model.Instance.removeTree(new Position(12,15))
+        let response: any;
 
         response = await this._state.prepareResponse(phrase) //Ideally response to be sent back = this function returned json
         // console.log(response) // for now it is the intent but state should redefine prepareResponse and return the Json
         // N.B the next state is modified inside the state class while preparing the response so there is no need to redefine the method below in each state
         this._state = this._state.changeState() //change machine state to appropriate next one
-        return response.get('answer')!; //return JSON_RESPONSE_FOR_CLIENT
+        return response; //return JSON_RESPONSE_FOR_CLIENT
     }
 }

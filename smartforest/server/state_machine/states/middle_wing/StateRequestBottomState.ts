@@ -9,11 +9,11 @@ export class StateRequestBottomState extends MachineState {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
-    async prepareResponse(phrase: string): Promise<Map<string, string>> {
+    async prepareResponse(phrase: string): Promise<any> {
         // Parent class method returns the intent
-        let fromDialogFlow: Map<string, string> = await super.prepareResponse(phrase)
-        let intent: string = fromDialogFlow.get('intent')!
-        let answer: string = fromDialogFlow.get('answer')!
+        let fromDialogFlow = await super.prepareResponse(phrase)
+        let intent: string = super.intentString
+        let answer: string = super.answerString
 
         if (intent == Intents.yes_answer) {
             //not a state waiting for interaction

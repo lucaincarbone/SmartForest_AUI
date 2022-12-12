@@ -45,38 +45,25 @@ export class DialogHandler {
         return responses[0];
     }
 
-    public async executeQueries(queries: [string]): Promise<Map<string, string>> {
+    public async executeQueries(queries: [string]): Promise<any> {
         // Keeping the context across queries lets us simulate an ongoing conversation with the bot
         let context;
         let intentResponse;
-        let detectedIntent: string = ""
-        let caAnswer: string = ""
-        let mapToReturn: Map<string, string> = new Map<string, string>()
 
         for (const query of queries) {
             try {
-                //console.log('From DialogHandler:')
-                //console.log(`Sending Query: ${query}`);
                 intentResponse = await this.detectIntent(
                     query,
                     context,
                 );
-                detectedIntent = (intentResponse.queryResult.intent.displayName).toString()
-                caAnswer = intentResponse;
-                console.log(intentResponse.outputAudio);
-                // console.log('Detected intent: ' + detectedIntent);
-                //console.log('CA answer: ' + caAnswer);
+
                 // Use the context from this response for next queries
                 context = intentResponse.queryResult.outputContexts;
-                mapToReturn.set("intent", detectedIntent)
-                mapToReturn.set("answer", caAnswer)
-
-
             } catch (error) {
                 console.error(error);
             }
         }
-        return mapToReturn
+        return intentResponse
     }
 
 }

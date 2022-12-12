@@ -21,6 +21,7 @@ import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/T
  */
 export abstract class MachineState implements StateOperations {
     private nextState: MachineState
+    private _jsonAnswerFromCA!: any
 
     constructor() {
         this.nextState = this
@@ -29,8 +30,9 @@ export abstract class MachineState implements StateOperations {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
-    prepareResponse(phrase: string): Promise<Map<string, string>> {
-        return DialogHandler.Instance.executeQueries([phrase])
+    async prepareResponse(phrase: string): Promise<any> {
+        this._jsonAnswerFromCA = await DialogHandler.Instance.executeQueries([phrase])
+        return this._jsonAnswerFromCA
     }
 
     /**
@@ -45,5 +47,17 @@ export abstract class MachineState implements StateOperations {
      */
     setNextState(nextState: MachineState): void {
         this.nextState = nextState
+    }
+
+    get answerString() {
+        return this._jsonAnswerFromCA.queryResult.fulfillmentText.toString()
+    }
+
+    get intentString() {
+        return this._jsonAnswerFromCA.queryResult.intent.displayName.toString()
+    }
+
+    get parametersJson() {
+        return this._jsonAnswerFromCA.queryResult.parameters
     }
 }

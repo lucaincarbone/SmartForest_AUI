@@ -52,15 +52,15 @@ export class Model {
 
     /**
      * Check if enough leaves are available to buy
-     * @returns true if the user has enough leaves 
+     * @returns true if the user has enough leaves
      */
     public canIBuyATree() {
         return this._leaves >= this._leavesCost;
     }
 
     /**
-     * Return a free position where a tree can be planted 
-     * if no space is available in the selected place return a random free space 
+     * Return a free position where a tree can be planted
+     * if no space is available in the selected place return a random free space
      * if no space is available in general return an error
      * @param positionGeneral macro position chosen by the user
      * @returns A free position or an error if everything is full
@@ -105,7 +105,7 @@ export class Model {
                 }
             }
         }
-        //no free position in selectect place 
+        //no free position in selectect place
         for (let x = 1; x <= 6; x++) {
             for (let y = 1; y <= 6; y++) {
                 if (this.checkFreePosition(x, y)) {
@@ -131,6 +131,37 @@ export class Model {
         });
         return true;
     }
+
+    // public groupTrees(oldPositions: [Position, Position, Position]) {
+    //
+    //     let firstTree = this.getSpecificTree(oldPositions[0])!
+    //     let secondTree = this.getSpecificTree(oldPositions[1])!
+    //     let thirdTree = this.getSpecificTree(oldPositions[2])!
+    //
+    //     if (firstTree.level == secondTree.level && firstTree.level == thirdTree.level) {
+    //
+    //     }
+    //
+    //     oldPositions.forEach((position) => {
+    //         let selectedTree = this.getSpecificTree(position)
+    //         if (selectedTree)
+    //             this.removeTree(position)
+    //     });
+    //     let randomPosition = Math.floor(Math.random() * (3 + 1))
+    //     this.addTree(oldPosition[randomPosition], )
+    //
+    // }
+    //
+    // public getSpecificTree(position: Position) {
+    //     return this._trees.find(tree => tree.position_x == position.x && tree.position_y == position.y)
+    // }
+    //
+    // public canIGroup(position: Position) {
+    //     let treeToGroup = this.getSpecificTree(position)!
+    //
+    //     if (treeToGroup.experience < this._maxTreeExperience) {}
+    // }
+
     public addTree(position: Position, level: number, experience: number) {
         let treeToAdd = new Tree(position, level, experience)
 
