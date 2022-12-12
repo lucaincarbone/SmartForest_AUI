@@ -2,11 +2,8 @@
   <div class="vd-container floating">
     <div class="vd-flex">
       <div class="vd-grid-container" @click="askMeSomething()">
-        <img
-          src="../assets/sirigif.gif"
-          alt=""
-          class="vd-icon"
-        />
+        <img src="../assets/sirigif.gif" alt="" class="vd-icon" />
+        <div id="reg-detection" class="reg-detection"></div>
         <p id="flora-txt" class="vd-text">{{ runtimeTranscription_ }}</p>
       </div>
     </div>
@@ -29,9 +26,11 @@ export default {
   },
   methods: {
     askMeSomething() {
+      document.getElementById("reg-detection").style.visibility = "visible";
       // Init Voice Recognition
       window.SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
+
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang_;
       recognition.interimResults = true;
@@ -57,20 +56,23 @@ export default {
         // this.runtimeTranscription_ = "Hello, Flora!";
         // CLICK AND LISTEN, THEN STOP
         recognition.stop();
+        document.getElementById("reg-detection").style.visibility = "hidden";
         // ALWAYS LISTENING
         // recognition.start();
         this.changeAnswerTextBox();
+        console.log(this.answerFromCA_.outputAudio);
       });
       recognition.start();
     },
     changeAnswerTextBox() {
-      document.getElementById("answer-txt").textContent = this.answerFromCA_;
+      document.getElementById("answer-txt").textContent =
+        this.answerFromCA_.queryResult.fulfillmentText;
       document.getElementById("answer-container").style.visibility = "visible";
       document.getElementById("answer-container").style.transition = "opacity";
       document
         .getElementById("answer-container")
         .animate([{ opacity: "0%" }, { opacity: "100%" }], {
-          duration: 1000,
+          duration: 500,
           fill: "forwards",
         });
     },
@@ -98,6 +100,15 @@ export default {
   grid-area: sentence;
 }
 
+.reg-detection {
+  grid-area: regdetection;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background-color: red;
+  visibility: hidden;
+}
+
 .vd-icon {
   height: 40px;
   margin: auto;
@@ -114,7 +125,7 @@ export default {
 .vd-grid-container {
   position: relative;
   display: inline-grid;
-  grid-template-areas: "mic sentence";
+  grid-template-areas: "mic sentence regdetection";
   column-gap: 1em;
   align-items: center;
   justify-content: center;

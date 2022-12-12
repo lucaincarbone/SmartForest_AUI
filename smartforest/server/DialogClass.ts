@@ -62,17 +62,21 @@ export class DialogHandler {
                     context,
                 );
                 detectedIntent = (intentResponse.queryResult.intent.displayName).toString()
-                caAnswer = intentResponse.queryResult.fulfillmentText
-                //console.log('Detected intent: ' + detectedIntent);
+                caAnswer = intentResponse;
+                console.log(intentResponse.outputAudio);
+                // console.log('Detected intent: ' + detectedIntent);
                 //console.log('CA answer: ' + caAnswer);
                 // Use the context from this response for next queries
                 context = intentResponse.queryResult.outputContexts;
                 mapToReturn.set("intent", detectedIntent)
                 mapToReturn.set("answer", caAnswer)
+
+
             } catch (error) {
                 console.error(error);
             }
         }
         return mapToReturn
     }
+
 }

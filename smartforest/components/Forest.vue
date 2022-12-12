@@ -53,7 +53,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.loadBar();
-    }, 500);
+    }, 10000);
   },
 };
 </script>

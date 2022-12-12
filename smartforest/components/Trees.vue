@@ -294,7 +294,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.spawnTreeInARandomPos();
-    }, 1000);
+    }, 100000);
   },
 };
 </script>
@@ -312,7 +312,7 @@ export default {
   width: auto;
   z-index: 103;
   display: flex;
-  filter: drop-shadow(2px 0px 1px rgba(34, 34, 34, 0.7));
+  /* filter: drop-shadow(2px 0px 1px rgba(34, 34, 34, 0.7));*/
 }
 
 .pos_1_1 {
