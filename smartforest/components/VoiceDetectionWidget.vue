@@ -23,6 +23,7 @@ export default {
   },
   mounted() {
     this.runtimeTranscription_ = "Tap to ask Flora";
+    // this.updateTrees();
   },
   methods: {
     askMeSomething() {
@@ -60,6 +61,9 @@ export default {
         // ALWAYS LISTENING
         // recognition.start();
         this.changeAnswerTextBox();
+        /*Write here all methods to be called to control game logic on frontend! */
+        this.updateFrontEnd();
+        /** */
         await this.play();
       });
       recognition.start();
@@ -86,6 +90,24 @@ export default {
       utterThis.lang = 'en';
       window.speechSynthesis.speak(utterThis);
     },
+    updateFrontEnd() {
+      // DA QUI SONO NEL JSON DEL SERVER, .trees, .leaves, .experience
+      if(this.answerFromCA_.changes != null) {
+        console.log("Updating trees...")
+        this.updateTrees();
+
+      }
+    },
+    updateTrees() {
+      this.answerFromCA_.changes.trees.forEach(tree => {
+        let posToSpawn = "pos" + tree._position._x.toString() + tree._position._y.toString()
+        let levelToSpawn = "lev" + tree._level.toString()
+
+        document.getElementById(posToSpawn).src =
+          "/_nuxt/assets/dynamics/" + levelToSpawn + ".png";
+      });   
+    },
+    updateExperience() {}
   },
 };
 </script>

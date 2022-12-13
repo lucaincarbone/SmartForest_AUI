@@ -14,7 +14,8 @@ export default {
       answerFromCA_: "",
     };
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     closeAnswerBox() {
       document.getElementById('answer-container').style.visibility = 'hidden';
