@@ -16,14 +16,15 @@ export class Model {
     private _globalExperience: number;
     private pathToJsonFile: string = "./server/gameState.json";
     private _leavesCost = 10;
-    private _groupExperience = 50
+    private _newTreeExperience = 50;
+    private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
 
     //TODO make initial numbers correct (leaves)
     private constructor() {
         console.log("Creating a new Model...")
         this._trees = []
-        this._leaves = 50
+        this._leaves = 100
         this._globalExperience = 0
     }
 
@@ -35,20 +36,23 @@ export class Model {
         return this._trees;
     }
 
+    /**
+     * Return false if there is no space in the board
+     * @param positionGeneral
+     */
     public buyTree(positionGeneral: string): boolean {
-        if (this.canIBuyATree()) {
-            try {
-                let position: Position = this.getAPosition(positionGeneral)
-                this.addTree(position, 1, 50)
-                return true
-            }
-                // There is no free space on the whole board
-            catch (e) {
-                console.log(e);
-                return false
-            }
+
+        try {
+            let position: Position = this.getAPosition(positionGeneral)
+            this.addTree(position, this._startedTreeLevel, this._newTreeExperience)
+            this.updateLeaves(this._leavesCost)
+            return true
         }
-        return false
+            // There is no free space on the whole board
+        catch (e) {
+            console.log(e);
+            return false
+        }
     }
 
     /**
@@ -114,7 +118,7 @@ export class Model {
                 }
             }
         }
-        //no free position in selectect place
+        // No free position in selectect place
         for (let x = 1; x <= 6; x++) {
             for (let y = 1; y <= 6; y++) {
                 if (this.checkFreePosition(x, y)) {
@@ -122,7 +126,7 @@ export class Model {
                 }
             }
         }
-        //no free position in general
+        // No free position in general
         throw new Error('There is no space to plant a new tree');
     }
 
@@ -158,7 +162,7 @@ export class Model {
             });
 
             let randomPosition = Math.floor(Math.random() * (3 + 1))
-            this.addTree(oldPositions[randomPosition], firstTree.level, this._groupExperience)
+            this.addTree(oldPositions[randomPosition], firstTree.level, this._newTreeExperience)
 
         } catch (e) {
             console.error(e)
@@ -218,12 +222,24 @@ export class Model {
         })
     }
 
-    public updateLeaves(leaves: number) {
-        this._leaves = leaves
-
-        this.updateJsonFile(leaves, (parsedData, leaves) => {
-            parsedData.leaves = leaves;
-        })
+    /**
+     *
+     * @param leaves the number of leaves to add/remove
+     * @param isASum true if you want to add some leaves
+     *               false if you want to remove them
+     */
+    public updateLeaves(leaves: number, isASum: boolean = false) {
+        if (isASum) {
+            this._leaves = this._leaves + leaves
+            this.updateJsonFile(leaves, (parsedData, leaves) => {
+                parsedData.leaves = parsedData.leaves + leaves;
+            })
+        } else {
+            this._leaves = this._leaves - leaves < 0 ? 0 : this._leaves - leaves
+            this.updateJsonFile(leaves, (parsedData, leaves) => {
+                parsedData.leaves = parsedData.leaves - leaves;
+            })
+        }
     }
 
     private updateJsonFile(dataToUpdate: any, func: (parsedData: any, data: any) => void) {

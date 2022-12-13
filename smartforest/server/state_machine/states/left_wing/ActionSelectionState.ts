@@ -17,14 +17,10 @@ export class ActionSelectionState extends MachineState {
         let answer: string = super.answerString
 
         if (intent == Intents.forest_management_buy) {
-            //TODO check if possible to buy
-            //if yes    ->PositionSelectionState
-            //if not    ->TipRequestNoLeavesState
             if(Model.Instance.canIBuyATree()){
                 super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
-            }
-            else{
-                //TODO not show the result
+            } else{
+                fromDialogFlow.queryResult.fulfillmentText = "Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?"
                 super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
             }
         } else if (intent == Intents.forest_management_group) {
@@ -33,6 +29,5 @@ export class ActionSelectionState extends MachineState {
             console.log("From ActionSelectionState could not detect intent:" + intent)
         }
         return fromDialogFlow
-
     }
 }

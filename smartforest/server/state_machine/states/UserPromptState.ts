@@ -33,6 +33,7 @@ export class UserPromptState extends MachineState {
                     super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
                 }
                 else{
+                    fromDialogFlow.queryResult.fulfillmentText = "Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?"
                     super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
                 }
                 break;

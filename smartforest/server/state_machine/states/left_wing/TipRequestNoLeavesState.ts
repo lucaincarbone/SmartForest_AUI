@@ -16,9 +16,15 @@ export class TipRequestNoLeavesState extends MachineState {
         let answer: string = super.answerString
 
         if (intent == Intents.yes_answer) {
+            fromDialogFlow.queryResult.fulfillmentText = "Try to keep a green behavior (use clean energy) to get more Leaves. " +
+                "A player has a green behavior when using clean energy instead of buying it from the station." +
+                "The more Leaves you have, the more trees you plant!"
             super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+
         } else if (intent == Intents.no_answer) {
+            fromDialogFlow.queryResult.fulfillmentText = "Okay, no problem"
             super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+
         } else {
             console.log("TipRequestNoLeavesState could not detect intent:" + intent)
         }

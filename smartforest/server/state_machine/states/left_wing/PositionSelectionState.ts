@@ -17,17 +17,21 @@ export class PositionSelectionState extends MachineState {
         let answer: string = super.answerString
         let parameters: any = super.parametersJson
 
-        try {
-            let tree_position : string = parameters.fields.tree_position.stringValue.toUpperCase()
+        if (intent == Intents.forest_management_buy_position) {
+            try {
+                let tree_position: string = parameters.fields.tree_position.stringValue.toUpperCase()
 
-            if (Model.Instance.buyTree(tree_position)) {
-                console.log("Tree planted")
+                if (!Model.Instance.buyTree(tree_position)) {
+                    fromDialogFlow.queryResult.fulfillmentText = "There is not enough space!" +
+                        "Try to group 3 trees in order to free some space"
+                }
+
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-            } else {
-                console.log("Try again")
+            } catch (e) {
+                console.error(e)
             }
-        } catch (e) {
-            console.error(e)
+        } else {
+            console.log("From PositionSelectionState could not detect intent: " + intent)
         }
 
         return fromDialogFlow
