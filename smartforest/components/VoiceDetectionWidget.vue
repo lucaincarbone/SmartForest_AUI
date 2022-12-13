@@ -21,9 +21,16 @@ export default {
       answerFromCA_: "",
     };
   },
-  mounted() {
+  
+  async mounted() {
     this.runtimeTranscription_ = "Tap to ask Flora";
     // this.plantTree(); // fetch to another api to get the JSON
+    // this.answerFromCA_ = await $fetch("/api/test", {
+    //   method: "get",
+    // });
+    const { data: answerFromCA_ } = await useFetch('/api/getInitial')
+    this.answerFromCA_=answerFromCA_.value
+    this.updateFrontEnd();
   },
   methods: {
     askMeSomething() {
@@ -84,39 +91,41 @@ export default {
       window.speechSynthesis.cancel();
       var voices = window.speechSynthesis.getVoices();
       var utterThis = new SpeechSynthesisUtterance();
-      utterThis.text = this.answerFromCA_.queryResult.fulfillmentText.toString();
+      utterThis.text =
+        this.answerFromCA_.queryResult.fulfillmentText.toString();
       utterThis.voice = voices[2];
       utterThis.pitch = 1;
-      utterThis.lang = 'en';
+      utterThis.lang = "en";
       window.speechSynthesis.speak(utterThis);
     },
     updateFrontEnd() {
       // DA QUI SONO NEL JSON DEL SERVER, .trees, .leaves, .experience
-      if(this.answerFromCA_.changes != null) {
-        if(this.answerFromCA_.changes.trees != null) {
-        console.log("Updating trees...")
-        this.plantTree();
-      }
-      if(this.answerFromCA_.changes.leaves != null) {
-          console.log("Updating leaves...")
+      if (this.answerFromCA_.changes != null) {
+        if (this.answerFromCA_.changes.trees != null) {
+          console.log("Updating trees...");
+          this.plantTree();
+        }
+        if (this.answerFromCA_.changes.leaves != null) {
+          console.log("Updating leaves...");
           this.updateLeaves();
         }
       }
     },
     plantTree() {
-      this.answerFromCA_.changes.trees.forEach(tree => {
-        let posToSpawn = "pos" + tree._position._x.toString() + tree._position._y.toString()
-        let levelToSpawn = "lev" + tree._level.toString()
+      this.answerFromCA_.changes.trees.forEach((tree) => {
+        let posToSpawn =
+          "pos" + tree._position._x.toString() + tree._position._y.toString();
+        let levelToSpawn = "lev" + tree._level.toString();
 
         document.getElementById(posToSpawn).src =
           "/_nuxt/assets/dynamics/" + levelToSpawn + ".png";
         // document.getElementById(posToSpawn).visibility = 'visible';
-      });   
+      });
     },
     updateLeaves() {
-      let amount = this.answerFromCA_.changes.leaves
+      let amount = this.answerFromCA_.changes.leaves;
       document.getElementById("leaves-num").textContent = amount.toString();
-    }
+    },
   },
 };
 </script>

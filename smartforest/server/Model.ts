@@ -363,6 +363,15 @@ export class Model {
         return this._jsonWithChanges;
     }
 
+    get initialBoardJson():any{
+        let initial: JsonWithChanges = {
+            leaves:this._leaves,
+            globalExperience:this._globalExperience,
+            trees: this._trees
+        };
+        return initial
+    }
+
     public ResetJsonWithChanges(): void {
         this._jsonWithChanges = {
             trees: []
