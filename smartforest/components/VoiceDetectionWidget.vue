@@ -81,7 +81,7 @@ export default {
       var voices = window.speechSynthesis.getVoices();
       var utterThis = new SpeechSynthesisUtterance();
       utterThis.text = this.answerFromCA_.queryResult.fulfillmentText.toString();
-      utterThis.voice = voices[146];
+      utterThis.voice = voices[2];
       utterThis.pitch = 1;
       utterThis.lang = 'en';
       window.speechSynthesis.speak(utterThis);

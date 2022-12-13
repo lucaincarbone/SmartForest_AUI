@@ -10,6 +10,7 @@
         <div id="current" class="current-bar">
         </div>
       </div>
+      <LeavesCounter/>
     </div>
   </div>
 </template>
