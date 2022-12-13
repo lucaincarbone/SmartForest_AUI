@@ -13,7 +13,7 @@ export class SpecificStateRequestState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-       
+
         if (intent == Intents.forest_status_overall_leaves) {
             super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
         } else if (intent == Intents.forest_status_overall_numberTrees) {
@@ -23,6 +23,7 @@ export class SpecificStateRequestState extends MachineState {
         } else if (intent == Intents.forest_status_overall_levelExperience) {
             super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
         } else {
+            super.setDefaultAnswer()
             console.log("SpecificStateRequestState could not detect intent:" + intent)
         }
         return super.finalResponse

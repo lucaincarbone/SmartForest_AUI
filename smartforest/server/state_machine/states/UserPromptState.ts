@@ -14,11 +14,11 @@ export class UserPromptState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-       
+
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
-                super.setNextState(statesMap.get(NameStates.UserRequestState)!)
+                //super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
             case Intents.forest_management_general: {
@@ -43,7 +43,7 @@ export class UserPromptState extends MachineState {
             }
             case Intents.forest_status_general: {
                 console.log(Intents.forest_status_general)
-                super.setNextState(statesMap.get(NameStates.StateRequestState)!)
+                // super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
             case Intents.forest_status_overall: {
@@ -109,7 +109,7 @@ export class UserPromptState extends MachineState {
             }
             default: {
                 console.log("From UserPromptState could not detect intent: " + intent)
-                super.setAnswer("intent not valid now")
+                super.setDefaultAnswer()
                 break;
             }
         }

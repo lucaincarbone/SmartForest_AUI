@@ -37,7 +37,7 @@
     />
     <img
         id="pos16"
-        src="../assets/dynamics/lev2.png"
+        src="../assets/dynamics/empty.png"
         alt=""
         class="tree floating-base pos_1_6"
         @click="doAction('pos16')"
@@ -58,7 +58,7 @@
     />
     <img
         id="pos23"
-        src="../assets/dynamics/lev1.png"
+        src="../assets/dynamics/empty.png"
         alt=""
         class="tree floating-base pos_2_3"
         @click="doAction('pos23')"
@@ -292,9 +292,9 @@ export default {
     },
   },
   mounted() {
-    setInterval(() => {
-      this.spawnTreeInARandomPos();
-    }, 100000);
+    // setInterval(() => {
+    //   this.spawnTreeInARandomPos();
+    // }, 100000);
   },
 };
 </script>
@@ -312,6 +312,8 @@ export default {
   width: auto;
   z-index: 103;
   display: flex;
+  /* filter: brightness(1.2); */
+  /* visibility: hidden; */
   /* filter: drop-shadow(2px 0px 1px rgba(34, 34, 34, 0.7));*/
 }
 

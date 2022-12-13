@@ -13,7 +13,7 @@ export class AdviceSelectionState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        
+
         if (intent == Intents.advices_appliances_consumption) {
             //specific tree part
         } else if (intent == Intents.advices_energy_status) {
@@ -21,6 +21,7 @@ export class AdviceSelectionState extends MachineState {
         } else if (intent == Intents.advices_start_specific_appliance) {
             //specific tree part
         } else {
+            super.setDefaultAnswer()
             console.log("AdviceSelectionState could not detect intent:" + intent)
         }
         return super.finalResponse

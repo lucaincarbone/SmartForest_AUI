@@ -25,6 +25,7 @@ export class TipRequestNoLeavesState extends MachineState {
             super.setNextState(statesMap.get(NameStates.UserPromptState)!)
 
         } else {
+            super.setDefaultAnswer()
             console.log("TipRequestNoLeavesState could not detect intent:" + intent)
         }
         return super.finalResponse

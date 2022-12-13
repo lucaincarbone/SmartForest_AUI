@@ -5,11 +5,11 @@
       <img src="../assets/CLOUDS.png" alt="" class="clouds floating-clouds"/>
       <img class="ground" src="../assets/GROUND.png" alt=""/>
       <img class="base floating-base" src="../assets/LINES_BASE.png" alt=""/>
-      <div class="experience-bar">
+      <!-- <div class="experience-bar">
         <p id="currentnum" class="experience-text"></p>
         <div id="current" class="current-bar">
         </div>
-      </div>
+      </div> -->
       <LeavesCounter/>
     </div>
   </div>
@@ -52,9 +52,6 @@ export default {
     },
   },
   mounted() {
-    setInterval(() => {
-      this.loadBar();
-    }, 10000);
   },
 };
 </script>

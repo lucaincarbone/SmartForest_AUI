@@ -1,6 +1,6 @@
 import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
-import { Model } from "~~/server/Model"
+import {Model} from "~~/server/Model"
 
 
 /**
@@ -14,17 +14,20 @@ export class ActionSelectionState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
+
         if (intent == Intents.forest_management_buy) {
-            if(Model.Instance.canIBuyATree()){
+            if (Model.Instance.canIBuyATree()) {
                 super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
-            } else{
+            } else {
                 super.setAnswer("Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?")
                 super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
             }
         } else if (intent == Intents.forest_management_group) {
             //TODO this diramation within state machine need to be clarified
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
         } else {
             console.log("From ActionSelectionState could not detect intent:" + intent)
+            super.setDefaultAnswer()
         }
         return super.finalResponse
     }
