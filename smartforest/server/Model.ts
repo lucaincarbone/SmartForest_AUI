@@ -39,10 +39,10 @@ export class Model {
             this._leaves = loaderResponse.leaves;
             this._globalExperience = loaderResponse.globalExperience;
             this._trees = loaderResponse.trees;
-            console.log("Model loaded")
-            console.log(this._leaves);
-            console.log(this._globalExperience);
-            console.log(this._trees);
+            // console.log("Model loaded")
+            // console.log(this._leaves);
+            // console.log(this._globalExperience);
+            // console.log(this._trees);
           } 
         else {
             // Load empty model if no previous json

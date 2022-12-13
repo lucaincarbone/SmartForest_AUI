@@ -114,7 +114,7 @@ export class UserPromptState extends MachineState {
             }
             default: {
                 console.log("From UserPromptState could not detect intent: " + intent)
-                super.setDefaultAnswer()
+                // super.setDefaultAnswer()
                 break;
             }
         }

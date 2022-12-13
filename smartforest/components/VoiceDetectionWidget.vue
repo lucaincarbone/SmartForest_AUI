@@ -28,6 +28,7 @@ export default {
     // this.answerFromCA_ = await $fetch("/api/test", {
     //   method: "get",
     // });
+    // If we want to keep updated, we need to refresh also the server. So run again npm run dev.
     const { data: answerFromCA_ } = await useFetch('/api/getInitial')
     this.answerFromCA_=answerFromCA_.value
     this.updateFrontEnd();
