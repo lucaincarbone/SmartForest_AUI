@@ -17,11 +17,13 @@ export class PositionSelectionState extends MachineState {
         if (intent == Intents.forest_management_buy_position) {
             try {
                 let tree_position: string = super.tree_position
-                if (!Model.Instance.buyTree(tree_position)) {
+
+                if (Model.Instance.buyTree(tree_position)) {
+                    this.setChanges(Model.Instance.JsonWithChanges)
+                } else {
                     super.setAnswer("There is not enough space!" +
-                        "Try to group 3 trees in order to free some space")
+                        " Try to group 3 trees in order to free some space")
                 }
-                this.setChanges(Model.Instance.JsonWithChanges)
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
             } catch (e) {
                 super.setAnswer("There is an error")

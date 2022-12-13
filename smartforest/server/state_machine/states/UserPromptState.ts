@@ -43,7 +43,7 @@ export class UserPromptState extends MachineState {
             }
             case Intents.forest_status_general: {
                 console.log(Intents.forest_status_general)
-                super.setNextState(statesMap.get(NameStates.StateRequestState)!)
+                // super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
             case Intents.forest_status_overall: {

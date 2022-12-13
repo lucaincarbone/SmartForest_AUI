@@ -20,11 +20,11 @@ export class UserRequestState extends MachineState {
                 break;
             }
             case Intents.forest_status_general: {
-                super.setNextState(statesMap.get(NameStates.StateRequestState)!)
+                // super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
             case Intents.advices_general: {
-                super.setNextState(statesMap.get(NameStates.AdviceSelectionState)!)
+                // super.setNextState(statesMap.get(NameStates.AdviceSelectionState)!)
                 break;
             }
             case Intents.guide_general: {
