@@ -32,10 +32,39 @@ export class Model {
 
     //FIXME insert correct initial numbers
     private constructor() {
-        console.log("Creating a new Model...")
-        this._trees = []
-        this._leaves = 100
-        this._globalExperience = 0
+        if (fs.existsSync(this._pathToJsonFile)) {
+            console.log("Loading the Model...")
+            var jsonString = '{"some":"json"}';
+            var jsonPretty = JSON.stringify(JSON.parse(jsonString),null,2); 
+            let data = fs.readFileSync(this._pathToJsonFile);
+            const parsedData = JSON.parse(data.toString());
+
+            this._leaves = parsedData.leaves;
+            this._globalExperience = parsedData.globalExperience;
+            let tree_list = parsedData.trees;
+
+            this._trees = []
+
+            for (let i = 0; i < tree_list.length; i++) {
+                let position: Position = new Position(tree_list[i].position._x,tree_list[i].position._y);
+                let level = tree_list[i].level;
+                let experience = tree_list[i].experience;
+                let tree: Tree = new Tree(position,level,experience);
+                this._trees.push(tree);            
+              }
+
+            console.log(this._leaves);
+            console.log(this._globalExperience);
+            console.log(this._trees);
+
+          } 
+        else {
+            // Load empty model if no previous json
+            console.log("Creating a new Model...")
+            this._trees = []
+            this._leaves = 100
+            this._globalExperience = 0
+        }
     }
 
     public static get Instance() {

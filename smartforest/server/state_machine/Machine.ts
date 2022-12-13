@@ -37,7 +37,7 @@ export class Machine {
      */
     public async prepareResponse(phrase: string): Promise<string> {
         let response: any;
-
+        Model.Instance;
         response = await this._state.prepareResponse(phrase) //Ideally response to be sent back = this function returned json
         // console.log(response) // for now it is the intent but state should redefine prepareResponse and return the Json
         // N.B the next state is modified inside the state class while preparing the response so there is no need to redefine the method below in each state
