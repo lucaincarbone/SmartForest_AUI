@@ -107,6 +107,11 @@ export class UserPromptState extends MachineState {
                 console.log(Intents.guide_plant)
                 break;
             }
+            case Intents.exit_intent: {
+                super.setAnswer("Exiting")
+                console.log(Intents.exit_intent)
+                break;
+            }
             default: {
                 console.log("From UserPromptState could not detect intent: " + intent)
                 super.setDefaultAnswer()
