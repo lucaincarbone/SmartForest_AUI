@@ -32,7 +32,7 @@ export class UserRequestState extends MachineState {
                 break;
             }
             default: {
-                console.log("From UserPromptState could not detect intent: " + intent)
+                console.log("From UserRequestState could not detect intent: " + intent)
                 super.setDefaultAnswer()
                 break;
             }
