@@ -1,17 +1,5 @@
-import {DialogHandler} from "../DialogClass";
-import {StateOperations} from "./StateOperations";
-import {NameStates} from "~/server/state_machine/Utils";
-import {UserPromptState} from "~/server/state_machine/states/UserPromptState";
-import {UserRequestState} from "~/server/state_machine/states/UserRequestState";
-import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
-import {HowToSpendRequestState} from "~/server/state_machine/states/middle_wing/HowToSpendRequestState";
-import {SpecificStateRequestState} from "~/server/state_machine/states/middle_wing/SpecificStateRequestState";
-import {StateRequestBottomState} from "~/server/state_machine/states/middle_wing/StateRequestBottomState";
-import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
-import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionSelectionState";
-import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
-import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
-import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
+import { DialogHandler } from "../DialogClass";
+import { StateOperations } from "./StateOperations";
 import { Model } from "../Model";
 
 
@@ -63,4 +51,19 @@ export abstract class MachineState implements StateOperations {
     get parametersJson() {
         return this._jsonAnswerFromCA.queryResult.parameters
     }
+
+    get tree_position():string {
+        return this._jsonAnswerFromCA.queryResult.parameters.fields.tree_position.stringValue.toUpperCase()
+    }
+
+    setChanges(changes: string) {
+        this._jsonAnswerFromCA.changes = changes
+    }
+    setAnswer(answer:string){
+        this._jsonAnswerFromCA.queryResult.fulfillmentText=answer
+    }
+    get finalResponse(){
+        return this._jsonAnswerFromCA
+    }
+
 }

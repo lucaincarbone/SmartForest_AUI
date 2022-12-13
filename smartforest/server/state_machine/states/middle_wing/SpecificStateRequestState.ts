@@ -11,10 +11,9 @@ export class SpecificStateRequestState extends MachineState {
      */
     async prepareResponse(phrase: string): Promise<any> {
         // Parent class method returns the intent
-        let fromDialogFlow = await super.prepareResponse(phrase)
+        await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        let answer: string = super.answerString
-
+       
         if (intent == Intents.forest_status_overall_leaves) {
             super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
         } else if (intent == Intents.forest_status_overall_numberTrees) {
@@ -26,7 +25,7 @@ export class SpecificStateRequestState extends MachineState {
         } else {
             console.log("SpecificStateRequestState could not detect intent:" + intent)
         }
-        return fromDialogFlow
+        return super.finalResponse
 
     }
 }

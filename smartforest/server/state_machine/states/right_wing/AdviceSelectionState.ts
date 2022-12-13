@@ -11,10 +11,9 @@ export class AdviceSelectionState extends MachineState {
      */
     async prepareResponse(phrase: string): Promise<any> {
         // Parent class method returns the intent
-        let fromDialogFlow = await super.prepareResponse(phrase)
+        await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        let answer: string = super.answerString
-
+        
         if (intent == Intents.advices_appliances_consumption) {
             //specific tree part
         } else if (intent == Intents.advices_energy_status) {
@@ -24,7 +23,7 @@ export class AdviceSelectionState extends MachineState {
         } else {
             console.log("AdviceSelectionState could not detect intent:" + intent)
         }
-        return fromDialogFlow
+        return super.finalResponse
 
     }
 }

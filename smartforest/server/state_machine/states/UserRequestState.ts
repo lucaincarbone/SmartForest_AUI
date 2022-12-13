@@ -10,9 +10,9 @@ export class UserRequestState extends MachineState {
      */
     async prepareResponse(phrase: string): Promise<any> {
         // Parent class method returns the intent
-        let fromDialogFlow = await super.prepareResponse(phrase)
+        await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        let answer: string = super.answerString
+      
 
         switch (intent) {
             case Intents.forest_management_general: {
@@ -37,6 +37,6 @@ export class UserRequestState extends MachineState {
             }
         }
 
-        return fromDialogFlow
+        return super.finalResponse
     }
 }

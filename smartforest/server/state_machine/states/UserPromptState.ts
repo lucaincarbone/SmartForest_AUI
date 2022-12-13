@@ -12,10 +12,9 @@ export class UserPromptState extends MachineState {
      */
     async prepareResponse(phrase: string): Promise<any> {
         // Parent class method returns the intent
-        let fromDialogFlow = await super.prepareResponse(phrase)
+        await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        let answer: string = super.answerString
-
+       
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
@@ -33,7 +32,7 @@ export class UserPromptState extends MachineState {
                     super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
                 }
                 else{
-                    fromDialogFlow.queryResult.fulfillmentText = "Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?"
+                    super.setAnswer("Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?")
                     super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
                 }
                 break;
@@ -110,11 +109,12 @@ export class UserPromptState extends MachineState {
             }
             default: {
                 console.log("From UserPromptState could not detect intent: " + intent)
+                super.setAnswer("intent not valid now")
                 break;
             }
         }
 
-        return fromDialogFlow
+        return super.finalResponse
     }
 
 }

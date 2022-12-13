@@ -12,15 +12,13 @@ export class ActionSelectionState extends MachineState {
      */
     async prepareResponse(phrase: string): Promise<any> {
         // Parent class method returns the intent
-        let fromDialogFlow = await super.prepareResponse(phrase)
+        await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        let answer: string = super.answerString
-
         if (intent == Intents.forest_management_buy) {
             if(Model.Instance.canIBuyATree()){
                 super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
             } else{
-                fromDialogFlow.queryResult.fulfillmentText = "Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?"
+                super.setAnswer("Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?")
                 super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
             }
         } else if (intent == Intents.forest_management_group) {
@@ -28,6 +26,6 @@ export class ActionSelectionState extends MachineState {
         } else {
             console.log("From ActionSelectionState could not detect intent:" + intent)
         }
-        return fromDialogFlow
+        return super.finalResponse
     }
 }
