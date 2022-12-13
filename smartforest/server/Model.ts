@@ -20,9 +20,10 @@ export class Model {
     private _trees: Tree[];
     private _leaves: number;
     private _globalExperience: number;
-    private pathToJsonFile: string = "./server/gameState.json";
+    private _pathToJsonFile: string = "./server/gameState.json";
     private _leavesCost = 10;
     private _newTreeExperience = 50;
+    private _maxTreeExperience = 1000;
     private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
     private _jsonWithChanges: JsonWithChanges = {
@@ -166,12 +167,17 @@ export class Model {
             // If the level constraints are not satisfied, it throws an exception
             this.checkLevel([firstTree, secondTree, thirdTree])
 
+            // If the trees have not reached the max experience, it throws an exception
+            this.checkExperience([firstTree, secondTree, thirdTree])
+
             oldPositions.forEach((position) => {
                 this.removeTree(position)
             });
 
-            let randomPosition = Math.floor(Math.random() * (3 + 1))
-            this.addTree(oldPositions[randomPosition], firstTree.level, this._newTreeExperience)
+            let randomPosition = Math.floor(Math.random() * 3);
+            let newPosition = oldPositions[randomPosition]
+
+            this.addTree(newPosition, firstTree.level, this._newTreeExperience)
 
         } catch (e) {
             console.error(e)
@@ -180,16 +186,29 @@ export class Model {
 
     public getSpecificTree(position: Position) {
         let tree = this._trees.find(tree => tree.position_x == position.x && tree.position_y == position.y)
-        if (typeof tree !== 'undefined')
+
+        if (typeof tree == 'undefined')
             throw new Error('In position ' + position.x + ", " + position.y + " there is not a tree");
+
         return tree!;
     }
 
     private checkLevel(trees: [Tree, Tree, Tree]) {
-        if (trees[0].level == this._maxLevel || trees[1].level == this._maxLevel || trees[2].level == this._maxLevel) {
-            throw new Error("A tree has yet the maximum level");
-        } else if (!(trees[0].level == trees[1].level && trees[0].level == trees[2].level)) {
+
+        if (!(trees[0].level == trees[1].level && trees[0].level == trees[2].level)) {
             throw new Error("The tress have not the same level");
+
+        } else if (trees[0].level == this._maxLevel || trees[1].level == this._maxLevel
+            || trees[2].level == this._maxLevel) {
+            throw new Error("The trees has yet the maximum level");
+        }
+    }
+
+    private checkExperience(trees: [Tree, Tree, Tree]) {
+
+        if (!(trees[0].experience == this._maxTreeExperience && trees[1].experience == this._maxTreeExperience
+            && trees[2].experience == this._maxTreeExperience)) {
+            throw new Error("The tress have not the reach the max experience");
         }
     }
 
@@ -218,7 +237,7 @@ export class Model {
             }
         });
         this._trees.length = j;
-        console.log(indexOfTreeToRemove)
+
         this.updateJsonFile([position.x, position.y], (parsedData, not_used) => {
             parsedData.trees.splice(indexOfTreeToRemove, 1);
         })
@@ -258,14 +277,15 @@ export class Model {
 
     private updateJsonFile(dataToUpdate: any, func: (parsedData: any, data: any) => void) {
 
-        let data = fs.readFileSync(this.pathToJsonFile);
+        let data = fs.readFileSync(this._pathToJsonFile);
         const parsedData = JSON.parse(data.toString());
 
         func(parsedData, dataToUpdate)
 
-        fs.writeFileSync(this.pathToJsonFile,
+        fs.writeFileSync(this._pathToJsonFile,
             JSON.stringify(parsedData, null, 2));
     }
+
 
     get JsonWithChanges(): JsonWithChanges {
         return this._jsonWithChanges;
@@ -277,5 +297,3 @@ export class Model {
         };
     }
 }
-
-
