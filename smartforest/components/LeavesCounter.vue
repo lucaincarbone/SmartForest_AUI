@@ -4,7 +4,7 @@
         <div class="img-container">
             <img src="../assets/dynamics/leaf.png" alt="" class="leaf-img">
         </div>
-        <p id="leaves-num" class="leaves-num">125</p>
+        <p id="leaves-num" class="leaves-num"></p>
     </div>
   </div>
 </template>

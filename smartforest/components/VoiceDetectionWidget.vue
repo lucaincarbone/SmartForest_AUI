@@ -23,7 +23,7 @@ export default {
   },
   mounted() {
     this.runtimeTranscription_ = "Tap to ask Flora";
-    // this.updateTrees();
+    // this.plantTree(); // fetch to another api to get the JSON
   },
   methods: {
     askMeSomething() {
@@ -93,21 +93,30 @@ export default {
     updateFrontEnd() {
       // DA QUI SONO NEL JSON DEL SERVER, .trees, .leaves, .experience
       if(this.answerFromCA_.changes != null) {
+        if(this.answerFromCA_.changes.trees != null) {
         console.log("Updating trees...")
-        this.updateTrees();
-
+        this.plantTree();
+      }
+      if(this.answerFromCA_.changes.leaves != null) {
+          console.log("Updating leaves...")
+          this.updateLeaves();
+        }
       }
     },
-    updateTrees() {
+    plantTree() {
       this.answerFromCA_.changes.trees.forEach(tree => {
         let posToSpawn = "pos" + tree._position._x.toString() + tree._position._y.toString()
         let levelToSpawn = "lev" + tree._level.toString()
 
         document.getElementById(posToSpawn).src =
           "/_nuxt/assets/dynamics/" + levelToSpawn + ".png";
+        // document.getElementById(posToSpawn).visibility = 'visible';
       });   
     },
-    updateExperience() {}
+    updateLeaves() {
+      let amount = this.answerFromCA_.changes.leaves
+      document.getElementById("leaves-num").textContent = amount.toString();
+    }
   },
 };
 </script>
