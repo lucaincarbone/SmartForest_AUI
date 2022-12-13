@@ -28,7 +28,9 @@ export abstract class MachineState implements StateOperations {
      * Return the next state for the machine after the current one
      */
     changeState(): MachineState {
-        return this.nextState
+        let nextState:MachineState=this.nextState
+        this.nextState=this
+        return nextState
     }
 
     /**
