@@ -2,6 +2,7 @@ import fs from 'fs';
 import {Tree} from "~/server/Tree";
 import {Position} from './Position';
 import {PlantPlaces} from './state_machine/Utils';
+import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
 
 interface JsonWithChanges {
     leaves?: number,
@@ -34,29 +35,14 @@ export class Model {
     private constructor() {
         if (fs.existsSync(this._pathToJsonFile)) {
             console.log("Loading the Model...")
-            var jsonString = '{"some":"json"}';
-            var jsonPretty = JSON.stringify(JSON.parse(jsonString),null,2); 
-            let data = fs.readFileSync(this._pathToJsonFile);
-            const parsedData = JSON.parse(data.toString());
-
-            this._leaves = parsedData.leaves;
-            this._globalExperience = parsedData.globalExperience;
-            let tree_list = parsedData.trees;
-
-            this._trees = []
-
-            for (let i = 0; i < tree_list.length; i++) {
-                let position: Position = new Position(tree_list[i].position._x,tree_list[i].position._y);
-                let level = tree_list[i].level;
-                let experience = tree_list[i].experience;
-                let tree: Tree = new Tree(position,level,experience);
-                this._trees.push(tree);            
-              }
-
+            let loaderResponse: LoaderResponse = ModelLoader.Instance.loadData();
+            this._leaves = loaderResponse.leaves;
+            this._globalExperience = loaderResponse.globalExperience;
+            this._trees = loaderResponse.trees;
+            console.log("Model loaded")
             console.log(this._leaves);
             console.log(this._globalExperience);
             console.log(this._trees);
-
           } 
         else {
             // Load empty model if no previous json

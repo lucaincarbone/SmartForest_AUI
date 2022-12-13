@@ -1,5 +1,14 @@
 {
-  "leaves": 130,
+  "leaves": 120,
   "globalExperience": 69,
-  "trees": []
+  "trees": [
+    {
+      "position": {
+        "_x": 1,
+        "_y": 1
+      },
+      "level": 1,
+      "experience": 50
+    }
+  ]
 }
