@@ -1,4 +1,4 @@
-import {Intents} from "../../Utils"
+import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
 
@@ -20,7 +20,10 @@ export class AdviceSelectionState extends MachineState {
             //specific tree part
         } else if (intent == Intents.advices_start_specific_appliance) {
             //specific tree part
-        } else {
+        }else if (intent == Intents.exit_intent) {
+            super.setAnswer("Exiting")
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+        }  else {
             super.setDefaultAnswer()
             console.log("AdviceSelectionState could not detect intent:" + intent)
         }

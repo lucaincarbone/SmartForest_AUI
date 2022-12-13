@@ -1,4 +1,4 @@
-import {Intents} from "../../Utils"
+import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
 /**
@@ -17,7 +17,10 @@ export class TipRequestNoPlantsState extends MachineState {
             //not a state waiting for interaction
         } else if (intent == Intents.no_answer) {
             //not a state waiting for interaction
-        } else {
+        }else if (intent == Intents.exit_intent) {
+            super.setAnswer("Exiting")
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+        }  else {
             super.setDefaultAnswer()
             console.log("TipRequestNoPlantsState could not detect intent:" + intent)
         }

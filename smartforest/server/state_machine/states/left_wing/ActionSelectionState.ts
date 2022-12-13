@@ -25,6 +25,9 @@ export class ActionSelectionState extends MachineState {
         } else if (intent == Intents.forest_management_group) {
             //TODO this diramation within state machine need to be clarified
             super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+        } else if (intent == Intents.exit_intent) {
+            super.setAnswer("Exiting")
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
         } else {
             console.log("From ActionSelectionState could not detect intent:" + intent)
             super.setDefaultAnswer()

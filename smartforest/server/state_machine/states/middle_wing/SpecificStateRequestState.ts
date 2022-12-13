@@ -22,7 +22,10 @@ export class SpecificStateRequestState extends MachineState {
             //not a status waiting for interaction
         } else if (intent == Intents.forest_status_overall_levelExperience) {
             super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
-        } else {
+        }else if (intent == Intents.exit_intent) {
+            super.setAnswer("Exiting")
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+        }  else {
             super.setDefaultAnswer()
             console.log("SpecificStateRequestState could not detect intent:" + intent)
         }

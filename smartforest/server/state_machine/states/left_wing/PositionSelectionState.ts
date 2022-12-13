@@ -29,7 +29,10 @@ export class PositionSelectionState extends MachineState {
                 super.setAnswer("There is an error")
                 console.error(e)
             }
-        } else {
+        } else if (intent == Intents.exit_intent) {
+            super.setAnswer("Exiting")
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+        }  else {
             super.setDefaultAnswer()
             console.log("From PositionSelectionState could not detect intent: " + intent)
         }

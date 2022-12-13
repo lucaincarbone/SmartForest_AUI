@@ -1,4 +1,4 @@
-import {Intents} from "../../Utils"
+import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
 
 
@@ -16,7 +16,10 @@ export class StateRequestState extends MachineState {
 
         if (intent == Intents.forest_status_specific) {
             //specific tree part
-        } else {
+        }else if (intent == Intents.exit_intent) {
+            super.setAnswer("Exiting")
+            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+        }  else {
             super.setDefaultAnswer()
             console.log("StateRequestState could not detect intent:" + intent)
         }
