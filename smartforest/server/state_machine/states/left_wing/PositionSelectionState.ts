@@ -31,7 +31,6 @@ export class PositionSelectionState extends MachineState {
             super.setDefaultAnswer()
             console.log("From PositionSelectionState could not detect intent: " + intent)
         }
-        console.log(super.finalResponse)
         return super.finalResponse
     }
 }

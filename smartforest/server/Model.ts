@@ -42,10 +42,6 @@ export class Model {
         return this._instance || (this._instance = new this());
     }
 
-    get trees(): Tree[] {
-        return this._trees;
-    }
-
     /**
      * It permits to buy a new tree given the general position.
      * Note that the available leaves are not checked here!
@@ -87,7 +83,6 @@ export class Model {
      * @throws an exception if no space is available
      */
     private getAPosition(positionGeneral: string) {
-        let possiblePositions: Position[] = []
         let x_start, x_end, y_start, y_end
 
         switch (positionGeneral) {
@@ -120,13 +115,9 @@ export class Model {
                 break;
             }
             default: {
-                x_start = 0
-                x_end = 0
-                y_start = 0
-                y_end = 0
+               throw new Error("Can't detect requested position")
             }
         }
-
         for (let x = x_start; x <= x_end; x++) {
             for (let y = y_start; y <= y_end; y++) {
                 if (this.checkFreePosition(x, y)) {
@@ -154,12 +145,14 @@ export class Model {
      * @returns true if free/ false if not
      */
     private checkFreePosition(x: number, y: number) {
+        let free:boolean=true
         this._trees.forEach(tree => {
             if ((tree.position_x == x) && (tree.position_y == y)) {
-                return false
+                free=false
+                return
             }
         });
-        return true;
+        return free;
     }
 
     /**
