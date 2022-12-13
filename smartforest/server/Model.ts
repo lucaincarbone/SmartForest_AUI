@@ -1,7 +1,7 @@
 import fs from 'fs';
-import { Tree } from "~/server/Tree";
-import { Position } from './Position';
-import { PlantPlaces } from './state_machine/Utils';
+import {Tree} from "~/server/Tree";
+import {Position} from './Position';
+import {PlantPlaces} from './state_machine/Utils';
 
 interface JsonWithChanges {
     leaves?: number,
@@ -30,8 +30,7 @@ export class Model {
         trees: []
     };
 
-
-    //TODO make initial numbers correct (leaves)
+    //FIXME insert correct initial numbers
     private constructor() {
         console.log("Creating a new Model...")
         this._trees = []
@@ -48,8 +47,12 @@ export class Model {
     }
 
     /**
-     * Return false if there is no space in the board
-     * @param positionGeneral
+     * It permits to buy a new tree given the general position.
+     * Note that the available leaves are not checked here!
+     * This function adds the new tree and updates the leaves of the user.
+     *
+     * @param positionGeneral (TOP, BOTTOM, RIGHT, LEFT)
+     * @exception if no space is available
      */
     public buyTree(positionGeneral: string): boolean {
         try {
@@ -58,7 +61,7 @@ export class Model {
             this.updateLeaves(this._leavesCost)
             return true
         }
-        // There is no free space on the whole board
+            // There is no free space on the whole board
         catch (e) {
             console.log(e);
             return false
@@ -67,6 +70,7 @@ export class Model {
 
     /**
      * Check if enough leaves are available to buy
+     *
      * @returns true if the user has enough leaves
      */
     public canIBuyATree() {
@@ -77,8 +81,10 @@ export class Model {
      * Return a free position where a tree can be planted
      * if no space is available in the selected place return a random free space
      * if no space is available in general return an error
+     *
      * @param positionGeneral macro position chosen by the user
      * @returns A free position or an error if everything is full
+     * @throws an exception if no space is available
      */
     private getAPosition(positionGeneral: string) {
         let possiblePositions: Position[] = []
@@ -142,6 +148,7 @@ export class Model {
 
     /**
      * Check if a position is free
+     *
      * @param x desired x
      * @param y desired y
      * @returns true if free/ false if not
@@ -155,7 +162,18 @@ export class Model {
         return true;
     }
 
-    //TODO: to test!!
+    /**
+     * It groups 3 trees in a single one with level and experience equal to:
+     * "the level of the trees + 1" and "this._newTreeExperience".
+     * The position of the new tree is chosen randomly between
+     * the position of the old trees.
+     *
+     * @param oldPositions the positions of the tree to group
+     * @exception if the trees have not the same level
+     * @exception if the trees have yet reach the max level
+     * @exception if the trees have not reached the max experience
+     * @exception if the tree is not found
+     */
     public groupTrees(oldPositions: [Position, Position, Position]) {
 
         try {
@@ -177,13 +195,19 @@ export class Model {
             let randomPosition = Math.floor(Math.random() * 3);
             let newPosition = oldPositions[randomPosition]
 
-            this.addTree(newPosition, firstTree.level, this._newTreeExperience)
+            this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
 
         } catch (e) {
             console.error(e)
         }
     }
 
+    /**
+     * It returns the Tree object given the position
+     *
+     * @param position
+     * @throws an exception if the tree is not found
+     */
     public getSpecificTree(position: Position) {
         let tree = this._trees.find(tree => tree.position_x == position.x && tree.position_y == position.y)
 
@@ -193,6 +217,13 @@ export class Model {
         return tree!;
     }
 
+    /**
+     * It checks the level of the trees
+     *
+     * @param trees the trees to check
+     * @throws an exception if the trees have not the same level
+     * @throws an exception if the trees have yet reach the max level
+     */
     private checkLevel(trees: [Tree, Tree, Tree]) {
 
         if (!(trees[0].level == trees[1].level && trees[0].level == trees[2].level)) {
@@ -204,6 +235,12 @@ export class Model {
         }
     }
 
+    /**
+     * It checks the experience of the trees
+     *
+     * @param trees the trees to check
+     * @throws an exception if the trees have not reached the max experience
+     */
     private checkExperience(trees: [Tree, Tree, Tree]) {
 
         if (!(trees[0].experience == this._maxTreeExperience && trees[1].experience == this._maxTreeExperience
@@ -212,18 +249,30 @@ export class Model {
         }
     }
 
+    /**
+     * It adds a tree to the Json and to the model
+     *
+     * @param position the position of the new tree
+     * @param level the level of the new tree
+     * @param experience the experience of the new tree
+     */
     public addTree(position: Position, level: number, experience: number) {
         let treeToAdd = new Tree(position, level, experience)
 
         this._trees.push(treeToAdd)
         this._jsonWithChanges.trees.push(treeToAdd)
 
-        this.updateJsonFile({ position: position, level: level, experience: experience },
+        this.updateJsonFile({position: position, level: level, experience: experience},
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
     }
 
+    /**
+     * It removes a tree from the Json and from the model
+     *
+     * @param position the position of the tree to remove
+     */
     public removeTree(position: Position) {
         let j = 0;
         let indexOfTreeToRemove = 0;
@@ -243,6 +292,12 @@ export class Model {
         })
     }
 
+    /**
+     * It updates the global experience,
+     * for now it just replace the old experience with the new one
+     *
+     * @param experience
+     */
     public updateGlobalExperience(experience: number) {
         this._globalExperience = experience
 
@@ -252,6 +307,8 @@ export class Model {
     }
 
     /**
+     * It updates the number of leaves,
+     * you can either add or remove them
      *
      * @param leaves the number of leaves to add/remove
      * @param isASum true if you want to add some leaves
@@ -261,20 +318,27 @@ export class Model {
         if (isASum) {
             this._leaves = this._leaves + leaves
             //update json to send back
-            this._jsonWithChanges.leaves=this._leaves
+            this._jsonWithChanges.leaves = this._leaves
             this.updateJsonFile(leaves, (parsedData, leaves) => {
                 parsedData.leaves = parsedData.leaves + leaves;
             })
         } else {
             this._leaves = this._leaves - leaves < 0 ? 0 : this._leaves - leaves
             //update json to send back
-            this._jsonWithChanges.leaves=this._leaves
+            this._jsonWithChanges.leaves = this._leaves
             this.updateJsonFile(leaves, (parsedData, leaves) => {
                 parsedData.leaves = parsedData.leaves - leaves;
             })
         }
     }
 
+    /**
+     * It updates the Json file
+     *
+     * @param dataToUpdate the data to update
+     * @param func the function with the modifications to apply at the data
+     * @private
+     */
     private updateJsonFile(dataToUpdate: any, func: (parsedData: any, data: any) => void) {
 
         let data = fs.readFileSync(this._pathToJsonFile);
@@ -291,9 +355,22 @@ export class Model {
         return this._jsonWithChanges;
     }
 
-    public ResetJsonWithChanges():void {
+    public ResetJsonWithChanges(): void {
         this._jsonWithChanges = {
             trees: []
         };
+    }
+
+    /**
+     * It initializes the Json file with an empty tree array
+     * and with default values
+     */
+    public initializeJsonFile() {
+        this.updateJsonFile({},
+            (parsedData, tree) => {
+                parsedData.trees = [];
+                parsedData.globalExperience = 69;
+                parsedData.globalExperience = 69;
+            })
     }
 }
