@@ -12,12 +12,13 @@ export class TipRequestNoPlantsState extends MachineState {
         //Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-    
+
         if (intent == Intents.yes_answer) {
             //not a state waiting for interaction
         } else if (intent == Intents.no_answer) {
             //not a state waiting for interaction
         } else {
+            super.setDefaultAnswer()
             console.log("TipRequestNoPlantsState could not detect intent:" + intent)
         }
         return super.finalResponse

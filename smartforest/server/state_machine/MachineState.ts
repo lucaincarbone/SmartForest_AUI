@@ -1,6 +1,6 @@
-import { DialogHandler } from "../DialogClass";
-import { StateOperations } from "./StateOperations";
-import { Model } from "../Model";
+import {DialogHandler} from "../DialogClass";
+import {StateOperations} from "./StateOperations";
+import {Model} from "../Model";
 
 
 /**
@@ -52,17 +52,23 @@ export abstract class MachineState implements StateOperations {
         return this._jsonAnswerFromCA.queryResult.parameters
     }
 
-    get tree_position():string {
+    get tree_position(): string {
         return this._jsonAnswerFromCA.queryResult.parameters.fields.tree_position.stringValue.toUpperCase()
     }
 
     setChanges(changes: any) {
         this._jsonAnswerFromCA.changes = changes
     }
-    setAnswer(answer:string){
-        this._jsonAnswerFromCA.queryResult.fulfillmentText=answer
+
+    setAnswer(answer: string) {
+        this._jsonAnswerFromCA.queryResult.fulfillmentText = answer
     }
-    get finalResponse(){
+
+    setDefaultAnswer() {
+        this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now"
+    }
+
+    get finalResponse() {
         return this._jsonAnswerFromCA
     }
 

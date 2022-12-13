@@ -154,7 +154,7 @@ export class Model {
      * @returns true if free/ false if not
      */
     private checkFreePosition(x: number, y: number) {
-        this.trees.forEach(tree => {
+        this._trees.forEach(tree => {
             if ((tree.position_x == x) && (tree.position_y == y)) {
                 return false
             }

@@ -12,7 +12,7 @@ export class UserRequestState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-      
+
 
         switch (intent) {
             case Intents.forest_management_general: {
@@ -33,6 +33,7 @@ export class UserRequestState extends MachineState {
             }
             default: {
                 console.log("From UserPromptState could not detect intent: " + intent)
+                super.setDefaultAnswer()
                 break;
             }
         }

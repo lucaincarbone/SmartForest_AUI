@@ -13,10 +13,11 @@ export class StateRequestState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        
+
         if (intent == Intents.forest_status_specific) {
             //specific tree part
         } else {
+            super.setDefaultAnswer()
             console.log("StateRequestState could not detect intent:" + intent)
         }
         return super.finalResponse

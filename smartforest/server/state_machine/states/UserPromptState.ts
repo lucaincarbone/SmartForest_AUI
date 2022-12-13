@@ -14,7 +14,7 @@ export class UserPromptState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-       
+
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
@@ -109,7 +109,7 @@ export class UserPromptState extends MachineState {
             }
             default: {
                 console.log("From UserPromptState could not detect intent: " + intent)
-                super.setAnswer("intent not valid now")
+                super.setDefaultAnswer()
                 break;
             }
         }
