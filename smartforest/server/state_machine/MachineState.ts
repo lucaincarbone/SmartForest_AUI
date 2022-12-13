@@ -12,6 +12,7 @@ import {ActionSelectionState} from "~/server/state_machine/states/left_wing/Acti
 import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
 import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
 import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
+import { Model } from "../Model";
 
 
 /**
@@ -46,6 +47,8 @@ export abstract class MachineState implements StateOperations {
      * Set the next state following this one
      */
     setNextState(nextState: MachineState): void {
+        Model.Instance.ResetJsonWithChanges()
+        //console.log("setting State to "+nextState)
         this.nextState = nextState
     }
 

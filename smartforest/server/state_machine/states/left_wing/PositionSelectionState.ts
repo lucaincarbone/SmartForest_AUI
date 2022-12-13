@@ -1,6 +1,6 @@
-import {Intents, NameStates, PlantPlaces, statesMap} from "../../Utils"
-import {MachineState} from "../../MachineState"
-import {Model} from "~/server/Model";
+import { Intents, NameStates, PlantPlaces, statesMap } from "../../Utils"
+import { MachineState } from "../../MachineState"
+import { Model } from "~/server/Model";
 
 
 /**
@@ -25,7 +25,7 @@ export class PositionSelectionState extends MachineState {
                     fromDialogFlow.queryResult.fulfillmentText = "There is not enough space!" +
                         "Try to group 3 trees in order to free some space"
                 }
-
+                fromDialogFlow.changes = JSON.stringify(Model.Instance.JsonWithChanges)
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
             } catch (e) {
                 console.error(e)
@@ -33,7 +33,7 @@ export class PositionSelectionState extends MachineState {
         } else {
             console.log("From PositionSelectionState could not detect intent: " + intent)
         }
-
+        console.log(fromDialogFlow)
         return fromDialogFlow
     }
 }

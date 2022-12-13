@@ -1,7 +1,13 @@
 import fs from 'fs';
-import {Tree} from "~/server/Tree";
-import {Position} from './Position';
-import {PlantPlaces} from './state_machine/Utils';
+import { Tree } from "~/server/Tree";
+import { Position } from './Position';
+import { PlantPlaces } from './state_machine/Utils';
+
+interface JsonWithChanges {
+    leaves?: number,
+    globalExperience?: number,
+    trees: Tree[]
+}
 
 /**
  * Singleton class that represents the model of the game.
@@ -19,6 +25,10 @@ export class Model {
     private _newTreeExperience = 50;
     private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
+    private _jsonWithChanges: JsonWithChanges = {
+        trees: []
+    };
+
 
     //TODO make initial numbers correct (leaves)
     private constructor() {
@@ -41,14 +51,13 @@ export class Model {
      * @param positionGeneral
      */
     public buyTree(positionGeneral: string): boolean {
-
         try {
             let position: Position = this.getAPosition(positionGeneral)
             this.addTree(position, this._startedTreeLevel, this._newTreeExperience)
             this.updateLeaves(this._leavesCost)
             return true
         }
-            // There is no free space on the whole board
+        // There is no free space on the whole board
         catch (e) {
             console.log(e);
             return false
@@ -188,8 +197,9 @@ export class Model {
         let treeToAdd = new Tree(position, level, experience)
 
         this._trees.push(treeToAdd)
+        this._jsonWithChanges.trees.push(treeToAdd)
 
-        this.updateJsonFile({position: position, level: level, experience: experience},
+        this.updateJsonFile({ position: position, level: level, experience: experience },
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
@@ -231,11 +241,15 @@ export class Model {
     public updateLeaves(leaves: number, isASum: boolean = false) {
         if (isASum) {
             this._leaves = this._leaves + leaves
+            //update json to send back
+            this._jsonWithChanges.leaves=this._leaves
             this.updateJsonFile(leaves, (parsedData, leaves) => {
                 parsedData.leaves = parsedData.leaves + leaves;
             })
         } else {
             this._leaves = this._leaves - leaves < 0 ? 0 : this._leaves - leaves
+            //update json to send back
+            this._jsonWithChanges.leaves=this._leaves
             this.updateJsonFile(leaves, (parsedData, leaves) => {
                 parsedData.leaves = parsedData.leaves - leaves;
             })
@@ -251,6 +265,16 @@ export class Model {
 
         fs.writeFileSync(this.pathToJsonFile,
             JSON.stringify(parsedData, null, 2));
+    }
+
+    get JsonWithChanges(): JsonWithChanges {
+        return this._jsonWithChanges;
+    }
+
+    public ResetJsonWithChanges():void {
+        this._jsonWithChanges = {
+            trees: []
+        };
     }
 }
 
