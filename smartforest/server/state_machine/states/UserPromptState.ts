@@ -18,7 +18,7 @@ export class UserPromptState extends MachineState {
         switch (intent) {
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
-                super.setNextState(statesMap.get(NameStates.UserRequestState)!)
+                //super.setNextState(statesMap.get(NameStates.UserRequestState)!)
                 break;
             }
             case Intents.forest_management_general: {
