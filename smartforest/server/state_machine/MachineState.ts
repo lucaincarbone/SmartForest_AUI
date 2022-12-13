@@ -56,7 +56,7 @@ export abstract class MachineState implements StateOperations {
         return this._jsonAnswerFromCA.queryResult.parameters.fields.tree_position.stringValue.toUpperCase()
     }
 
-    setChanges(changes: string) {
+    setChanges(changes: any) {
         this._jsonAnswerFromCA.changes = changes
     }
     setAnswer(answer:string){

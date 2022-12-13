@@ -21,7 +21,7 @@ export class PositionSelectionState extends MachineState {
                     super.setAnswer("There is not enough space!" +
                         "Try to group 3 trees in order to free some space")
                 }
-                this.setChanges(JSON.stringify(Model.Instance.JsonWithChanges))
+                this.setChanges(Model.Instance.JsonWithChanges)
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
             } catch (e) {
                 super.setAnswer("There is an error")
