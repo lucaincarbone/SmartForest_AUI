@@ -119,7 +119,7 @@ export default {
         let levelToSpawn = "lev" + tree._level.toString();
 
         document.getElementById(posToSpawn).src =
-          "/_nuxt/assets/dynamics/" + levelToSpawn + ".png";
+          "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
         // document.getElementById(posToSpawn).visibility = 'visible';
       });
     },
