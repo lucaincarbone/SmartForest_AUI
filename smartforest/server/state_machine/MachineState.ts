@@ -1,6 +1,7 @@
 import {DialogHandler} from "../DialogClass";
 import {StateOperations} from "./StateOperations";
 import {Model} from "../Model";
+import { Intents, NameStates, statesMap } from "./Utils";
 
 
 /**
@@ -74,4 +75,22 @@ export abstract class MachineState implements StateOperations {
         return this._jsonAnswerFromCA
     }
 
+    /**
+     * Handle exit e non recognized intent
+     * @param name Name of the Child State
+     */
+    prepareResponseDefault(name:string){
+        let intent = this.intentString
+        switch(intent){
+            case Intents.exit_intent:{
+                this.setAnswer("Exiting")
+                this.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break;
+            }
+            default:{
+                console.log("From "+name+" could not detect intent:" + intent)
+                this.setDefaultAnswer()
+            }
+        }
+    }
 }

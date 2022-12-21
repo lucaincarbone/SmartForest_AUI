@@ -13,18 +13,21 @@ export class TipRequestNoPlantsState extends MachineState {
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
 
-        if (intent == Intents.yes_answer) {
-            //not a state waiting for interaction
-        } else if (intent == Intents.no_answer) {
-            //not a state waiting for interaction
-        }else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("TipRequestNoPlantsState could not detect intent:" + intent)
+        switch (intent) {
+            case Intents.yes_answer: {
+                //not a state waiting for interaction
+                break;
+            }
+            case Intents.no_answer: {
+                super.setAnswer("Okay, no problem. Can i do anything else for you?")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break
+            }
+            default: {
+                super.prepareResponseDefault("TipRequestNoPlantsState")
+                break;
+            }
         }
         return super.finalResponse
-
     }
 }

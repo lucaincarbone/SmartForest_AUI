@@ -1,5 +1,5 @@
-import {Intents, NameStates, statesMap} from "../../Utils"
-import {MachineState} from "../../MachineState"
+import { Intents, NameStates, statesMap } from "../../Utils"
+import { MachineState } from "../../MachineState"
 
 
 /**
@@ -13,25 +13,26 @@ export class TipRequestNoLeavesState extends MachineState {
         //Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-
-        if (intent == Intents.yes_answer) {
-            super.setAnswer("Try to keep a green behavior (use clean energy) to get more Leaves. " +
-            "A player has a green behavior when using clean energy instead of buying it from the station." +
-            "The more Leaves you have, the more trees you plant!")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-
-        } else if (intent == Intents.no_answer) {
-            super.setAnswer("Okay, no problem")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-
-        }else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("TipRequestNoLeavesState could not detect intent:" + intent)
+        switch (intent) {
+            case Intents.yes_answer: {
+                //ask dialogFlow for a more varied answer
+                await super.prepareResponse("How can i get more trees?")
+                // super.setAnswer("Try to keep a green behavior (use clean energy) to get more Leaves. " +
+                // "A player has a green behavior when using clean energy instead of buying it from the station." +
+                // "The more Leaves you have, the more trees you plant!")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break;
+            }
+            case Intents.no_answer: {
+                super.setAnswer("Okay, no problem. Can i do anything else for you?")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break
+            }
+            default: {
+                super.prepareResponseDefault("TipRequestNoLeavesState")
+                break;
+            }
         }
         return super.finalResponse
-
     }
 }

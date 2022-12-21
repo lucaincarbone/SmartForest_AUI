@@ -1,19 +1,6 @@
 import {MachineState} from "./MachineState";
-import {UserPromptState} from "./states/UserPromptState";
-import {UserRequestState} from "~/server/state_machine/states/UserRequestState";
-import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
-import {HowToSpendRequestState} from "~/server/state_machine/states/middle_wing/HowToSpendRequestState";
-import {SpecificStateRequestState} from "~/server/state_machine/states/middle_wing/SpecificStateRequestState";
-import {StateRequestBottomState} from "~/server/state_machine/states/middle_wing/StateRequestBottomState";
-import {StateRequestState} from "~/server/state_machine/states/middle_wing/StateRequestState";
-import {ActionSelectionState} from "~/server/state_machine/states/left_wing/ActionSelectionState";
-import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
-import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
-import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
 import {Model} from "~/server/Model";
-import {HomeEnergyAPI} from "~/server/HomeEnergyAPI";
-import { Position } from "../Position";
-import {NameStates, PlantPlaces, statesMap} from "~/server/state_machine/Utils";
+import {NameStates, statesMap} from "~/server/state_machine/Utils";
 
 
 /**

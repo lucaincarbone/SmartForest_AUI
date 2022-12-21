@@ -16,16 +16,18 @@ export class UserPromptState extends MachineState {
         let intent: string = super.intentString
 
         switch (intent) {
+            //Done
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
-                //super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
+            //Done
             case Intents.forest_management_general: {
                 console.log(Intents.forest_management_general)
                 super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
                 break;
             }
+            //Done
             case Intents.forest_management_buy: {
                 console.log(Intents.forest_management_buy)
                 if(Model.Instance.canIBuyATree()){
@@ -39,6 +41,15 @@ export class UserPromptState extends MachineState {
             }
             case Intents.forest_management_group: {
                 console.log(Intents.forest_management_group)
+                if(Model.Instance.canIGroupTrees()){
+
+                }
+                else{
+                    super.setAnswer(`You can't group any plant!
+                    To group plants you need to have at least 3 trees with max. experience, at a level 1 or 2.
+                    Would you like to know how to gain experience?`)
+                    super.setNextState(statesMap.get(NameStates.TipRequestNoPlantsState)!)
+                }
                 break;
             }
             case Intents.forest_status_general: {
@@ -107,14 +118,8 @@ export class UserPromptState extends MachineState {
                 console.log(Intents.guide_plant)
                 break;
             }
-            case Intents.exit_intent: {
-                super.setAnswer("Exiting")
-                console.log(Intents.exit_intent)
-                break;
-            }
             default: {
-                console.log("From UserPromptState could not detect intent: " + intent)
-                // super.setDefaultAnswer()
+                super.prepareResponseDefault("UserPrompState")
                 break;
             }
         }

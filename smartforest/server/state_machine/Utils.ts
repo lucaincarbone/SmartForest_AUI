@@ -1,6 +1,5 @@
 import {MachineState} from "~/server/state_machine/MachineState";
 import {UserPromptState} from "~/server/state_machine/states/UserPromptState";
-import {UserRequestState} from "~/server/state_machine/states/UserRequestState";
 import {AdviceSelectionState} from "~/server/state_machine/states/right_wing/AdviceSelectionState";
 import {HowToSpendRequestState} from "~/server/state_machine/states/middle_wing/HowToSpendRequestState";
 import {SpecificStateRequestState} from "~/server/state_machine/states/middle_wing/SpecificStateRequestState";
@@ -62,7 +61,6 @@ export enum PlantPlaces {
 
 export const statesMap: Map<string, MachineState> = new Map<string, MachineState>([
     [NameStates.UserPromptState, new UserPromptState()],
-    [NameStates.UserRequestState, new UserRequestState()],
     [NameStates.AdviceSelectionState, new AdviceSelectionState()],
     [NameStates.HowToSpendRequestState, new HowToSpendRequestState()],
     [NameStates.SpecificStateRequestState, new SpecificStateRequestState()],

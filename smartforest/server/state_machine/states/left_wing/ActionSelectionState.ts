@@ -14,23 +14,25 @@ export class ActionSelectionState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-
-        if (intent == Intents.forest_management_buy) {
-            if (Model.Instance.canIBuyATree()) {
-                super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
-            } else {
-                super.setAnswer("Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?")
-                super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
+        switch (intent) {
+            case Intents.forest_management_buy:{
+                if (Model.Instance.canIBuyATree()) {
+                    super.setNextState(statesMap.get(NameStates.PositionSelectionState)!)
+                } else {
+                    super.setAnswer("Ops, you have not enough Leaves to buy a plant! Would you like to know how to get some?")
+                    super.setNextState(statesMap.get(NameStates.TipRequestNoLeavesState)!)
+                } 
+                break;
             }
-        } else if (intent == Intents.forest_management_group) {
-            //TODO this diramation within state machine need to be clarified
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        } else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        } else {
-            console.log("From ActionSelectionState could not detect intent:" + intent)
-            super.setDefaultAnswer()
+            case Intents.forest_management_group:{
+                //TODO check if i can group something: yes go to group state else?
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break
+            }
+            default:{
+                super.prepareResponseDefault("ActionSelectionState")
+                break;
+            } 
         }
         return super.finalResponse
     }

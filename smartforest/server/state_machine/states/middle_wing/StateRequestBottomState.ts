@@ -14,18 +14,20 @@ export class StateRequestBottomState extends MachineState {
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
 
-        if (intent == Intents.yes_answer) {
-            //not a state waiting for interaction
-        } else if (intent == Intents.no_answer) {
-            //not a state waiting for interaction
-        }else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("StateRequestBottomState could not detect intent:" + intent)
+        switch (intent) {
+            case Intents.yes_answer: {
+                //not a state waiting for interaction
+                break;
+            }
+            case Intents.no_answer: {
+                //not a state waiting for interaction
+                break
+            }
+            default: {
+                super.prepareResponseDefault("StateRequestBottom")
+                break;
+            }
         }
         return super.finalResponse
-
     }
 }

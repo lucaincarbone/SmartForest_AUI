@@ -13,17 +13,16 @@ export class StateRequestState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-
-        if (intent == Intents.forest_status_specific) {
-            //specific tree part
-        }else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("StateRequestState could not detect intent:" + intent)
+        switch (intent) {
+            case Intents.forest_status_specific: {
+                //not a state waiting for interaction
+                break;
+            }
+            default: {
+                super.prepareResponseDefault("StateRequestState")
+                break;
+            }
         }
         return super.finalResponse
-
     }
 }

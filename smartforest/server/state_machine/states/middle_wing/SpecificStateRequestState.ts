@@ -14,22 +14,28 @@ export class SpecificStateRequestState extends MachineState {
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
 
-        if (intent == Intents.forest_status_overall_leaves) {
-            super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
-        } else if (intent == Intents.forest_status_overall_numberTrees) {
-            //not a status waiting for interaction
-        } else if (intent == Intents.forest_status_overall_notifications) {
-            //not a status waiting for interaction
-        } else if (intent == Intents.forest_status_overall_levelExperience) {
-            super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
-        }else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("SpecificStateRequestState could not detect intent:" + intent)
+        switch (intent) {
+            case Intents.forest_status_overall_leaves: {
+                super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
+                break;
+            }
+            case Intents.forest_status_overall_numberTrees: {
+                //not a state waiting for interaction
+                break
+            }
+            case Intents.forest_status_overall_notifications: {
+                //not a state waiting for interaction
+                break
+            }
+            case Intents.forest_status_overall_levelExperience: {
+                super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
+                break
+            }
+            default: {
+                super.prepareResponseDefault("SpecificStateRequestState")
+                break;
+            }
         }
         return super.finalResponse
-
     }
 }

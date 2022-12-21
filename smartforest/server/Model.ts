@@ -31,7 +31,6 @@ export class Model {
         trees: []
     };
 
-    //FIXME insert correct initial numbers
     private constructor() {
         if (fs.existsSync(this._pathToJsonFile)) {
             console.log("Loading the Model...")
@@ -84,8 +83,15 @@ export class Model {
      *
      * @returns true if the user has enough leaves
      */
-    public canIBuyATree() {
+    public canIBuyATree():boolean {
         return this._leaves >= this._leavesCost;
+    }
+    /**
+     * Check if there are trees that can be grouped toghter right now
+     * @returns true if there are
+     */
+    public canIGroupTrees():boolean{
+       return false;
     }
 
     /**

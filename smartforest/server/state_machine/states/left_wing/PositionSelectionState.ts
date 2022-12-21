@@ -14,27 +14,28 @@ export class PositionSelectionState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        if (intent == Intents.forest_management_buy_position) {
-            try {
-                let tree_position: string = super.tree_position
-
-                if (Model.Instance.buyTree(tree_position)) {
-                    this.setChanges(Model.Instance.JsonWithChanges)
-                } else {
-                    super.setAnswer("There is not enough space!" +
-                        " Try to group 3 trees in order to free some space")
+        switch (intent) {
+            case Intents.forest_management_buy_position:{
+                try {
+                    let tree_position: string = super.tree_position
+    
+                    if (Model.Instance.buyTree(tree_position)) {
+                        this.setChanges(Model.Instance.JsonWithChanges)
+                    } else {
+                        super.setAnswer("There is not enough space!" +
+                            " Try to group 3 trees in order to free some space")
+                    }
+                    super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                } catch (e) {
+                    super.setAnswer("An error occured while planting a tree")
+                    console.error(e)
                 }
-                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-            } catch (e) {
-                super.setAnswer("There is an error")
-                console.error(e)
+                break;
             }
-        } else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("From PositionSelectionState could not detect intent: " + intent)
+            default:{
+                super.prepareResponseDefault("PositionselectionState")
+                break;
+            } 
         }
         return super.finalResponse
     }
