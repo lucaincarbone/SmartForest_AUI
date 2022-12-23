@@ -26,12 +26,12 @@ export default {
     background-color: white;
     border-top-left-radius: 10em;
     border-bottom-left-radius: 10em;
-    width: 210px;
-    height: 100px;
+    width: 180px;
+    height: 60px;
     margin-left: auto;
     margin-right: 0;
     margin-bottom: 40px;
-
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
     grid-template-areas: 
     "img num";
     column-gap: 0em;
@@ -39,7 +39,7 @@ export default {
 }
 
 .leaf-img {
-    height: 100px;
+    height: 60px;
     width: auto;
     margin: auto;
     padding: 0;
@@ -58,6 +58,7 @@ export default {
     display: flex;
     grid-area: img;
     width: 30px;
+    margin-left: 10px;
 }
 
 

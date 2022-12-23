@@ -11,8 +11,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 <template>
   
   <div class="bg">
+    <img class="bgimg" src="./assets/dynamics/other/background-display.jpeg" alt="">
     <AnswerBox/>
-    <!-- <VoiceDetectionWidget/> -->
+    <PowerStatusWidget/>
     <Trees/>
     <!-- <WeatherWidget/> -->
     <Forest />
@@ -21,15 +22,22 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 <style scoped>
 .bg {
-  background-color: black;
-  width: 1080px;
-  height: 1920px;
+  background-color: black;  
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+  width: 1080px;
+  height: 1920px;
 }
 iframe {
   position: absolute;
   top: 0;
+}
+.bgimg{
+  opacity: 50%;
+  position: absolute;
+  z-index: 0;
+  width: 1080px;
+  height: 1920px;
 }
 </style>

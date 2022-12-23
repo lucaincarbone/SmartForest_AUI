@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="forest-container">
+    <div id="bg" class="forest-container" @click="changeBackground()">
       <VoiceDetectionWidget/>
-      <img src="../assets/dynamics/clouds/clouds_happy.png" alt="" class="clouds floating-clouds"/>
+      <img id="cloudsId" src="../assets/dynamics/clouds/clouds_happy.png" alt="" class="clouds floating-clouds"/>
       <img class="ground" src="../assets/GROUND.png" alt=""/>
       <img class="base floating-base" src="../assets/LINES_BASE.png" alt=""/>
       <!-- <div class="experience-bar">
@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       percentage: 0,
+      isSunny: true,
     };
   },
 
@@ -50,6 +51,33 @@ export default {
       div.style.width = this.percentage + "px";
       document.getElementById("currentnum").textContent = this.percentage / 2 + "/100";
     },
+    changeBackground: function() {
+      var bg = document.getElementById("bg");
+      var clouds = document.getElementById("cloudsId");
+      // FROM STORMY TO SUNNY
+      if(!this.isSunny) {
+        clouds.src = "/_nuxt/assets/dynamics/clouds/clouds_happy.png";
+        clouds.style.width = "800px";
+        bg.style.background = `linear-gradient(
+      180deg,
+      rgba(0, 170, 255, 1) 0%,
+      rgba(0, 192, 255, 1) 23%,
+      rgba(159, 241, 255, 1) 49%,
+      rgba(255, 255, 255, 1) 100%` 
+      }
+      // FROM SUNNY TO STORMY
+      else {
+        clouds.src = "/_nuxt/assets/dynamics/clouds/clouds_sad.png";
+        clouds.style.width = "700px";
+        bg.style.background = `linear-gradient(
+      180deg,
+      rgb(255, 106, 0) 0%,
+      rgb(209, 133, 1) 23%,
+      rgb(255, 218, 159) 49%,
+      rgba(255, 255, 255, 1) 100%)` 
+      }
+      this.isSunny = !this.isSunny;
+    }
   },
   mounted() {
   },
@@ -65,7 +93,7 @@ export default {
   justify-content: flex-end;
   flex-direction: column;
 
-  background: rgb(0, 170, 255);
+  /* background: rgb(0, 170, 255); */
   background: linear-gradient(
       180deg,
       rgba(0, 170, 255, 1) 0%,
@@ -73,6 +101,13 @@ export default {
       rgba(159, 241, 255, 1) 49%,
       rgba(255, 255, 255, 1) 100%
   );
+  /* background: linear-gradient(
+      180deg,
+      rgb(255, 106, 0) 0%,
+      rgb(209, 133, 1) 23%,
+      rgb(255, 218, 159) 49%,
+      rgba(255, 255, 255, 1) 100%
+  ); */
   border-top-left-radius: 200px;
   border-top-right-radius: 200px;
 }
@@ -100,11 +135,11 @@ export default {
 .clouds {
   position: absolute;
   z-index: 100;
-  width: 800px;
   height: auto;
   left: 0;
   right: 0;
   margin: 0 auto;
+  width: 800px;
   bottom: 25em;
 }
 

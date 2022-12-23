@@ -3,7 +3,7 @@
     <div class="answer-box">
       <p id="answer-txt" class="answer-txt">{{ answerFromCA_ }}</p>
     </div>
-    <div class="button" @click="closeAnswerBox()"><p class="ok">OK</p></div>
+    <div class="button" @click="closeAnswerBox()"><p class="ok">Close</p></div>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
   color: black;
 }
 .button {
-  background: green;
+  background: rgb(192, 16, 16);
   width: 150px;
   height: 50px;
   margin: 1em auto;
