@@ -287,21 +287,25 @@ export class Model {
      * @param position the position of the tree to remove
      */
     public removeTree(position: Position) {
-        let j = 0;
-        let indexOfTreeToRemove = 0;
 
-        this._trees.forEach((tree, i) => {
-            if (tree.position_x != position.x && tree.position_y != position.y) {
-                if (i !== j) this._trees[j] = tree;
-                j++;
-            } else if (tree.position_x == position.x && tree.position_y == position.y) {
-                indexOfTreeToRemove = i;
-            }
-        });
-        this._trees.length = j;
+        let indexOfTreeToRemove = this._trees.findIndex(tree => tree.position_x === position.x && tree.position_y === position.y);
+
+        if (indexOfTreeToRemove > -1) {
+            this._trees.splice(indexOfTreeToRemove, 1);
+        }
+
         this._jsonWithChanges.removed.push(new Tree(position, 0, 0))
-        this.updateJsonFile(indexOfTreeToRemove, (parsedData, indexOfTreeToRemove) => {
-            parsedData.trees.splice(indexOfTreeToRemove, 1);
+
+        this.updateJsonFile(position, (parsedData, position) => {
+            let indexOfTreeToRemove = 0;
+
+            indexOfTreeToRemove = parsedData.trees.findIndex(function (tree: any) {
+                return tree.position._x === position.x && tree.position._y === position.y;
+            });
+
+            if (indexOfTreeToRemove > -1) {
+                parsedData.trees.splice(indexOfTreeToRemove, 1);
+            }
         })
     }
 
@@ -400,6 +404,7 @@ export class Model {
 
     /**
      * Method used to query the number of leaves the player owns
+     *
      * @returns the number of owned leaves
      */
     public getNoOfLeaves(): number {
@@ -410,6 +415,7 @@ export class Model {
      * Method used to query the number of trees the player owns
      * return an array of 4 number:
      * pos 0 is the number of trees, pos 1 to 3 are the number of trees of that level
+     *
      * @returns the number array of length 4
      */
     public getNoOfTrees(): number[] {
