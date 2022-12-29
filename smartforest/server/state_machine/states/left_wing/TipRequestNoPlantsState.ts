@@ -15,7 +15,9 @@ export class TipRequestNoPlantsState extends MachineState {
 
         switch (intent) {
             case Intents.yes_answer: {
-                //not a state waiting for interaction
+                //ask dialogFlow for a more varied answer
+                await super.prepareResponse("How can i get more experience")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
             case Intents.no_answer: {

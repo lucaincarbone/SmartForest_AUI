@@ -16,18 +16,18 @@ export class UserPromptState extends MachineState {
         let intent: string = super.intentString
 
         switch (intent) {
-            //Done
+            //hey, Forest
             case Intents.Welcome_Flora: {
                 console.log(Intents.Welcome_Flora)
                 break;
             }
-            //Done
+            //I want to modify my forest
             case Intents.forest_management_general: {
                 console.log(Intents.forest_management_general)
                 super.setNextState(statesMap.get(NameStates.ActionSelectionState)!)
                 break;
             }
-            //Done
+            //I want to buy a new plant
             case Intents.forest_management_buy: {
                 console.log(Intents.forest_management_buy)
                 if(Model.Instance.canIBuyATree()){
@@ -39,10 +39,11 @@ export class UserPromptState extends MachineState {
                 }
                 break;
             }
+            //I want to group some plants
             case Intents.forest_management_group: {
                 console.log(Intents.forest_management_group)
                 if(Model.Instance.canIGroupTrees()){
-
+                    super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 }
                 else{
                     super.setAnswer(`You can't group any plant!
@@ -52,72 +53,98 @@ export class UserPromptState extends MachineState {
                 }
                 break;
             }
+            //I want to know the status of my forest
             case Intents.forest_status_general: {
                 console.log(Intents.forest_status_general)
-                // super.setNextState(statesMap.get(NameStates.StateRequestState)!)
+                super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
-            case Intents.forest_status_overall: {
-                console.log(Intents.forest_status_overall)
-                break;
-            }
+            
+            // case Intents.forest_status_overall: {
+            //     console.log(Intents.forest_status_overall)
+            //     break;
+            // }
+
+            //How many leaves do i have?
             case Intents.forest_status_overall_leaves: {
-                console.log(Intents.forest_status_overall_leaves)
+                let x = Model.Instance.getNoOfLeaves()
+                super.setAnswer("You have "+x+" leaves in your forest")
+                super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
                 break;
             }
-            case Intents.forest_status_overall_levelExperience: {
-                console.log(Intents.forest_status_overall_levelExperience)
-                break;
+            //Show me how many trees i have
+            case Intents.forest_status_overall_numberTrees: {
+                let x = Model.Instance.getNoOfTrees()
+                super.setAnswer(`You have  ${x[0]} trees in your forest. Of this trees ${x[1]} are level 1, ${x[2]} are level 2, ${x[3]} are level 3`)
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break
             }
+            //Which are my last notifications?
             case Intents.forest_status_overall_notifications: {
                 console.log(Intents.forest_status_overall_notifications)
                 break;
             }
-            case Intents.forest_status_overall_numberTrees: {
-                console.log(Intents.forest_status_overall_numberTrees)
-                break;
+            //let's see the level of experience of the trees
+            case Intents.forest_status_overall_levelExperience: {
+                let x = Model.Instance.getLevelexperience()
+                super.setAnswer(`You global level experience is ${x}.
+                Do you want to know your level progress over time?`)
+                super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
+                break
             }
+            //single tree
             case Intents.forest_status_specific: {
                 console.log(Intents.forest_status_specific)
                 break;
             }
+
+            //show me how to play
             case Intents.guide_general: {
                 console.log(Intents.guide_general)
                 break;
             }
+            //Can i group trees?
             case Intents.guide_group_plant: {
                 console.log(Intents.guide_group_plant)
                 break;
             }
+            //What is the best strategy?
             case Intents.guide_strategy: {
                 console.log(Intents.guide_strategy)
                 break;
             }
+            //What are the tree types?
             case Intents.guide_tree_types: {
                 console.log(Intents.guide_tree_types)
                 break;
             }
+            //How do i plant a tree?
             case Intents.guide_plant: {
                 console.log(Intents.guide_plant)
                 break;
             }
+            //Show me the status of my house
             case Intents.advices_general: {
                 console.log(Intents.advices_general)
-                // super.setNextState(statesMap.get(NameStates.AdviceSelectionState)!)
+                super.setNextState(statesMap.get(NameStates.AdviceSelectionState)!)
                 break;
             }
+            //What appliance is consuming the most
             case Intents.advices_appliances_consumption: {
-                console.log(Intents.guide_plant)
+                console.log(Intents.advices_general)
                 break;
             }
+            //Tell me how much energy I have available inside the battery
             case Intents.advices_energy_status: {
-                console.log(Intents.guide_plant)
-                break;
+                console.log(Intents.advices_general)
+                break
             }
+            //Can I start the washing machine ?
             case Intents.advices_start_specific_appliance: {
-                console.log(Intents.guide_plant)
-                break;
+                console.log(Intents.advices_general)
+                break
             }
+            //Exit and not recognized
             default: {
                 super.prepareResponseDefault("UserPrompState")
                 break;

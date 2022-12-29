@@ -24,10 +24,18 @@ export class ActionSelectionState extends MachineState {
                 } 
                 break;
             }
-            case Intents.forest_management_group:{
-                //TODO check if i can group something: yes go to group state else?
-                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-                break
+            case Intents.forest_management_group: {
+                console.log(Intents.forest_management_group)
+                if(Model.Instance.canIGroupTrees()){
+                    super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                }
+                else{
+                    super.setAnswer(`You can't group any plant!
+                    To group plants you need to have at least 3 trees with max. experience, at a level 1 or 2.
+                    Would you like to know how to gain experience?`)
+                    super.setNextState(statesMap.get(NameStates.TipRequestNoPlantsState)!)
+                }
+                break;
             }
             default:{
                 super.prepareResponseDefault("ActionSelectionState")

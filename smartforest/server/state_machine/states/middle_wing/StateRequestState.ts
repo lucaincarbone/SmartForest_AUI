@@ -14,10 +14,18 @@ export class StateRequestState extends MachineState {
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
         switch (intent) {
-            case Intents.forest_status_specific: {
-                //not a state waiting for interaction
+            //A specific tree
+            case Intents.forest_status_overall:{
+                //TODO handle this part
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
+            //General Information
+            case Intents.forest_status_specific: {
+                super.setNextState(statesMap.get(NameStates.SpecificStateRequestState)!)
+                break;
+            }
+
             default: {
                 super.prepareResponseDefault("StateRequestState")
                 break;

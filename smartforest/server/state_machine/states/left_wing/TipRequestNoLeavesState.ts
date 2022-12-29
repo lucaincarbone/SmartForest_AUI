@@ -16,10 +16,7 @@ export class TipRequestNoLeavesState extends MachineState {
         switch (intent) {
             case Intents.yes_answer: {
                 //ask dialogFlow for a more varied answer
-                await super.prepareResponse("How can i get more trees?")
-                // super.setAnswer("Try to keep a green behavior (use clean energy) to get more Leaves. " +
-                // "A player has a green behavior when using clean energy instead of buying it from the station." +
-                // "The more Leaves you have, the more trees you plant!")
+                await super.prepareResponse("How can i get more leaves?")
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }

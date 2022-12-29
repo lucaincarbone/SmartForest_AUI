@@ -16,11 +16,14 @@ export class HowToSpendRequestState extends MachineState {
 
         switch (intent) {
             case Intents.yes_answer: {
-                //not a state waiting for interaction
+                //ask dialogFlow for a more varied answer
+                await super.prepareResponse("What can i use my leaves for?")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
             case Intents.no_answer: {
-                //not a state waiting for interaction
+                super.setAnswer("Okay, no problem. Can i do anything else for you?")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break
             }
             default: {

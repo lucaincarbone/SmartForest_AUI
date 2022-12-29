@@ -7,7 +7,8 @@ import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
 interface JsonWithChanges {
     leaves?: number,
     globalExperience?: number,
-    trees: Tree[]
+    trees: Tree[],
+    removed: Tree[],
 }
 
 /**
@@ -16,7 +17,6 @@ interface JsonWithChanges {
  * it is modified/accessed by all the states.
  */
 export class Model {
-
     private static _instance: Model;
     private _trees: Tree[];
     private _leaves: number;
@@ -28,7 +28,8 @@ export class Model {
     private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
     private _jsonWithChanges: JsonWithChanges = {
-        trees: []
+        trees: [],
+        removed: [],
     };
 
     private constructor() {
@@ -91,7 +92,7 @@ export class Model {
      * @returns true if there are
      */
     public canIGroupTrees():boolean{
-       return false;
+       return true;
     }
 
     /**
@@ -208,9 +209,7 @@ export class Model {
 
             let randomPosition = Math.floor(Math.random() * 3);
             let newPosition = oldPositions[randomPosition]
-
-            this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
-
+            this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)            
         } catch (e) {
             console.error(e)
         }
@@ -300,7 +299,8 @@ export class Model {
             }
         });
         this._trees.length = j;
-
+        this._jsonWithChanges.removed.push(new Tree(position, 0, 0))
+        console.log("Splicing tree in position: "+indexOfTreeToRemove)
         this.updateJsonFile([position.x, position.y], (parsedData, not_used) => {
             parsedData.trees.splice(indexOfTreeToRemove, 1);
         })
@@ -373,14 +373,16 @@ export class Model {
         let initial: JsonWithChanges = {
             leaves:this._leaves,
             globalExperience:this._globalExperience,
-            trees: this._trees
+            trees: this._trees,
+            removed:[]
         };
         return initial
     }
 
     public ResetJsonWithChanges(): void {
         this._jsonWithChanges = {
-            trees: []
+            trees: [],
+            removed: [],
         };
     }
 
@@ -395,5 +397,32 @@ export class Model {
                 parsedData.globalExperience = 69;
                 parsedData.globalExperience = 69;
             })
+    }
+
+    /**
+     * Method used to query the number of leaves the player owns
+     * @returns the number of owned leaves
+     */
+    public getNoOfLeaves():number{
+        return this._leaves
+    }
+
+    /**
+     * Method used to query the number of trees the player owns
+     * return an array of 4 number:
+     * pos 0 is the number of trees, pos 1 to 3 are the number of trees of that level
+     * @returns the number array of length 4
+     */
+    public getNoOfTrees():number[]{
+        let level = [0,0,0,0]
+        this._trees.forEach(function (arrayItem) {
+            var x = arrayItem.level;
+            level[0]++
+            level[x]+=1
+        });
+        return level
+    }
+    public getLevelexperience():number {
+       return this._globalExperience;
     }
 }

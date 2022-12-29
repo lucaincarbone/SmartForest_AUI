@@ -16,11 +16,14 @@ export class StateRequestBottomState extends MachineState {
 
         switch (intent) {
             case Intents.yes_answer: {
-                //not a state waiting for interaction
+                //TODO implement this
+                super.setAnswer("This is not yet implemented")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
             case Intents.no_answer: {
-                //not a state waiting for interaction
+                super.setAnswer("Okay, no problem. Can i do anything else for you?")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break
             }
             default: {
