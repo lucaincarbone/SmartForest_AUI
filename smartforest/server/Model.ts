@@ -43,8 +43,7 @@ export class Model {
             // console.log(this._leaves);
             // console.log(this._globalExperience);
             // console.log(this._trees);
-          } 
-        else {
+        } else {
             // Load empty model if no previous json
             console.log("Creating a new Model...")
             this._trees = []
@@ -84,15 +83,16 @@ export class Model {
      *
      * @returns true if the user has enough leaves
      */
-    public canIBuyATree():boolean {
+    public canIBuyATree(): boolean {
         return this._leaves >= this._leavesCost;
     }
+
     /**
      * Check if there are trees that can be grouped toghter right now
      * @returns true if there are
      */
-    public canIGroupTrees():boolean{
-       return true;
+    public canIGroupTrees(): boolean {
+        return true;
     }
 
     /**
@@ -137,7 +137,7 @@ export class Model {
                 break;
             }
             default: {
-               throw new Error("Can't detect requested position")
+                throw new Error("Can't detect requested position")
             }
         }
         for (let x = x_start; x <= x_end; x++) {
@@ -167,10 +167,10 @@ export class Model {
      * @returns true if free/ false if not
      */
     private checkFreePosition(x: number, y: number) {
-        let free:boolean=true
+        let free: boolean = true
         this._trees.forEach(tree => {
             if ((tree.position_x == x) && (tree.position_y == y)) {
-                free=false
+                free = false
                 return
             }
         });
@@ -209,7 +209,7 @@ export class Model {
 
             let randomPosition = Math.floor(Math.random() * 3);
             let newPosition = oldPositions[randomPosition]
-            this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)            
+            this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
         } catch (e) {
             console.error(e)
         }
@@ -300,8 +300,7 @@ export class Model {
         });
         this._trees.length = j;
         this._jsonWithChanges.removed.push(new Tree(position, 0, 0))
-        console.log("Splicing tree in position: "+indexOfTreeToRemove)
-        this.updateJsonFile([position.x, position.y], (parsedData, not_used) => {
+        this.updateJsonFile(indexOfTreeToRemove, (parsedData, indexOfTreeToRemove) => {
             parsedData.trees.splice(indexOfTreeToRemove, 1);
         })
     }
@@ -369,12 +368,12 @@ export class Model {
         return this._jsonWithChanges;
     }
 
-    get initialBoardJson():any{
+    get initialBoardJson(): any {
         let initial: JsonWithChanges = {
-            leaves:this._leaves,
-            globalExperience:this._globalExperience,
+            leaves: this._leaves,
+            globalExperience: this._globalExperience,
             trees: this._trees,
-            removed:[]
+            removed: []
         };
         return initial
     }
@@ -403,7 +402,7 @@ export class Model {
      * Method used to query the number of leaves the player owns
      * @returns the number of owned leaves
      */
-    public getNoOfLeaves():number{
+    public getNoOfLeaves(): number {
         return this._leaves
     }
 
@@ -413,16 +412,17 @@ export class Model {
      * pos 0 is the number of trees, pos 1 to 3 are the number of trees of that level
      * @returns the number array of length 4
      */
-    public getNoOfTrees():number[]{
-        let level = [0,0,0,0]
+    public getNoOfTrees(): number[] {
+        let level = [0, 0, 0, 0]
         this._trees.forEach(function (arrayItem) {
             var x = arrayItem.level;
             level[0]++
-            level[x]+=1
+            level[x] += 1
         });
         return level
     }
-    public getLevelexperience():number {
-       return this._globalExperience;
+
+    public getLevelexperience(): number {
+        return this._globalExperience;
     }
 }
