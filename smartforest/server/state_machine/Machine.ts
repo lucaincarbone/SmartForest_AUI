@@ -10,12 +10,16 @@ import {NameStates, statesMap} from "~/server/state_machine/Utils";
  * Ex: machine.handle() => currState.handle()
  */
 export class Machine {
+    private static _instance: Machine;
     private _state: MachineState
 
-    constructor() {
+    private constructor() {
         this._state = statesMap.get(NameStates.UserPromptState)!
     }
-
+    
+    public static get Instance() {
+        return this._instance || (this._instance = new this());
+    }
     /**
      * This function is called every time a voice command is received
      * It takes as parameter the string command

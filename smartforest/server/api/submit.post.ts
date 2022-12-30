@@ -1,6 +1,6 @@
 import {Machine} from "../state_machine/Machine"
 
-const machine = new Machine();
+const machine = Machine.Instance;
 /**
  * Api handling the dialogflow exchange:
  * Event is equivalent to HTTP POST request with body a json like this {phrase:"hi,forest!"}

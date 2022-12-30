@@ -7,8 +7,10 @@ import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
 interface JsonWithChanges {
     leaves?: number, 
     globalExperience?: number, 
+    wantGroup?:boolean
     trees: Tree[],
     removed: Tree[],
+    group: Tree[],
 }
 
 /**
@@ -30,6 +32,7 @@ export class Model {
     private _jsonWithChanges: JsonWithChanges = {
         trees: [],
         removed: [],
+        group:[],
     };
 
     private constructor() {
@@ -95,9 +98,14 @@ export class Model {
         let nTreesForLevel = [0,0,0]
         let maxExpTrees = this._trees.filter(tree=>tree.experience==this._maxTreeExperience)
         maxExpTrees.forEach(tree=>nTreesForLevel[tree.level-1]++)
-        return nTreesForLevel.filter(num=>num>=3).length>0
+        let answer = nTreesForLevel.filter(num=>num>=3).length>0 
+        if(answer){
+            this._jsonWithChanges.wantGroup=true
+            maxExpTrees.filter(tree=>nTreesForLevel[tree.level-1]>=3).forEach(tree=>this._jsonWithChanges.group.push(tree))
+        }
+        return answer
     }
-
+    
     /**
      * Return a free position where a tree can be planted
      * if no space is available in the selected place return a random free space
@@ -380,7 +388,8 @@ export class Model {
             leaves: this._leaves,
             globalExperience: this._globalExperience,
             trees: this._trees,
-            removed: []
+            removed: [],
+            group:[],
         };
         return initial
     }
@@ -389,6 +398,7 @@ export class Model {
         this._jsonWithChanges = {
             trees: [],
             removed: [],
+            group:[]
         };
     }
 

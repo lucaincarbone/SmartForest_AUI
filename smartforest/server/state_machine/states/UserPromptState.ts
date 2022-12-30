@@ -43,6 +43,7 @@ export class UserPromptState extends MachineState {
             case Intents.forest_management_group: {
                 console.log(Intents.forest_management_group)
                 if(Model.Instance.canIGroupTrees()){
+                    super.setChanges(Model.Instance.JsonWithChanges)
                     super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 }
                 else{

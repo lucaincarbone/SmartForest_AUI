@@ -19,9 +19,11 @@ export default {
       transcription_: [],
       lang_: "en-US",
       answerFromCA_: "",
+      numOfClicks: 0,
+      positions: "",
     };
   },
-  
+
   async mounted() {
     this.runtimeTranscription_ = "Tap to ask Flora";
     // this.plantTree(); // fetch to another api to get the JSON
@@ -29,8 +31,8 @@ export default {
     //   method: "get",
     // });
     // If we want to keep updated, we need to refresh also the server. So run again npm run dev.
-    const { data: answerFromCA_ } = await useFetch('/api/getInitial')
-    this.answerFromCA_=answerFromCA_.value
+    const { data: answerFromCA_ } = await useFetch("/api/getInitial");
+    this.answerFromCA_ = answerFromCA_.value;
     this.updateFrontEnd();
   },
   methods: {
@@ -104,28 +106,71 @@ export default {
       if (this.answerFromCA_.changes != null) {
         if (this.answerFromCA_.changes.trees != null) {
           console.log("Updating trees...");
-          this.plantTree();
+          this.plantTree(this.answerFromCA_.changes.trees);
         }
         if (this.answerFromCA_.changes.leaves != null) {
           console.log("Updating leaves...");
-          this.updateLeaves();
+          this.updateLeaves(this.answerFromCA_.changes.leaves);
+        }
+        if (this.answerFromCA_.changes.group != null) {
+          this.activateGroup(this.answerFromCA_.changes.group);
         }
       }
     },
-    plantTree() {
-      this.answerFromCA_.changes.trees.forEach((tree) => {
+    plantTree(trees) {
+      trees.forEach((tree) => {
         let posToSpawn =
-          "pos" + tree._position._x.toString() + tree._position._y.toString();
+          tree._position._x.toString() + "-" + tree._position._y.toString();
         let levelToSpawn = "lev" + tree._level.toString();
 
         document.getElementById(posToSpawn).src =
           "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
-        // document.getElementById(posToSpawn).visibility = 'visible';
       });
     },
-    updateLeaves() {
-      let amount = this.answerFromCA_.changes.leaves;
+    updateLeaves(leaves) {
+      let amount = leaves;
       document.getElementById("leaves-num").textContent = amount.toString();
+    },
+    activateGroup(group) {
+      //self is needed as addEventListener changes context and loses this
+      var self = this
+      group.forEach(function (tree){
+        let treeId = tree._position._x.toString() + "-" + tree._position._y.toString();
+        console.log("activating click for tree: " + treeId);
+        document.getElementById(treeId).addEventListener("click", async function (e) {
+            let id = e.target.id;
+            console.log("click " + id);
+            let num = self.numOfClicks
+            console.log(num)
+            if (self.numOfClicks < 2) {
+              self.positions = self.positions + id + "-";
+              self.numOfClicks++;
+              return;
+            }
+            self.positions = self.positions + id;
+            console.log("Positions: " + self.positions);
+            let answer = await $fetch("/api/click", {
+              method: "post",
+              body: { id: self.positions },
+            });
+            self.updateTrees(answer);
+            self.positions = "";
+            self.numOfClicks = 0;
+          });
+      });
+    },
+    
+    updateTrees: function (answer) {
+      answer.removed.forEach((tree) => {
+        let posToSpawn =
+          tree._position._x.toString() + "-" + tree._position._y.toString();
+          tree = document.getElementById(posToSpawn)
+        tree.src =
+          "/_nuxt/assets/dynamics/trees/empty.png";
+        //This line removes all event listeners from the tree (It is needed for the end of grouping action)
+        tree.replaceWith(tree.cloneNode(true));
+      });
+      this.plantTree(answer.trees);
     },
   },
 };

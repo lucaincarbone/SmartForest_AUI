@@ -1,252 +1,252 @@
 <template>
   <div id="window" class="tree-container">
     <img
-      id="pos11"
+      id="1-1"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_1_1"
       @click="doAction('1-1')"
     />
     <img
-      id="pos12"
+      id="1-2"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_1_2"
       @click="doAction('1-2')"
     />
     <img
-      id="pos13"
+      id="1-3"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_1_3"
       @click="doAction('1-3')"
     />
     <img
-      id="pos14"
+      id="1-4"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_1_4"
       @click="doAction('1-4')"
     />
     <img
-      id="pos15"
+      id="1-5"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_1_5"
       @click="doAction('1-5')"
     />
     <img
-      id="pos16"
+      id="1-6"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_1_6"
       @click="doAction('1-6')"
     />
     <img
-      id="pos21"
+      id="2-1"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_2_1"
       @click="doAction('2-1')"
     />
     <img
-      id="pos22"
+      id="2-2"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_2_2"
       @click="doAction('2-2')"
     />
     <img
-      id="pos23"
+      id="2-3"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_2_3"
       @click="doAction('2-3')"
     />
     <img
-      id="pos24"
+      id="2-4"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_2_4"
       @click="doAction('2-4')"
     />
     <img
-      id="pos25"
+      id="2-5"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_2_5"
       @click="doAction('2-5')"
     />
     <img
-      id="pos26"
+      id="2-6"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_2_6"
       @click="doAction('2-6')"
     />
     <img
-      id="pos31"
+      id="3-1"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_3_1"
       @click="doAction('3-1')"
     />
     <img
-      id="pos32"
+      id="3-2"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_3_2"
       @click="doAction('3-2')"
     />
     <img
-      id="pos33"
+      id="3-3"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_3_3"
       @click="doAction('3-3')"
     />
     <img
-      id="pos34"
+      id="3-4"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_3_4"
       @click="doAction('3-4')"
     />
     <img
-      id="pos35"
+      id="3-5"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_3_5"
       @click="doAction('3-5')"
     />
     <img
-      id="pos36"
+      id="3-6"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_3_6"
       @click="doAction('3-6')"
     />
     <img
-      id="pos41"
+      id="4-1"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_4_1"
       @click="doAction('4-1')"
     />
     <img
-      id="pos42"
+      id="4-2"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_4_2"
       @click="doAction('4-2')"
     />
     <img
-      id="pos43"
+      id="4-3"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_4_3"
       @click="doAction('4-3')"
     />
     <img
-      id="pos44"
+      id="4-4"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_4_4"
       @click="doAction('4-4')"
     />
     <img
-      id="pos45"
+      id="4-5"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_4_5"
       @click="doAction('4-5')"
     />
     <img
-      id="pos46"
+      id="4-6"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_4_6"
       @click="doAction('4-6')"
     />
     <img
-      id="pos51"
+      id="5-1"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_5_1"
       @click="doAction('5-1')"
     />
     <img
-      id="pos52"
+      id="5-2"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_5_2"
       @click="doAction('5-2')"
     />
     <img
-      id="pos53"
+      id="5-3"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_5_3"
       @click="doAction('5-3')"
     />
     <img
-      id="pos54"
+      id="5-4"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_5_4"
       @click="doAction('5-4')"
     />
     <img
-      id="pos55"
+      id="5-5"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_5_5"
       @click="doAction('5-5')"
     />
     <img
-      id="pos56"
+      id="5-6"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_5_6"
       @click="doAction('5-6')"
     />
     <img
-      id="pos61"
+      id="6-1"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_6_1"
       @click="doAction('6-1')"
     />
     <img
-      id="pos62"
+      id="6-2"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_6_2"
       @click="doAction('6-2')"
     />
     <img
-      id="pos63"
+      id="6-3"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_6_3"
       @click="doAction('6-3')"
     />
     <img
-      id="pos64"
+      id="6-4"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_6_4"
       @click="doAction('6-4')"
     />
     <img
-      id="pos65"
+      id="6-5"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_6_5"
       @click="doAction('6-5')"
     />
     <img
-      id="pos66"
+      id="6-6"
       src="../assets/dynamics/trees/empty.png"
       alt=""
       class="tree floating-base pos_6_6"
@@ -265,41 +265,41 @@ export default {
   },
   methods: {
     doAction: async function (id) {
-      if (this.numOfClicks < 2) {
-        this.positions = this.positions + id + "-";
-        this.numOfClicks++;
-        return;
-      }
-      this.positions = this.positions + id;
-      console.log(this.positions);
-      let answer = await $fetch("/api/click", {
-        method: "post",
-        body: { id: this.positions },
-      });
-      this.updateTrees(answer)
-      this.positions = "";
-      this.numOfClicks = 0;
+      // if (this.numOfClicks < 2) {
+      //   this.positions = this.positions + id + "-";
+      //   this.numOfClicks++;
+      //   return;
+      // }
+      // this.positions = this.positions + id;
+      // console.log(this.positions);
+      // let answer = await $fetch("/api/click", {
+      //   method: "post",
+      //   body: { id: this.positions },
+      // });
+      // this.updateTrees(answer)
+      // this.positions = "";
+      // this.numOfClicks = 0;
     },
     // answer has 2 array of trees: 
     // trees has the new tree position and stats
     // removed has the old trees positions
-    updateTrees: function (answer) {
-      answer.removed.forEach((tree) => {
-        let posToSpawn =
-          "pos" + tree._position._x.toString() + tree._position._y.toString();
-        document.getElementById(posToSpawn).src =
-          "/_nuxt/assets/dynamics/trees/empty.png";
-      });
-      answer.trees.forEach((tree) => {
-        let posToSpawn =
-          "pos" + tree._position._x.toString() + tree._position._y.toString();
-        let levelToSpawn = "lev" + tree._level.toString();
+    // updateTrees: function (answer) {
+    //   answer.removed.forEach((tree) => {
+    //     let posToSpawn =
+    //       "pos" + tree._position._x.toString() + tree._position._y.toString();
+    //     document.getElementById(posToSpawn).src =
+    //       "/_nuxt/assets/dynamics/trees/empty.png";
+    //   });
+    //   answer.trees.forEach((tree) => {
+    //     let posToSpawn =
+    //       "pos" + tree._position._x.toString() + tree._position._y.toString();
+    //     let levelToSpawn = "lev" + tree._level.toString();
 
-        document.getElementById(posToSpawn).src =
-          "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
-        // document.getElementById(posToSpawn).visibility = 'visible';
-      });
-    },
+    //     document.getElementById(posToSpawn).src =
+    //       "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
+    //     // document.getElementById(posToSpawn).visibility = 'visible';
+    //   });
+    // },
 
     spawnTreeInARandomPos: function () {
       document.getElementById(this.randomPos()).src =
