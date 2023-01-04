@@ -5,9 +5,9 @@ import {PlantPlaces} from './state_machine/Utils';
 import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
 
 interface JsonWithChanges {
-    leaves?: number, 
-    globalExperience?: number, 
-    wantGroup?:boolean
+    leaves?: number,
+    globalExperience?: number,
+    wantGroup?: boolean
     trees: Tree[],
     removed: Tree[],
     group: Tree[],
@@ -32,7 +32,7 @@ export class Model {
     private _jsonWithChanges: JsonWithChanges = {
         trees: [],
         removed: [],
-        group:[],
+        group: [],
     };
 
     private constructor() {
@@ -95,17 +95,17 @@ export class Model {
      * @returns true if there are
      */
     public canIGroupTrees(): boolean {
-        let nTreesForLevel = [0,0,0]
-        let maxExpTrees = this._trees.filter(tree=>tree.experience==this._maxTreeExperience)
-        maxExpTrees.forEach(tree=>nTreesForLevel[tree.level-1]++)
-        let answer = nTreesForLevel.filter(num=>num>=3).length>0 
-        if(answer){
-            this._jsonWithChanges.wantGroup=true
-            maxExpTrees.filter(tree=>nTreesForLevel[tree.level-1]>=3).forEach(tree=>this._jsonWithChanges.group.push(tree))
+        let nTreesForLevel = [0, 0, 0]
+        let maxExpTrees = this._trees.filter(tree => tree.experience == this._maxTreeExperience)
+        maxExpTrees.forEach(tree => nTreesForLevel[tree.level - 1]++)
+        let answer = nTreesForLevel.filter(num => num >= 3).length > 0
+        if (answer) {
+            this._jsonWithChanges.wantGroup = true
+            maxExpTrees.filter(tree => nTreesForLevel[tree.level - 1] >= 3).forEach(tree => this._jsonWithChanges.group.push(tree))
         }
         return answer
     }
-    
+
     /**
      * Return a free position where a tree can be planted
      * if no space is available in the selected place return a random free space
@@ -201,7 +201,7 @@ export class Model {
      * @exception if the tree is not found
      * @returns true if the plants were grouped succesfully
      */
-    public groupTrees(oldPositions: [Position, Position, Position]):boolean {
+    public groupTrees(oldPositions: [Position, Position, Position]): boolean {
 
         try {
             // If there is not a tree in that position, they throw an exception
@@ -209,12 +209,15 @@ export class Model {
             let secondTree = this.getSpecificTree(oldPositions[1])
             let thirdTree = this.getSpecificTree(oldPositions[2])
 
-        
+
             // If the level constraints are not satisfied, it throws an exception
             this.checkLevel([firstTree, secondTree, thirdTree])
 
             // If the trees have not reached the max experience, it throws an exception
             this.checkExperience([firstTree, secondTree, thirdTree])
+
+            // If the User chose some equal positions, it throws an exception
+            this.checkPositions(oldPositions)
 
             oldPositions.forEach((position) => {
                 this.removeTree(position)
@@ -274,6 +277,20 @@ export class Model {
         if (!(trees[0].experience == this._maxTreeExperience && trees[1].experience == this._maxTreeExperience
             && trees[2].experience == this._maxTreeExperience)) {
             throw new Error("The tress have not the reach the max experience");
+        }
+    }
+
+    /**
+     * It checks if the user chose equal positions
+     *
+     * @param positions the position of the trees
+     * @throws an exception if there is some equal positions
+     */
+    private checkPositions(positions: [Position, Position, Position]) {
+        if ((positions[0].x == positions[1].x && positions[0].y == positions[1].y)
+            || (positions[0].x == positions[2].x && positions[0].y == positions[2].y)
+            || (positions[1].x == positions[2].x && positions[1].y == positions[2].y)) {
+            throw new Error("You choose some trees in the same position");
         }
     }
 
@@ -393,7 +410,7 @@ export class Model {
             globalExperience: this._globalExperience,
             trees: this._trees,
             removed: [],
-            group:[],
+            group: [],
         };
         return initial
     }
@@ -402,7 +419,7 @@ export class Model {
         this._jsonWithChanges = {
             trees: [],
             removed: [],
-            group:[]
+            group: []
         };
     }
 
