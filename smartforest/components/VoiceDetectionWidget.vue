@@ -118,13 +118,16 @@ export default {
       }
     },
     plantTree(trees) {
+      this.positions = "";
+      this.numOfClicks = 0;
       trees.forEach((tree) => {
         let posToSpawn =
           tree._position._x.toString() + "-" + tree._position._y.toString();
         let levelToSpawn = "lev" + tree._level.toString();
-
-        document.getElementById(posToSpawn).src =
+        tree = document.getElementById(posToSpawn)
+        tree.src =
           "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
+        tree.replaceWith(tree.cloneNode(true));
       });
     },
     updateLeaves(leaves) {
@@ -160,6 +163,7 @@ export default {
       });
     },
     
+    //Called after a group 
     updateTrees: function (answer) {
       answer.removed.forEach((tree) => {
         let posToSpawn =

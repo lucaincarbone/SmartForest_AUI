@@ -9,6 +9,7 @@ import {ActionSelectionState} from "~/server/state_machine/states/left_wing/Acti
 import {PositionSelectionState} from "~/server/state_machine/states/left_wing/PositionSelectionState";
 import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
 import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
+import { GroupingState } from "./states/left_wing/GroupingState";
 
 export class Intents {
     public static advices_appliances_consumption: string = "advices_applinces_consumption";
@@ -49,6 +50,7 @@ export enum NameStates {
     PositionSelectionState = "PositionSelectionState",
     TipRequestNoLeavesState = "TipRequestNoLeavesState",
     TipRequestNoPlantsState = "TipRequestNoPlantsState",
+    GroupingState = "GroupingState"
 }
 
 export enum PlantPlaces {
@@ -70,4 +72,5 @@ export const statesMap: Map<string, MachineState> = new Map<string, MachineState
     [NameStates.PositionSelectionState, new PositionSelectionState()],
     [NameStates.TipRequestNoLeavesState, new TipRequestNoLeavesState()],
     [NameStates.TipRequestNoPlantsState, new TipRequestNoPlantsState()],
+    [NameStates.GroupingState, new GroupingState()],
 ]);

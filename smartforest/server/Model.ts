@@ -199,8 +199,9 @@ export class Model {
      * @exception if the trees have yet reach the max level
      * @exception if the trees have not reached the max experience
      * @exception if the tree is not found
+     * @returns true if the plants were grouped succesfully
      */
-    public groupTrees(oldPositions: [Position, Position, Position]) {
+    public groupTrees(oldPositions: [Position, Position, Position]):boolean {
 
         try {
             // If there is not a tree in that position, they throw an exception
@@ -208,6 +209,7 @@ export class Model {
             let secondTree = this.getSpecificTree(oldPositions[1])
             let thirdTree = this.getSpecificTree(oldPositions[2])
 
+        
             // If the level constraints are not satisfied, it throws an exception
             this.checkLevel([firstTree, secondTree, thirdTree])
 
@@ -221,8 +223,10 @@ export class Model {
             let randomPosition = Math.floor(Math.random() * 3);
             let newPosition = oldPositions[randomPosition]
             this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
+            return true;
         } catch (e) {
             console.error(e)
+            return false
         }
     }
 

@@ -43,6 +43,14 @@ export abstract class MachineState implements StateOperations {
         this.nextState = nextState
     }
 
+    /**
+     * Set the next state following this one without resetting changes to json for client
+     */
+    setNextStateNoReset(nextState: MachineState): void {
+        //console.log("setting State to "+nextState)
+        this.nextState = nextState
+    }
+
     get answerString() {
         return this._jsonAnswerFromCA.queryResult.fulfillmentText.toString()
     }

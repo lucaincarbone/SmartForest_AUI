@@ -44,7 +44,7 @@ export class UserPromptState extends MachineState {
                 console.log(Intents.forest_management_group)
                 if(Model.Instance.canIGroupTrees()){
                     super.setChanges(Model.Instance.JsonWithChanges)
-                    super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                    super.setNextStateNoReset(statesMap.get(NameStates.GroupingState)!)
                 }
                 else{
                     super.setAnswer(`You can't group any plant!
