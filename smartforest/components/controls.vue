@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div class="remote-container">
+  <div class="controls-box">
+    <div id="showbutton" class="showbutton" @click="controlmanager()"><p id="textbutton" class="textbutton">Pick tablet</p></div>
+    <div id="remote-container" class="remote-container">
     <div class="remote">
         <div class="cell"><TileControls id="weather" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div>
         <div class="cell"><TileControls id="airconditioner" imageURL="/_nuxt/assets/appliances/air-conditioner.png" name="Air conditioner"/></div>
@@ -18,25 +19,99 @@
 
 <script>
 export default {
+  data() {
+    return {
+      activeControls: true,
+    }
+  },
+  methods: {
+    hideControls() {
+      console.log("Hiding contorls...");
+      document.getElementById("textbutton").innerText = "Pick tablet";
 
+      var tablet = document.getElementById("remote-container");
+
+      var id = setInterval(frame, 5);
+      var percentage = 100;
+
+      function frame() {
+        if (percentage == 0) {
+          tablet.style.pointerEvents = "none";
+          clearInterval(id);
+        } else {
+          percentage--
+          tablet.style.opacity = percentage + "%";
+        }
+      }
+      this.activeControls = false;
+    },
+    showControls() {
+      console.log("Showing contorls...");
+      document.getElementById("textbutton").innerText = "Hide tablet";
+
+      var tablet = document.getElementById("remote-container");
+
+      var id = setInterval(frame, 5);
+      var percentage = 0;
+
+      function frame() {
+        if (percentage == 100) {
+          tablet.style.pointerEvents = "all";
+          clearInterval(id);
+        } else {
+          percentage++
+          tablet.style.opacity = percentage + "%";
+        }
+      }
+      this.activeControls = true;
+    },
+    controlmanager() {
+      if(this.activeControls){
+        this.hideControls();
+      } else {
+        this.showControls();
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
+p{
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 40px;
+  color: black;
+}
+.showbutton {
+  background-color: white;
+  border-radius: 20px;
+  width: 140px;
+  height: 40px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  align-content: center;
+  padding: 0;
+}
+.controls-box {
+  position: absolute;
+  z-index: 100;
+  width: 1080px;
+  top: 0;
+  padding-top: 1em;
+}
 
 .remote-container {
-    position: absolute;
+    position: relative;
     z-index: 100;
     width: 650px;
     height: 500px;
     margin: auto;
-    top: 3em;
-    left: 0;
-    right: 0;
     background-image: url("../assets/appliances/tablet.png");
     background-size:cover;
     display: flex;
-    
 }
 .remote {
     position: relative;
