@@ -67,6 +67,10 @@ export abstract class MachineState implements StateOperations {
         return this._jsonAnswerFromCA.queryResult.parameters.fields.tree_position.stringValue.toUpperCase()
     }
 
+    get deviceName(): string {
+        return this._jsonAnswerFromCA.queryResult.parameters.fields.name_home_appliance.stringValue.toLowerCase()
+    }
+
     setChanges(changes: any) {
         this._jsonAnswerFromCA.changes = changes
     }

@@ -60,7 +60,7 @@ export class UserPromptState extends MachineState {
                 super.setNextState(statesMap.get(NameStates.StateRequestState)!)
                 break;
             }
-            
+
             // case Intents.forest_status_overall: {
             //     console.log(Intents.forest_status_overall)
             //     break;
@@ -132,7 +132,7 @@ export class UserPromptState extends MachineState {
             }
             //What appliance is consuming the most
             case Intents.advices_appliances_consumption: {
-                console.log(Intents.advices_general)
+                console.log(Intents.advices_general) //TODO
                 break;
             }
             //Tell me how much energy I have available inside the battery

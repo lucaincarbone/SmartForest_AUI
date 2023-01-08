@@ -1,5 +1,6 @@
 import {Intents, NameStates, statesMap} from "../../Utils"
 import {MachineState} from "../../MachineState"
+import {HomeEnergyAPI} from "~/server/HomeEnergyAPI";
 
 
 /**
@@ -13,47 +14,51 @@ export class AdviceSelectionState extends MachineState {
         // Parent class method returns the intent
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
-        //TODO do this part with api help
+
         switch (intent) {
-            //Which are the devices that are consuming the most ?
+            // Which is the device that is consuming the most ?
             case Intents.advices_appliances_consumption: {
+                try {
+                    let mostConsuming = await HomeEnergyAPI.Instance.getMostConsumingDevice()
+                    super.setAnswer("The " + mostConsuming + " is the device that is consuming the most")
+                } catch (e: any) {
+                    super.setAnswer(e.message)
+                }
+
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
-            //Tell me how much energy I have available inside the battery
+            // Tell me how much energy I have available inside the battery
             case Intents.advices_energy_status: {
+                try {
+                    let overallCapacity = await HomeEnergyAPI.Instance.getOverallBatteryEnergy()
+                    super.setAnswer("You have a total of " + overallCapacity + " kWh inside the batteries")
+                } catch (e: any) {
+                    super.setAnswer(e.message)
+                }
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break
             }
-            //Can I start the washing machine ?
+            // Can I start the washing machine ?
             case Intents.advices_start_specific_appliance: {
+                try { //TODO fai in modo che l'api riconosce i dispositivi
+                    if (await HomeEnergyAPI.Instance.canITurnOnTheDevice(super.deviceName)) {
+                        super.setAnswer("Yes! You have enough energy in your batteries!")
+                    } else {
+                        super.setAnswer("I'm sorry but it's better to wait, your batteries don't have accumulated enough energy")
+                    }
+                } catch (e: any) {
+                    super.setAnswer(e.message)
+                }
+
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break
             }
             default: {
-                super.prepareResponseDefault("StateRequestBottom")
+                super.prepareResponseDefault("AdviceSelectionState")
                 break;
             }
         }
         return super.finalResponse
-
-
-
-
-        if (intent == Intents.advices_appliances_consumption) {
-            //specific tree part
-        } else if (intent == Intents.advices_energy_status) {
-            //specific tree part
-        } else if (intent == Intents.advices_start_specific_appliance) {
-            //specific tree part
-        }else if (intent == Intents.exit_intent) {
-            super.setAnswer("Exiting")
-            super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-        }  else {
-            super.setDefaultAnswer()
-            console.log("AdviceSelectionState could not detect intent:" + intent)
-        }
-        return super.finalResponse
-
     }
 }

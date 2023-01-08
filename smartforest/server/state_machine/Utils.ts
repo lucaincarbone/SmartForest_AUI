@@ -12,7 +12,7 @@ import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/T
 import { GroupingState } from "./states/left_wing/GroupingState";
 
 export class Intents {
-    public static advices_appliances_consumption: string = "advices_applinces_consumption";
+    public static advices_appliances_consumption: string = "advices_appliances_consumption";
     public static advices_energy_status: string = "advices_energy_status";
     public static advices_general: string = "advices_general";
     public static advices_start_specific_appliance: string = "advices_start_specific_appliance";
