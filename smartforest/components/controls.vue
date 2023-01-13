@@ -12,7 +12,7 @@
       </div>
         <!-- <div class="cell"><TileControls id="simulation" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div> -->
         <div class="cell"><TileControls id="airconditioner" imageURL="/_nuxt/assets/appliances/air-conditioner.png" name="Air conditioner"/></div>
-        <div class="cell"><TileControls id="coffee" imageURL="/_nuxt/assets/appliances/coffee-machine.png" name="Coffee machine"/></div>
+        <div class="cell"><TileControls id="dehumidifier" imageURL="/_nuxt/assets/appliances/dehumidifier.png" name="Dehumidifier"/></div>
         <div class="cell"><TileControls id="cooker" imageURL="/_nuxt/assets/appliances/cooker.png" name="Induction cooker"/></div>
         <div class="cell"><TileControls id="dishwasher" imageURL="/_nuxt/assets/appliances/dishwasher.png" name="Dishwasher"/></div>
         <div class="cell"><TileControls id="dryer" imageURL="/_nuxt/assets/appliances/dryer.png" name="Clothes dryer"/></div>
@@ -99,6 +99,7 @@ export default {
 .showbutton {
   background: #4e4e4e;
   background: linear-gradient(180deg, #4e4e4e 0%, #000000 100%);
+  cursor: pointer;
 
   border-radius: 20px;
   width: 140px;
@@ -205,6 +206,7 @@ export default {
 
 }
 .simulation-button{
+  cursor: pointer;
   width: 150px;
   height: 40px;
   

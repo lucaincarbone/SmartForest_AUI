@@ -135,6 +135,7 @@ export default {
     backdrop-filter: blur(10px);
     width: 160px;
     height: 110px;
+    cursor: pointer;
 }
 .img {
     padding: 0.3em;
