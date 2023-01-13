@@ -331,6 +331,28 @@ export default {
   },
 };
 </script>
+<style>
+.groupable{
+  background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(226,161,255,1) 35%, rgba(255,0,243,0.23153011204481788) 100%);
+  border-radius: 25%;
+}
+.high-exp{
+  background: rgb(3,236,8);
+  background: radial-gradient(circle, rgba(3,236,8,1) 0%, rgba(0,255,130,1) 35%, rgba(0,255,130,0) 100%);
+  border-radius: 25%;
+}
+.mid-exp{
+  background: rgb(236,220,3);
+  background: radial-gradient(circle, rgba(236,220,3,1) 0%, rgba(255,194,0,1) 35%, rgba(255,0,0,0) 100%);
+  border-radius: 25%;
+}
+.low-exp{
+  background: rgb(236,98,3);
+  background: radial-gradient(circle, rgba(236,98,3,1) 0%, rgba(255,0,0,1) 35%, rgba(255,0,0,0) 100%);
+  border-radius: 25%;
+}
+</style>
 
 <style scoped>
 .tree-container {

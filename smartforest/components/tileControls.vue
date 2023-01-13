@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div :id="id" class="tile" @click="toggleSwitch(id)">
-    <img class="img" :src="imageURL" alt="">
-    <p class="name">{{ name }}</p>
-  </div>
+        <img class="img" :src="imageURL" alt="">
+        <p class="name">{{ name }}</p>
+    </div>
   </div>
 </template>
 

@@ -11,7 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 <template>
   
   <div class="bg">
-    <img class="bgimg" src="./assets/dynamics/other/background-display.jpeg" alt="">
+    <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt="">
     <Controls/>
     <AnswerBox/>
     <PowerStatusWidget/>

@@ -5,7 +5,7 @@
       <img src="../assets/dynamics/power.webp" alt="" class="image" />
       <div class="current">
         <div class="status">
-            <div class="circle"></div>
+            <div id="circle" class="circle" @click="toggleCircle(50)"></div>
         </div>
       </div>
     </div>
@@ -16,7 +16,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toggleCircle(value){
+      var normalized = (value*270)/100
+      console.log("Circle toggled");
+      var circle = document.getElementById("circle");
+      var id = setInterval(frame, 5);
+      var percentage = 0;
+
+      function frame() {
+        if (percentage == normalized) {
+          clearInterval(id);
+        } else {
+          percentage++
+          circle.style.left = percentage + "px";
+        }
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -53,7 +72,7 @@ export default {};
     position: relative;
     padding: 0;
     font-size: 1.5em;
-    left: 200px;
+    left: 0px;
 }
 
 .image {

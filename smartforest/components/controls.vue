@@ -3,7 +3,14 @@
     <div id="showbutton" class="showbutton" @click="controlmanager()"><p id="textbutton" class="textbutton">Pick tablet</p></div>
     <div id="remote-container" class="remote-container">
     <div class="remote">
-        <div class="cell"><TileControls id="weather" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div>
+      <div class="status tile">
+        <div class="infobox">
+          <p class="info">Battery:</p>
+          <p class="info">PV:</p>
+          <p class="info">Clean cons.:</p>
+          <p class="info">Dirty cons.:</p></div>
+      </div>
+        <!-- <div class="cell"><TileControls id="simulation" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div> -->
         <div class="cell"><TileControls id="airconditioner" imageURL="/_nuxt/assets/appliances/air-conditioner.png" name="Air conditioner"/></div>
         <div class="cell"><TileControls id="coffee" imageURL="/_nuxt/assets/appliances/coffee-machine.png" name="Coffee machine"/></div>
         <div class="cell"><TileControls id="cooker" imageURL="/_nuxt/assets/appliances/cooker.png" name="Induction cooker"/></div>
@@ -13,6 +20,7 @@
         <div class="cell"><TileControls id="oven" imageURL="/_nuxt/assets/appliances/oven.png" name="Oven"/></div>
         <div class="cell"><TileControls id="wahsingmachine" imageURL="/_nuxt/assets/appliances/washing-machine.png" name="Washing machine"/></div>
     </div>
+    <div class="startsimulation-container"><div class="simulation-button" @click="simulate()"><p class="simulatetext">SIMULATE</p></div></div>
   </div>
   </div>
 </template>
@@ -21,10 +29,15 @@
 export default {
   data() {
     return {
-      activeControls: true,
+      activeControls: false,
     }
   },
+  mounted(){
+  },
   methods: {
+    simulate(){
+      console.log("simulating...");
+    },
     hideControls() {
       console.log("Hiding contorls...");
       document.getElementById("textbutton").innerText = "Pick tablet";
@@ -77,14 +90,16 @@ export default {
 </script>
 
 <style scoped>
-p{
+.textbutton{
   font-size: 1em;
   font-weight: 600;
   line-height: 40px;
-  color: black;
+  color: whitesmoke;
 }
 .showbutton {
-  background-color: white;
+  background: #4e4e4e;
+  background: linear-gradient(180deg, #4e4e4e 0%, #000000 100%);
+
   border-radius: 20px;
   width: 140px;
   height: 40px;
@@ -111,13 +126,16 @@ p{
     margin: auto;
     background-image: url("../assets/appliances/tablet.png");
     background-size:cover;
-    display: flex;
+    /* display: flex; */
+
+    opacity: 0;
+    pointer-events: none;
 }
 .remote {
     position: relative;
-    /* width: 500px; */
+    width: 600px;
     margin: auto;
-    top: 0;
+    top: 1em;
     left: 0;
     right: 0;
     bottom: 0;
@@ -133,6 +151,86 @@ p{
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+.status {
+    height: 140px;
+    width: 200px;
+    display: flex;
+}
+
+.tile {
+    height: 100px;
+    width: 150px;
+    border-radius: 20px;
+    background: #FEE140;
+    background: linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+    opacity: 90%;
+
+
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(6px);
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.25);
+
+    /* display: flex; */
+}
+.info {
+  font-size: 0.75em;
+  font-weight: 600;
+  line-height: 1.25em;
+  margin: 0;
+  padding: 0;
+  color: black;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+}
+.infobox{
+  height: fit-content;
+  width: 120px;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+.startsimulation-container{
+  width: 200px;
+  height: 55px;
+  margin: auto;
+  top: 1em;
+  bottom: 0;
+  display: flex;
+
+}
+.simulation-button{
+  width: 150px;
+  height: 40px;
+  
+  margin: auto;
+  border-radius: 200px;
+  box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+  background: #4158D0;
+  background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+.simulation-button:hover{
+  
+  background: #0093E9;
+  background: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+}
+.simulatetext{
+  height: 40px;
+  text-align: center;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  line-height: 40px;
+  font-size: 1.25em;
+  font-weight: 500;
+  color: whitesmoke;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
 </style>

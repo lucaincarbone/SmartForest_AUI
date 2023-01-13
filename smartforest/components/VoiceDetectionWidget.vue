@@ -135,11 +135,13 @@ export default {
       document.getElementById("leaves-num").textContent = amount.toString();
     },
     activateGroup(group) {
+      //TODO tree più luminoso
       //self is needed as addEventListener changes context and loses this
       var self = this
       group.forEach(function (tree){
         let treeId = tree._position._x.toString() + "-" + tree._position._y.toString();
         console.log("activating click for tree: " + treeId);
+        document.getElementById(treeId).classList.add("groupable");
         document.getElementById(treeId).addEventListener("click", async function (e) {
             let id = e.target.id;
             console.log("click " + id);
@@ -159,6 +161,7 @@ export default {
             self.updateTrees(answer);
             self.positions = "";
             self.numOfClicks = 0;
+            document.getElementById(treeId).classList.remove("groupable");
           });
       });
     },
