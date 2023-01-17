@@ -79,7 +79,7 @@ export default {
                     fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=airconditioner");
                     break;
                 case "dehumidifier":
-                    console.log("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dehumidifier");
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dehumidifier");
                     break;
                 case "cooker":
                     fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=cooker");                    
