@@ -37,31 +37,31 @@ export default {
             // Call relative function API
             switch (id) {
                 case "weather":
-                    
+                    console.log("Weather")
                     break;
                 case "airconditioner":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=airconditioner");
                     break;
-                case "weather":
-                    
-                    break;
-                case "coffee":
-                    
+                case "dehumidifier":
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=dehumidifier"); 
                     break;
                 case "cooker":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=cooker"); 
                     break;
                 case "dishwasher":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=dishwasher");
                     break;
                 case "dryer":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=dryer");
                     break;
                 case "boiler":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=heatboiler");
                     break;
                 case "oven":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=Oven");
+                    break;
+                case "washingmachine":
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=washingmachine");
                     break;
                 default:
                     break;
@@ -73,31 +73,31 @@ export default {
             // Call relative function API
             switch (id) {
                 case "weather":
-                    
+                    console.log("Weather");
                     break;
                 case "airconditioner":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=airconditioner");
                     break;
-                case "weather":
-                    
-                    break;
-                case "coffee":
-                    
+                case "dehumidifier":
+                    console.log("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dehumidifier");
                     break;
                 case "cooker":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=cooker");                    
                     break;
                 case "dishwasher":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dishwasher");
                     break;
                 case "dryer":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dryer");
                     break;
                 case "boiler":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=heatboiler");
                     break;
                 case "oven":
-                    
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=Oven");
+                    break;
+                case "washingmachine":
+                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=washingmachine");
                     break;
                 default:
                     break;
