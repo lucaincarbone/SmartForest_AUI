@@ -18,7 +18,7 @@
         <div class="cell"><TileControls id="dryer" imageURL="/_nuxt/assets/appliances/dryer.png" name="Clothes dryer"/></div>
         <div class="cell"><TileControls id="boiler" imageURL="/_nuxt/assets/appliances/heater.png" name="Heat boiler"/></div>
         <div class="cell"><TileControls id="oven" imageURL="/_nuxt/assets/appliances/oven.png" name="Oven"/></div>
-        <div class="cell"><TileControls id="wahsingmachine" imageURL="/_nuxt/assets/appliances/washing-machine.png" name="Washing machine"/></div>
+        <div class="cell"><TileControls id="washingmachine" imageURL="/_nuxt/assets/appliances/washing-machine.png" name="Washing machine"/></div>
     </div>
     <div class="startsimulation-container"><div class="simulation-button" @click="simulate()"><p class="simulatetext">SIMULATE</p></div></div>
   </div>
