@@ -21,6 +21,7 @@ export default {
       answerFromCA_: "",
       numOfClicks: 0,
       positions: "",
+      highlightedTreesIds: [],
     };
   },
 
@@ -120,13 +121,14 @@ export default {
     plantTree(trees) {
       this.positions = "";
       this.numOfClicks = 0;
+      this.highlightedTreesIds = [];
       trees.forEach((tree) => {
         let posToSpawn =
           tree._position._x.toString() + "-" + tree._position._y.toString();
         let levelToSpawn = "lev" + tree._level.toString();
-        tree = document.getElementById(posToSpawn)
-        tree.src =
-          "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
+        tree = document.getElementById(posToSpawn);
+        tree.classList.remove("groupable");
+        tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
         tree.replaceWith(tree.cloneNode(true));
       });
     },
@@ -134,19 +136,48 @@ export default {
       let amount = leaves;
       document.getElementById("leaves-num").textContent = amount.toString();
     },
+    async testTimeout() {
+      //If group was done succesfully already abort grouping action
+      if (this.highlightedTreesIds.length > 0) {
+        console.log("time has ended");
+        this.runtimeTranscription_ = "Exit";
+        this.answerFromCA_ = await $fetch("/api/submit", {
+          method: "post",
+          body: { phrase: this.runtimeTranscription_.toString() },
+        });
+        this.changeAnswerTextBox();
+        /*Write here all methods to be called to control game logic on frontend! */
+        this.updateFrontEnd();
+        /** */
+        await this.play();
+      } else console.log("time out but action was completed");
+    },
     activateGroup(group) {
       //TODO tree più luminoso
       //self is needed as addEventListener changes context and loses this
-      var self = this
-      group.forEach(function (tree){
-        let treeId = tree._position._x.toString() + "-" + tree._position._y.toString();
+      var self = this;
+      //if a group action started a timer is set for automatic exit if a timer was there replace it
+      if (group.length > 0) {
+        if (this.timer != null) {
+          console.log("removing old timer");
+          clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(this.testTimeout, 30000);
+      }
+      group.forEach(function (tree) {
+        let treeId =
+          tree._position._x.toString() + "-" + tree._position._y.toString();
         console.log("activating click for tree: " + treeId);
+        self.highlightedTreesIds.push(treeId.toString());
+        console.log(self.highlightedTreesIds);
         document.getElementById(treeId).classList.add("groupable");
-        document.getElementById(treeId).addEventListener("click", async function (e) {
+        document
+          .getElementById(treeId)
+          .addEventListener("click", async function (e) {
             let id = e.target.id;
             console.log("click " + id);
-            let num = self.numOfClicks
-            console.log(num)
+            let num = self.numOfClicks;
+            console.log(num);
             if (self.numOfClicks < 2) {
               self.positions = self.positions + id + "-";
               self.numOfClicks++;
@@ -158,25 +189,38 @@ export default {
               method: "post",
               body: { id: self.positions },
             });
-            self.updateTrees(answer);
-            self.positions = "";
-            self.numOfClicks = 0;
-            document.getElementById(treeId).classList.remove("groupable");
+            self.highlightedTreesIds.forEach((treeID) => {
+              let tree = document.getElementById(treeID);
+              tree.classList.remove("groupable");
+              tree.replaceWith(tree.cloneNode(true));
+            });
+            self.updateTreesAfterGroup(answer);
+            //clearTimeout(self.timer);
+
+            // self.positions = "";
+            // self.numOfClicks = 0;
+            // self.highlightedTreesIds = [];
           });
       });
     },
-    
-    //Called after a group 
-    updateTrees: function (answer) {
+
+    /**
+     * Called after a successful tree group
+     * Disable click and visual effect on the three grouped trees
+     * Then plant the new higher level one
+     */
+    updateTreesAfterGroup: function (answer) {
+      //first remove all 3 plants(also disable click and group highlight)
       answer.removed.forEach((tree) => {
         let posToSpawn =
           tree._position._x.toString() + "-" + tree._position._y.toString();
-          tree = document.getElementById(posToSpawn)
-        tree.src =
-          "/_nuxt/assets/dynamics/trees/empty.png";
+        tree = document.getElementById(posToSpawn);
+        // tree.classList.remove("groupable");
+        tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
         //This line removes all event listeners from the tree (It is needed for the end of grouping action)
-        tree.replaceWith(tree.cloneNode(true));
+        //tree.replaceWith(tree.cloneNode(true));
       });
+      //then plant the new higher level tree
       this.plantTree(answer.trees);
     },
   },

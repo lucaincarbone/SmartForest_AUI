@@ -12,26 +12,18 @@
     },
     {
       "position": {
-        "_x": 4,
-        "_y": 4
+        "_x": 1,
+        "_y": 2
       },
       "level": 2,
       "experience": 1000
     },
     {
       "position": {
-        "_x": 5,
-        "_y": 6
+        "_x": 1,
+        "_y": 3
       },
       "level": 3,
-      "experience": 1000
-    },
-    {
-      "position": {
-        "_x": 4,
-        "_y": 1
-      },
-      "level": 1,
       "experience": 1000
     },
     {
@@ -44,10 +36,58 @@
     },
     {
       "position": {
-        "_x": 4,
+        "_x": 1,
+        "_y": 5
+      },
+      "level": 1,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 1,
+        "_y": 6
+      },
+      "level": 1,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 2,
+        "_y": 1
+      },
+      "level": 1,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 2,
         "_y": 2
       },
       "level": 1,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 2,
+        "_y": 3
+      },
+      "level": 2,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 2,
+        "_y": 4
+      },
+      "level": 2,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 2,
+        "_y": 5
+      },
+      "level": 2,
       "experience": 1000
     }
   ]
