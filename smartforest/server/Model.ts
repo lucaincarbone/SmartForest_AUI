@@ -1,8 +1,8 @@
 import fs from 'fs';
-import {Tree} from "~/server/Tree";
-import {Position} from './Position';
-import {PlantPlaces} from './state_machine/Utils';
-import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
+import { Tree } from "~/server/Tree";
+import { Position } from './Position';
+import { PlantPlaces } from './state_machine/Utils';
+import { LoaderResponse, ModelLoader } from '~/server/ModelLoader'
 
 interface JsonWithChanges {
     leaves?: number,
@@ -74,7 +74,7 @@ export class Model {
             this.updateLeaves(this._leavesCost)
             return true
         }
-            // There is no free space on the whole board
+        // There is no free space on the whole board
         catch (e) {
             console.log(e);
             return false
@@ -201,36 +201,27 @@ export class Model {
      * @exception if the tree is not found
      * @returns true if the plants were grouped succesfully
      */
-    public groupTrees(oldPositions: [Position, Position, Position]): boolean {
+    public groupTrees(oldPositions: [Position, Position, Position]) {
+        // If there is not a tree in that position, they throw an exception
+        let firstTree = this.getSpecificTree(oldPositions[0])
+        let secondTree = this.getSpecificTree(oldPositions[1])
+        let thirdTree = this.getSpecificTree(oldPositions[2])
+        // If the level constraints are not satisfied, it throws an exception
+        this.checkLevel([firstTree, secondTree, thirdTree])
+        // If the trees have not reached the max experience, it throws an exception
+        this.checkExperience([firstTree, secondTree, thirdTree])
+        // If the User chose some equal positions, it throws an exception
+        this.checkPositions(oldPositions)
 
-        try {
-            // If there is not a tree in that position, they throw an exception
-            let firstTree = this.getSpecificTree(oldPositions[0])
-            let secondTree = this.getSpecificTree(oldPositions[1])
-            let thirdTree = this.getSpecificTree(oldPositions[2])
+        oldPositions.forEach((position) => {
+            this.removeTree(position)
+        });
 
+        let randomPosition = Math.floor(Math.random() * 3);
+        let newPosition = oldPositions[randomPosition]
+        this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
+        return true;
 
-            // If the level constraints are not satisfied, it throws an exception
-            this.checkLevel([firstTree, secondTree, thirdTree])
-
-            // If the trees have not reached the max experience, it throws an exception
-            this.checkExperience([firstTree, secondTree, thirdTree])
-
-            // If the User chose some equal positions, it throws an exception
-            this.checkPositions(oldPositions)
-
-            oldPositions.forEach((position) => {
-                this.removeTree(position)
-            });
-
-            let randomPosition = Math.floor(Math.random() * 3);
-            let newPosition = oldPositions[randomPosition]
-            this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
-            return true;
-        } catch (e) {
-            console.error(e)
-            return false
-        }
     }
 
     /**
@@ -258,11 +249,11 @@ export class Model {
     private checkLevel(trees: [Tree, Tree, Tree]) {
 
         if (!(trees[0].level == trees[1].level && trees[0].level == trees[2].level)) {
-            throw new Error("The tress have not the same level");
+            throw new Error("The trees do not have the same level");
 
         } else if (trees[0].level == this._maxLevel || trees[1].level == this._maxLevel
             || trees[2].level == this._maxLevel) {
-            throw new Error("The trees has yet the maximum level");
+            throw new Error("You cannot merge trees of level 3");
         }
     }
 
@@ -276,7 +267,7 @@ export class Model {
 
         if (!(trees[0].experience == this._maxTreeExperience && trees[1].experience == this._maxTreeExperience
             && trees[2].experience == this._maxTreeExperience)) {
-            throw new Error("The tress have not the reach the max experience");
+            throw new Error("The selected trees must have max experience");
         }
     }
 
@@ -290,7 +281,7 @@ export class Model {
         if ((positions[0].x == positions[1].x && positions[0].y == positions[1].y)
             || (positions[0].x == positions[2].x && positions[0].y == positions[2].y)
             || (positions[1].x == positions[2].x && positions[1].y == positions[2].y)) {
-            throw new Error("You choose some trees in the same position");
+            throw new Error("You need to select 3 different trees");
         }
     }
 
@@ -307,7 +298,7 @@ export class Model {
         this._trees.push(treeToAdd)
         this._jsonWithChanges.trees.push(treeToAdd)
 
-        this.updateJsonFile({position: position, level: level, experience: experience},
+        this.updateJsonFile({ position: position, level: level, experience: experience },
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
