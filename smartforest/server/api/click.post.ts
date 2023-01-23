@@ -29,7 +29,6 @@ export default defineEventHandler(async (event) => {
         response.data = answer
         response.success = false;
         response.queryResult.fulfillmentText = "I'm  sorry, "+getErrorMessage(e)
-        model.ResetJsonWithChanges()
         return response;
     }
 })
