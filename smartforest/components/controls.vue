@@ -5,11 +5,12 @@
     <div class="remote">
       <div class="status tile">
         <div class="infobox">
-          <p class="info">Meteo:{{ meteo }}</p>
-          <p class="info">Battery:{{ battery }}</p>
-          <p class="info">PV:{{ pv }}</p>
-          <p class="info">Clean cons.:{{ cleanCons }}</p>
-          <p class="info">Dirty cons.:{{ dirtyCons }}</p></div>
+          <p class="info">Meteo: {{ meteo }} </p>
+          <p class="info">Battery: {{ Math.round((battery + Number.EPSILON) * 100) / 100 }} kW</p>
+          <p class="info">PV: {{ Math.round((pv + Number.EPSILON) * 100) / 100 }} kW/h</p>
+          <p class="info">Clean cons: {{ Math.round((cleanCons + Number.EPSILON) * 100) / 100 }} kW</p>
+          <p class="info">Dirty cons: {{ Math.round((dirtyCons + Number.EPSILON) * 100) / 100 }} kW</p>
+        </div>
       </div>
         <!-- <div class="cell"><TileControls id="simulation" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div> -->
         <div class="cell"><TileControls id="airconditioner" imageURL="/_nuxt/assets/appliances/air-conditioner.png" name="Air conditioner"/></div>
@@ -209,7 +210,7 @@ export default {
     /* display: flex; */
 }
 .info {
-  font-size: 0.75em;
+  font-size: 0.65em;
   font-weight: 600;
   line-height: 1.25em;
   margin: 0;

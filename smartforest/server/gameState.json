@@ -1,5 +1,5 @@
 {
-  "leaves": 190,
+  "leaves": 180,
   "globalExperience": 69,
   "trees": [
     {
@@ -89,6 +89,14 @@
       },
       "level": 2,
       "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 4,
+        "_y": 1
+      },
+      "level": 1,
+      "experience": 50
     }
   ]
 }
