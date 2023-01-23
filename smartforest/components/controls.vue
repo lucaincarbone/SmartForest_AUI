@@ -39,9 +39,20 @@ export default {
     }
   },
   mounted(){
-    this.simulate()
+    this.initialize();
   },
   methods: {
+    async initialize(){
+      let response = await fetch("https://smart-home-api-2j4i.onrender.com/home")
+        .then((response) => response.json())
+        .then((data)=>{
+          this.meteo = data["meteo"];
+          this.battery = data["battery"];
+          this.pv = data["panel"];
+          this.cleanCons = data["greenEnergyTotal"];
+          this.dirtyCons = data["notGreenEnergyTotal"];
+        });
+    },
     async simulate(){
       console.log("simulating...");
       let response = await fetch("https://smart-home-api-2j4i.onrender.com/home/simulate")
