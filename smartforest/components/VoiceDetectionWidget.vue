@@ -153,7 +153,6 @@ export default {
       } else console.log("time out but action was completed");
     },
     activateGroup(group) {
-      //TODO tree più luminoso
       //self is needed as addEventListener changes context and loses this
       var self = this;
       //if a group action started a timer is set for automatic exit if a timer was there replace it
@@ -189,17 +188,26 @@ export default {
               method: "post",
               body: { id: self.positions },
             });
-            self.highlightedTreesIds.forEach((treeID) => {
-              let tree = document.getElementById(treeID);
-              tree.classList.remove("groupable");
-              tree.replaceWith(tree.cloneNode(true));
-            });
-            self.updateTreesAfterGroup(answer);
-            //clearTimeout(self.timer);
-
-            // self.positions = "";
-            // self.numOfClicks = 0;
-            // self.highlightedTreesIds = [];
+            self.positions = "";
+            self.numOfClicks = 0;
+            if (answer.success) {
+              self.highlightedTreesIds.forEach((treeID) => {
+                let tree = document.getElementById(treeID);
+                tree.classList.remove("groupable");
+                tree.replaceWith(tree.cloneNode(true));
+                self.updateTreesAfterGroup(answer.data);
+              });
+            } else {
+              console.log("group failed");
+            }
+            self.answerFromCA_ = answer;
+            //If group was done succesfully already abort grouping action
+            console.log("Setting response");
+            self.changeAnswerTextBox();
+            /*Write here all methods to be called to control game logic on frontend! */
+            self.updateFrontEnd();
+            /** */
+            await self.play();
           });
       });
     },
