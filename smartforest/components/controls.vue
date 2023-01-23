@@ -37,6 +37,7 @@ export default {
   methods: {
     simulate(){
       console.log("simulating...");
+      fetch("https://smart-home-api-2j4i.onrender.com/home/simulate");
     },
     hideControls() {
       console.log("Hiding contorls...");
