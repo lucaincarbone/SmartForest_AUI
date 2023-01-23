@@ -14,6 +14,9 @@ export default {
             isOn: false,
         }
     },
+    mounted(){
+        this.initialize(this.id)
+    },
     props: {
         imageURL: String,
         name: String,
@@ -21,6 +24,15 @@ export default {
 
     },
     methods: {
+        initialize(id){
+            fetch("https://smart-home-api-2j4i.onrender.com/appliances/name=" + id)
+                .then((response) => response.json())
+                .then((data)=>{
+                    this.isOn = data["isOn"];
+                    if(this.isOn) document.getElementById(id).style.background = "rgba(0, 200, 255, 0.7)";
+                    else document.getElementById(id).style.background = "rgba(255, 255, 255, 0.70)";
+                });
+        },
         toggleSwitch(id){
             if(this.isOn){
                 this.switchOff(id);
@@ -34,74 +46,12 @@ export default {
         switchOn(id){
             console.log("Switching ON " + id)
             document.getElementById(id).style.background = "rgba(0, 200, 255, 0.7)";
-            // Call relative function API
-            switch (id) {
-                case "weather":
-                    console.log("Weather")
-                    break;
-                case "airconditioner":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=airconditioner");
-                    break;
-                case "dehumidifier":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=dehumidifier"); 
-                    break;
-                case "cooker":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=cooker"); 
-                    break;
-                case "dishwasher":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=dishwasher");
-                    break;
-                case "dryer":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=dryer");
-                    break;
-                case "boiler":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=heatboiler");
-                    break;
-                case "oven":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=Oven");
-                    break;
-                case "washingmachine":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=washingmachine");
-                    break;
-                default:
-                    break;
-            }
+            fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOn/name=" + id);
         },
         switchOff(id){
             console.log("Switching OFF " + id)
             document.getElementById(id).style.background = "rgba(255, 255, 255, 0.70)";
-            // Call relative function API
-            switch (id) {
-                case "weather":
-                    console.log("Weather");
-                    break;
-                case "airconditioner":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=airconditioner");
-                    break;
-                case "dehumidifier":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dehumidifier");
-                    break;
-                case "cooker":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=cooker");                    
-                    break;
-                case "dishwasher":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dishwasher");
-                    break;
-                case "dryer":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=dryer");
-                    break;
-                case "boiler":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=heatboiler");
-                    break;
-                case "oven":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=Oven");
-                    break;
-                case "washingmachine":
-                    fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=washingmachine");
-                    break;
-                default:
-                    break;
-            }
+            fetch("https://smart-home-api-2j4i.onrender.com/appliances/turnOff/name=" + id);
         }
     }
 }
