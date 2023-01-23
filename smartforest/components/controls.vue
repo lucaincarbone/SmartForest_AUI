@@ -5,10 +5,11 @@
     <div class="remote">
       <div class="status tile">
         <div class="infobox">
-          <p class="info">Battery:</p>
-          <p class="info">PV:</p>
-          <p class="info">Clean cons.:</p>
-          <p class="info">Dirty cons.:</p></div>
+          <p class="info">Meteo:{{ meteo }}</p>
+          <p class="info">Battery:{{ battery }}</p>
+          <p class="info">PV:{{ pv }}</p>
+          <p class="info">Clean cons.:{{ cleanCons }}</p>
+          <p class="info">Dirty cons.:{{ dirtyCons }}</p></div>
       </div>
         <!-- <div class="cell"><TileControls id="simulation" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div> -->
         <div class="cell"><TileControls id="airconditioner" imageURL="/_nuxt/assets/appliances/air-conditioner.png" name="Air conditioner"/></div>
@@ -30,16 +31,28 @@ export default {
   data() {
     return {
       activeControls: false,
+      meteo: 0,
+      battery: 0,
+      pv: 0,
+      cleanCons: 0,
+      dirtyCons: 0,
     }
   },
   mounted(){
+    this.simulate()
   },
   methods: {
     async simulate(){
       console.log("simulating...");
       let response = await fetch("https://smart-home-api-2j4i.onrender.com/home/simulate")
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data)=>{
+          this.meteo = data["meteo"];
+          this.battery = data["battery"];
+          this.pv = data["panel"];
+          this.cleanCons = data["greenEnergyTotal"];
+          this.dirtyCons = data["notGreenEnergyTotal"];
+        });
 
 
     },
