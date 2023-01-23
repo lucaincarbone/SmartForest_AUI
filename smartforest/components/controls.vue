@@ -35,9 +35,13 @@ export default {
   mounted(){
   },
   methods: {
-    simulate(){
+    async simulate(){
       console.log("simulating...");
-      fetch("https://smart-home-api-2j4i.onrender.com/home/simulate");
+      let response = await fetch("https://smart-home-api-2j4i.onrender.com/home/simulate")
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+
+
     },
     hideControls() {
       console.log("Hiding contorls...");
