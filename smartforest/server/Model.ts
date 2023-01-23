@@ -95,8 +95,8 @@ export class Model {
      * @returns true if there are
      */
     public canIGroupTrees(): boolean {
-        let nTreesForLevel = [0, 0, 0]
-        let maxExpTrees = this._trees.filter(tree => tree.experience == this._maxTreeExperience)
+        let nTreesForLevel = [0, 0]
+        let maxExpTrees = this._trees.filter(tree => tree.experience == this._maxTreeExperience || tree.level==3)
         maxExpTrees.forEach(tree => nTreesForLevel[tree.level - 1]++)
         let answer = nTreesForLevel.filter(num => num >= 3).length > 0
         if (answer) {
