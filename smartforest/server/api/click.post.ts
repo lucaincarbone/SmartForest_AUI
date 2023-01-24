@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
         console.log(answer)
         response.data = answer
         response.success = false;
-        response.queryResult.fulfillmentText = "I'm  sorry, "+getErrorMessage(e)
+        response.queryResult.fulfillmentText = "I'm  sorry, "+getErrorMessage(e)+", Please select other 3 plants."
         return response;
     }
 })

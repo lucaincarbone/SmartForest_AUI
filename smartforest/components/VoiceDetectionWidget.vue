@@ -63,6 +63,11 @@ export default {
           this.updateTreesAfterGroup(answer.data);
         });
       } else {
+        if (this.timer != null) {
+          console.log("removing old timer");
+          clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(this.testTimeout, 30000);
         console.log("group failed");
       }
       this.answerFromCA_ = answer;

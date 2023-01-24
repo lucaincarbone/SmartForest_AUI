@@ -70,7 +70,7 @@ export class UserPromptState extends MachineState {
             //How many leaves do i have?
             case Intents.forest_status_overall_leaves: {
                 let x = Model.Instance.getNoOfLeaves()
-                super.setAnswer("You have "+x+" leaves in your forest")
+                super.setAnswer("You have "+x+" leaves in your forest, Would you like to know what you can do with them?")
                 super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
                 break;
             }
