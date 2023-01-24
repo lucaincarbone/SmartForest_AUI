@@ -5,7 +5,7 @@
       <img src="../assets/dynamics/power.webp" alt="" class="image" />
       <div class="current">
         <div class="status">
-            <div id="circle" class="circle" @click="toggleCircle(50)"></div>
+            <div id="circle" class="circle"></div>
         </div>
       </div>
     </div>
@@ -19,8 +19,8 @@
 export default {
   methods: {
     toggleCircle(value){
-      var normalized = (value*270)/100
-      console.log("Circle toggled");
+      var normalized = parseInt((value*270)/100);
+      console.log("Updating real-time consumptions...");
       var circle = document.getElementById("circle");
       var id = setInterval(frame, 5);
       var percentage = 0;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="bg" class="forest-container" @click="changeBackground()">
+    <div id="bg" class="forest-container">
       <VoiceDetectionWidget/>
       <img id="cloudsId" src="../assets/dynamics/clouds/clouds_happy.png" alt="" class="clouds floating-clouds"/>
       <img class="ground" src="../assets/GROUND.png" alt=""/>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       percentage: 0,
-      isSunny: true,
+      isSunny: true, // USELESS VALUE
     };
   },
 
@@ -51,7 +51,7 @@ export default {
       div.style.width = this.percentage + "px";
       document.getElementById("currentnum").textContent = this.percentage / 2 + "/100";
     },
-    changeBackground: function() {
+    changeBackground: function() { // DO NOT CALL THIS FUNCTION, IT IS USELESS RIGHT HERE
       var bg = document.getElementById("bg");
       var clouds = document.getElementById("cloudsId");
       // FROM STORMY TO SUNNY

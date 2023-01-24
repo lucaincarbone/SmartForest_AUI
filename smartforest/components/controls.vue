@@ -37,6 +37,8 @@ export default {
       pv: 0,
       cleanCons: 0,
       dirtyCons: 0,
+      currentGrade: 0,
+      isBadWeather: true,
     }
   },
   mounted(){
@@ -52,7 +54,19 @@ export default {
           this.pv = data["panel"];
           this.cleanCons = data["greenEnergyTotal"];
           this.dirtyCons = data["notGreenEnergyTotal"];
+          this.currentGrade = data["currentGrade"];
         });
+        // console.log(parseInt(this.currentGrade));
+        this.toggleCircle(parseInt(this.currentGrade));
+        this.toggleIfSunny();
+    },
+    toggleIfSunny(){
+      if(parseInt(this.currentGrade) <= 30){
+        this.isBadWeather = true;
+      } else {
+        this.isBadWeather = false;
+      }
+      this.changeBackground();
     },
     async simulate(){
       console.log("simulating...");
@@ -64,9 +78,11 @@ export default {
           this.pv = data["panel"];
           this.cleanCons = data["greenEnergyTotal"];
           this.dirtyCons = data["notGreenEnergyTotal"];
+          this.currentGrade = data["currentGrade"];
         });
-
-
+        console.log(parseInt(this.currentGrade));
+        this.toggleCircle(parseInt(this.currentGrade));
+        this.toggleIfSunny();
     },
     hideControls() {
       console.log("Hiding contorls...");
@@ -114,6 +130,51 @@ export default {
       } else {
         this.showControls();
       }
+    },
+    toggleCircle(value){
+      // console.log("Not normalized value: " + value )
+      var normalized = parseInt((value*270)/100);
+      console.log("Updating real-time consumptions...");
+      // console.log("Normalized value: " + normalized )
+      var circle = document.getElementById("circle");
+      var id = setInterval(frame, 5);
+      var percentage = 0;
+
+      function frame() {
+        if (percentage == normalized) {
+          clearInterval(id);
+        } else {
+          percentage++
+          circle.style.left = percentage + "px";
+        }
+      }
+    },
+    changeBackground() {
+      var bg = document.getElementById("bg");
+      var clouds = document.getElementById("cloudsId");
+      // FROM STORMY TO SUNNY
+      if(!this.isBadWeather) {
+        clouds.src = "/_nuxt/assets/dynamics/clouds/clouds_happy.png";
+        clouds.style.width = "800px";
+        bg.style.background = `linear-gradient(
+      180deg,
+      rgba(0, 170, 255, 1) 0%,
+      rgba(0, 192, 255, 1) 23%,
+      rgba(159, 241, 255, 1) 49%,
+      rgba(255, 255, 255, 1) 100%` 
+      }
+      // FROM SUNNY TO STORMY
+      else {
+        clouds.src = "/_nuxt/assets/dynamics/clouds/clouds_sad.png";
+        clouds.style.width = "700px";
+        bg.style.background = `linear-gradient(
+      180deg,
+      rgb(255, 106, 0) 0%,
+      rgb(209, 133, 1) 23%,
+      rgb(255, 218, 159) 49%,
+      rgba(255, 255, 255, 1) 100%)` 
+      }
+      // this.isBadWeather = !this.isBadWeather;
     }
   }
 }
