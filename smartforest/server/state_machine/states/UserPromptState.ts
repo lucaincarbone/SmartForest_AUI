@@ -1,6 +1,7 @@
 import {Intents, NameStates, statesMap} from "../Utils";
 import {MachineState} from "../MachineState";
 import { Model } from "~~/server/Model";
+import {HomeEnergyAPI} from "~/server/HomeEnergyAPI";
 
 
 /**
@@ -119,7 +120,7 @@ export class UserPromptState extends MachineState {
                 console.log(Intents.guide_tree_types)
                 break;
             }
-            //How do i plant a tree?
+            //How do I plant a tree?
             case Intents.guide_plant: {
                 console.log(Intents.guide_plant)
                 break;
@@ -132,17 +133,36 @@ export class UserPromptState extends MachineState {
             }
             //What appliance is consuming the most
             case Intents.advices_appliances_consumption: {
-                console.log(Intents.advices_general) //TODO
+                try {
+                    let mostConsuming = await HomeEnergyAPI.Instance.getMostConsumingDevice()
+                    super.setAnswer("The " + mostConsuming + " is the device that is consuming the most")
+                } catch (e: any) {
+                    super.setAnswer(e.message)
+                }
                 break;
+
             }
             //Tell me how much energy I have available inside the battery
             case Intents.advices_energy_status: {
-                console.log(Intents.advices_general)
+                try {
+                    let overallCapacity = await HomeEnergyAPI.Instance.getOverallBatteryEnergy()
+                    super.setAnswer("You have a total of " + overallCapacity + " kWh inside the batteries")
+                } catch (e: any) {
+                    super.setAnswer(e.message)
+                }
                 break
             }
             //Can I start the washing machine ?
             case Intents.advices_start_specific_appliance: {
-                console.log(Intents.advices_general)
+                try {
+                    if (await HomeEnergyAPI.Instance.canITurnOnTheDevice(super.deviceName)) {
+                        super.setAnswer("Yes! You have enough energy in your batteries!")
+                    } else {
+                        super.setAnswer("I'm sorry but it's better to wait, your batteries don't have accumulated enough energy")
+                    }
+                } catch (e: any) {
+                    super.setAnswer(e.message)
+                }
                 break
             }
             //Exit and not recognized

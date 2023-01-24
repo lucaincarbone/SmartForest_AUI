@@ -41,7 +41,7 @@ export class AdviceSelectionState extends MachineState {
             }
             // Can I start the washing machine ?
             case Intents.advices_start_specific_appliance: {
-                try { //TODO fai in modo che l'api riconosce i dispositivi
+                try {
                     if (await HomeEnergyAPI.Instance.canITurnOnTheDevice(super.deviceName)) {
                         super.setAnswer("Yes! You have enough energy in your batteries!")
                     } else {
