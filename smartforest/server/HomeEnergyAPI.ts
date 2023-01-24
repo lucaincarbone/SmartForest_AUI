@@ -127,7 +127,9 @@ export class HomeEnergyAPI {
             const data = await res.json();
 
             if (data.hasOwnProperty('name')) {
-                if (data.isOn == 'true') {
+                if (data.isOn == true) {
+                    throw new Error("Your device is just turned on")
+                } else {
                     deviceConsumption = parseInt(data.consume)
                 }
             } else {
