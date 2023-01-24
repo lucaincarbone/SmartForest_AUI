@@ -37,6 +37,43 @@ export default {
     this.updateFrontEnd();
   },
   methods: {
+    async clickEvent(e) {
+      let id = e.target.id;
+      console.log("click " + id);
+      let num = this.numOfClicks;
+      console.log(num);
+      if (this.numOfClicks < 2) {
+        this.positions = this.positions + id + "-";
+        this.numOfClicks++;
+        return;
+      }
+      this.positions = this.positions + id;
+      console.log("Positions: " + this.positions);
+      let answer = await $fetch("/api/click", {
+        method: "post",
+        body: { id: this.positions },
+      });
+      this.positions = "";
+      this.numOfClicks = 0;
+      if (answer.success) {
+        this.highlightedTreesIds.forEach((treeID) => {
+          let tree = document.getElementById(treeID);
+          tree.classList.remove("groupable");
+          tree.removeEventListener("click", this.clickEvent);
+          this.updateTreesAfterGroup(answer.data);
+        });
+      } else {
+        console.log("group failed");
+      }
+      this.answerFromCA_ = answer;
+      //If group was done succesfully already abort grouping action
+      console.log("Setting response");
+      this.changeAnswerTextBox();
+      /*Write here all methods to be called to control game logic on frontend! */
+      this.updateFrontEnd();
+      /** */
+      await this.play();
+    },
     askMeSomething() {
       document.getElementById("reg-detection").style.visibility = "visible";
       // Init Voice Recognition
@@ -129,7 +166,7 @@ export default {
         tree = document.getElementById(posToSpawn);
         tree.classList.remove("groupable");
         tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
-        tree.replaceWith(tree.cloneNode(true));
+        tree.removeEventListener("click", this.clickEvent);
       });
     },
     updateLeaves(leaves) {
@@ -172,43 +209,7 @@ export default {
         document.getElementById(treeId).classList.add("groupable");
         document
           .getElementById(treeId)
-          .addEventListener("click", async function (e) {
-            let id = e.target.id;
-            console.log("click " + id);
-            let num = self.numOfClicks;
-            console.log(num);
-            if (self.numOfClicks < 2) {
-              self.positions = self.positions + id + "-";
-              self.numOfClicks++;
-              return;
-            }
-            self.positions = self.positions + id;
-            console.log("Positions: " + self.positions);
-            let answer = await $fetch("/api/click", {
-              method: "post",
-              body: { id: self.positions },
-            });
-            self.positions = "";
-            self.numOfClicks = 0;
-            if (answer.success) {
-              self.highlightedTreesIds.forEach((treeID) => {
-                let tree = document.getElementById(treeID);
-                tree.classList.remove("groupable");
-                tree.replaceWith(tree.cloneNode(true));
-                self.updateTreesAfterGroup(answer.data);
-              });
-            } else {
-              console.log("group failed");
-            }
-            self.answerFromCA_ = answer;
-            //If group was done succesfully already abort grouping action
-            console.log("Setting response");
-            self.changeAnswerTextBox();
-            /*Write here all methods to be called to control game logic on frontend! */
-            self.updateFrontEnd();
-            /** */
-            await self.play();
-          });
+          .addEventListener("click", self.clickEvent);
       });
     },
 
