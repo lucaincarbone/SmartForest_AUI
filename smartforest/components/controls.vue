@@ -101,10 +101,17 @@ export default {
 
     },
     triggerFrontEndUpdate(response){
+      var deadTrees = 0;
       // Update visible trees
       this.updateTrees(response);
       // Update leaves counter
-      document.getElementById("leaves-num").textContent = response.leaves; 
+      document.getElementById("leaves-num").textContent = response.leaves;
+      deadTrees = response.removed.length
+      if(deadTrees!=0){
+        document.getElementById("tips").textContent = "🌱 " + deadTrees.toString() + " plant(s) has died. Stay green! 🌱"
+      } else {
+        document.getElementById("tips").textContent = "🌱 No new notifications. 🌱"
+      }
 
     },
     updateTrees(response){

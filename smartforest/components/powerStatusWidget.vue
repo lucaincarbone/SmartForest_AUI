@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="energytips">
-        <p class="tips">You are doing great!</p>
+        <p id="tips" class="tips">🌱 No new notifications. 🌱</p>
     </div>
   </div>
 </template>
@@ -132,6 +132,7 @@ p {
     bottom: 0;
     top: 0;
     font-weight: 300;
+    font-style: italic;
     /* height: 120px; */
 }
 </style>
