@@ -112,24 +112,39 @@ export default {
         this.deleteTrees(deletedTree);
         
       });
-      response.trees.forEach(addTree => {
+      setTimeout(() => {
+        response.trees.forEach(addTree => {
         this.addTrees(addTree);
-        
       });
+      }, 1000);
     },
     addTrees(tree){
         let posToSpawn =
         tree._position._x.toString() + "-" + tree._position._y.toString();
         let levelToSpawn = "lev" + tree._level.toString();
         tree = document.getElementById(posToSpawn);
+        tree.animate([{ opacity: "100%" }, { opacity: "0%" }], {
+          duration: 250,
+          fill: "forwards",
+        });
         tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
+        tree.animate([{ opacity: "0%" }, { opacity: "100%" }], {
+          duration: 1000,
+          fill: "forwards",
+        });
 
     },
     deleteTrees(tree){
       let posToSpawn =
         tree._position._x.toString() + "-" + tree._position._y.toString();
         tree = document.getElementById(posToSpawn);
-        tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
+        tree.animate([{ opacity: "100%" }, { opacity: "0%" }], {
+          duration: 500,
+          fill: "forwards",
+        });
+        setTimeout(() => {
+          tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
+        }, 500);
     },
 
     hideControls() {
