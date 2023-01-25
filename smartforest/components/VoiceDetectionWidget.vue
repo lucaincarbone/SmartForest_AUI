@@ -41,6 +41,29 @@ export default {
   },
   methods: {
     showTreeExperience(tree){
+      let posToSpawn =
+          tree._position._x.toString() + "-" + tree._position._y.toString();
+        let exp = tree._experience.toString();
+        tree = document.getElementById(posToSpawn);
+        tree.classList.remove("groupable");
+        if(exp > 0 && exp <= 300){
+          tree.classList.add("low-exp");
+        }
+        else if (exp > 300 && exp <= 700){
+          tree.classList.add("mid-exp");
+        }
+        else if (exp > 700 && exp < 1000){
+          tree.classList.add("high-exp");
+        }
+        else if (exp == 1000){
+          tree.classList.add("max-exp");
+        }
+        setTimeout(() => {
+          tree.classList.remove("low-exp");
+          tree.classList.remove("mid-exp");
+          tree.classList.remove("high-exp");
+          tree.classList.remove("max-exp");
+        }, 5000);
 
     },
     async clickEvent(e) {
