@@ -104,7 +104,7 @@ export default {
       // Update visible trees
       this.updateTrees(response);
       // Update leaves counter
-      // document.getElementById("leaves-num").textContent = response.toString(); //TODO
+      document.getElementById("leaves-num").textContent = response.leaves; 
 
     },
     updateTrees(response){
