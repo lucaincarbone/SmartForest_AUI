@@ -478,7 +478,7 @@ export class Model {
 
     /**
      * Explode a tree with 0 exp in 2 of lesser level or only delete if level 1
-     * @param tree 
+     * @param tree
      */
     private explodeTree(tree: Tree) {
 
@@ -500,12 +500,12 @@ export class Model {
             for (let x = 1; x <= 6; x++) {
                 for (let y = 1; y <= 6; y++) {
                     if (this.checkFreePosition(x, y)) {
-                        positions.push(new Position(x,y))
+                        positions.push(new Position(x, y))
                     }
                 }
             }
 
-            positionSecondPlant = positions[Math.floor(Math.random()*positions.length)];
+            positionSecondPlant = positions[Math.floor(Math.random() * positions.length)];
 
             // No free position is found
             if (positionSecondPlant == null) {
@@ -518,7 +518,7 @@ export class Model {
     }
 
     /**
-     * Update tree exp in json 
+     * Update tree exp in json
      * @param updatedExperience new exp
      * @param position position of the tree
      */
@@ -539,8 +539,8 @@ export class Model {
 
     /**
      * Update the game state based on totalGrade and currentGrade
-     * @param totalGrade 
-     * @param currentGrade 
+     * @param totalGrade
+     * @param currentGrade
      */
     public updateGameStateGrade(totalGrade: number, currentGrade: number) {
         this.ResetJsonWithChanges();
@@ -561,6 +561,7 @@ export class Model {
                 exp += self.highThreshold;
             }
 
+            exp = Math.round(exp);
             tree.experience = exp;
             self.updateTreeExpOnJson(exp, new Position(tree.position_x, tree.position_y));
 
@@ -577,8 +578,8 @@ export class Model {
 
     /**
      * Update the leaves number based on the owned trees and totalGrade and currentGrade
-     * @param totalGrade 
-     * @param currentGrade 
+     * @param totalGrade
+     * @param currentGrade
      */
     public updateLeavesBasedOnForestStatus(totalGrade: number, currentGrade: number) {
 
