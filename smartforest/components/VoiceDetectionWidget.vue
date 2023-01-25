@@ -132,6 +132,16 @@ export default {
           duration: 500,
           fill: "forwards",
         });
+      setTimeout(() => {
+        document.getElementById('answer-container').animate([{ opacity: "100%" }, { opacity: "0%" }], {
+          duration: 10000,
+          fill: "forwards",
+        });
+      }, 10000);
+      setTimeout(() => {
+        document.getElementById('answer-container').style.visibility = 'hidden';
+        document.getElementById('flora-txt').textContent = 'Tap to ask Flora';
+      }, 20000);
     },
     async play() {
       window.speechSynthesis.cancel();
