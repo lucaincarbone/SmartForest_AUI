@@ -456,4 +456,36 @@ export class Model {
     public getLevelexperience(): number {
         return this._globalExperience;
     }
+
+    private explodeTree(tree: Tree) {
+
+        // Just remove the tree with level equal to 1
+        if (tree.level == this._startedTreeLevel) {
+
+            this.removeTree(new Position(tree.position_x, tree.position_y))
+
+        // Remove the tree and add 2 new trees with level decreased by 1
+        } else {
+
+            this.removeTree(new Position(tree.position_x, tree.position_y))
+            this.addTree(new Position(tree.position_x, tree.position_y), tree.level - 1, this._newTreeExperience)
+
+            let positionSecondPlant = null
+
+            for (let x = 1; x <= 6; x++) {
+                for (let y = 1; y <= 6; y++) {
+                    if (this.checkFreePosition(x, y)) {
+                        positionSecondPlant = new Position(x, y);
+                    }
+                }
+            }
+
+            // No free position is found
+            if (positionSecondPlant == null) {
+                throw new Error('There is no space to plant a new tree');
+            }
+
+            this.addTree(new Position(tree.position_x, tree.position_y), tree.level - 1, this._newTreeExperience)
+        }
+    }
 }
