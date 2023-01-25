@@ -397,10 +397,16 @@ export class Model {
     }
 
 
+    /**
+     * Getter for the Json with changes to send to the client
+     */
     get JsonWithChanges(): JsonWithChanges {
         return this._jsonWithChanges;
     }
 
+    /**
+     * Return a jsonWithChanges with all the data used for first load of client
+     */
     get initialBoardJson(): any {
         let initial: JsonWithChanges = {
             leaves: this._leaves,
@@ -412,6 +418,9 @@ export class Model {
         return initial
     }
 
+    /**
+     * Reset the JsonWithChanges
+     */
     public ResetJsonWithChanges(): void {
         this._jsonWithChanges = {
             trees: [],
@@ -459,10 +468,18 @@ export class Model {
         return level
     }
 
+    /**
+     * Return the global experience
+     * @returns global experience
+     */
     public getLevelexperience(): number {
         return this._globalExperience;
     }
 
+    /**
+     * Explode a tree with 0 exp in 2 of lesser level or only delete if level 1
+     * @param tree 
+     */
     private explodeTree(tree: Tree) {
 
         // Just remove the tree with level equal to 1
@@ -483,7 +500,7 @@ export class Model {
             for (let x = 1; x <= 6; x++) {
                 for (let y = 1; y <= 6; y++) {
                     if (this.checkFreePosition(x, y)) {
-                        positions.push(positionSecondPlant)
+                        positions.push(new Position(x,y))
                     }
                 }
             }
@@ -500,6 +517,11 @@ export class Model {
         }
     }
 
+    /**
+     * Update tree exp in json 
+     * @param updatedExperience new exp
+     * @param position position of the tree
+     */
     private updateTreeExpOnJson(updatedExperience: number, position: Position) {
         this.updateJsonFile({exp: updatedExperience, pos: position},
             (parsedData, obj) => {
@@ -515,6 +537,11 @@ export class Model {
             })
     }
 
+    /**
+     * Update the game state based on totalGrade and currentGrade
+     * @param totalGrade 
+     * @param currentGrade 
+     */
     public updateGameStateGrade(totalGrade: number, currentGrade: number) {
         this.ResetJsonWithChanges();
         let self = this;
@@ -548,6 +575,11 @@ export class Model {
         })
     }
 
+    /**
+     * Update the leaves number based on the owned trees and totalGrade and currentGrade
+     * @param totalGrade 
+     * @param currentGrade 
+     */
     public updateLeavesBasedOnForestStatus(totalGrade: number, currentGrade: number) {
 
         let nTrees1 = 0;
