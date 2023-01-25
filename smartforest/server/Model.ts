@@ -1,8 +1,8 @@
 import fs from 'fs';
-import {Tree} from "~/server/Tree";
-import {Position} from './Position';
-import {PlantPlaces} from './state_machine/Utils';
-import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
+import { Tree } from "~/server/Tree";
+import { Position } from './Position';
+import { PlantPlaces } from './state_machine/Utils';
+import { LoaderResponse, ModelLoader } from '~/server/ModelLoader'
 
 interface JsonWithChanges {
     leaves?: number,
@@ -80,7 +80,7 @@ export class Model {
             this.updateLeaves(this._leavesCost)
             return true
         }
-            // There is no free space on the whole board
+        // There is no free space on the whole board
         catch (e) {
             console.log(e);
             return false
@@ -304,7 +304,7 @@ export class Model {
         this._trees.push(treeToAdd)
         this._jsonWithChanges.trees.push(treeToAdd)
 
-        this.updateJsonFile({position: position, level: level, experience: experience},
+        this.updateJsonFile({ position: position, level: level, experience: experience },
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
@@ -402,6 +402,13 @@ export class Model {
      */
     get JsonWithChanges(): JsonWithChanges {
         return this._jsonWithChanges;
+    }
+
+    /**
+     * Getter for the full tree list
+     */
+    get trees() {
+        return this._trees;
     }
 
     /**
@@ -523,7 +530,7 @@ export class Model {
      * @param position position of the tree
      */
     private updateTreeExpOnJson(updatedExperience: number, position: Position) {
-        this.updateJsonFile({exp: updatedExperience, pos: position},
+        this.updateJsonFile({ exp: updatedExperience, pos: position },
             (parsedData, obj) => {
 
                 let indexOfTreeToUpdate = 0;

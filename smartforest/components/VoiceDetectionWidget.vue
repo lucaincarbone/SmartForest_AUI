@@ -40,6 +40,9 @@ export default {
     this.updateFrontEnd();
   },
   methods: {
+    showTreeExperience(tree){
+
+    },
     async clickEvent(e) {
       let id = e.target.id;
       console.log("click " + id);
@@ -162,11 +165,17 @@ export default {
       window.speechSynthesis.speak(utterThis);
     },
     updateFrontEnd() {
+      let self = this;
       // DA QUI SONO NEL JSON DEL SERVER, .trees, .leaves, .experience
       if (this.answerFromCA_.switchOff) {
         document.getElementById("mirror-off").style.visibility = "visible";
         document.getElementById("mirror-off").style.pointerEvents = "all";
       } else {
+        if(this.answerFromCA_.allTrees!=null){
+          this.answerFromCA_.allTrees.forEach(function(tree){
+            self.showTreeExperience(tree)
+          })
+        }
         // document.getElementById("mirror-off").style.visibility = "hidden"
         if (this.answerFromCA_.changes != null) {
           if (this.answerFromCA_.changes.trees != null) {

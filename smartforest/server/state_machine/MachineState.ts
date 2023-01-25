@@ -83,6 +83,9 @@ export abstract class MachineState implements StateOperations {
         this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now. "+text;
     }
 
+    setAllTrees(trees:any){
+        this._jsonAnswerFromCA.allTrees = trees
+    }
     get finalResponse() {
         return this._jsonAnswerFromCA
     }

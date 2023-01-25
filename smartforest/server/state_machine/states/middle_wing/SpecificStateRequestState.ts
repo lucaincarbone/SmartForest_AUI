@@ -36,12 +36,12 @@ export class SpecificStateRequestState extends MachineState {
                 //not a state waiting for interaction
                 break
             }
-            //let's see the level of experience of the trees
-            case Intents.forest_status_overall_levelExperience: {
-                let x = Model.Instance.getLevelexperience()
-                super.setAnswer(`You global level experience is ${x}.
-                Do you want to know your level progress over time?`)
-                super.setNextState(statesMap.get(NameStates.StateRequestBottomState)!)
+             //let's see the level of experience of the trees
+             case Intents.forest_status_overall_levelExperience: {
+                let trees = Model.Instance.trees
+                super.setAllTrees(trees)
+                super.setAnswer("Here is the experience level of all your trees")
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break
             }
             default: {
