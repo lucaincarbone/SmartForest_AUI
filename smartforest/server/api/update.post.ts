@@ -1,16 +1,14 @@
-import {Machine} from "../state_machine/Machine"
+import { Model } from "../Model";
 
-const machine = Machine.Instance;
-/**
- * Api handling the dialogflow exchange:
- * Event is equivalent to HTTP POST request with body a json like this {phrase:"hi,forest!"}
- * I read the phrase and ask the machine to handle: 1) The DialogFlow detect intent
- *                                                  2) The creation of the Json to send back
- *                                                  3) The advancement of the machine state
- */
+let model = Model.Instance
+
 export default defineEventHandler(async (event) => {
-    let answer = {a:""}
     const body = await readBody(event)
-    
+    let currentGrade:number = body.currentGrade
+    let totalGrade:number = body.totalGrade
+    console.log("total: "+totalGrade);
+    console.log("current: "+currentGrade);
+    model.updateExpTrees(totalGrade,currentGrade)
+    let answer = model.JsonWithChanges
     return answer
 })
