@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     let totalGrade:number = body.totalGrade
     console.log("total: "+totalGrade);
     console.log("current: "+currentGrade);
-    model.updateExpTrees(totalGrade,currentGrade)
+    model.updateGameStateGrade(totalGrade,currentGrade)
     let answer = model.JsonWithChanges
     model.ResetJsonWithChanges();
     return answer

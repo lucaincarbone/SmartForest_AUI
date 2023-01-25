@@ -32,6 +32,9 @@ export class Model {
     private badThreshold: number = 30;
     private middleThreshold: number = 70;
     private highThreshold: number = 100;
+    private weightTree1: number = 1;
+    private weightTree2: number = 4;
+    private weightTree3: number = 15;
     private _jsonWithChanges: JsonWithChanges = {
         trees: [],
         removed: [],
@@ -509,10 +512,13 @@ export class Model {
             })
     }
 
-    public updateExpTrees(totalGrade: number, currentGrade: number) {
+    public updateGameStateGrade(totalGrade: number, currentGrade: number) {
         this.ResetJsonWithChanges();
         let self = this;
         let toRemove: Array<Tree> = [];
+
+        this.updateLeavesBasedOnForestStatus(totalGrade, currentGrade)
+
         this._trees.forEach(function (tree) {
             let exp = tree.experience;
             let weighted = (0.8 * totalGrade + 0.2 * currentGrade) / 100;
@@ -532,10 +538,31 @@ export class Model {
                 toRemove.push(tree)
             }
         });
-        toRemove.forEach(function(tree){
-            console.log("exploding tree: "+tree.position_x+" "+tree.position_y)
+
+        toRemove.forEach(function (tree) {
+            console.log("exploding tree: " + tree.position_x + " " + tree.position_y)
             self.explodeTree(tree)
         })
+    }
 
+    public updateLeavesBasedOnForestStatus(totalGrade: number, currentGrade: number) {
+
+        let nTrees1 = 0;
+        let nTrees2 = 0;
+        let nTrees3 = 0;
+        let weighted = 0.8 * currentGrade + 0.2 * totalGrade
+
+        this._trees.forEach(function (tree) {
+            if (tree.level == 1) {
+                nTrees1++;
+            } else if (tree.level == 2) {
+                nTrees2++;
+            } else if (tree.level == 3) {
+                nTrees3++;
+            }
+        })
+
+        let newLeavesToAdd = weighted + (nTrees1 * this.weightTree1 + nTrees2 * this.weightTree2 + nTrees3 * this.weightTree3);
+        this.updateLeaves(Math.round(newLeavesToAdd), true)
     }
 }
