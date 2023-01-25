@@ -22,7 +22,9 @@ export default {
       numOfClicks: 0,
       positions: "",
       highlightedTreesIds: [],
-      groupTimeoutID:0
+      groupTimeoutID: 0,
+      firstTextBoxID: 0,
+      secondTextBoxID: 0,
     };
   },
 
@@ -133,15 +135,19 @@ export default {
           duration: 500,
           fill: "forwards",
         });
-      setTimeout(() => {
-        document.getElementById('answer-container').animate([{ opacity: "100%" }, { opacity: "0%" }], {
-          duration: 10000,
-          fill: "forwards",
-        });
+      clearTimeout(this.firstTextBoxID);
+      clearTimeout(this.secondTextBoxID);
+      this.firstTextBoxID = setTimeout(() => {
+        document
+          .getElementById("answer-container")
+          .animate([{ opacity: "100%" }, { opacity: "0%" }], {
+            duration: 10000,
+            fill: "forwards",
+          });
       }, 10000);
-      setTimeout(() => {
-        document.getElementById('answer-container').style.visibility = 'hidden';
-        document.getElementById('flora-txt').textContent = 'Tap to ask Flora';
+      this.secondTextBoxID = setTimeout(() => {
+        document.getElementById("answer-container").style.visibility = "hidden";
+        document.getElementById("flora-txt").textContent = "Tap to ask Flora";
       }, 20000);
     },
     async play() {
@@ -157,25 +163,24 @@ export default {
     },
     updateFrontEnd() {
       // DA QUI SONO NEL JSON DEL SERVER, .trees, .leaves, .experience
-      if(this.answerFromCA_.switchOff){
-        document.getElementById("mirror-off").style.visibility = "visible"
+      if (this.answerFromCA_.switchOff) {
+        document.getElementById("mirror-off").style.visibility = "visible";
         document.getElementById("mirror-off").style.pointerEvents = "all";
-      }
-      else {
+      } else {
         // document.getElementById("mirror-off").style.visibility = "hidden"
         if (this.answerFromCA_.changes != null) {
-        if (this.answerFromCA_.changes.trees != null) {
-          console.log("Updating trees...");
-          this.plantTree(this.answerFromCA_.changes.trees);
+          if (this.answerFromCA_.changes.trees != null) {
+            console.log("Updating trees...");
+            this.plantTree(this.answerFromCA_.changes.trees);
+          }
+          if (this.answerFromCA_.changes.leaves != null) {
+            console.log("Updating leaves...");
+            this.updateLeaves(this.answerFromCA_.changes.leaves);
+          }
+          if (this.answerFromCA_.changes.group != null) {
+            this.activateGroup(this.answerFromCA_.changes.group);
+          }
         }
-        if (this.answerFromCA_.changes.leaves != null) {
-          console.log("Updating leaves...");
-          this.updateLeaves(this.answerFromCA_.changes.leaves);
-        }
-        if (this.answerFromCA_.changes.group != null) {
-          this.activateGroup(this.answerFromCA_.changes.group);
-        }
-      }
       }
     },
     plantTree(trees) {
@@ -217,11 +222,11 @@ export default {
       var self = this;
       //if a group action started a timer is set for automatic exit if a timer was there replace it
       if (group.length > 0) {
-        if (this.timer != null) {
+        if (this.groupTimeoutID != null) {
           console.log("removing old timer");
-          clearTimeout(this.timer);
+          clearTimeout(this.groupTimeoutID);
         }
-        this.timer = setTimeout(this.testTimeout, 30000);
+        this.groupTimeoutID = setTimeout(this.testTimeout, 30000);
       }
       group.forEach(function (tree) {
         let treeId =

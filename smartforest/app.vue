@@ -21,7 +21,7 @@ export default {
     <div class="bg">
       <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt="">
       <div id="mirror-off" class="mirror-off" @click="mirrorOn()">
-        <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt="">
+        <!-- <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt=""> -->
       </div>
       <Controls/>
       <AnswerBox/>

@@ -1,5 +1,5 @@
 {
-  "leaves": 150,
+  "leaves": 293,
   "globalExperience": 69,
   "trees": [
     {
@@ -8,7 +8,95 @@
         "_y": 1
       },
       "level": 1,
+      "experience": 900
+    },
+    {
+      "position": {
+        "_x": 5,
+        "_y": 1
+      },
+      "level": 2,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 4,
+        "_y": 2
+      },
+      "level": 3,
+      "experience": 900
+    },
+    {
+      "position": {
+        "_x": 1,
+        "_y": 1
+      },
+      "level": 1,
+      "experience": 900
+    },
+    {
+      "position": {
+        "_x": 2,
+        "_y": 1
+      },
+      "level": 3,
+      "experience": 900
+    },
+    {
+      "position": {
+        "_x": 2,
+        "_y": 2
+      },
+      "level": 3,
+      "experience": 900
+    },
+    {
+      "position": {
+        "_x": 6,
+        "_y": 6
+      },
+      "level": 1,
+      "experience": 200
+    },
+    {
+      "position": {
+        "_x": 6,
+        "_y": 2
+      },
+      "level": 2,
+      "experience": 300
+    },
+    {
+      "position": {
+        "_x": 5,
+        "_y": 5
+      },
+      "level": 3,
+      "experience": 400
+    },
+    {
+      "position": {
+        "_x": 1,
+        "_y": 4
+      },
+      "level": 1,
       "experience": 50
+    },
+    {
+      "position": {
+        "_x": 5,
+        "_y": 6
+      },
+      "level": 2,
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 4,
+        "_y": 3
+      },
+      "level": 2,
+      "experience": 1000
     }
   ]
 }
