@@ -94,6 +94,12 @@ export abstract class MachineState implements StateOperations {
     prepareResponseDefault(name:string){
         let intent = this.intentString
         switch(intent){
+            case Intents.switchOff_intent:{
+                this.setAnswer("Good Night, Asshole")
+                this.setswitchOffBool(true);
+                this.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break;
+            }
             case Intents.exit_intent:{
                 this.setAnswer("Exiting")
                 this.setNextState(statesMap.get(NameStates.UserPromptState)!)
@@ -104,5 +110,9 @@ export abstract class MachineState implements StateOperations {
                 this.setDefaultAnswer()
             }
         }
+    }
+
+    setswitchOffBool(value:boolean) {
+        this._jsonAnswerFromCA.switchOff = value
     }
 }
