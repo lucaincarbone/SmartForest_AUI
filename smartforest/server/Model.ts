@@ -477,15 +477,18 @@ export class Model {
             this.removeTree(positionFirstPlant)
             this.addTree(positionFirstPlant, tree.level - 1, this._newTreeExperience)
 
+            let positions = []
             let positionSecondPlant = null
 
             for (let x = 1; x <= 6; x++) {
                 for (let y = 1; y <= 6; y++) {
                     if (this.checkFreePosition(x, y)) {
-                        positionSecondPlant = new Position(x, y);
+                        positions.push(positionSecondPlant)
                     }
                 }
             }
+
+            positionSecondPlant = positions[Math.floor(Math.random()*positions.length)];
 
             // No free position is found
             if (positionSecondPlant == null) {
