@@ -511,7 +511,7 @@ export class Model {
     public updateExpTrees(totalGrade: number, currentGrade: number) {
         this.ResetJsonWithChanges();
         let self = this;
-
+        let toRemove: Array<Tree> = [];
         this._trees.forEach(function (tree) {
             let exp = tree.experience;
             let weighted = (0.8 * totalGrade + 0.2 * currentGrade) / 100;
@@ -528,9 +528,13 @@ export class Model {
             self.updateTreeExpOnJson(exp, new Position(tree.position_x, tree.position_y));
 
             if (exp <= 0) {
-                self.explodeTree(tree)
+                toRemove.push(tree)
             }
         });
+        toRemove.forEach(function(tree){
+            console.log("exploding tree: "+tree.position_x+" "+tree.position_y)
+            self.explodeTree(tree)
+        })
 
     }
 }

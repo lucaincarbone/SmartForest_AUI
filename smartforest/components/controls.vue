@@ -108,12 +108,12 @@ export default {
 
     },
     updateTrees(response){
-      response.trees.forEach(addTree => {
-        this.addTrees(addTree);
-        
-      });
       response.removed.forEach(deletedTree => {
         this.deleteTrees(deletedTree);
+        
+      });
+      response.trees.forEach(addTree => {
+        this.addTrees(addTree);
         
       });
     },
