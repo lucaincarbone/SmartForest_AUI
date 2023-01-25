@@ -470,8 +470,9 @@ export class Model {
             // Remove the tree and add 2 new trees with level decreased by 1
         } else {
 
-            this.removeTree(new Position(tree.position_x, tree.position_y))
-            this.addTree(new Position(tree.position_x, tree.position_y), tree.level - 1, this._newTreeExperience)
+            let positionFirstPlant = new Position(tree.position_x, tree.position_y)
+            this.removeTree(positionFirstPlant)
+            this.addTree(positionFirstPlant, tree.level - 1, this._newTreeExperience)
 
             let positionSecondPlant = null
 
