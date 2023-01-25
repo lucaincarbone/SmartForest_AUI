@@ -22,6 +22,7 @@ export default {
       numOfClicks: 0,
       positions: "",
       highlightedTreesIds: [],
+      groupTimeoutID:0
     };
   },
 
@@ -63,11 +64,11 @@ export default {
           this.updateTreesAfterGroup(answer.data);
         });
       } else {
-        if (this.timer != null) {
+        if (this.groupTimeoutID != null) {
           console.log("removing old timer");
-          clearTimeout(this.timer);
+          clearTimeout(this.groupTimeoutID);
         }
-        this.timer = setTimeout(this.testTimeout, 30000);
+        this.groupTimeoutID = setTimeout(this.testTimeout, 30000);
         console.log("group failed");
       }
       this.answerFromCA_ = answer;
