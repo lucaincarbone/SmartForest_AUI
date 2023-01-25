@@ -7,7 +7,7 @@ import { LoaderResponse, ModelLoader } from '~/server/ModelLoader'
 interface JsonWithChanges {
     leaves?: number,
     globalExperience?: number,
-    wantGroup?: boolean
+    // wantGroup?: boolean
     trees: Tree[],
     removed: Tree[],
     group: Tree[],
@@ -29,6 +29,9 @@ export class Model {
     private _maxTreeExperience = 1000;
     private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
+    private badThreshold:number =30;
+    private middleThreshold:number =70;
+    private highThreshold:number =100;
     private _jsonWithChanges: JsonWithChanges = {
         trees: [],
         removed: [],
@@ -100,7 +103,7 @@ export class Model {
         maxExpTrees.forEach(tree => nTreesForLevel[tree.level - 1]++)
         let answer = nTreesForLevel.filter(num => num >= 3).length > 0
         if (answer) {
-            this._jsonWithChanges.wantGroup = true
+            // this._jsonWithChanges.wantGroup = true
             maxExpTrees.filter(tree => nTreesForLevel[tree.level - 1] >= 3).forEach(tree => this._jsonWithChanges.group.push(tree))
         }
         return answer
@@ -410,7 +413,7 @@ export class Model {
         this._jsonWithChanges = {
             trees: [],
             removed: [],
-            group: []
+            group: [],
         };
     }
 
@@ -485,7 +488,29 @@ export class Model {
                 throw new Error('There is no space to plant a new tree');
             }
 
-            this.addTree(new Position(tree.position_x, tree.position_y), tree.level - 1, this._newTreeExperience)
+            this.addTree(positionSecondPlant, tree.level - 1, this._newTreeExperience)
         }
+    }
+
+    public updateExpTrees(totalGrade:number,currentGrade:number){
+        this.ResetJsonWithChanges();
+        let self = this;
+        this._trees.forEach(function (tree) {
+            let exp = tree.experience;
+            let weighted = (0.8 * totalGrade + 0.2 * currentGrade) /100;
+            if(weighted<=self.badThreshold){
+                exp -=self.highThreshold-weighted;
+            }
+            else if (weighted<=self.middleThreshold){
+                exp += weighted;
+            }
+            else{
+                exp += self.highThreshold;
+            }
+            if(exp<=0){
+               self.explodeTree(tree)
+            }
+        });
+
     }
 }
