@@ -229,6 +229,7 @@ export default {
 </script>
 
 <style scoped>
+
 .textbutton{
   font-size: 1em;
   font-weight: 600;
