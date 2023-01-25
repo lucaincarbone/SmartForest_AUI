@@ -11,6 +11,6 @@ const machine = Machine.Instance;
 export default defineEventHandler(async (event) => {
     let answer = {a:""}
     const body = await readBody(event)
-
+    
     return answer
 })
