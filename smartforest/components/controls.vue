@@ -88,15 +88,12 @@ export default {
         this.toggleIfSunny();
         // Submitting grade about Overall Green Behavior and Current Green Behavior
         // in order to calc the weighted equation
-        await $fetch("/api/submit", {
+        await $fetch("/api/update", {
           method: "post",
           body: { totalGrade: this.totalGrade.toString(),
                   currentGrade: this.currentGrade.toString() },
         }).then((response) => {
-          // foreach cancellati cambio
-          // aggiunti due, di cui uno nella stessa posizione
-          // mi mandano anche le foglie da aggiornare
-          this.triggerFrontEndUpdate(response.toJson());
+          this.triggerFrontEndUpdate(response);
           
         })        
 
