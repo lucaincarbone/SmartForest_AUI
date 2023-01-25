@@ -38,6 +38,7 @@ export default {
       cleanCons: 0,
       dirtyCons: 0,
       currentGrade: 0,
+      totalGrade: 0,
       isBadWeather: true,
     }
   },
@@ -55,6 +56,7 @@ export default {
           this.cleanCons = data["greenEnergyTotal"];
           this.dirtyCons = data["notGreenEnergyTotal"];
           this.currentGrade = data["currentGrade"];
+          this.totalGrade = data["totalGrade"];
         });
         // console.log(parseInt(this.currentGrade));
         this.toggleCircle(parseInt(this.currentGrade));
@@ -79,11 +81,59 @@ export default {
           this.cleanCons = data["greenEnergyTotal"];
           this.dirtyCons = data["notGreenEnergyTotal"];
           this.currentGrade = data["currentGrade"];
+          this.totalGrade = data["totalGrade"];
         });
         console.log(parseInt(this.currentGrade));
         this.toggleCircle(parseInt(this.currentGrade));
         this.toggleIfSunny();
+        // Submitting grade about Overall Green Behavior and Current Green Behavior
+        // in order to calc the weighted equation
+        await $fetch("/api/submit", {
+          method: "post",
+          body: { totalGrade: this.totalGrade.toString(),
+                  currentGrade: this.currentGrade.toString() },
+        }).then((response) => {
+          // foreach cancellati cambio
+          // aggiunti due, di cui uno nella stessa posizione
+          // mi mandano anche le foglie da aggiornare
+          this.triggerFrontEndUpdate(response.toJson());
+          
+        })        
+
+
     },
+    triggerFrontEndUpdate(response){
+      // Update visible trees
+      this.updateTrees(response);
+      // Update leaves counter
+      // document.getElementById("leaves-num").textContent = response.toString(); //TODO
+
+    },
+    updateTrees(response){
+      response.trees.forEach(addTree => {
+        this.addTrees(addTree);
+        
+      });
+      response.deleted.forEach(deletedTree => {
+        this.deleteTrees(deletedTree);
+        
+      });
+    },
+    addTrees(tree){
+        let posToSpawn =
+        tree._position._x.toString() + "-" + tree._position._y.toString();
+        let levelToSpawn = "lev" + tree._level.toString();
+        tree = document.getElementById(posToSpawn);
+        tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
+
+    },
+    deleteTrees(tree){
+      let posToSpawn =
+        tree._position._x.toString() + "-" + tree._position._y.toString();
+        tree = document.getElementById(posToSpawn);
+        tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
+    },
+
     hideControls() {
       console.log("Hiding contorls...");
       document.getElementById("textbutton").innerText = "Pick tablet";
