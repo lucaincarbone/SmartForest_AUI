@@ -95,7 +95,7 @@ export abstract class MachineState implements StateOperations {
         let intent = this.intentString
         switch(intent){
             case Intents.switchOff_intent:{
-                this.setAnswer("Good Night, Asshole")
+                this.setAnswer("Good Night, Sleep well")
                 this.setswitchOffBool(true);
                 this.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
