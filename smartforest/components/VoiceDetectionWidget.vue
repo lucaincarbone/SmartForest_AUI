@@ -146,7 +146,13 @@ export default {
     },
     updateFrontEnd() {
       // DA QUI SONO NEL JSON DEL SERVER, .trees, .leaves, .experience
-      if (this.answerFromCA_.changes != null) {
+      if(this.answerFromCA_.switchOff){
+        document.getElementById("mirror-off").style.visibility = "visible"
+        document.getElementById("mirror-off").style.pointerEvents = "all";
+      }
+      else {
+        // document.getElementById("mirror-off").style.visibility = "hidden"
+        if (this.answerFromCA_.changes != null) {
         if (this.answerFromCA_.changes.trees != null) {
           console.log("Updating trees...");
           this.plantTree(this.answerFromCA_.changes.trees);
@@ -158,6 +164,7 @@ export default {
         if (this.answerFromCA_.changes.group != null) {
           this.activateGroup(this.answerFromCA_.changes.group);
         }
+      }
       }
     },
     plantTree(trees) {

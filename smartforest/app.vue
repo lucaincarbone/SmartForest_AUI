@@ -6,14 +6,22 @@ import Trees from "./components/Trees.vue";
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+export default {
+  methods: {
+    mirrorOn() {
+      document.getElementById("mirror-off").style.visibility = "hidden"
+      document.getElementById("mirror-off").style.pointerEvents = "none";
+    }
+  }
+}
 </script>
 
 <template>  
     <div class="bg">
       <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt="">
-      <div id="mirror-off" class="mirror-off" >
+      <div id="mirror-off" class="mirror-off" @click="mirrorOn()">
         <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt="">
-        <VoiceDetectionWidget/>
       </div>
       <Controls/>
       <AnswerBox/>
