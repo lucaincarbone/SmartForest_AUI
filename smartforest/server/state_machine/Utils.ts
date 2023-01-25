@@ -36,6 +36,7 @@ export class Intents {
     public static Welcome_Flora: string = "Welcome_Flora";
     public static yes_answer: string = "yes_answer";
     public static exit_intent:string = "Exit"
+    public static switchOff_intent:string = "SwitchOff"
 }
 
 export enum NameStates {
