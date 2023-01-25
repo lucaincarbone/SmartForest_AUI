@@ -27,7 +27,7 @@ export class StateRequestBottomState extends MachineState {
                 break
             }
             default: {
-                super.prepareResponseDefault("StateRequestBottom")
+                super.prepareResponseDefault("to implement")
                 break;
             }
         }

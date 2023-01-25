@@ -167,7 +167,7 @@ export class UserPromptState extends MachineState {
             }
             //Exit and not recognized
             default: {
-                super.prepareResponseDefault("UserPrompState")
+                super.prepareResponseDefault("I'm waiting for you to ask me anything")
                 break;
             }
         }

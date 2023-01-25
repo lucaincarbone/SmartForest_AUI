@@ -26,7 +26,7 @@ export class TipRequestNoLeavesState extends MachineState {
                 break
             }
             default: {
-                super.prepareResponseDefault("TipRequestNoLeavesState")
+                super.prepareResponseDefault("I'm waiting for you to tell me if you want tips on how to get more leaves or not")
                 break;
             }
         }

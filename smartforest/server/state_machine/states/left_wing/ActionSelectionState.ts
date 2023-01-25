@@ -40,7 +40,7 @@ export class ActionSelectionState extends MachineState {
                 break;
             }
             default:{
-                super.prepareResponseDefault("ActionSelectionState")
+                super.prepareResponseDefault("I'm waiting for you to tell me if you want to group trees or buy a new one")
                 break;
             } 
         }

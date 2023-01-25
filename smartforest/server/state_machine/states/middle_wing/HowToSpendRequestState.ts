@@ -27,7 +27,7 @@ export class HowToSpendRequestState extends MachineState {
                 break
             }
             default: {
-                super.prepareResponseDefault("HowToSpendRequestState")
+                super.prepareResponseDefault("I'm waiting for you to tell me if you want to know what you can use your leaves for or not")
                 break;
             }
         }

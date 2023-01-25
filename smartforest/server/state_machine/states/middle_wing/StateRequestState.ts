@@ -27,7 +27,7 @@ export class StateRequestState extends MachineState {
             }
 
             default: {
-                super.prepareResponseDefault("StateRequestState")
+                super.prepareResponseDefault("I'm waiting for you to tell me if you want information about a specific tree or general information")
                 break;
             }
         }

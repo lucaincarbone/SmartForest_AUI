@@ -45,7 +45,7 @@ export class SpecificStateRequestState extends MachineState {
                 break
             }
             default: {
-                super.prepareResponseDefault("SpecificStateRequestState")
+                super.prepareResponseDefault("I'm waiting for you to ask me one of the following: How many leaves do i have, Show me how many trees i have, Which are my last notifications, let's see the level of experience of the trees   ")
                 break;
             }
         }

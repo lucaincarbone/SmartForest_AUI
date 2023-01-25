@@ -55,7 +55,7 @@ export class AdviceSelectionState extends MachineState {
                 break
             }
             default: {
-                super.prepareResponseDefault("AdviceSelectionState")
+                super.prepareResponseDefault("I'm waiting for you to ask me one of the following: Which is the device that is consuming the most?, Tell me how much energy I have available inside the battery,  Can I start the washing machine ? ")
                 break;
             }
         }

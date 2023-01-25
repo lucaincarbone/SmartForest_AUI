@@ -79,8 +79,8 @@ export abstract class MachineState implements StateOperations {
         this._jsonAnswerFromCA.queryResult.fulfillmentText = answer
     }
 
-    setDefaultAnswer() {
-        this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now"
+    setDefaultAnswer(text:string) {
+        this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now. "+text;
     }
 
     get finalResponse() {
@@ -89,9 +89,9 @@ export abstract class MachineState implements StateOperations {
 
     /**
      * Handle exit e non recognized intent
-     * @param name Name of the Child State
+     * @param text Name of the Child State
      */
-    prepareResponseDefault(name:string){
+    prepareResponseDefault(text:string){
         let intent = this.intentString
         switch(intent){
             case Intents.switchOff_intent:{
@@ -106,8 +106,8 @@ export abstract class MachineState implements StateOperations {
                 break;
             }
             default:{
-                console.log("From "+name+" could not detect intent:" + intent)
-                this.setDefaultAnswer()
+                // console.log("From "+text+" could not detect intent:" + intent)
+                this.setDefaultAnswer(text)
             }
         }
     }

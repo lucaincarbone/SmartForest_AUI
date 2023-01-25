@@ -35,7 +35,7 @@ export class GroupingState extends MachineState {
                 break;
             }
             default: {
-                super.prepareResponseDefault("GroupingState")
+                super.prepareResponseDefault("I'm waiting for you to select the trees you want to group")
                 break;
             }
         }

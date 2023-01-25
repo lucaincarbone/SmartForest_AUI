@@ -33,7 +33,7 @@ export class PositionSelectionState extends MachineState {
                 break;
             }
             default:{
-                super.prepareResponseDefault("PositionselectionState")
+                super.prepareResponseDefault("I'm waiting for you to tell me if you want to plant at the top, bottom, right or left")
                 break;
             } 
         }
