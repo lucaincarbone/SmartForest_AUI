@@ -93,6 +93,7 @@ export default {
           body: { totalGrade: this.totalGrade.toString(),
                   currentGrade: this.currentGrade.toString() },
         }).then((response) => {
+          console.log(response)
           this.triggerFrontEndUpdate(response);
           
         })        
@@ -111,7 +112,7 @@ export default {
         this.addTrees(addTree);
         
       });
-      response.deleted.forEach(deletedTree => {
+      response.removed.forEach(deletedTree => {
         this.deleteTrees(deletedTree);
         
       });

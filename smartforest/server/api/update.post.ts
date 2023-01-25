@@ -10,5 +10,6 @@ export default defineEventHandler(async (event) => {
     console.log("current: "+currentGrade);
     model.updateExpTrees(totalGrade,currentGrade)
     let answer = model.JsonWithChanges
+    model.ResetJsonWithChanges();
     return answer
 })
