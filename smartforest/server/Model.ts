@@ -1,8 +1,8 @@
 import fs from 'fs';
-import { Tree } from "~/server/Tree";
-import { Position } from './Position';
-import { PlantPlaces } from './state_machine/Utils';
-import { LoaderResponse, ModelLoader } from '~/server/ModelLoader'
+import {Tree} from "~/server/Tree";
+import {Position} from './Position';
+import {PlantPlaces} from './state_machine/Utils';
+import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
 
 interface JsonWithChanges {
     leaves?: number,
@@ -29,9 +29,9 @@ export class Model {
     private _maxTreeExperience = 1000;
     private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
-    private badThreshold:number =30;
-    private middleThreshold:number =70;
-    private highThreshold:number =100;
+    private badThreshold: number = 30;
+    private middleThreshold: number = 70;
+    private highThreshold: number = 100;
     private _jsonWithChanges: JsonWithChanges = {
         trees: [],
         removed: [],
@@ -77,7 +77,7 @@ export class Model {
             this.updateLeaves(this._leavesCost)
             return true
         }
-        // There is no free space on the whole board
+            // There is no free space on the whole board
         catch (e) {
             console.log(e);
             return false
@@ -99,7 +99,7 @@ export class Model {
      */
     public canIGroupTrees(): boolean {
         let nTreesForLevel = [0, 0]
-        let maxExpTrees = this._trees.filter(tree => tree.experience == this._maxTreeExperience || tree.level==3)
+        let maxExpTrees = this._trees.filter(tree => tree.experience == this._maxTreeExperience || tree.level == 3)
         maxExpTrees.forEach(tree => nTreesForLevel[tree.level - 1]++)
         let answer = nTreesForLevel.filter(num => num >= 3).length > 0
         if (answer) {
@@ -301,7 +301,7 @@ export class Model {
         this._trees.push(treeToAdd)
         this._jsonWithChanges.trees.push(treeToAdd)
 
-        this.updateJsonFile({ position: position, level: level, experience: experience },
+        this.updateJsonFile({position: position, level: level, experience: experience},
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
@@ -467,7 +467,7 @@ export class Model {
 
             this.removeTree(new Position(tree.position_x, tree.position_y))
 
-        // Remove the tree and add 2 new trees with level decreased by 1
+            // Remove the tree and add 2 new trees with level decreased by 1
         } else {
 
             this.removeTree(new Position(tree.position_x, tree.position_y))
@@ -492,23 +492,42 @@ export class Model {
         }
     }
 
-    public updateExpTrees(totalGrade:number,currentGrade:number){
+    private updateTreeExpOnJson(updatedExperience: number, position: Position) {
+        this.updateJsonFile({exp: updatedExperience, pos: position},
+            (parsedData, obj) => {
+
+                let indexOfTreeToUpdate = 0;
+
+                indexOfTreeToUpdate = parsedData.trees.findIndex(function (tree: any) {
+                    return tree.position._x === obj.pos.x && tree.position._y === obj.pos.y;
+                });
+
+                let treeToUpdate = parsedData.trees[indexOfTreeToUpdate];
+                treeToUpdate.experience = obj.exp
+            })
+    }
+
+    public updateExpTrees(totalGrade: number, currentGrade: number) {
         this.ResetJsonWithChanges();
         let self = this;
+
         this._trees.forEach(function (tree) {
             let exp = tree.experience;
-            let weighted = (0.8 * totalGrade + 0.2 * currentGrade) /100;
-            if(weighted<=self.badThreshold){
-                exp -=self.highThreshold-weighted;
-            }
-            else if (weighted<=self.middleThreshold){
+            let weighted = (0.8 * totalGrade + 0.2 * currentGrade) / 100;
+
+            if (weighted <= self.badThreshold) {
+                exp -= self.highThreshold - weighted;
+            } else if (weighted <= self.middleThreshold) {
                 exp += weighted;
-            }
-            else{
+            } else {
                 exp += self.highThreshold;
             }
-            if(exp<=0){
-               self.explodeTree(tree)
+
+            tree.experience = exp;
+            self.updateTreeExpOnJson(exp, new Position(tree.position_x, tree.position_y));
+
+            if (exp <= 0) {
+                self.explodeTree(tree)
             }
         });
 
