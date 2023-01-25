@@ -486,10 +486,11 @@ export class Model {
 
             // No free position is found
             if (positionSecondPlant == null) {
-                throw new Error('There is no space to plant a new tree');
+                // FIXME
+                // throw new Error('There is no space to plant a new tree');
+            } else {
+                this.addTree(positionSecondPlant, tree.level - 1, this._newTreeExperience)
             }
-
-            this.addTree(positionSecondPlant, tree.level - 1, this._newTreeExperience)
         }
     }
 
