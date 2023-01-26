@@ -1,5 +1,5 @@
 {
-  "leaves": 293,
+  "leaves": 999,
   "globalExperience": 69,
   "trees": [
     {
@@ -8,7 +8,7 @@
         "_y": 1
       },
       "level": 1,
-      "experience": 900
+      "experience": 504
     },
     {
       "position": {
@@ -16,7 +16,7 @@
         "_y": 1
       },
       "level": 2,
-      "experience": 1000
+      "experience": 604
     },
     {
       "position": {
@@ -24,7 +24,7 @@
         "_y": 2
       },
       "level": 3,
-      "experience": 900
+      "experience": 504
     },
     {
       "position": {
@@ -32,7 +32,7 @@
         "_y": 1
       },
       "level": 1,
-      "experience": 900
+      "experience": 504
     },
     {
       "position": {
@@ -40,7 +40,7 @@
         "_y": 1
       },
       "level": 3,
-      "experience": 900
+      "experience": 504
     },
     {
       "position": {
@@ -48,23 +48,7 @@
         "_y": 2
       },
       "level": 3,
-      "experience": 900
-    },
-    {
-      "position": {
-        "_x": 6,
-        "_y": 6
-      },
-      "level": 1,
-      "experience": 200
-    },
-    {
-      "position": {
-        "_x": 6,
-        "_y": 2
-      },
-      "level": 2,
-      "experience": 300
+      "experience": 504
     },
     {
       "position": {
@@ -72,7 +56,39 @@
         "_y": 5
       },
       "level": 3,
-      "experience": 400
+      "experience": 4
+    },
+    {
+      "position": {
+        "_x": 5,
+        "_y": 6
+      },
+      "level": 2,
+      "experience": 604
+    },
+    {
+      "position": {
+        "_x": 4,
+        "_y": 3
+      },
+      "level": 2,
+      "experience": 604
+    },
+    {
+      "position": {
+        "_x": 6,
+        "_y": 2
+      },
+      "level": 1,
+      "experience": 50
+    },
+    {
+      "position": {
+        "_x": 5,
+        "_y": 2
+      },
+      "level": 1,
+      "experience": 50
     },
     {
       "position": {
@@ -81,22 +97,6 @@
       },
       "level": 1,
       "experience": 50
-    },
-    {
-      "position": {
-        "_x": 5,
-        "_y": 6
-      },
-      "level": 2,
-      "experience": 1000
-    },
-    {
-      "position": {
-        "_x": 4,
-        "_y": 3
-      },
-      "level": 2,
-      "experience": 1000
     }
   ]
 }

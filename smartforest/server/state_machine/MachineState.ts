@@ -2,6 +2,7 @@ import {DialogHandler} from "../DialogClass";
 import {StateOperations} from "./StateOperations";
 import {Model} from "../Model";
 import { Intents, NameStates, statesMap } from "./Utils";
+import { Notice } from "../notifications/Notice";
 
 
 /**
@@ -81,6 +82,10 @@ export abstract class MachineState implements StateOperations {
 
     setDefaultAnswer(text:string) {
         this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now. "+text;
+    }
+
+    setNotificationsList(notifications:Array<Notice>){
+        this._jsonAnswerFromCA.notifications = notifications;
     }
 
     setAllTrees(trees:any){

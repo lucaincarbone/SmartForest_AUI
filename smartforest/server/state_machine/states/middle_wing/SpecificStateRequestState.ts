@@ -1,5 +1,5 @@
-import {Intents, NameStates, statesMap} from "../../Utils"
-import {MachineState} from "../../MachineState"
+import { Intents, NameStates, statesMap } from "../../Utils"
+import { MachineState } from "../../MachineState"
 import { Model } from "~~/server/Model"
 
 
@@ -19,7 +19,7 @@ export class SpecificStateRequestState extends MachineState {
             //How many leaves do i have
             case Intents.forest_status_overall_leaves: {
                 let x = Model.Instance.getNoOfLeaves()
-                super.setAnswer("You have "+x+" leaves in your forest")
+                super.setAnswer("You have " + x + " leaves in your forest")
                 super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
                 break;
             }
@@ -32,12 +32,17 @@ export class SpecificStateRequestState extends MachineState {
             }
             //Which are my last notifications
             case Intents.forest_status_overall_notifications: {
-                //TODO implement
-                //not a state waiting for interaction
+                let n = Model.Instance.getNumberOfStoredNotifications()
+                if (n == 0) {
+                    super.setAnswer("You have no notifications to show");
+                } else {
+                    super.setAnswer("Here are your last " + n + " notifications");
+                    super.setNotificationsList(Model.Instance.getLastNotifications())
+                }
                 break
             }
-             //let's see the level of experience of the trees
-             case Intents.forest_status_overall_levelExperience: {
+            //let's see the level of experience of the trees
+            case Intents.forest_status_overall_levelExperience: {
                 let trees = Model.Instance.trees
                 super.setAllTrees(trees)
                 super.setAnswer("Here is the experience level of all your trees")

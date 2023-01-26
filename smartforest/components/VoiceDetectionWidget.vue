@@ -40,6 +40,10 @@ export default {
     this.updateFrontEnd();
   },
   methods: {
+    displayNotifications(notifications){
+      console.log(notifications)
+
+    },
     showTreeExperience(tree){
       let posToSpawn =
           tree._position._x.toString() + "-" + tree._position._y.toString();
@@ -194,6 +198,9 @@ export default {
         document.getElementById("mirror-off").style.visibility = "visible";
         document.getElementById("mirror-off").style.pointerEvents = "all";
       } else {
+        if(this.answerFromCA_.notifications!=null){
+          this.displayNotifications(this.answerFromCA_.notifications)
+        }
         if(this.answerFromCA_.allTrees!=null){
           this.answerFromCA_.allTrees.forEach(function(tree){
             self.showTreeExperience(tree)

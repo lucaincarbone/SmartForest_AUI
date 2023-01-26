@@ -3,6 +3,7 @@ import { Tree } from "~/server/Tree";
 import { Position } from './Position';
 import { PlantPlaces } from './state_machine/Utils';
 import { LoaderResponse, ModelLoader } from '~/server/ModelLoader'
+import { NotificationsManager } from './notifications/NotificationsManager';
 
 interface JsonWithChanges {
     leaves?: number,
@@ -40,6 +41,7 @@ export class Model {
         removed: [],
         group: [],
     };
+    private notificationManager: NotificationsManager;
 
     private constructor() {
         if (fs.existsSync(this._pathToJsonFile)) {
@@ -59,6 +61,7 @@ export class Model {
             this._leaves = 100
             this._globalExperience = 0
         }
+        this.notificationManager = new NotificationsManager(5)
     }
 
     public static get Instance() {
@@ -78,6 +81,7 @@ export class Model {
             let position: Position = this.getAPosition(positionGeneral)
             this.addTree(position, this._startedTreeLevel, this._newTreeExperience)
             this.updateLeaves(this._leavesCost)
+            this.notificationManager.AddNewNotice("You planted a new tree at the " + positionGeneral.toLowerCase())
             return true
         }
         // There is no free space on the whole board
@@ -226,6 +230,7 @@ export class Model {
         let randomPosition = Math.floor(Math.random() * 3);
         let newPosition = oldPositions[randomPosition]
         this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
+        this.notificationManager.AddNewNotice("You succesfully grouped 3 threes of level " + firstTree.level)
         return true;
 
     }
@@ -494,6 +499,7 @@ export class Model {
 
             this.removeTree(new Position(tree.position_x, tree.position_y))
 
+
             // Remove the tree and add 2 new trees with level decreased by 1
         } else {
 
@@ -576,11 +582,16 @@ export class Model {
                 toRemove.push(tree)
             }
         });
+        if (toRemove.length > 0) {
+            let nLost = 0
+            toRemove.forEach(function (tree) {
+                console.log("exploding tree: " + tree.position_x + " " + tree.position_y)
+                self.explodeTree(tree)
+                nLost++;
+            })
+            this.notificationManager.AddNewNotice("Unfortunatly " + nLost + "plant(s) suffered for your excessive consumption")
+        }
 
-        toRemove.forEach(function (tree) {
-            console.log("exploding tree: " + tree.position_x + " " + tree.position_y)
-            self.explodeTree(tree)
-        })
     }
 
     /**
@@ -607,5 +618,19 @@ export class Model {
 
         let newLeavesToAdd = weighted + (nTrees1 * this.weightTree1 + nTrees2 * this.weightTree2 + nTrees3 * this.weightTree3);
         this.updateLeaves(Math.round(newLeavesToAdd), true)
+        this.notificationManager.AddNewNotice("You gained " + newLeavesToAdd + " leaves");
+    }
+
+    /**
+     * Get the number of currently stored past notifications
+     */
+    public getNumberOfStoredNotifications():number {
+        return this.notificationManager.NotificationsNumber;
+    }
+    /**
+     * Get the currently stored past notifications
+     */
+    public getLastNotifications() {
+        return this.notificationManager.NotificationsList;
     }
 }

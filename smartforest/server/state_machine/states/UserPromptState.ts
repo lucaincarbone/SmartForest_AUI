@@ -81,10 +81,16 @@ export class UserPromptState extends MachineState {
                 super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break
             }
-            //Which are my last notifications?
+            //Which are my last notifications
             case Intents.forest_status_overall_notifications: {
-                console.log(Intents.forest_status_overall_notifications)
-                break;
+                let n = Model.Instance.getNumberOfStoredNotifications()
+                if (n == 0) {
+                    super.setAnswer("You have no notifications to show");
+                } else {
+                    super.setAnswer("Here are your last " + n + " notifications");
+                    super.setNotificationsList(Model.Instance.getLastNotifications())
+                }
+                break
             }
             //let's see the level of experience of the trees
             case Intents.forest_status_overall_levelExperience: {
@@ -161,7 +167,7 @@ export class UserPromptState extends MachineState {
                         super.setAnswer("I'm sorry but it's better to wait, your batteries don't have accumulated enough energy")
                     }
                 } catch (e: any) {
-                    super.setAnswer(e.message)
+                    super.setAnswer("I'm sorry it seems that you do not own a device named "+super.deviceName)
                 }
                 break
             }
