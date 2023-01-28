@@ -42,7 +42,32 @@ export default {
   methods: {
     displayNotifications(notifications){
       console.log(notifications)
+      var index = 1;
+      notifications.forEach(notification => {
 
+        document.getElementById("notification-" + index.toString()).textContent = notification.event;
+        document.getElementById("time-" + index.toString()).textContent = notification.time;
+        if(notification.good){
+          document.getElementById("notification-" + index.toString()).style.color = "green";
+        } else {
+          document.getElementById("notification-" + index.toString()).style.color = "rgb(200, 0, 0)";
+        }
+        document.getElementById("cont-" + index.toString()).style.visibility = "visible";
+        document.getElementById("cont-" + index.toString()).animate([{ opacity: "0%" }, { opacity: "100%" }], {
+          duration: 250,
+          fill: "forwards",
+        });
+        index++;
+      });
+      setTimeout(() => {
+        for(var i = 1; i<=5; i++){
+          document.getElementById("cont-" + i.toString()).animate([{ opacity: "100%" }, { opacity: "0%" }], {
+          duration: 250,
+          fill: "forwards",
+        });
+          document.getElementById("cont-" + i.toString()).style.visibility = "hidden";
+        }
+      }, 10000);
     },
     showTreeExperience(tree){
       let posToSpawn =

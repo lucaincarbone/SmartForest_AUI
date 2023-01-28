@@ -81,7 +81,8 @@ export default {
   height: 40px;
   left: 0;
   right: 0;
-  background-color: greenyellow;
+  /* background-color: rgb(176, 0, 117); */
+  border: 3px solid rgb(214, 192, 0);
   border-radius: 100px;
 }
 .title {
