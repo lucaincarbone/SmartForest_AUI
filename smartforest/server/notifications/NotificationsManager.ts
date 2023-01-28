@@ -14,8 +14,8 @@ export class NotificationsManager {
      * If the number of notification exeeds the max number the oldest one is popped
      * @param event the string to store describing the event
      */
-    public AddNewNotice(event: string) {
-        let newNotice = new Notice(event);
+    public AddNewNotice(event: string,good:boolean) {
+        let newNotice = new Notice(event,good);
         this.notificationsList.push(newNotice);
         if (this.notificationsList.length > this.maxNumber) {
             this.notificationsList.shift();
