@@ -12,6 +12,9 @@ export default {
     mirrorOn() {
       document.getElementById("mirror-off").style.visibility = "hidden"
       document.getElementById("mirror-off").style.pointerEvents = "none";
+    },
+    showRules() {
+      document.getElementById("rules-container").style.visibility = "visible";
     }
   }
 }
@@ -36,10 +39,28 @@ export default {
         <Notification id="notification-4" idcont="cont-4" idtime="time-4"/>
         <Notification id="notification-5" idcont="cont-5" idtime="time-5"/>
       </div>
+      <div class="rules-question-mark" @click="showRules()">?</div>
+      <ShowRules/>
   </div>
 </template>
 
 <style scoped>
+.rules-question-mark {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.35);
+  position: absolute;
+  margin-left: 840px;
+  margin-bottom: 45px;
+  border-radius: 100px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 2em;
+  font-weight: 200;
+  color: white;
+  /* border: 1px solid grey; */
+  cursor: pointer;
+}
 .notification-box {
   position: absolute;
   /* background-color: red; */
