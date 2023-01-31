@@ -26,12 +26,6 @@ export class HomeEnergyAPI {
         return this._instance || (this._instance = new this());
     }
 
-    // TODO: put this stuff also in the front-end (it works)
-    /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
-     * https://it.javascript.info/websocket#esempio-di-chat
-     * https://www.npmjs.com/package/express-ws
-     */
     private handleWebSocket() {
 
         this._socket.onopen = function (e: any) {
@@ -56,20 +50,7 @@ export class HomeEnergyAPI {
             console.log(`[error] ${error.message}`);
         };
     }
-
-    /**
-     * The Smart Home Server for now
-     * just replies with the same message
-     */
-    public testTheWebSocket() {
-        this._socket.send("IT the Clown");
-        // if (connected) {
-        //     this._socket.send("Il mio nome è lil");
-        // } else {
-        //     console.log("WAIT")
-        // }
-    }
-
+    
     /**
      * Method that returns a number that represents the overall
      * battery energy accumulated
