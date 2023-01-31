@@ -233,6 +233,9 @@ export default {
         }
         // document.getElementById("mirror-off").style.visibility = "hidden"
         if (this.answerFromCA_.changes != null) {
+          if (this.answerFromCA_.changes.hide != null){
+            this.hideTrees(this.answerFromCA_.changes.hide)
+          }
           if (this.answerFromCA_.changes.trees != null) {
             console.log("Updating trees...");
             this.plantTree(this.answerFromCA_.changes.trees);
@@ -259,6 +262,14 @@ export default {
         tree.classList.remove("groupable");
         tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
         tree.removeEventListener("click", this.clickEvent);
+      });
+    },
+    hideTrees(trees) {
+      trees.forEach((tree) => {
+        let posToSpawn =
+          tree._position._x.toString() + "-" + tree._position._y.toString();
+        tree = document.getElementById(posToSpawn);
+        tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
       });
     },
     updateLeaves(leaves) {

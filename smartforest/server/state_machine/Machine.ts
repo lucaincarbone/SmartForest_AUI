@@ -38,5 +38,6 @@ export class Machine {
 
     public groupAction(response:any,splitted: string[]): any {
         this._state.groupAction(response,splitted)
+        return response
     }
 }

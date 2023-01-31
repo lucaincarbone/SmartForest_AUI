@@ -11,9 +11,9 @@ export default defineEventHandler(async (event) => {
     let splitted = id.split("-", 6);
     console.log(splitted)
     let response = getStructure();
-    try{
-    response = machine.groupAction(response, splitted)
-    }catch(e){
+    try {
+        response = machine.groupAction(response, splitted)
+    } catch (e) {
         //somehow clicked while not in grouping state
         console.error("Error: group request received while not in group state")
     }

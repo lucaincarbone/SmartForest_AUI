@@ -1,70 +1,38 @@
 {
-  "leaves": 1506,
+  "leaves": 190,
   "globalExperience": 69,
   "trees": [
-    {
-      "position": {
-        "_x": 4,
-        "_y": 1
-      },
-      "level": 1,
-      "experience": 207
-    },
-    {
-      "position": {
-        "_x": 5,
-        "_y": 1
-      },
-      "level": 2,
-      "experience": 307
-    },
-    {
-      "position": {
-        "_x": 4,
-        "_y": 2
-      },
-      "level": 3,
-      "experience": 207
-    },
     {
       "position": {
         "_x": 1,
         "_y": 1
       },
-      "level": 1,
-      "experience": 207
+      "level": 3,
+      "experience": 1000
     },
     {
       "position": {
-        "_x": 2,
-        "_y": 1
+        "_x": 4,
+        "_y": 4
       },
-      "level": 3,
-      "experience": 207
-    },
-    {
-      "position": {
-        "_x": 2,
-        "_y": 2
-      },
-      "level": 3,
-      "experience": 207
+      "level": 2,
+      "experience": 1000
     },
     {
       "position": {
         "_x": 5,
         "_y": 6
       },
-      "level": 2,
-      "experience": 307
+      "level": 3,
+      "experience": 1000
     },
     {
       "position": {
         "_x": 4,
-        "_y": 3
+        "_y": 1
       },
       "level": 2,
-      "experience": 307
+      "experience": 50
     }
   ]
 }

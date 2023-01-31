@@ -10,6 +10,10 @@ import {PositionSelectionState} from "~/server/state_machine/states/left_wing/Po
 import {TipRequestNoLeavesState} from "~/server/state_machine/states/left_wing/TipRequestNoLeavesState";
 import {TipRequestNoPlantsState} from "~/server/state_machine/states/left_wing/TipRequestNoPlantsState";
 import { GroupingState } from "./states/left_wing/GroupingState";
+import { TutorialPositionSelectionState } from "./states/tutorial/TutorialPositionSelectionState";
+import { TutorialPlantState } from "./states/tutorial/TutorialPlantState";
+import { TutorialGroupState } from "./states/tutorial/TutorialGroupState";
+import { TutorialAwait2State } from "./states/tutorial/TutorialAwait2State";
 
 export class Intents {
     public static advices_appliances_consumption: string = "advices_appliances_consumption";
@@ -37,6 +41,7 @@ export class Intents {
     public static yes_answer: string = "yes_answer";
     public static exit_intent:string = "Exit"
     public static switchOff_intent:string = "SwitchOff"
+    public static tutorial_intent:string = "play_tutorial"
 }
 
 export enum NameStates {
@@ -51,7 +56,11 @@ export enum NameStates {
     PositionSelectionState = "PositionSelectionState",
     TipRequestNoLeavesState = "TipRequestNoLeavesState",
     TipRequestNoPlantsState = "TipRequestNoPlantsState",
-    GroupingState = "GroupingState"
+    GroupingState = "GroupingState",
+    TutorialPositionSelectionState = "TutorialPositionSelectionState",
+    TutorialPlantState = "TutorialPlantState",
+    TutorialGroupState = "TutorialGroupState",
+    TutorialAwait2State = "TutorialAwait2State"
 }
 
 export enum PlantPlaces {
@@ -74,4 +83,8 @@ export const statesMap: Map<string, MachineState> = new Map<string, MachineState
     [NameStates.TipRequestNoLeavesState, new TipRequestNoLeavesState()],
     [NameStates.TipRequestNoPlantsState, new TipRequestNoPlantsState()],
     [NameStates.GroupingState, new GroupingState()],
+    [NameStates.TutorialPositionSelectionState, new TutorialPositionSelectionState()],
+    [NameStates.TutorialPlantState, new TutorialPlantState()],
+    [NameStates.TutorialGroupState, new TutorialGroupState()],
+    [NameStates.TutorialAwait2State, new TutorialAwait2State()],
 ]);
