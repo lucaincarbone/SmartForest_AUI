@@ -23,10 +23,11 @@ export class NotificationsManager {
     }
 
     /**
-    * Getter for the full notification list
+    * Getter for the full notification list (inverted for frontend commodity)
     */
     get NotificationsList(): Array<Notice> {
-        return this.notificationsList;
+        let inverted = this.notificationsList.slice().reverse();
+        return inverted;
     }
     /**
     * Getter for the number of stored notifications

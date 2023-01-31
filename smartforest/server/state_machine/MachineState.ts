@@ -123,4 +123,8 @@ export abstract class MachineState implements StateOperations {
     setswitchOffBool(value:boolean) {
         this._jsonAnswerFromCA.switchOff = value
     }
+
+    public groupAction(response: any,splitted: string[]){
+        throw new Error("Invalid operation")
+    }
 }

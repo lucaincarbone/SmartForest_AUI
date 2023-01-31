@@ -35,4 +35,8 @@ export class Machine {
         this._state = this._state.changeState() //change machine state to appropriate next one
         return response; //return JSON_RESPONSE_FOR_CLIENT
     }
+
+    public groupAction(response:any,splitted: string[]): any {
+        this._state.groupAction(response,splitted)
+    }
 }
