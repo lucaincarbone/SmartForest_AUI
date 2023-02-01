@@ -7,21 +7,21 @@
       <div class="remote">
         <div class="status tile">
           <div class="infobox">
-            <p class="info">Meteo: {{ meteo }}</p>
+            <p class="info">Weather: {{ meteo }}</p>
             <p class="info">
               Battery:
               {{ Math.round((battery + Number.EPSILON) * 100) / 100 }} kW
             </p>
             <p class="info">
-              PV: {{ Math.round((pv + Number.EPSILON) * 100) / 100 }} kW/h
+              PV: {{ Math.round((pv + Number.EPSILON) * 100) / 100 }} kW
             </p>
             <p class="info">
               Clean cons:
-              {{ Math.round((cleanCons + Number.EPSILON) * 100) / 100 }} kW
+              {{ Math.round((cleanCons + Number.EPSILON) * 100) / 100 }} kWh
             </p>
             <p class="info">
               Dirty cons:
-              {{ Math.round((dirtyCons + Number.EPSILON) * 100) / 100 }} kW
+              {{ Math.round((dirtyCons + Number.EPSILON) * 100) / 100 }} kWh
             </p>
           </div>
         </div>
