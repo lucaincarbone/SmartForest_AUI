@@ -85,7 +85,7 @@ export class Model {
     }
 
     /**
-     * Tell notificationManager to add a new notification 
+     * Tell notificationManager to add a new notification
      * @param text text of the notification
      * @param good if the notification is good
      */
@@ -392,7 +392,7 @@ export class Model {
      * @param func the function with the modifications to apply at the data
      * @private
      */
-    private updateJsonFile(dataToUpdate: any, func: (parsedData: any, data: any) => void) {
+    public updateJsonFile(dataToUpdate: any, func: (parsedData: any, data: any) => void) {
 
         let data = fs.readFileSync(this._pathToJsonFile);
         const parsedData = JSON.parse(data.toString());
