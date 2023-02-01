@@ -1,6 +1,7 @@
 import fs from 'fs';
-import {Tree} from "~/server/Tree";
-import {Position} from './Position';
+import { Tree } from "~/server/Tree";
+import { Notice } from './notifications/Notice';
+import { Position } from './Position';
 
 export class LoaderResponse {
     private _leaves: number;
@@ -61,6 +62,22 @@ export class ModelLoader {
         let trees: Tree[] = this.loadTrees(parsedData);
         let loaderResponse: LoaderResponse = new LoaderResponse(leaves, globalExperience, trees);
         return loaderResponse;
+    }
+
+    public loadNotifications() {
+        let data = fs.readFileSync(this._pathToJsonFile);
+        let parsedData = JSON.parse(data.toString());
+        let notifications: Notice[] = [];
+        let notifications_list = parsedData.notifications;
+
+        for (let i = 0; i < notifications_list.length; i++) {
+            let time = notifications_list[i].time;
+            let event = notifications_list[i].event;
+            let good = notifications_list[i].good;
+            let notice: Notice = new Notice(event, good, time);
+            notifications.push(notice);
+        }
+        return notifications;
     }
 
 }

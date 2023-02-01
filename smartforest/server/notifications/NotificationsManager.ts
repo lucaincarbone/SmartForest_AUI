@@ -3,10 +3,11 @@ import { Notice } from "./Notice";
 
 export class NotificationsManager {
     private maxNumber: number = 10;
-    private notificationsList: Array<Notice> = [];
+    private notificationsList: Array<Notice>;
 
-    public constructor(maxNumber: number) {
+    public constructor(maxNumber: number,notificationsList = new Array<Notice>) {
         this.maxNumber = maxNumber;
+        this.notificationsList = notificationsList;
     }
 
     /**
@@ -20,6 +21,7 @@ export class NotificationsManager {
         if (this.notificationsList.length > this.maxNumber) {
             this.notificationsList.shift();
         }
+        //TODO open json and delete list of notifications then substitute with this.notificationList
     }
 
     /**

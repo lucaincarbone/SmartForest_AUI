@@ -63,7 +63,7 @@ export class Model {
             this._leaves = 100
             this._globalExperience = 0
         }
-        this.notificationManager = new NotificationsManager(5)
+        this.notificationManager = new NotificationsManager(5,ModelLoader.Instance.loadNotifications())
     }
 
     public static get Instance() {
@@ -81,7 +81,16 @@ export class Model {
         let position: Position = this.getAPosition(positionGeneral)
         this.addTree(position, this._startedTreeLevel, this._newTreeExperience)
         this.updateLeaves(this._leavesCost)
-        this.notificationManager.AddNewNotice("You planted a new tree at the " + positionGeneral.toLowerCase(), true)
+        this.addNewNotice("You planted a new tree at the " + positionGeneral.toLowerCase(), true)
+    }
+
+    /**
+     * Tell notificationManager to add a new notification 
+     * @param text text of the notification
+     * @param good if the notification is good
+     */
+    private addNewNotice(text:string,good:boolean){
+        this.notificationManager.AddNewNotice(text, good)
     }
 
     /**
@@ -223,7 +232,7 @@ export class Model {
         let randomPosition = Math.floor(Math.random() * 3);
         let newPosition = oldPositions[randomPosition]
         this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
-        this.notificationManager.AddNewNotice("You succesfully grouped 3 threes of level " + firstTree.level, true)
+        this.addNewNotice("You succesfully grouped 3 threes of level " + firstTree.level, true)
         return true;
 
     }
@@ -557,11 +566,11 @@ export class Model {
         //TODO merge this part with the one below (carefull the add notice must not be in the forEach!!)
         let weighted = (0.8 * totalGrade + 0.2 * currentGrade) / 100;
         if (weighted <= self.badThreshold) {
-            this.notificationManager.AddNewNotice("Your plants were harmed due to your bad behaviour", false)
+            this.addNewNotice("Your plants were harmed due to your bad behaviour", false)
         } else if (weighted <= self.middleThreshold) {
-            this.notificationManager.AddNewNotice("Well done, you maintained a green behaviour", true)
+            this.addNewNotice("Well done, you maintained a green behaviour", true)
         } else {
-            this.notificationManager.AddNewNotice("You maintained an excellent green behaviour, your plants are happy", true)
+            this.addNewNotice("You maintained an excellent green behaviour, your plants are happy", true)
         }
         this._trees.forEach(function (tree) {
             let exp = tree.experience;
@@ -590,7 +599,7 @@ export class Model {
                 self.explodeTree(tree)
                 nLost++;
             })
-            this.notificationManager.AddNewNotice("Unfortunatly " + nLost + " plant(s) suffered for your excessive consumption", false)
+            this.addNewNotice("Unfortunatly " + nLost + " plant(s) suffered for your excessive consumption", false)
         }
 
     }
@@ -619,7 +628,7 @@ export class Model {
 
         let newLeavesToAdd = weighted + (nTrees1 * this.weightTree1 + nTrees2 * this.weightTree2 + nTrees3 * this.weightTree3);
         this.updateLeaves(Math.round(newLeavesToAdd), true)
-        this.notificationManager.AddNewNotice("You gained " + newLeavesToAdd + " leaves", true);
+        this.addNewNotice("You gained " + newLeavesToAdd + " leaves", true);
     }
 
     /**
