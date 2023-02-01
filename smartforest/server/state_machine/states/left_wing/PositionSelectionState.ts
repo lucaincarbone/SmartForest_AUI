@@ -1,6 +1,7 @@
-import { Intents, NameStates, PlantPlaces, statesMap } from "../../Utils"
-import { MachineState } from "../../MachineState"
-import { Model } from "~/server/Model";
+import {Intents, NameStates, PlantPlaces, statesMap} from "../../Utils"
+import {MachineState} from "../../MachineState"
+import {Model} from "~/server/Model";
+import {Position} from "~/server/Position";
 
 
 /**
@@ -15,27 +16,24 @@ export class PositionSelectionState extends MachineState {
         await super.prepareResponse(phrase)
         let intent: string = super.intentString
         switch (intent) {
-            case Intents.forest_management_buy_position:{
+            case Intents.forest_management_buy_position: {
+
+                let tree_position: string = super.tree_position
+
                 try {
-                    let tree_position: string = super.tree_position
-    
-                    if (Model.Instance.buyTree(tree_position)) {
-                        this.setChanges(Model.Instance.JsonWithChanges)
-                    } else {
-                        super.setAnswer("There is not enough space!" +
-                            " Try to group 3 trees in order to free some space")
-                    }
-                    super.setNextState(statesMap.get(NameStates.UserPromptState)!)
-                } catch (e) {
-                    super.setAnswer("An error occured while planting a tree")
-                    console.error(e)
+                    Model.Instance.buyTree(tree_position)
+                    this.setChanges(Model.Instance.JsonWithChanges)
+                } catch (e: any) {
+                    super.setAnswer(e.message)
                 }
+
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
-            default:{
+            default: {
                 super.prepareResponseDefault("I'm waiting for you to tell me if you want to plant at the top, bottom, right or left")
                 break;
-            } 
+            }
         }
         return super.finalResponse
     }

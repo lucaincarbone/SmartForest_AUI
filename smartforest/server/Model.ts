@@ -1,9 +1,9 @@
 import fs from 'fs';
-import { Tree } from "~/server/Tree";
-import { Position } from './Position';
-import { PlantPlaces } from './state_machine/Utils';
-import { LoaderResponse, ModelLoader } from '~/server/ModelLoader'
-import { NotificationsManager } from './notifications/NotificationsManager';
+import {Tree} from "~/server/Tree";
+import {Position} from './Position';
+import {PlantPlaces} from './state_machine/Utils';
+import {LoaderResponse, ModelLoader} from '~/server/ModelLoader'
+import {NotificationsManager} from './notifications/NotificationsManager';
 
 interface JsonWithChanges {
     leaves?: number,
@@ -12,6 +12,7 @@ interface JsonWithChanges {
     trees: Tree[],
     removed: Tree[],
     group: Tree[],
+    error: string
 }
 
 /**
@@ -40,6 +41,7 @@ export class Model {
         trees: [],
         removed: [],
         group: [],
+        error: ""
     };
     private notificationManager: NotificationsManager;
 
@@ -74,21 +76,12 @@ export class Model {
      * This function adds the new tree and updates the leaves of the user.
      *
      * @param positionGeneral (TOP, BOTTOM, RIGHT, LEFT)
-     * @exception if no space is available
      */
-    public buyTree(positionGeneral: string): boolean {
-        try {
-            let position: Position = this.getAPosition(positionGeneral)
-            this.addTree(position, this._startedTreeLevel, this._newTreeExperience)
-            this.updateLeaves(this._leavesCost)
-            this.notificationManager.AddNewNotice("You planted a new tree at the " + positionGeneral.toLowerCase(), true)
-            return true
-        }
-        // There is no free space on the whole board
-        catch (e) {
-            console.log(e);
-            return false
-        }
+    public buyTree(positionGeneral: string) {
+        let position: Position = this.getAPosition(positionGeneral)
+        this.addTree(position, this._startedTreeLevel, this._newTreeExperience)
+        this.updateLeaves(this._leavesCost)
+        this.notificationManager.AddNewNotice("You planted a new tree at the " + positionGeneral.toLowerCase(), true)
     }
 
     /**
@@ -158,7 +151,7 @@ export class Model {
                 break;
             }
             default: {
-                throw new Error("Can't detect requested position")
+                throw new Error("Can't detect the requested position")
             }
         }
         for (let x = x_start; x <= x_end; x++) {
@@ -168,7 +161,7 @@ export class Model {
                 }
             }
         }
-        // No free position in selectect place
+        // No free position in selected place
         for (let x = 1; x <= 6; x++) {
             for (let y = 1; y <= 6; y++) {
                 if (this.checkFreePosition(x, y)) {
@@ -177,7 +170,7 @@ export class Model {
             }
         }
         // No free position in general
-        throw new Error('There is no space to plant a new tree');
+        throw new Error("There is not enough space! Try to group 3 trees in order to free some space");
     }
 
     /**
@@ -309,7 +302,7 @@ export class Model {
         this._trees.push(treeToAdd)
         this._jsonWithChanges.trees.push(treeToAdd)
 
-        this.updateJsonFile({ position: position, level: level, experience: experience },
+        this.updateJsonFile({position: position, level: level, experience: experience},
             (parsedData, tree) => {
                 parsedData.trees.push(tree);
             })
@@ -426,6 +419,7 @@ export class Model {
             trees: this._trees,
             removed: [],
             group: [],
+            error: ""
         };
         return initial
     }
@@ -438,6 +432,7 @@ export class Model {
             trees: [],
             removed: [],
             group: [],
+            error: ""
         };
     }
 
@@ -499,8 +494,7 @@ export class Model {
 
             this.removeTree(new Position(tree.position_x, tree.position_y))
 
-
-            // Remove the tree and add 2 new trees with level decreased by 1
+        // Remove the tree and add 2 new trees with level decreased by 1
         } else {
 
             let positionFirstPlant = new Position(tree.position_x, tree.position_y)
@@ -518,13 +512,12 @@ export class Model {
                 }
             }
 
-            positionSecondPlant = positions[Math.floor(Math.random() * positions.length)];
-
             // No free position is found
-            if (positionSecondPlant == null) {
+            if (positions.length == 0) {
                 // FIXME
-                // throw new Error('There is no space to plant a new tree');
+                this._jsonWithChanges.error = "There is no space to plant the generated tree"
             } else {
+                positionSecondPlant = positions[Math.floor(Math.random() * positions.length)];
                 this.addTree(positionSecondPlant, tree.level - 1, this._newTreeExperience)
             }
         }
@@ -536,7 +529,7 @@ export class Model {
      * @param position position of the tree
      */
     private updateTreeExpOnJson(updatedExperience: number, position: Position) {
-        this.updateJsonFile({ exp: updatedExperience, pos: position },
+        this.updateJsonFile({exp: updatedExperience, pos: position},
             (parsedData, obj) => {
 
                 let indexOfTreeToUpdate = 0;
@@ -635,6 +628,7 @@ export class Model {
     public getNumberOfStoredNotifications(): number {
         return this.notificationManager.NotificationsNumber;
     }
+
     /**
      * Get the currently stored past notifications
      */
