@@ -28,7 +28,6 @@ export class TutorialAwait2State extends TutorialState {
                     group: [tree0,tree1,tree2],
                 })
                 super.setAnswer("Well done, now let's click on the 3 plants we want to group")
-                //TODO move to tutorial group state
                 super.setNextStateNoReset(statesMap.get(NameStates.TutorialGroupState)!)
                 break;
             }

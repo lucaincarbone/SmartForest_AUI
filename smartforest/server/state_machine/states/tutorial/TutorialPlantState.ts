@@ -18,8 +18,15 @@ export class TutorialPlantState extends TutorialState {
         switch (intent) {
             case Intents.forest_management_buy:{
                 super.setAnswer("Well done, now let's choose a spot where to plant it: try saying plant it at the bottom, top, right, left.")
-                // TODO set to next select position tutorial phase
                 super.setNextState(statesMap.get(NameStates.TutorialPositionSelectionState)!)
+                break;
+            }
+            case Intents.exit_intent:{
+                super.setAnswer("I'm glad to know you already know how to play the game, whad do you want to do?")
+                let changes = Model.Instance.initialBoardJson
+                changes.hide = super.getAllPossibleTutorialTrees()
+                super.setChanges(changes)
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
             default:{

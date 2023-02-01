@@ -55,7 +55,6 @@ export class TutorialPositionSelectionState extends TutorialState {
                     group: [],
                     leaves: 0
                 })
-                //TODO Send to next tutorial phase or close it
                 super.setNextState(statesMap.get(NameStates.TutorialAwait2State)!)
                 break;
             }

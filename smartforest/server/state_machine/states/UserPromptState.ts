@@ -174,7 +174,7 @@ export class UserPromptState extends MachineState {
                 break
             }
             case Intents.tutorial_intent: {
-                super.setAnswer("Sure, let's learn how to plant and group trees. First let's try and plant a new tree, try saying: i want to buy a new plant")
+                super.setAnswer("Sure, let's learn how to plant and group trees. First let's try and plant a new tree, try saying: i want to buy a new plant or exit if you know the game already")
                 super.setNextState(statesMap.get(NameStates.TutorialPlantState)!)
                 let tree0 = new Tree(new Position(2, 2), 2, 1000)
                 let tree1 = new Tree(new Position(3, 3), 2, 1000)
