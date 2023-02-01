@@ -36,7 +36,6 @@ export class TutorialGroupState extends TutorialState {
         let planted2 = new Tree(new Position(6,6), 2, 1000)
         let planted3 = new Tree(new Position(1,6), 2, 1000)
         let planted4 = new Tree(new Position(6,1), 2, 1000)
-        console.log("starting group")
         try {
             let pos1 = new Position(+splitted[0], +splitted[1])
             let pos2 = new Position(+splitted[2], +splitted[3])
@@ -44,9 +43,6 @@ export class TutorialGroupState extends TutorialState {
             if(pos1.x+pos2.x+pos3.x!=9||pos1.y+pos2.y+pos3.y!=9||pos1.x==pos2.x){
                 throw new Error("Invalid operation")
             }
-            console.log("positions were right")
-            //TODO check if positions are 22,33,44 if not throw exception
-            let newTree = new Tree(new Position(3, 3), 3, 1000)
             //return to player board
             let answer = Model.Instance.initialBoardJson
             answer.removed = super.getAllPossibleTutorialTrees()

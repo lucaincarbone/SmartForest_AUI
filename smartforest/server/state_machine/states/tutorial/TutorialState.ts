@@ -18,7 +18,6 @@ export abstract class TutorialState extends MachineState {
         Model.Instance.updateGameStateGrade(totalGrade, currentGrade)
         Model.Instance.ResetJsonWithChanges();
         let answer = Model.Instance.JsonWithChanges
-        answer.leaves=undefined;
         return answer
     }
 

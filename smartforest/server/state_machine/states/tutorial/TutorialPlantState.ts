@@ -18,7 +18,6 @@ export class TutorialPlantState extends TutorialState {
         switch (intent) {
             case Intents.forest_management_buy:{
                 super.setAnswer("Well done, now let's choose a spot where to plant it: try saying plant it at the bottom, top, right, left.")
-                // TODO set to next select position tutorial phase
                 super.setNextState(statesMap.get(NameStates.TutorialPositionSelectionState)!)
                 break;
             }
