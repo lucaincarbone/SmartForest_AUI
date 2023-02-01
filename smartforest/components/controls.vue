@@ -1,55 +1,98 @@
 <template>
   <div class="controls-box">
-    <div id="showbutton" class="showbutton" @click="controlmanager()"><p id="textbutton" class="textbutton">Pick
-      tablet</p></div>
+    <div id="showbutton" class="showbutton" @click="controlmanager()">
+      <p id="textbutton" class="textbutton">Pick tablet</p>
+    </div>
     <div id="remote-container" class="remote-container">
       <div class="remote">
         <div class="status tile">
           <div class="infobox">
-            <p class="info">Meteo: {{ meteo }} </p>
-            <p class="info">Battery: {{ Math.round((battery + Number.EPSILON) * 100) / 100 }} kW</p>
-            <p class="info">PV: {{ Math.round((pv + Number.EPSILON) * 100) / 100 }} kW/h</p>
-            <p class="info">Clean cons: {{ Math.round((cleanCons + Number.EPSILON) * 100) / 100 }} kW</p>
-            <p class="info">Dirty cons: {{ Math.round((dirtyCons + Number.EPSILON) * 100) / 100 }} kW</p>
+            <p class="info">Meteo: {{ meteo }}</p>
+            <p class="info">
+              Battery:
+              {{ Math.round((battery + Number.EPSILON) * 100) / 100 }} kW
+            </p>
+            <p class="info">
+              PV: {{ Math.round((pv + Number.EPSILON) * 100) / 100 }} kW/h
+            </p>
+            <p class="info">
+              Clean cons:
+              {{ Math.round((cleanCons + Number.EPSILON) * 100) / 100 }} kW
+            </p>
+            <p class="info">
+              Dirty cons:
+              {{ Math.round((dirtyCons + Number.EPSILON) * 100) / 100 }} kW
+            </p>
           </div>
         </div>
         <!-- <div class="cell"><TileControls id="simulation" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div> -->
         <div class="cell">
-          <TileControls id="airconditioner" imageURL="/_nuxt/assets/appliances/air-conditioner.png"
-                        name="Air conditioner"/>
+          <TileControls
+            id="airconditioner"
+            imageURL="/_nuxt/assets/appliances/air-conditioner.png"
+            name="Air conditioner"
+          />
         </div>
         <div class="cell">
-          <TileControls id="dehumidifier" imageURL="/_nuxt/assets/appliances/dehumidifier.png" name="Dehumidifier"/>
+          <TileControls
+            id="dehumidifier"
+            imageURL="/_nuxt/assets/appliances/dehumidifier.png"
+            name="Dehumidifier"
+          />
         </div>
         <div class="cell">
-          <TileControls id="cooker" imageURL="/_nuxt/assets/appliances/cooker.png" name="Induction cooker"/>
+          <TileControls
+            id="cooker"
+            imageURL="/_nuxt/assets/appliances/cooker.png"
+            name="Induction cooker"
+          />
         </div>
         <div class="cell">
-          <TileControls id="dishwasher" imageURL="/_nuxt/assets/appliances/dishwasher.png" name="Dishwasher"/>
+          <TileControls
+            id="dishwasher"
+            imageURL="/_nuxt/assets/appliances/dishwasher.png"
+            name="Dishwasher"
+          />
         </div>
         <div class="cell">
-          <TileControls id="dryer" imageURL="/_nuxt/assets/appliances/dryer.png" name="Clothes dryer"/>
+          <TileControls
+            id="dryer"
+            imageURL="/_nuxt/assets/appliances/dryer.png"
+            name="Clothes dryer"
+          />
         </div>
         <div class="cell">
-          <TileControls id="boiler" imageURL="/_nuxt/assets/appliances/heater.png" name="Heat boiler"/>
+          <TileControls
+            id="boiler"
+            imageURL="/_nuxt/assets/appliances/heater.png"
+            name="Heat boiler"
+          />
         </div>
         <div class="cell">
-          <TileControls id="oven" imageURL="/_nuxt/assets/appliances/oven.png" name="Oven"/>
+          <TileControls
+            id="oven"
+            imageURL="/_nuxt/assets/appliances/oven.png"
+            name="Oven"
+          />
         </div>
         <div class="cell">
-          <TileControls id="washingmachine" imageURL="/_nuxt/assets/appliances/washing-machine.png"
-                        name="Washing machine"/>
+          <TileControls
+            id="washingmachine"
+            imageURL="/_nuxt/assets/appliances/washing-machine.png"
+            name="Washing machine"
+          />
         </div>
       </div>
       <div class="startsimulation-container">
-        <div class="simulation-button" @click="simulate()"><p class="simulatetext">SIMULATE</p></div>
+        <div class="simulation-button" @click="simulate()">
+          <p class="simulatetext">SIMULATE</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -62,7 +105,7 @@ export default {
       currentGrade: 0,
       totalGrade: 0,
       isBadWeather: true,
-    }
+    };
   },
   mounted() {
     this.initialize();
@@ -71,7 +114,35 @@ export default {
   },
   methods: {
     async initialize() {
-      let response = await fetch("https://smart-home-api-2j4i.onrender.com/home")
+      let response = await fetch(
+        "https://smart-home-api-2j4i.onrender.com/home"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          this.meteo = data["meteo"];
+          this.battery = data["battery"];
+          this.pv = data["panel"];
+          this.cleanCons = data["greenEnergyTotal"];
+          this.dirtyCons = data["notGreenEnergyTotal"];
+          this.currentGrade = data["currentGrade"];
+          this.totalGrade = data["totalGrade"];
+        });
+      // console.log(parseInt(this.currentGrade));
+      this.toggleCircle(parseInt(this.currentGrade));
+      this.toggleIfSunny();
+    },
+    async infiniteApiRequests() {
+      let intervalApiID = setInterval(async () => {
+        await this.sendRequest();
+      }, 1000);
+
+      this.sendRequest = async function () {
+        let currentGrade;
+        let totalGrade;
+
+        let response = await fetch(
+          "https://smart-home-api-2j4i.onrender.com/home"
+        )
           .then((response) => response.json())
           .then((data) => {
             this.meteo = data["meteo"];
@@ -79,40 +150,16 @@ export default {
             this.pv = data["panel"];
             this.cleanCons = data["greenEnergyTotal"];
             this.dirtyCons = data["notGreenEnergyTotal"];
-            this.currentGrade = data["currentGrade"];
-            this.totalGrade = data["totalGrade"];
+            currentGrade = data["currentGrade"];
+            totalGrade = data["totalGrade"];
           });
-      // console.log(parseInt(this.currentGrade));
-      this.toggleCircle(parseInt(this.currentGrade));
-      this.toggleIfSunny();
-    },
-    async infiniteApiRequests() {
 
-      let intervalApiID = setInterval(async () => {
-        await this.sendRequest()
-      }, 1000);
-
-      this.sendRequest = async function () {
-
-        let currentGrade;
-        let totalGrade;
-
-        let response = await fetch("https://smart-home-api-2j4i.onrender.com/home")
-            .then((response) => response.json())
-            .then((data) => {
-              this.meteo = data["meteo"];
-              this.battery = data["battery"];
-              this.pv = data["panel"];
-              this.cleanCons = data["greenEnergyTotal"];
-              this.dirtyCons = data["notGreenEnergyTotal"];
-              currentGrade = data["currentGrade"];
-              totalGrade = data["totalGrade"];
-            });
-
-        if (this.currentGrade !== currentGrade && this.totalGrade !== totalGrade) {
-
-          this.currenntGrade = currentGrade
-          this.totalGrade = totalGrade
+        if (
+          this.currentGrade !== currentGrade &&
+          this.totalGrade !== totalGrade
+        ) {
+          this.currenntGrade = currentGrade;
+          this.totalGrade = totalGrade;
 
           this.toggleCircle(parseInt(this.currentGrade));
           this.toggleIfSunny();
@@ -121,27 +168,27 @@ export default {
             method: "post",
             body: {
               totalGrade: this.totalGrade.toString(),
-              currentGrade: this.currentGrade.toString()
+              currentGrade: this.currentGrade.toString(),
             },
           }).then((response) => {
-            console.log(response)
+            console.log(response);
             this.triggerFrontEndUpdate(response);
-          })
+          });
         }
-      }
+      };
     },
     listenToSocket() {
-
-      this._socket = new WebSocket("wss://smart-home-api-2j4i.onrender.com/echo");
+      this._socket = new WebSocket(
+        "wss://smart-home-api-2j4i.onrender.com/echo"
+      );
 
       this._socket.onopen = function (e) {
         console.log("[open] Connection established");
       };
 
-      let self = this
+      let self = this;
 
       let onReceivedMessage = async function (event) {
-
         console.log(`[message] Received from the Smart Home: ${event.data}`);
         let currentGrade;
         let totalGrade;
@@ -156,10 +203,12 @@ export default {
         currentGrade = data["currentGrade"];
         totalGrade = data["totalGrade"];
 
-        if (self.currentGrade !== currentGrade && self.totalGrade !== totalGrade) {
-
-          this.currenntGrade = currentGrade
-          this.totalGrade = totalGrade
+        if (
+          self.currentGrade !== currentGrade &&
+          self.totalGrade !== totalGrade
+        ) {
+          this.currenntGrade = currentGrade;
+          this.totalGrade = totalGrade;
 
           self.toggleCircle(parseInt(self.currentGrade));
           self.toggleIfSunny();
@@ -168,33 +217,34 @@ export default {
             method: "post",
             body: {
               totalGrade: self.totalGrade.toString(),
-              currentGrade: self.currentGrade.toString()
+              currentGrade: self.currentGrade.toString(),
             },
           }).then((response) => {
-            console.log(response)
+            console.log(response);
             self.triggerFrontEndUpdate(response);
-          })
+          });
         }
-      }
+      };
 
       this._socket.onmessage = async function (event) {
-        await onReceivedMessage(event)
+        await onReceivedMessage(event);
       };
 
       this._socket.onclose = function (event) {
         if (event.wasClean) {
-          console.log(`[close] Connection successfully closed, code=${event.code} reason=${event.reason}`);
+          console.log(
+            `[close] Connection successfully closed, code=${event.code} reason=${event.reason}`
+          );
         } else {
           // e.g. the server's process is terminated
           // generally event.code is 1006
-          console.log('[close] Connection death.');
+          console.log("[close] Connection death.");
         }
       };
 
       this._socket.onerror = function (error) {
         console.log(`[error] ${error.message}`);
       };
-
     },
     toggleIfSunny() {
       if (parseInt(this.currentGrade) <= 30) {
@@ -206,17 +256,19 @@ export default {
     },
     async simulate() {
       console.log("simulating...");
-      let response = await fetch("https://smart-home-api-2j4i.onrender.com/home/simulate")
-          .then((response) => response.json())
-          .then((data) => {
-            this.meteo = data["meteo"];
-            this.battery = data["battery"];
-            this.pv = data["panel"];
-            this.cleanCons = data["greenEnergyTotal"];
-            this.dirtyCons = data["notGreenEnergyTotal"];
-            this.currentGrade = data["currentGrade"];
-            this.totalGrade = data["totalGrade"];
-          });
+      let response = await fetch(
+        "https://smart-home-api-2j4i.onrender.com/home/simulate"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          this.meteo = data["meteo"];
+          this.battery = data["battery"];
+          this.pv = data["panel"];
+          this.cleanCons = data["greenEnergyTotal"];
+          this.dirtyCons = data["notGreenEnergyTotal"];
+          this.currentGrade = data["currentGrade"];
+          this.totalGrade = data["totalGrade"];
+        });
       console.log(parseInt(this.currentGrade));
       this.toggleCircle(parseInt(this.currentGrade));
       this.toggleIfSunny();
@@ -226,60 +278,60 @@ export default {
         method: "post",
         body: {
           totalGrade: this.totalGrade.toString(),
-          currentGrade: this.currentGrade.toString()
+          currentGrade: this.currentGrade.toString(),
         },
       }).then((response) => {
-        console.log(response)
+        console.log(response);
         this.triggerFrontEndUpdate(response);
-
-      })
+      });
     },
     triggerFrontEndUpdate(response) {
       var deadTrees = 0;
       // Update visible trees
       this.updateTrees(response);
       // Update leaves counter
-      document.getElementById("leaves-num").textContent = response.leaves;
-      deadTrees = response.removed.length
-      if (deadTrees != 0) {
-        document.getElementById("tips").textContent = "🌱 " + deadTrees.toString() + " plant(s) has died. Stay green! 🌱"
-      } else {
-        document.getElementById("tips").textContent = "🌱 No new notifications. 🌱"
+      if (response.leaves != null) {
+        document.getElementById("leaves-num").textContent = response.leaves;
       }
-
+      deadTrees = response.removed.length;
+      if (deadTrees != 0) {
+        document.getElementById("tips").textContent =
+          "🌱 " + deadTrees.toString() + " plant(s) has died. Stay green! 🌱";
+      } else {
+        document.getElementById("tips").textContent =
+          "🌱 No new notifications. 🌱";
+      }
     },
     updateTrees(response) {
-      response.removed.forEach(deletedTree => {
+      response.removed.forEach((deletedTree) => {
         this.deleteTrees(deletedTree);
-
       });
       setTimeout(() => {
-        response.trees.forEach(addTree => {
+        response.trees.forEach((addTree) => {
           this.addTrees(addTree);
         });
       }, 1000);
     },
     addTrees(tree) {
       let posToSpawn =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
+        tree._position._x.toString() + "-" + tree._position._y.toString();
       let levelToSpawn = "lev" + tree._level.toString();
       tree = document.getElementById(posToSpawn);
-      tree.animate([{opacity: "100%"}, {opacity: "0%"}], {
+      tree.animate([{ opacity: "100%" }, { opacity: "0%" }], {
         duration: 250,
         fill: "forwards",
       });
       tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
-      tree.animate([{opacity: "0%"}, {opacity: "100%"}], {
+      tree.animate([{ opacity: "0%" }, { opacity: "100%" }], {
         duration: 1000,
         fill: "forwards",
       });
-
     },
     deleteTrees(tree) {
       let posToSpawn =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
+        tree._position._x.toString() + "-" + tree._position._y.toString();
       tree = document.getElementById(posToSpawn);
-      tree.animate([{opacity: "100%"}, {opacity: "0%"}], {
+      tree.animate([{ opacity: "100%" }, { opacity: "0%" }], {
         duration: 500,
         fill: "forwards",
       });
@@ -302,7 +354,7 @@ export default {
           tablet.style.pointerEvents = "none";
           clearInterval(id);
         } else {
-          percentage--
+          percentage--;
           tablet.style.opacity = percentage + "%";
         }
       }
@@ -323,7 +375,7 @@ export default {
           tablet.style.pointerEvents = "all";
           clearInterval(id);
         } else {
-          percentage++
+          percentage++;
           tablet.style.opacity = percentage + "%";
         }
       }
@@ -350,7 +402,7 @@ export default {
         if (percentage == normalized) {
           clearInterval(id);
         } else {
-          percentage++
+          percentage++;
           circle.style.left = percentage + "px";
         }
       }
@@ -367,7 +419,7 @@ export default {
       rgba(0, 170, 255, 1) 0%,
       rgba(0, 192, 255, 1) 23%,
       rgba(159, 241, 255, 1) 49%,
-      rgba(255, 255, 255, 1) 100%`
+      rgba(255, 255, 255, 1) 100%`;
       }
       // FROM SUNNY TO STORMY
       else {
@@ -378,16 +430,15 @@ export default {
       rgb(255, 106, 0) 0%,
       rgb(209, 133, 1) 23%,
       rgb(255, 218, 159) 49%,
-      rgba(255, 255, 255, 1) 100%)`
+      rgba(255, 255, 255, 1) 100%)`;
       }
       // this.isBadWeather = !this.isBadWeather;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 .textbutton {
   font-size: 1em;
   font-weight: 600;
@@ -465,10 +516,9 @@ export default {
   height: 100px;
   width: 150px;
   border-radius: 20px;
-  background: #FEE140;
-  background: linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+  background: #fee140;
+  background: linear-gradient(90deg, #fee140 0%, #fa709a 100%);
   opacity: 90%;
-
 
   margin: auto;
   top: 0;
@@ -507,7 +557,6 @@ export default {
   top: 1em;
   bottom: 0;
   display: flex;
-
 }
 
 .simulation-button {
@@ -518,15 +567,13 @@ export default {
   margin: auto;
   border-radius: 200px;
   box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
-  background: #4158D0;
-  background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  background: #4158d0;
+  background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
 }
 
 .simulation-button:hover {
-
-  background: #0093E9;
-  background: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
-
+  background: #0093e9;
+  background: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
 }
 
 .simulatetext {
@@ -541,5 +588,4 @@ export default {
   color: whitesmoke;
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
-
 </style>

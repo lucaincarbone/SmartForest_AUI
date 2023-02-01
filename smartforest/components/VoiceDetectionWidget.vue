@@ -40,60 +40,68 @@ export default {
     this.updateFrontEnd();
   },
   methods: {
-    displayNotifications(notifications){
-      console.log(notifications)
+    displayNotifications(notifications) {
+      console.log(notifications);
       var index = 1;
-      notifications.forEach(notification => {
-
-        document.getElementById("notification-" + index.toString()).textContent = notification.event;
-        document.getElementById("time-" + index.toString()).textContent = notification.time;
-        if(notification.good){
-          document.getElementById("notification-" + index.toString()).style.color = "green";
+      notifications.forEach((notification) => {
+        document.getElementById(
+          "notification-" + index.toString()
+        ).textContent = notification.event;
+        document.getElementById("time-" + index.toString()).textContent =
+          notification.time;
+        if (notification.good) {
+          document.getElementById(
+            "notification-" + index.toString()
+          ).style.color = "green";
         } else {
-          document.getElementById("notification-" + index.toString()).style.color = "rgb(200, 0, 0)";
+          document.getElementById(
+            "notification-" + index.toString()
+          ).style.color = "rgb(200, 0, 0)";
         }
-        document.getElementById("cont-" + index.toString()).style.visibility = "visible";
-        document.getElementById("cont-" + index.toString()).animate([{ opacity: "0%" }, { opacity: "100%" }], {
-          duration: 250,
-          fill: "forwards",
-        });
+        document.getElementById("cont-" + index.toString()).style.visibility =
+          "visible";
+        document
+          .getElementById("cont-" + index.toString())
+          .animate([{ opacity: "0%" }, { opacity: "100%" }], {
+            duration: 250,
+            fill: "forwards",
+          });
         index++;
       });
       setTimeout(() => {
-        for(var i = 1; i<=5; i++){
-          document.getElementById("cont-" + i.toString()).animate([{ opacity: "100%" }, { opacity: "0%" }], {
-          duration: 250,
-          fill: "forwards",
-        });
-          document.getElementById("cont-" + i.toString()).style.visibility = "hidden";
+        for (var i = 1; i <= 5; i++) {
+          document
+            .getElementById("cont-" + i.toString())
+            .animate([{ opacity: "100%" }, { opacity: "0%" }], {
+              duration: 250,
+              fill: "forwards",
+            });
+          document.getElementById("cont-" + i.toString()).style.visibility =
+            "hidden";
         }
       }, 10000);
     },
-    showTreeExperience(tree){
+    showTreeExperience(tree) {
       let posToSpawn =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
-        let exp = tree._experience.toString();
-        tree = document.getElementById(posToSpawn);
-        tree.classList.remove("groupable");
-        if(exp > 0 && exp <= 300){
-          tree.classList.add("low-exp");
-        }
-        else if (exp > 300 && exp <= 700){
-          tree.classList.add("mid-exp");
-        }
-        else if (exp > 700 && exp < 1000){
-          tree.classList.add("high-exp");
-        }
-        else if (exp == 1000){
-          tree.classList.add("max-exp");
-        }
-        setTimeout(() => {
-          tree.classList.remove("low-exp");
-          tree.classList.remove("mid-exp");
-          tree.classList.remove("high-exp");
-          tree.classList.remove("max-exp");
-        }, 5000);
-
+        tree._position._x.toString() + "-" + tree._position._y.toString();
+      let exp = tree._experience.toString();
+      tree = document.getElementById(posToSpawn);
+      tree.classList.remove("groupable");
+      if (exp > 0 && exp <= 300) {
+        tree.classList.add("low-exp");
+      } else if (exp > 300 && exp <= 700) {
+        tree.classList.add("mid-exp");
+      } else if (exp > 700 && exp < 1000) {
+        tree.classList.add("high-exp");
+      } else if (exp == 1000) {
+        tree.classList.add("max-exp");
+      }
+      setTimeout(() => {
+        tree.classList.remove("low-exp");
+        tree.classList.remove("mid-exp");
+        tree.classList.remove("high-exp");
+        tree.classList.remove("max-exp");
+      }, 5000);
     },
     async clickEvent(e) {
       let id = e.target.id;
@@ -223,18 +231,18 @@ export default {
         document.getElementById("mirror-off").style.visibility = "visible";
         document.getElementById("mirror-off").style.pointerEvents = "all";
       } else {
-        if(this.answerFromCA_.notifications!=null){
-          this.displayNotifications(this.answerFromCA_.notifications)
+        if (this.answerFromCA_.notifications != null) {
+          this.displayNotifications(this.answerFromCA_.notifications);
         }
-        if(this.answerFromCA_.allTrees!=null){
-          this.answerFromCA_.allTrees.forEach(function(tree){
-            self.showTreeExperience(tree)
-          })
+        if (this.answerFromCA_.allTrees != null) {
+          this.answerFromCA_.allTrees.forEach(function (tree) {
+            self.showTreeExperience(tree);
+          });
         }
         // document.getElementById("mirror-off").style.visibility = "hidden"
         if (this.answerFromCA_.changes != null) {
-          if (this.answerFromCA_.changes.hide != null){
-            this.hideTrees(this.answerFromCA_.changes.hide)
+          if (this.answerFromCA_.changes.hide != null) {
+            this.hideTrees(this.answerFromCA_.changes.hide);
           }
           if (this.answerFromCA_.changes.trees != null) {
             console.log("Updating trees...");
@@ -334,6 +342,9 @@ export default {
       });
       //then plant the new higher level tree
       this.plantTree(answer.trees);
+      if (answer.leaves != null) {
+        this.updateLeaves(answer.leaves);
+      }
     },
   },
 };

@@ -1,6 +1,5 @@
-import { Model } from "../Model";
-
-let model = Model.Instance
+import {Machine} from "../state_machine/Machine"
+const machine = Machine.Instance;
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
@@ -8,8 +7,5 @@ export default defineEventHandler(async (event) => {
     let totalGrade:number = body.totalGrade
     console.log("total: "+totalGrade);
     console.log("current: "+currentGrade);
-    model.updateGameStateGrade(totalGrade,currentGrade)
-    let answer = model.JsonWithChanges
-    model.ResetJsonWithChanges();
-    return answer
+    return machine.updateGameStateGrade(totalGrade,currentGrade)
 })

@@ -3,12 +3,13 @@ import { MachineState } from "../../MachineState"
 import { Model } from "~/server/Model";
 import { Tree } from "~~/server/Tree";
 import { Position } from "~~/server/Position";
+import { TutorialState } from "./TutorialState";
 
 
 /**
  * Concrete state class that will redefine prepare response and change state methods
  */
-export class TutorialPositionSelectionState extends MachineState {
+export class TutorialPositionSelectionState extends TutorialState {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */

@@ -40,4 +40,8 @@ export class Machine {
         this._state.groupAction(response,splitted)
         return response
     }
+
+    public updateGameStateGrade(totalGrade:number,currentGrade:number):any{
+        return this._state.updateGameStateGrade(totalGrade,currentGrade)
+    }
 }

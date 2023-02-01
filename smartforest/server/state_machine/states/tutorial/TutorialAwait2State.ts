@@ -1,14 +1,14 @@
 import { Intents, NameStates, statesMap } from "../../Utils"
-import { MachineState } from "../../MachineState"
 import { Model } from "~~/server/Model"
 import { Position } from "~~/server/Position"
 import { Tree } from "~~/server/Tree"
+import { TutorialState } from "./TutorialState"
 
 
 /**
  * Concrete state class that will redefine prepare response and change state methods
  */
-export class TutorialAwait2State extends MachineState {
+export class TutorialAwait2State extends TutorialState {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */

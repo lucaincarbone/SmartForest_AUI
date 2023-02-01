@@ -3,12 +3,13 @@ import { MachineState } from "../../MachineState"
 import { Model } from "~~/server/Model"
 import { Position } from "~~/server/Position"
 import { Tree } from "~~/server/Tree"
+import { TutorialState } from "./TutorialState"
 
 
 /**
  * Concrete state class that will redefine prepare response and change state methods
  */
-export class TutorialGroupState extends MachineState {
+export class TutorialGroupState extends TutorialState {
     /**
      * Using the received string prepares the appropriate json response by interacting with the dialogflow api
      */
@@ -40,7 +41,7 @@ export class TutorialGroupState extends MachineState {
             let pos1 = new Position(+splitted[0], +splitted[1])
             let pos2 = new Position(+splitted[2], +splitted[3])
             let pos3 = new Position(+splitted[4], +splitted[5])
-            if(pos1.x+pos2.x+pos3.x!=9||pos1.y+pos2.y+pos3.y!=9){
+            if(pos1.x+pos2.x+pos3.x!=9||pos1.y+pos2.y+pos3.y!=9||pos1.x==pos2.x){
                 throw new Error("Invalid operation")
             }
             console.log("positions were right")

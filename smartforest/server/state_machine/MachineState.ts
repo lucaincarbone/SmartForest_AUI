@@ -1,6 +1,6 @@
-import {DialogHandler} from "../DialogClass";
-import {StateOperations} from "./StateOperations";
-import {Model} from "../Model";
+import { DialogHandler } from "../DialogClass";
+import { StateOperations } from "./StateOperations";
+import { Model } from "../Model";
 import { Intents, NameStates, statesMap } from "./Utils";
 import { Notice } from "../notifications/Notice";
 
@@ -30,8 +30,8 @@ export abstract class MachineState implements StateOperations {
      * Return the next state for the machine after the current one
      */
     changeState(): MachineState {
-        let nextState:MachineState=this.nextState
-        this.nextState=this
+        let nextState: MachineState = this.nextState
+        this.nextState = this
         return nextState
     }
 
@@ -80,15 +80,15 @@ export abstract class MachineState implements StateOperations {
         this._jsonAnswerFromCA.queryResult.fulfillmentText = answer
     }
 
-    setDefaultAnswer(text:string) {
-        this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now. "+text;
+    setDefaultAnswer(text: string) {
+        this._jsonAnswerFromCA.queryResult.fulfillmentText = "You can not ask me this right now. " + text;
     }
 
-    setNotificationsList(notifications:Array<Notice>){
+    setNotificationsList(notifications: Array<Notice>) {
         this._jsonAnswerFromCA.notifications = notifications;
     }
 
-    setAllTrees(trees:any){
+    setAllTrees(trees: any) {
         this._jsonAnswerFromCA.allTrees = trees
     }
     get finalResponse() {
@@ -99,32 +99,39 @@ export abstract class MachineState implements StateOperations {
      * Handle exit e non recognized intent
      * @param text Name of the Child State
      */
-    prepareResponseDefault(text:string){
+    prepareResponseDefault(text: string) {
         let intent = this.intentString
-        switch(intent){
-            case Intents.switchOff_intent:{
+        switch (intent) {
+            case Intents.switchOff_intent: {
                 this.setAnswer("Good Night, Sleep well")
                 this.setswitchOffBool(true);
-                this.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                // this.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
-            case Intents.exit_intent:{
+            case Intents.exit_intent: {
                 this.setAnswer("Exiting")
                 this.setNextState(statesMap.get(NameStates.UserPromptState)!)
                 break;
             }
-            default:{
+            default: {
                 // console.log("From "+text+" could not detect intent:" + intent)
                 this.setDefaultAnswer(text)
             }
         }
     }
 
-    setswitchOffBool(value:boolean) {
+    setswitchOffBool(value: boolean) {
         this._jsonAnswerFromCA.switchOff = value
     }
 
-    public groupAction(response: any,splitted: string[]){
+    public groupAction(response: any, splitted: string[]) {
         throw new Error("Invalid operation")
+    }
+
+    public updateGameStateGrade(totalGrade: number, currentGrade: number): any {
+        Model.Instance.updateGameStateGrade(totalGrade, currentGrade)
+        let answer = Model.Instance.JsonWithChanges
+        Model.Instance.ResetJsonWithChanges();
+        return answer
     }
 }

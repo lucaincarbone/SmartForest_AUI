@@ -1,10 +1,6 @@
-import { Model } from "../Model";
-import { Position } from "../Position";
 import { Machine } from "../state_machine/Machine"
-
 const machine = Machine.Instance;
 
-let model = Model.Instance
 export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     let id: string = body.id;
@@ -22,6 +18,7 @@ export default defineEventHandler(async (event) => {
     }
     return response
 })
+
 function getStructure() {
     return {
         "queryResult": {
