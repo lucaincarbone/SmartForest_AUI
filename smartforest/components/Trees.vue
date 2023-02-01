@@ -333,29 +333,29 @@ export default {
 </script>
 <style>
 .groupable{
-  background: rgb(255,255,255);
-background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(226,161,255,1) 35%, rgba(255,0,243,0.23153011204481788) 100%);
-  border-radius: 25%;
+  background: rgb(222,8,208);
+background: linear-gradient(0deg, rgba(222,8,208,1) 0%, rgba(246,155,255,1) 100%);
+  border-radius: 50%;
 }
 .max-exp{
-  background: rgb(255,255,255);
-background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(226,161,255,1) 35%, rgba(255,0,243,0.23153011204481788) 100%);
-  border-radius: 25%;
+  background: rgb(222,8,208);
+background: linear-gradient(0deg, rgba(222,8,208,1) 0%, rgba(246,155,255,1) 100%);
+  border-radius: 50%;
 }
 .high-exp{
-  background: rgb(3,236,8);
-  background: radial-gradient(circle, rgba(3,236,8,1) 0%, rgba(0,255,130,1) 35%, rgba(0,255,130,0) 100%);
-  border-radius: 25%;
+  background: rgb(114,190,0);
+  background: linear-gradient(0deg, rgba(114,190,0,1) 0%, rgba(232,255,155,1) 100%);
+  border-radius: 50%;
 }
 .mid-exp{
-  background: rgb(236,220,3);
-  background: radial-gradient(circle, rgba(236,220,3,1) 0%, rgba(255,194,0,1) 35%, rgba(255,0,0,0) 100%);
-  border-radius: 25%;
+  background: rgb(222,214,8);
+  background: linear-gradient(0deg, rgba(222,214,8,1) 0%, rgba(255,233,155,1) 100%);
+  border-radius: 50%;
 }
 .low-exp{
-  background: rgb(236,98,3);
-  background: radial-gradient(circle, rgba(236,98,3,1) 0%, rgba(255,0,0,1) 35%, rgba(255,0,0,0) 100%);
-  border-radius: 25%;
+  background: rgb(222,8,8);
+    background: linear-gradient(0deg, rgba(222,8,8,1) 0%, rgba(255,155,155,1) 100%);
+  border-radius: 50%;
 }
 </style>
 
