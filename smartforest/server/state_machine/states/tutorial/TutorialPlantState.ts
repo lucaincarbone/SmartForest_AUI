@@ -22,6 +22,14 @@ export class TutorialPlantState extends TutorialState {
                 super.setNextState(statesMap.get(NameStates.TutorialPositionSelectionState)!)
                 break;
             }
+            case Intents.exit_intent:{
+                super.setAnswer("I'm glad to know you already know how to play the game, whad do you want to do?")
+                let changes = Model.Instance.initialBoardJson
+                changes.hide = super.getAllPossibleTutorialTrees()
+                super.setChanges(changes)
+                super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break;
+            }
             default:{
                 super.setAnswer("Try asking me: I want to plant a new tree")
                 break;

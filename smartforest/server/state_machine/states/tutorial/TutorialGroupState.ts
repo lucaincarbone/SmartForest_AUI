@@ -49,7 +49,7 @@ export class TutorialGroupState extends TutorialState {
             let newTree = new Tree(new Position(3, 3), 3, 1000)
             //return to player board
             let answer = Model.Instance.initialBoardJson
-            answer.removed = [tree0, tree1, tree2,planted1,planted2,planted3,planted4]
+            answer.removed = super.getAllPossibleTutorialTrees()
             response.data = answer;
             response.success = true;
             response.queryResult.fulfillmentText = "Congratulations, you succesfully grouped your plants. The tutorial is now over"
