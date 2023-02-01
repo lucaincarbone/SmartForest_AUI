@@ -23,19 +23,31 @@ export class TutorialGroupState extends TutorialState {
         }
         //Parent class method returns the intent
         await super.prepareResponse(phrase)
-        super.setAnswer("Let's finish this group action, try clicking on the 3 plants you want to group")
+        let intent: string = super.intentString
+        switch (intent) {
+            //Need to undo possibility to click on specific plants
+            // done by returning the tree lists as changes to the client
+            case Intents.exit_intent: {
+                super.setChanges({
+                    trees: super.getMaxLevelTutorialTrees(),
+                    removed: [],
+                    group: super.getMaxLevelTutorialTrees(),
+                    hide:  super.getMaxLevelTutorialTrees()
+                })
+                super.setAnswer("Let's finish this group action, try clicking on the 3 plants you want to group")
+                // super.setNextState(statesMap.get(NameStates.UserPromptState)!)
+                break;
+            }
+            default: {
+                super.setAnswer("Let's finish this group action, try clicking on the 3 plants you want to group")
+                break;
+            }
+        }
         return super.finalResponse
     }
 
     public groupAction(response: any, splitted: string[]): any {
         // try if group was ok and if yes return response with .success=true to move to next tutorial state
-        let tree0 = new Tree(new Position(2, 2), 2, 1000)
-        let tree1 = new Tree(new Position(3, 3), 2, 1000)
-        let tree2 = new Tree(new Position(4, 4), 2, 1000)
-        let planted1 = new Tree(new Position(1,1), 2, 1000)
-        let planted2 = new Tree(new Position(6,6), 2, 1000)
-        let planted3 = new Tree(new Position(1,6), 2, 1000)
-        let planted4 = new Tree(new Position(6,1), 2, 1000)
         try {
             let pos1 = new Position(+splitted[0], +splitted[1])
             let pos2 = new Position(+splitted[2], +splitted[3])
@@ -54,7 +66,7 @@ export class TutorialGroupState extends TutorialState {
             response.data = {
                 trees: [],
                 removed: [],
-                group: [tree0, tree1, tree2],
+                group:super.getMaxLevelTutorialTrees(),
             }
             response.success = false;
             response.queryResult.fulfillmentText = "I'm  sorry you need to select 3 different plants. Please try again"

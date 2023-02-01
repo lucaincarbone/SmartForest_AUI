@@ -21,6 +21,13 @@ export abstract class TutorialState extends MachineState {
         return answer
     }
 
+    getMaxLevelTutorialTrees(){
+        let tree0 = new Tree(new Position(2, 2), 2, 1000)
+        let tree1 = new Tree(new Position(3, 3), 2, 1000)
+        let tree2 = new Tree(new Position(4, 4), 2, 1000)
+        return [tree0, tree1, tree2]
+    }
+
     getAllPossibleTutorialTrees(){
         let tree0 = new Tree(new Position(2, 2), 2, 1000)
         let tree1 = new Tree(new Position(3, 3), 2, 1000)

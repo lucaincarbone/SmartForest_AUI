@@ -278,6 +278,8 @@ export default {
           tree._position._x.toString() + "-" + tree._position._y.toString();
         tree = document.getElementById(posToSpawn);
         tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
+        tree.classList.remove("groupable");
+        tree.removeEventListener("click", this.clickEvent);
       });
     },
     updateLeaves(leaves) {
