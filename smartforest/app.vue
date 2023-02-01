@@ -22,8 +22,9 @@ export default {
 
 <template>  
     <div class="bg">
-      <!-- <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt=""> -->
+      <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt="">
       <div id="mirror-off" class="mirror-off" @click="mirrorOn()">
+        <!-- THIS IS TO KEEP BG WHILE MIRROR IS OFF, KEEP THE LINE BELOW COMMENTED TO HAVE BLACK SCREENSAVER -->
         <!-- <img class="bgimg" src="./assets/dynamics/other/background-display.jpg" alt=""> -->
       </div>
       <Controls/>
