@@ -26,8 +26,8 @@ export class Model {
     private _leaves: number;
     private _globalExperience: number;
     private _pathToJsonFile: string = "./server/gameState.json";
-    private _leavesCost = 10;
-    private _newTreeExperience = 50;
+    private _leavesCost = 1000;
+    private _newTreeExperience = 500;
     private _maxTreeExperience = 1000;
     private _startedTreeLevel = 1;
     private _maxLevel: number = 3;
@@ -36,7 +36,7 @@ export class Model {
     private highThreshold: number = 100;
     private weightTree1: number = 1;
     private weightTree2: number = 4;
-    private weightTree3: number = 15;
+    private weightTree3: number = 16;
     private _jsonWithChanges: JsonWithChanges = {
         trees: [],
         removed: [],
@@ -564,7 +564,8 @@ export class Model {
 
         this.updateLeavesBasedOnForestStatus(totalGrade, currentGrade)
         //TODO merge this part with the one below (carefull the add notice must not be in the forEach!!)
-        let weighted = (0.8 * totalGrade + 0.2 * currentGrade) / 100;
+        let weighted = (0.8 * totalGrade + 0.2 * currentGrade);
+        // console.log("WEIGHTED LEAVES: " + weighted);
         if (weighted <= self.badThreshold) {
             this.addNewNotice("Your plants were harmed due to your bad behaviour", false)
         } else if (weighted <= self.middleThreshold) {
@@ -614,7 +615,7 @@ export class Model {
         let nTrees1 = 0;
         let nTrees2 = 0;
         let nTrees3 = 0;
-        let weighted = 0.8 * currentGrade + 0.2 * totalGrade
+        let weighted = 0.08 * currentGrade + 0.02 * totalGrade
 
         this._trees.forEach(function (tree) {
             if (tree.level == 1) {

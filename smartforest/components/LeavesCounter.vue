@@ -39,7 +39,7 @@ export default {
 }
 
 .leaf-img {
-    height: 60px;
+    height: 50px;
     width: auto;
     margin: auto;
     padding: 0;
@@ -51,7 +51,7 @@ export default {
     grid-area: num;
     padding: 0;
     margin: auto;
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: 600;
 }
 .img-container {

@@ -337,6 +337,7 @@ export default {
       });
       setTimeout(() => {
         tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
+        // tree.style.opacity = "100%";
       }, 500);
     },
 
