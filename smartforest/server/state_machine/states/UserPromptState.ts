@@ -173,6 +173,7 @@ export class UserPromptState extends MachineState {
                 }
                 break
             }
+            //I need the tutorial
             case Intents.tutorial_intent: {
                 super.setAnswer("Sure, let's learn how to plant and group trees. First let's try and plant a new tree, try saying: i want to buy a new plant or exit if you know the game already")
                 super.setNextState(statesMap.get(NameStates.TutorialPlantState)!)

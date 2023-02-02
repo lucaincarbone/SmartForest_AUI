@@ -60,7 +60,7 @@ export class TutorialGroupState extends TutorialState {
             answer.removed = super.getAllPossibleTutorialTrees()
             response.data = answer;
             response.success = true;
-            response.queryResult.fulfillmentText = "Congratulations, you succesfully grouped your plants. The tutorial is now over, you will be hable to replay it every time you want just by saying: i need the tutorial"
+            response.queryResult.fulfillmentText = "Congratulations, you succesfully grouped your plants. The tutorial is now over, you will be able to replay it every time you want just by saying: i need the tutorial"
             return response
         } catch (e) {
             response.data = {

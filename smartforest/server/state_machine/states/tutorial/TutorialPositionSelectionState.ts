@@ -48,7 +48,7 @@ export class TutorialPositionSelectionState extends TutorialState {
                     }
                 }
                 let tree = new Tree(new Position(x, y), 1, 50)
-                super.setAnswer("Well Done, you learned how to plant a new tree!.Now let's try and see their level, try saying: i want to see the level of experience of my plants")
+                super.setAnswer("Well Done, you learned how to plant a new tree!. Now let's try and see their level, try saying: i want to see the level of experience of my plants")
                 super.setChanges({
                     trees: [tree],
                     removed: [],

@@ -10,7 +10,7 @@
             <p class="info">Weather: {{ meteo }}</p>
             <p class="info">
               Battery:
-              {{ Math.round((battery + Number.EPSILON) * 100) / 100 }} kW
+              {{ Math.round((battery + Number.EPSILON) * 100) / 100 }} kWh
             </p>
             <p class="info">
               PV: {{ Math.round((pv + Number.EPSILON) * 100) / 100 }} kW
