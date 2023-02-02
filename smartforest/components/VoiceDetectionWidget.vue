@@ -2,7 +2,7 @@
   <div class="vd-container floating">
     <div class="vd-flex">
       <div class="vd-grid-container" @click="askMeSomething()">
-        <img src="../assets/sirigif.gif" alt="" class="vd-icon" />
+        <img src="../assets/sirigif.gif" alt="" class="vd-icon"/>
         <div id="reg-detection" class="reg-detection"></div>
         <p id="flora-txt" class="vd-text">{{ runtimeTranscription_ }}</p>
       </div>
@@ -35,7 +35,7 @@ export default {
     //   method: "get",
     // });
     // If we want to keep updated, we need to refresh also the server. So run again npm run dev.
-    const { data: answerFromCA_ } = await useFetch("/api/getInitial");
+    const {data: answerFromCA_} = await useFetch("/api/getInitial");
     this.answerFromCA_ = answerFromCA_.value;
     this.updateFrontEnd();
   },
@@ -45,45 +45,45 @@ export default {
       var index = 1;
       notifications.forEach((notification) => {
         document.getElementById(
-          "notification-" + index.toString()
+            "notification-" + index.toString()
         ).textContent = notification.event;
         document.getElementById("time-" + index.toString()).textContent =
-          notification.time;
+            notification.time;
         if (notification.good) {
           document.getElementById(
-            "notification-" + index.toString()
+              "notification-" + index.toString()
           ).style.color = "green";
         } else {
           document.getElementById(
-            "notification-" + index.toString()
+              "notification-" + index.toString()
           ).style.color = "rgb(200, 0, 0)";
         }
         document.getElementById("cont-" + index.toString()).style.visibility =
-          "visible";
+            "visible";
         document
-          .getElementById("cont-" + index.toString())
-          .animate([{ opacity: "0%" }, { opacity: "100%" }], {
-            duration: 250,
-            fill: "forwards",
-          });
+            .getElementById("cont-" + index.toString())
+            .animate([{opacity: "0%"}, {opacity: "100%"}], {
+              duration: 250,
+              fill: "forwards",
+            });
         index++;
       });
       setTimeout(() => {
         for (var i = 1; i <= 5; i++) {
           document
-            .getElementById("cont-" + i.toString())
-            .animate([{ opacity: "100%" }, { opacity: "0%" }], {
-              duration: 250,
-              fill: "forwards",
-            });
+              .getElementById("cont-" + i.toString())
+              .animate([{opacity: "100%"}, {opacity: "0%"}], {
+                duration: 250,
+                fill: "forwards",
+              });
           document.getElementById("cont-" + i.toString()).style.visibility =
-            "hidden";
+              "hidden";
         }
       }, 10000);
     },
     showTreeExperience(tree) {
       let posToSpawn =
-        tree._position._x.toString() + "-" + tree._position._y.toString();
+          tree._position._x.toString() + "-" + tree._position._y.toString();
       let exp = tree._experience.toString();
       tree = document.getElementById(posToSpawn);
       tree.classList.remove("groupable");
@@ -117,7 +117,7 @@ export default {
       console.log("Positions: " + this.positions);
       let answer = await $fetch("/api/click", {
         method: "post",
-        body: { id: this.positions },
+        body: {id: this.positions},
       });
       this.positions = "";
       this.numOfClicks = 0;
@@ -149,7 +149,7 @@ export default {
       document.getElementById("reg-detection").style.visibility = "visible";
       // Init Voice Recognition
       window.SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+          window.SpeechRecognition || window.webkitSpeechRecognition;
 
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang_;
@@ -158,9 +158,9 @@ export default {
       // Sentence-Matching Event Triggered
       recognition.addEventListener("result", (event) => {
         this.runtimeTranscription_ = Array.from(event.results)
-          .map((result) => result[0])
-          .map((result) => result.transcript)
-          .join("");
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
       });
       // End of Sentence Event Triggered
       recognition.addEventListener("end", async () => {
@@ -170,7 +170,7 @@ export default {
         this.transcription_.push(this.runtimeTranscription_);
         this.answerFromCA_ = await $fetch("/api/submit", {
           method: "post",
-          body: { phrase: this.runtimeTranscription_.toString() },
+          body: {phrase: this.runtimeTranscription_.toString()},
         });
         //}
         // this.runtimeTranscription_ = "Hello, Flora!";
@@ -189,24 +189,24 @@ export default {
     },
     changeAnswerTextBox() {
       document.getElementById("answer-txt").textContent =
-        this.answerFromCA_.queryResult.fulfillmentText.toString();
+          this.answerFromCA_.queryResult.fulfillmentText.toString();
       document.getElementById("answer-container").style.visibility = "visible";
       document.getElementById("answer-container").style.transition = "opacity";
       document
-        .getElementById("answer-container")
-        .animate([{ opacity: "0%" }, { opacity: "100%" }], {
-          duration: 500,
-          fill: "forwards",
-        });
+          .getElementById("answer-container")
+          .animate([{opacity: "0%"}, {opacity: "100%"}], {
+            duration: 500,
+            fill: "forwards",
+          });
       clearTimeout(this.firstTextBoxID);
       clearTimeout(this.secondTextBoxID);
       this.firstTextBoxID = setTimeout(() => {
         document
-          .getElementById("answer-container")
-          .animate([{ opacity: "100%" }, { opacity: "0%" }], {
-            duration: 20000,
-            fill: "forwards",
-          });
+            .getElementById("answer-container")
+            .animate([{opacity: "100%"}, {opacity: "0%"}], {
+              duration: 20000,
+              fill: "forwards",
+            });
       }, 10000);
       this.secondTextBoxID = setTimeout(() => {
         document.getElementById("answer-container").style.visibility = "hidden";
@@ -218,7 +218,7 @@ export default {
       var voices = window.speechSynthesis.getVoices();
       var utterThis = new SpeechSynthesisUtterance();
       utterThis.text =
-        this.answerFromCA_.queryResult.fulfillmentText.toString();
+          this.answerFromCA_.queryResult.fulfillmentText.toString();
       utterThis.voice = voices[2];
       utterThis.pitch = 1;
       utterThis.lang = "en";
@@ -231,11 +231,6 @@ export default {
         document.getElementById("mirror-off").style.visibility = "visible";
         document.getElementById("mirror-off").style.pointerEvents = "all";
       } else {
-        if (this.answerFromCA_.last_notification != null) {
-          document.getElementById("tips").textContent = this.answerFromCA_.last_notification.toString();
-        } else {
-            document.getElementById("tips").textContent = "🌱 No new notifications. 🌱";
-        }
         if (this.answerFromCA_.notifications != null) {
           this.displayNotifications(this.answerFromCA_.notifications);
         }
@@ -246,6 +241,11 @@ export default {
         }
         // document.getElementById("mirror-off").style.visibility = "hidden"
         if (this.answerFromCA_.changes != null) {
+          if (this.answerFromCA_.changes.last_notification != null) {
+            document.getElementById("tips").textContent = JSON.stringify(this.answerFromCA_.changes.last_notification);
+          } else {
+            document.getElementById("tips").textContent = "🌱 No new notifications. 🌱";
+          }
           if (this.answerFromCA_.changes.hide != null) {
             this.hideTrees(this.answerFromCA_.changes.hide);
           }
@@ -269,22 +269,22 @@ export default {
       this.highlightedTreesIds = [];
       trees.forEach((tree) => {
         let posToSpawn =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
+            tree._position._x.toString() + "-" + tree._position._y.toString();
         let levelToSpawn = "lev" + tree._level.toString();
         tree = document.getElementById(posToSpawn);
         tree.classList.remove("groupable");
         tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
         tree.removeEventListener("click", this.clickEvent);
-        tree.animate([{ opacity: "0%" }, { opacity: "100%" }], {
-        duration: 500,
-        fill: "forwards",
-      });
+        tree.animate([{opacity: "0%"}, {opacity: "100%"}], {
+          duration: 500,
+          fill: "forwards",
+        });
       });
     },
     hideTrees(trees) {
       trees.forEach((tree) => {
         let posToSpawn =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
+            tree._position._x.toString() + "-" + tree._position._y.toString();
         tree = document.getElementById(posToSpawn);
         tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
         tree.classList.remove("groupable");
@@ -302,7 +302,7 @@ export default {
         this.runtimeTranscription_ = "Exit";
         this.answerFromCA_ = await $fetch("/api/submit", {
           method: "post",
-          body: { phrase: this.runtimeTranscription_.toString() },
+          body: {phrase: this.runtimeTranscription_.toString()},
         });
         this.changeAnswerTextBox();
         /*Write here all methods to be called to control game logic on frontend! */
@@ -324,14 +324,14 @@ export default {
       }
       group.forEach(function (tree) {
         let treeId =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
+            tree._position._x.toString() + "-" + tree._position._y.toString();
         console.log("activating click for tree: " + treeId);
         self.highlightedTreesIds.push(treeId.toString());
         console.log(self.highlightedTreesIds);
         document.getElementById(treeId).classList.add("groupable");
         document
-          .getElementById(treeId)
-          .addEventListener("click", self.clickEvent);
+            .getElementById(treeId)
+            .addEventListener("click", self.clickEvent);
       });
     },
 
@@ -344,7 +344,7 @@ export default {
       //first remove all 3 plants(also disable click and group highlight)
       answer.removed.forEach((tree) => {
         let posToSpawn =
-          tree._position._x.toString() + "-" + tree._position._y.toString();
+            tree._position._x.toString() + "-" + tree._position._y.toString();
         tree = document.getElementById(posToSpawn);
         // tree.classList.remove("groupable");
         tree.src = "/_nuxt/assets/dynamics/trees/empty.png";
@@ -355,6 +355,12 @@ export default {
       this.plantTree(answer.trees);
       if (answer.leaves != null) {
         this.updateLeaves(answer.leaves);
+      }
+
+      if (answer.last_notification != null) {
+        document.getElementById("tips").textContent = answer.last_notification;
+      } else {
+        document.getElementById("tips").textContent = "🌱 No new notifications. 🌱";
       }
     },
   },

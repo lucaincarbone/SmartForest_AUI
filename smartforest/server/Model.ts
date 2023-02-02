@@ -12,7 +12,8 @@ interface JsonWithChanges {
     trees: Tree[],
     removed: Tree[],
     group: Tree[],
-    error: string
+    error: string,
+    last_notification: string
 }
 
 /**
@@ -41,7 +42,8 @@ export class Model {
         trees: [],
         removed: [],
         group: [],
-        error: ""
+        error: "",
+        last_notification: "🌱 No new notifications. 🌱"
     };
     private notificationManager: NotificationsManager;
 
@@ -63,7 +65,7 @@ export class Model {
             this._leaves = 100
             this._globalExperience = 0
         }
-        this.notificationManager = new NotificationsManager(5,ModelLoader.Instance.loadNotifications())
+        this.notificationManager = new NotificationsManager(5, ModelLoader.Instance.loadNotifications())
     }
 
     public static get Instance() {
@@ -89,7 +91,8 @@ export class Model {
      * @param text text of the notification
      * @param good if the notification is good
      */
-    private addNewNotice(text:string,good:boolean){
+    private addNewNotice(text: string, good: boolean) {
+        this._jsonWithChanges.last_notification = text
         this.notificationManager.AddNewNotice(text, good)
     }
 
@@ -232,7 +235,7 @@ export class Model {
         let randomPosition = Math.floor(Math.random() * 3);
         let newPosition = oldPositions[randomPosition]
         this.addTree(newPosition, firstTree.level + 1, this._newTreeExperience)
-        this.addNewNotice("You succesfully grouped 3 threes of level " + firstTree.level, true)
+        this.addNewNotice("You successfully grouped 3 threes of level " + firstTree.level, true)
         return true;
 
     }
@@ -428,7 +431,8 @@ export class Model {
             trees: this._trees,
             removed: [],
             group: [],
-            error: ""
+            error: "",
+            last_notification: "🌱 No new notifications. 🌱"
         };
         return initial
     }
@@ -441,7 +445,8 @@ export class Model {
             trees: [],
             removed: [],
             group: [],
-            error: ""
+            error: "",
+            last_notification: "🌱 No new notifications. 🌱"
         };
     }
 
@@ -503,7 +508,7 @@ export class Model {
 
             this.removeTree(new Position(tree.position_x, tree.position_y))
 
-        // Remove the tree and add 2 new trees with level decreased by 1
+            // Remove the tree and add 2 new trees with level decreased by 1
         } else {
 
             let positionFirstPlant = new Position(tree.position_x, tree.position_y)
@@ -576,7 +581,6 @@ export class Model {
         this._trees.forEach(function (tree) {
             let exp = tree.experience;
 
-
             if (weighted <= self.badThreshold) {
                 exp -= self.highThreshold - weighted;
             } else if (weighted <= self.middleThreshold) {
@@ -585,7 +589,8 @@ export class Model {
                 exp += self.highThreshold;
             }
 
-            exp = Math.round(exp);
+            let temp_exp = Math.round(exp);
+            exp = Math.min(temp_exp, self._maxTreeExperience);
             tree.experience = exp;
             self.updateTreeExpOnJson(exp, new Position(tree.position_x, tree.position_y));
 
@@ -629,7 +634,7 @@ export class Model {
 
         let newLeavesToAdd = weighted + (nTrees1 * this.weightTree1 + nTrees2 * this.weightTree2 + nTrees3 * this.weightTree3);
         this.updateLeaves(Math.round(newLeavesToAdd), true)
-        this.addNewNotice("You gained " + newLeavesToAdd + " leaves", true);
+        this.addNewNotice("You gained " + Math.round(newLeavesToAdd) + " leaves", true);
     }
 
     /**

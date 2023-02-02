@@ -28,58 +28,58 @@
         <!-- <div class="cell"><TileControls id="simulation" imageURL="/_nuxt/assets/appliances/bad-weather.png" name="Bad weather"/></div> -->
         <div class="cell">
           <TileControls
-            id="airconditioner"
-            imageURL="/_nuxt/assets/appliances/air-conditioner.png"
-            name="Air conditioner"
+              id="airconditioner"
+              imageURL="/_nuxt/assets/appliances/air-conditioner.png"
+              name="Air conditioner"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="dehumidifier"
-            imageURL="/_nuxt/assets/appliances/dehumidifier.png"
-            name="Dehumidifier"
+              id="dehumidifier"
+              imageURL="/_nuxt/assets/appliances/dehumidifier.png"
+              name="Dehumidifier"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="cooker"
-            imageURL="/_nuxt/assets/appliances/cooker.png"
-            name="Induction cooker"
+              id="cooker"
+              imageURL="/_nuxt/assets/appliances/cooker.png"
+              name="Induction cooker"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="dishwasher"
-            imageURL="/_nuxt/assets/appliances/dishwasher.png"
-            name="Dishwasher"
+              id="dishwasher"
+              imageURL="/_nuxt/assets/appliances/dishwasher.png"
+              name="Dishwasher"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="dryer"
-            imageURL="/_nuxt/assets/appliances/dryer.png"
-            name="Clothes dryer"
+              id="dryer"
+              imageURL="/_nuxt/assets/appliances/dryer.png"
+              name="Clothes dryer"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="boiler"
-            imageURL="/_nuxt/assets/appliances/heater.png"
-            name="Heat boiler"
+              id="boiler"
+              imageURL="/_nuxt/assets/appliances/heater.png"
+              name="Heat boiler"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="oven"
-            imageURL="/_nuxt/assets/appliances/oven.png"
-            name="Oven"
+              id="oven"
+              imageURL="/_nuxt/assets/appliances/oven.png"
+              name="Oven"
           />
         </div>
         <div class="cell">
           <TileControls
-            id="washingmachine"
-            imageURL="/_nuxt/assets/appliances/washing-machine.png"
-            name="Washing machine"
+              id="washingmachine"
+              imageURL="/_nuxt/assets/appliances/washing-machine.png"
+              name="Washing machine"
           />
         </div>
       </div>
@@ -115,18 +115,18 @@ export default {
   methods: {
     async initialize() {
       let response = await fetch(
-        "https://smart-home-api-2j4i.onrender.com/home"
+          "https://smart-home-api-2j4i.onrender.com/home"
       )
-        .then((response) => response.json())
-        .then((data) => {
-          this.meteo = data["meteo"];
-          this.battery = data["battery"];
-          this.pv = data["panel"];
-          this.cleanCons = data["greenEnergyTotal"];
-          this.dirtyCons = data["notGreenEnergyTotal"];
-          this.currentGrade = data["currentGrade"];
-          this.totalGrade = data["totalGrade"];
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            this.meteo = data["meteo"];
+            this.battery = data["battery"];
+            this.pv = data["panel"];
+            this.cleanCons = data["greenEnergyTotal"];
+            this.dirtyCons = data["notGreenEnergyTotal"];
+            this.currentGrade = data["currentGrade"];
+            this.totalGrade = data["totalGrade"];
+          });
       // console.log(parseInt(this.currentGrade));
       this.toggleCircle(parseInt(this.currentGrade));
       this.toggleIfSunny();
@@ -141,45 +141,40 @@ export default {
         let totalGrade;
 
         let response = await fetch(
-          "https://smart-home-api-2j4i.onrender.com/home"
+            "https://smart-home-api-2j4i.onrender.com/home"
         )
-          .then((response) => response.json())
-          .then((data) => {
-            this.meteo = data["meteo"];
-            this.battery = data["battery"];
-            this.pv = data["panel"];
-            this.cleanCons = data["greenEnergyTotal"];
-            this.dirtyCons = data["notGreenEnergyTotal"];
-            currentGrade = data["currentGrade"];
-            totalGrade = data["totalGrade"];
-          });
+            .then((response) => response.json())
+            .then((data) => {
+              this.meteo = data["meteo"];
+              this.battery = data["battery"];
+              this.pv = data["panel"];
+              this.cleanCons = data["greenEnergyTotal"];
+              this.dirtyCons = data["notGreenEnergyTotal"];
+              currentGrade = data["currentGrade"];
+              totalGrade = data["totalGrade"];
+            });
 
-        if (
-          this.currentGrade !== currentGrade &&
-          this.totalGrade !== totalGrade
-        ) {
-          this.currenntGrade = currentGrade;
-          this.totalGrade = totalGrade;
+        this.currenntGrade = currentGrade;
+        this.totalGrade = totalGrade;
 
-          this.toggleCircle(parseInt(this.currentGrade));
-          this.toggleIfSunny();
+        this.toggleCircle(parseInt(this.currentGrade));
+        this.toggleIfSunny();
 
-          await $fetch("/api/update", {
-            method: "post",
-            body: {
-              totalGrade: this.totalGrade.toString(),
-              currentGrade: this.currentGrade.toString(),
-            },
-          }).then((response) => {
-            console.log(response);
-            this.triggerFrontEndUpdate(response);
-          });
-        }
-      };
+        await $fetch("/api/update", {
+          method: "post",
+          body: {
+            totalGrade: this.totalGrade.toString(),
+            currentGrade: this.currentGrade.toString(),
+          },
+        }).then((response) => {
+          console.log(response);
+          this.triggerFrontEndUpdate(response);
+        });
+      }
     },
     listenToSocket() {
       this._socket = new WebSocket(
-        "wss://smart-home-api-2j4i.onrender.com/echo"
+          "wss://smart-home-api-2j4i.onrender.com/echo"
       );
 
       this._socket.onopen = function (e) {
@@ -203,28 +198,23 @@ export default {
         currentGrade = data["currentGrade"];
         totalGrade = data["totalGrade"];
 
-        if (
-          self.currentGrade !== currentGrade &&
-          self.totalGrade !== totalGrade
-        ) {
-          this.currenntGrade = currentGrade;
-          this.totalGrade = totalGrade;
+        this.currenntGrade = currentGrade;
+        this.totalGrade = totalGrade;
 
-          self.toggleCircle(parseInt(self.currentGrade));
-          self.toggleIfSunny();
+        self.toggleCircle(parseInt(self.currentGrade));
+        self.toggleIfSunny();
 
-          await $fetch("/api/update", {
-            method: "post",
-            body: {
-              totalGrade: self.totalGrade.toString(),
-              currentGrade: self.currentGrade.toString(),
-            },
-          }).then((response) => {
-            console.log(response);
-            self.triggerFrontEndUpdate(response);
-          });
-        }
-      };
+        await $fetch("/api/update", {
+          method: "post",
+          body: {
+            totalGrade: self.totalGrade.toString(),
+            currentGrade: self.currentGrade.toString(),
+          },
+        }).then((response) => {
+          console.log(response);
+          self.triggerFrontEndUpdate(response);
+        });
+      }
 
       this._socket.onmessage = async function (event) {
         await onReceivedMessage(event);
@@ -233,7 +223,7 @@ export default {
       this._socket.onclose = function (event) {
         if (event.wasClean) {
           console.log(
-            `[close] Connection successfully closed, code=${event.code} reason=${event.reason}`
+              `[close] Connection successfully closed, code=${event.code} reason=${event.reason}`
           );
         } else {
           // e.g. the server's process is terminated
@@ -257,18 +247,18 @@ export default {
     async simulate() {
       console.log("simulating...");
       let response = await fetch(
-        "https://smart-home-api-2j4i.onrender.com/home/simulate"
+          "https://smart-home-api-2j4i.onrender.com/home/simulate"
       )
-        .then((response) => response.json())
-        .then((data) => {
-          this.meteo = data["meteo"];
-          this.battery = data["battery"];
-          this.pv = data["panel"];
-          this.cleanCons = data["greenEnergyTotal"];
-          this.dirtyCons = data["notGreenEnergyTotal"];
-          this.currentGrade = data["currentGrade"];
-          this.totalGrade = data["totalGrade"];
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            this.meteo = data["meteo"];
+            this.battery = data["battery"];
+            this.pv = data["panel"];
+            this.cleanCons = data["greenEnergyTotal"];
+            this.dirtyCons = data["notGreenEnergyTotal"];
+            this.currentGrade = data["currentGrade"];
+            this.totalGrade = data["totalGrade"];
+          });
       console.log(parseInt(this.currentGrade));
       this.toggleCircle(parseInt(this.currentGrade));
       this.toggleIfSunny();
@@ -293,6 +283,12 @@ export default {
       if (response.leaves != null) {
         document.getElementById("leaves-num").textContent = response.leaves;
       }
+
+      if (response.last_notification != null) {
+        document.getElementById("tips").textContent = response.last_notification;
+      } else {
+        document.getElementById("tips").textContent = "🌱 No new notifications. 🌱";
+      }
       // deadTrees = response.removed.length;
       // if (deadTrees != 0) {
       //   document.getElementById("tips").textContent =
@@ -314,24 +310,24 @@ export default {
     },
     addTrees(tree) {
       let posToSpawn =
-        tree._position._x.toString() + "-" + tree._position._y.toString();
+          tree._position._x.toString() + "-" + tree._position._y.toString();
       let levelToSpawn = "lev" + tree._level.toString();
       tree = document.getElementById(posToSpawn);
-      tree.animate([{ opacity: "100%" }, { opacity: "0%" }], {
+      tree.animate([{opacity: "100%"}, {opacity: "0%"}], {
         duration: 250,
         fill: "forwards",
       });
       tree.src = "/_nuxt/assets/dynamics/trees/" + levelToSpawn + ".png";
-      tree.animate([{ opacity: "0%" }, { opacity: "100%" }], {
+      tree.animate([{opacity: "0%"}, {opacity: "100%"}], {
         duration: 1000,
         fill: "forwards",
       });
     },
     deleteTrees(tree) {
       let posToSpawn =
-        tree._position._x.toString() + "-" + tree._position._y.toString();
+          tree._position._x.toString() + "-" + tree._position._y.toString();
       tree = document.getElementById(posToSpawn);
-      tree.animate([{ opacity: "100%" }, { opacity: "0%" }], {
+      tree.animate([{opacity: "100%"}, {opacity: "0%"}], {
         duration: 500,
         fill: "forwards",
       });
