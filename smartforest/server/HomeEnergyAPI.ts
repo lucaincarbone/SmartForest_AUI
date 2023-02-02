@@ -50,7 +50,7 @@ export class HomeEnergyAPI {
             console.log(`[error] ${error.message}`);
         };
     }
-    
+
     /**
      * Method that returns a number that represents the overall
      * battery energy accumulated
@@ -109,7 +109,7 @@ export class HomeEnergyAPI {
 
             if (data.hasOwnProperty('name')) {
                 if (data.isOn == true) {
-                    throw new Error("Your device is just turned on")
+                    throw new Error("Your device is already turned on")
                 } else {
                     deviceConsumption = parseInt(data.consume)
                 }

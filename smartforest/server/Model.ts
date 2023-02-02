@@ -106,7 +106,7 @@ export class Model {
     }
 
     /**
-     * Check if there are trees that can be grouped toghter right now
+     * Check if there are trees that can be grouped together right now
      * @returns true if there are
      */
     public canIGroupTrees(): boolean {
@@ -605,7 +605,7 @@ export class Model {
                 self.explodeTree(tree)
                 nLost++;
             })
-            this.addNewNotice("Unfortunatly " + nLost + " plant(s) suffered for your excessive consumption", false)
+            this.addNewNotice("Unfortunately " + nLost + " plant(s) suffered for your excessive consumption", false)
         }
 
     }

@@ -25,7 +25,7 @@ export class TutorialNotificationState extends TutorialState {
                 break;
             }
             case Intents.exit_intent:{
-                super.setAnswer("I'm glad to know you already know how to play the game, whad do you want to do?")
+                super.setAnswer("I'm glad to know you already know how to play the game, what do you want to do?")
                 let changes = Model.Instance.initialBoardJson
                 changes.hide = super.getAllPossibleTutorialTrees()
                 super.setChanges(changes)
@@ -35,7 +35,7 @@ export class TutorialNotificationState extends TutorialState {
             default:{
                 super.setAnswer("Try asking me: I want to know my last notifications")
                 break;
-            } 
+            }
         }
         return super.finalResponse
     }

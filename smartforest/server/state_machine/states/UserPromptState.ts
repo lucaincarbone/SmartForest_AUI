@@ -69,14 +69,14 @@ export class UserPromptState extends MachineState {
             //     break;
             // }
 
-            //How many leaves do i have?
+            //How many leaves do I have?
             case Intents.forest_status_overall_leaves: {
                 let x = Model.Instance.getNoOfLeaves()
                 super.setAnswer("You have " + x + " leaves in your forest, Would you like to know what you can do with them?")
                 super.setNextState(statesMap.get(NameStates.HowToSpendRequestState)!)
                 break;
             }
-            //Show me how many trees i have
+            //Show me how many trees I have
             case Intents.forest_status_overall_numberTrees: {
                 let x = Model.Instance.getNoOfTrees()
                 super.setAnswer(`You have  ${x[0]} trees in your forest. Of this trees ${x[1]} are level 1, ${x[2]} are level 2, ${x[3]} are level 3`)
@@ -113,7 +113,7 @@ export class UserPromptState extends MachineState {
                 console.log(Intents.guide_general)
                 break;
             }
-            //Can i group trees?
+            //Can I group trees?
             case Intents.guide_group_plant: {
                 console.log(Intents.guide_group_plant)
                 break;
