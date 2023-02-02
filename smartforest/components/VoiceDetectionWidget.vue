@@ -231,6 +231,11 @@ export default {
         document.getElementById("mirror-off").style.visibility = "visible";
         document.getElementById("mirror-off").style.pointerEvents = "all";
       } else {
+        if (this.answerFromCA_.last_notification != null) {
+          document.getElementById("tips").textContent = this.answerFromCA_.last_notification.toString();
+        } else {
+            document.getElementById("tips").textContent = "🌱 No new notifications. 🌱";
+        }
         if (this.answerFromCA_.notifications != null) {
           this.displayNotifications(this.answerFromCA_.notifications);
         }

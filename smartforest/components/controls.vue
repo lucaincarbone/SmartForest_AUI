@@ -293,14 +293,14 @@ export default {
       if (response.leaves != null) {
         document.getElementById("leaves-num").textContent = response.leaves;
       }
-      deadTrees = response.removed.length;
-      if (deadTrees != 0) {
-        document.getElementById("tips").textContent =
-          "🌱 " + deadTrees.toString() + " plant(s) has died. Stay green! 🌱";
-      } else {
-        document.getElementById("tips").textContent =
-          "🌱 No new notifications. 🌱";
-      }
+      // deadTrees = response.removed.length;
+      // if (deadTrees != 0) {
+      //   document.getElementById("tips").textContent =
+      //     "🌱 " + deadTrees.toString() + " plant(s) has died. Stay green! 🌱";
+      // } else {
+      //   document.getElementById("tips").textContent =
+      //     "🌱 No new notifications. 🌱";
+      // }
     },
     updateTrees(response) {
       response.removed.forEach((deletedTree) => {
