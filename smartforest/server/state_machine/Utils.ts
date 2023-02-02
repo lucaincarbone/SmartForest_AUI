@@ -14,6 +14,8 @@ import { TutorialPositionSelectionState } from "./states/tutorial/TutorialPositi
 import { TutorialPlantState } from "./states/tutorial/TutorialPlantState";
 import { TutorialGroupState } from "./states/tutorial/TutorialGroupState";
 import { TutorialAwait2State } from "./states/tutorial/TutorialAwait2State";
+import { TutorialNotificationState } from "./states/tutorial/TutorialNotificationState";
+import { TutorialAdviceState } from "./states/tutorial/TutorialAdviceState";
 
 export class Intents {
     public static advices_appliances_consumption: string = "advices_appliances_consumption";
@@ -60,7 +62,9 @@ export enum NameStates {
     TutorialPositionSelectionState = "TutorialPositionSelectionState",
     TutorialPlantState = "TutorialPlantState",
     TutorialGroupState = "TutorialGroupState",
-    TutorialAwait2State = "TutorialAwait2State"
+    TutorialAwait2State = "TutorialAwait2State",
+    TutorialNotificationState = "TutorialNotificationState",
+    TutorialAdviceState = "TutorialAdviceState"
 }
 
 export enum PlantPlaces {
@@ -87,4 +91,7 @@ export const statesMap: Map<string, MachineState> = new Map<string, MachineState
     [NameStates.TutorialPlantState, new TutorialPlantState()],
     [NameStates.TutorialGroupState, new TutorialGroupState()],
     [NameStates.TutorialAwait2State, new TutorialAwait2State()],
+    [NameStates.TutorialNotificationState, new TutorialNotificationState()],
+    [NameStates.TutorialAdviceState, new TutorialAdviceState()],
+
 ]);

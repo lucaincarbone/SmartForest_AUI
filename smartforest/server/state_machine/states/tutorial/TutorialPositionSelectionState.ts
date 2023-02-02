@@ -48,14 +48,14 @@ export class TutorialPositionSelectionState extends TutorialState {
                     }
                 }
                 let tree = new Tree(new Position(x, y), 1, 50)
-                super.setAnswer("Well Done, you learned how to plant a new tree!. Now let's try and see their level, try saying: i want to see the level of experience of my plants")
+                super.setAnswer("Well Done, you learned how to plant a new tree!. Now let's try and see your last notifications, try saying: i want to see my last notifications")
                 super.setChanges({
                     trees: [tree],
                     removed: [],
                     group: [],
                     leaves: 0
                 })
-                super.setNextState(statesMap.get(NameStates.TutorialAwait2State)!)
+                super.setNextState(statesMap.get(NameStates.TutorialNotificationState)!)
                 break;
             }
             default: {
