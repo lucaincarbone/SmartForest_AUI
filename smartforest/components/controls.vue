@@ -109,7 +109,7 @@ export default {
   },
   mounted() {
     this.initialize();
-    //this.infiniteApiRequests();
+    //this.infiniteApiRequests(); // FIXME
     //this.listenToSocket();
   },
   methods: {
@@ -134,14 +134,14 @@ export default {
     async infiniteApiRequests() {
       let intervalApiID = setInterval(async () => {
         await this.sendRequest();
-      }, 1000);
+      }, 10000); // FIXME
 
       this.sendRequest = async function () {
         let currentGrade;
         let totalGrade;
 
         let response = await fetch(
-            "https://smart-home-api-2j4i.onrender.com/home"
+            "https://smart-home-api-2j4i.onrender.com/home/simulate"
         )
             .then((response) => response.json())
             .then((data) => {
@@ -150,12 +150,9 @@ export default {
               this.pv = data["panel"];
               this.cleanCons = data["greenEnergyTotal"];
               this.dirtyCons = data["notGreenEnergyTotal"];
-              currentGrade = data["currentGrade"];
-              totalGrade = data["totalGrade"];
+              this.currentGrade = data["currentGrade"];
+              this.totalGrade = data["totalGrade"];
             });
-
-        this.currenntGrade = currentGrade;
-        this.totalGrade = totalGrade;
 
         this.toggleCircle(parseInt(this.currentGrade));
         this.toggleIfSunny();
@@ -195,11 +192,8 @@ export default {
         self.pv = data["panel"];
         self.cleanCons = data["greenEnergyTotal"];
         self.dirtyCons = data["notGreenEnergyTotal"];
-        currentGrade = data["currentGrade"];
-        totalGrade = data["totalGrade"];
-
-        this.currenntGrade = currentGrade;
-        this.totalGrade = totalGrade;
+        self.currentGrade = data["currentGrade"];
+        self.totalGrade = data["totalGrade"];
 
         self.toggleCircle(parseInt(self.currentGrade));
         self.toggleIfSunny();
