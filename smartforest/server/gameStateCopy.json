@@ -51,4 +51,17 @@
       "experience": 1000
     }
   ]
+  ,
+  "notifications": [
+    {
+        "time": "19-18-16",
+        "event": "test event n1",
+        "good":true
+    },
+    {
+      "time": "19-18-16",
+      "event": "test event n2",
+      "good":true
+  }
+  ]
 }
