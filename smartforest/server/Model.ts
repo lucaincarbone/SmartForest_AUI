@@ -565,7 +565,7 @@ export class Model {
         this.updateLeavesBasedOnForestStatus(totalGrade, currentGrade)
         //TODO merge this part with the one below (carefull the add notice must not be in the forEach!!)
         let weighted = (0.8 * totalGrade + 0.2 * currentGrade);
-        // console.log("WEIGHTED LEAVES: " + weighted);
+        console.log("WEIGHTED For Plant Exp: " + weighted);
         if (weighted <= self.badThreshold) {
             this.addNewNotice("Your plants were harmed due to your bad behaviour", false)
         } else if (weighted <= self.middleThreshold) {
