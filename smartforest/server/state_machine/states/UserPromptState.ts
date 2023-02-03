@@ -175,7 +175,9 @@ export class UserPromptState extends MachineState {
             }
             //I need the tutorial
             case Intents.tutorial_intent: {
-                super.setAnswer("Sure, let's learn how to plant and group trees. First let's try and plant a new tree, try saying: i want to buy a new plant or exit if you know the game already")
+                super.setAnswer(`Welcome to the tutorial,
+                Let's begin by learning how to plant a new tree which cost ${Model.Instance.leavesCost} leaves.
+                Fortunatly you have enough, try saying: i want to buy a new plant`)
                 super.setNextState(statesMap.get(NameStates.TutorialPlantState)!)
                 let tree0 = new Tree(new Position(2, 2), 2, 1000)
                 let tree1 = new Tree(new Position(3, 3), 2, 1000)
@@ -183,7 +185,7 @@ export class UserPromptState extends MachineState {
                 let initial = Model.Instance.initialBoardJson;
                 console.log(initial.trees)
                 super.setChanges({
-                    leaves: 10,
+                    leaves: Model.Instance.leavesCost,
                     trees: [tree0, tree1, tree2],
                     hide: initial.trees,
                     group: [],

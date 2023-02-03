@@ -68,6 +68,10 @@ export class Model {
         this.notificationManager = new NotificationsManager(5, ModelLoader.Instance.loadNotifications())
     }
 
+    get leavesCost(){
+        return this._leavesCost;
+    }
+
     public static get Instance() {
         return this._instance || (this._instance = new this());
     }

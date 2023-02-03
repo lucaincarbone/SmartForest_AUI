@@ -48,7 +48,10 @@ export class TutorialPositionSelectionState extends TutorialState {
                     }
                 }
                 let tree = new Tree(new Position(x, y), 1, 50)
-                super.setAnswer("Well Done, you learned how to plant a new tree!. Now let's try and see your last notifications, try saying: i want to see my last notifications")
+                super.setAnswer(`Well done, you planted a new tree at the ${tree_position.toLowerCase()}!
+                Every time something happens to you forest a notification will be displayed,
+                Try saying: i want to see my last notifications to check if you missed any!
+                `)
                 super.setChanges({
                     trees: [tree],
                     removed: [],

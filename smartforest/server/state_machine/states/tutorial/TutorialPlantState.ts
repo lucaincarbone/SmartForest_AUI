@@ -30,7 +30,7 @@ export class TutorialPlantState extends TutorialState {
                 break;
             }
             default:{
-                super.setAnswer("Try asking me: I want to plant a new tree")
+                super.setAnswer("Try asking me: I want to buy a new plant")
                 break;
             }
         }
