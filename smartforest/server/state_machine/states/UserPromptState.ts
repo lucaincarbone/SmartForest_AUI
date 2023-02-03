@@ -194,7 +194,11 @@ export class UserPromptState extends MachineState {
             }
             //Exit and not recognized
             default: {
-                super.prepareResponseDefault("I'm waiting for you to ask me anything")
+                super.prepareResponseDefault(`I'm waiting for you to ask me something like:
+                I want to modify my forest,
+                I want to know the status of my forest,
+                I want to receive some advices.
+                `)
                 break;
             }
         }
