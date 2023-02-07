@@ -1,5 +1,5 @@
 {
-  "leaves": 190,
+  "leaves": 2000,
   "globalExperience": 69,
   "trees": [
     {
@@ -8,7 +8,7 @@
         "_y": 1
       },
       "level": 3,
-      "experience": 1000
+      "experience": 1
     },
     {
       "position": {
@@ -16,23 +16,39 @@
         "_y": 4
       },
       "level": 2,
-      "experience": 1000
+      "experience": 500
     },
     {
       "position": {
         "_x": 5,
+        "_y": 5
+      },
+      "level": 2,
+      "experience": 900
+    },
+    {
+      "position": {
+        "_x": 6,
         "_y": 6
       },
-      "level": 3,
+      "level": 2,
       "experience": 1000
     },
     {
       "position": {
-        "_x": 4,
-        "_y": 1
+        "_x": 6,
+        "_y": 5
       },
       "level": 2,
-      "experience": 50
+      "experience": 1000
+    },
+    {
+      "position": {
+        "_x": 6,
+        "_y": 4
+      },
+      "level": 2,
+      "experience": 1000
     }
   ]
   ,

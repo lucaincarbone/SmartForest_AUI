@@ -578,7 +578,7 @@ export class Model {
         if (weighted <= self.badThreshold) {
             this.addNewNotice("Your plants were harmed due to your bad behaviour", false)
         } else if (weighted <= self.middleThreshold) {
-            this.addNewNotice("Well done, you maintained a green behaviour", true)
+            // this.addNewNotice("Well done, you maintained a green behaviour", true)
         } else {
             this.addNewNotice("You maintained an excellent green behaviour, your plants are happy", true)
         }

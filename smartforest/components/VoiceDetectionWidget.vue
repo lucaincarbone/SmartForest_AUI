@@ -101,7 +101,7 @@ export default {
         tree.classList.remove("mid-exp");
         tree.classList.remove("high-exp");
         tree.classList.remove("max-exp");
-      }, 5000);
+      }, 10000);
     },
     async clickEvent(e) {
       let id = e.target.id;

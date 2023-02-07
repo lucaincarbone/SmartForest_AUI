@@ -17,7 +17,7 @@ export class TutorialAdviceState extends TutorialState {
         let intent: string = super.intentString
         switch (intent) {
             case Intents.advices_general:{
-                super.setAnswer(`Well Done, you learned how to request advices! 
+                super.setAnswer(`Well done, you learned how to request advices! 
                 I Advice you to try and see your plants experience, there might be a surprise!
                 Try saying: I want to see the level of experience of my plants`)
                 super.setNextState(statesMap.get(NameStates.TutorialAwait2State)!)
@@ -32,7 +32,7 @@ export class TutorialAdviceState extends TutorialState {
                 break;
             }
             default:{
-                super.setAnswer("Try asking me: I want receive some advice")
+                super.setAnswer("Try asking me: I want receive some advices")
                 break;
             }
         }
