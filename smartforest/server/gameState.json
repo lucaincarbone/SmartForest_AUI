@@ -54,14 +54,14 @@
   ,
   "notifications": [
     {
-        "time": "19-18-16",
-        "event": "test event n1",
-        "good":true
+      "time": "7/2/2023, 16:29:49",
+      "event": "Your plants were harmed due to your bad behaviour",
+      "good": false
     },
     {
-      "time": "19-18-16",
-      "event": "test event n2",
-      "good":true
-  }
+      "time": "7/2/2023, 16:29:49",
+      "event": "Unfortunately 1 plant(s) suffered for your excessive consumption",
+      "good": false
+    }
   ]
 }
