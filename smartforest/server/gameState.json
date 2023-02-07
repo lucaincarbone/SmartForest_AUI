@@ -12,6 +12,22 @@
     },
     {
       "position": {
+        "_x": 2,
+        "_y": 3
+      },
+      "level": 1,
+      "experience": 500
+    },
+    {
+      "position": {
+        "_x": 5,
+        "_y": 2
+      },
+      "level": 1,
+      "experience": 500
+    },
+    {
+      "position": {
         "_x": 4,
         "_y": 4
       },
