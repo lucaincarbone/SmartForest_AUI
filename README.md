@@ -18,9 +18,9 @@ Smart Forest is a collaborative project developed by Politecnico di Milano and t
 | First name    | Last Name   | Email address                     |
 | ----------    | ---------   | ------------------------------    |
 | Luca          | Incarbone   | luca.incarbone@mail.polimi.it     |
-| Lorenzo      | Poretti  | @mail.polimi.it     |
-| Marco      | Bendinelli  | @mail.polimi.it     |
-| Matteo      | Beltrante  | @mail.polimi.it     |
+| Lorenzo      | Poretti  | lorenzo.poretti@mail.polimi.it     |
+| Marco      | Bendinelli  | marco.bendinelli@mail.polimi.it     |
+| Matteo      | Beltrante  | matteo.beltrante@mail.polimi.it     |
 
 ## Online Documentation
 Commercial Spot: https://polimi365-my.sharepoint.com/:v:/g/personal/10607871_polimi_it/ESgrSjIkNFxKshzoYNOAw0ABQtQRDfHYTSYmQPlbC6axNg?e=oJakKf
