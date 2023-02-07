@@ -12,13 +12,13 @@
 # SmartForest - SmartHome Project
 
 ## Description
-
+Smart Forest is a collaborative project developed by Politecnico di Milano and the energy provider Edison. The project aims to create an interactive mirror that helps users to easily monitor their energy consumption and encourages them to use renewable energy sources. The mirror displays an interactive forest, where users can earn leaves for using renewable energy and lose experience points, which is the lifespan of each tree, for using non-renewable energy. These leaves can then be used to purchase and plant new trees in order to gain more and more leaves. The mirror also provides real-time feedback and personalized recommendations for reducing energy consumption. Overall, Smart Forest project hopes to engage users in an interactive and fun way to promote sustainable energy practices and raise awareness about the importance of renewable energy.
 
 ## Team members
 | First name    | Last Name   | Email address                     |
 | ----------    | ---------   | ------------------------------    |
 | Luca          | Incarbone   | luca.incarbone@mail.polimi.it     |
-| Lorenzo      | Lisciandro  | @mail.polimi.it     |
+| Lorenzo      | Poretti  | @mail.polimi.it     |
 | Marco      | Bendinelli  | @mail.polimi.it     |
 | Matteo      | Beltrante  | @mail.polimi.it     |
 
