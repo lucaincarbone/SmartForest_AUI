@@ -19,7 +19,7 @@ export class TutorialAdviceState extends TutorialState {
             case Intents.advices_general:{
                 super.setAnswer(`Well Done, you learned how to request advices! 
                 I Advice you to try and see your plants experience, there might be a surprise!
-                Try saying: i want to see the level of experience of my plants`)
+                Try saying: I want to see the level of experience of my plants`)
                 super.setNextState(statesMap.get(NameStates.TutorialAwait2State)!)
                 break;
             }

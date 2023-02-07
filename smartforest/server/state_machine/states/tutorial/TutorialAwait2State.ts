@@ -25,9 +25,9 @@ export class TutorialAwait2State extends TutorialState {
                     //let's see the level of experience of the trees
                     let trees = super.getMaxLevelTutorialTrees()
                     super.setAllTrees(trees)
-                    super.setAnswer(`Well done,The experience of your plants is shown with different colors, red to green as the experience goes up.
+                    super.setAnswer(`Well done, the experience of your plants is shown with different colors, red to green as the experience goes up.
                     Purple ones are at max experience and can be merged to create a better tree.
-                    Try saying:I want to group some plants.`)
+                    Try saying: I want to group some plants`)
                     this.waitingForExp = false
                 } else {
                     super.setAnswer(this.askGroup)

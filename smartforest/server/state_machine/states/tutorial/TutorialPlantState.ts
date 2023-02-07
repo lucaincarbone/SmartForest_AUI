@@ -17,7 +17,7 @@ export class TutorialPlantState extends TutorialState {
         let intent: string = super.intentString
         switch (intent) {
             case Intents.forest_management_buy:{
-                super.setAnswer("Well done, now let's choose a spot where to plant it: try saying plant it at the bottom, top, right, left.")
+                super.setAnswer("Well done, now let's choose a spot where to plant it: try saying plant it at the bottom, top, right or left.")
                 super.setNextState(statesMap.get(NameStates.TutorialPositionSelectionState)!)
                 break;
             }

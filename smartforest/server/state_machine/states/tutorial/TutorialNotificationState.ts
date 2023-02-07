@@ -18,7 +18,7 @@ export class TutorialNotificationState extends TutorialState {
         let intent: string = super.intentString
         switch (intent) {
             case Intents.forest_status_overall_notifications:{
-                super.setAnswer(`Great job! If you ever find a lot of bad news here you can try ask me to receive some advices.
+                super.setAnswer(`Great job! If you ever find a lot of bad news here, you can try ask me to receive some advices.
                 Let's test it, try saying: I want receive some advices
                 `)
                 let notice = new Notice("Planted a new tutorial plant",true,"Right now")

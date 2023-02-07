@@ -61,7 +61,7 @@ export class TutorialGroupState extends TutorialState {
             response.data = answer;
             response.success = true;
             response.queryResult.fulfillmentText = `Congratulations, you succesfully grouped your plants. 
-            The tutorial is now over, replay it by saying: I need the tutorial or get more info wit: Show me the guide:`
+            The tutorial is now over, replay it by saying: I need the tutorial. Or to get more info ask me: Show me the guide`
             return response
         } catch (e) {
             response.data = {

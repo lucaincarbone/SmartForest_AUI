@@ -43,14 +43,14 @@ export class TutorialPositionSelectionState extends TutorialState {
                         break;
                     }
                     default: {
-                        super.setAnswer("That is not a valid position, try saying: plant it at the top,bottom,left,right")
+                        super.setAnswer("That is not a valid position, try saying: plant it at the top, bottom, left or right")
                         return super.finalResponse;
                     }
                 }
                 let tree = new Tree(new Position(x, y), 1, 50)
                 super.setAnswer(`Well done, you planted a new tree at the ${tree_position.toLowerCase()}!
                 Every time something happens to you forest a notification will be displayed,
-                Try saying: i want to see my last notifications to check if you missed any!
+                try saying: I want to see my last notifications to check if you missed any!
                 `)
                 super.setChanges({
                     trees: [tree],
