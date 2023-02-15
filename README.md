@@ -24,4 +24,19 @@ Smart Forest is a collaborative project developed by Politecnico di Milano and t
 | Francesco      | Piferi  | francesco.piferi@mail.polimi.it     |
 
 ## Online Documentation
-Commercial Spot: https://polimi365-my.sharepoint.com/:v:/g/personal/10607871_polimi_it/ESgrSjIkNFxKshzoYNOAw0ABQtQRDfHYTSYmQPlbC6axNg?e=oJakKf
+[Commercial Spot](https://polimi365-my.sharepoint.com/:v:/g/personal/10607871_polimi_it/ESgrSjIkNFxKshzoYNOAw0ABgrhgD0NjK3Pq8Kh86OkaOQ?e=gDFh0m)
+
+[Design document](Design-tech-doc)
+
+[Presentation](Presentation)
+
+## How to start the application
+Go to the project folder
+```bash
+cd smartforest
+```
+Run the application
+```bash
+npm run dev
+```
+To install the correct dependencies, see the [README](smartforest/README) inside the smartforest folder.
